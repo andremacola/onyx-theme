@@ -38,6 +38,7 @@ module.exports = {
 		"no-var": 0,
 		"no-console": 0,
 		"eqeqeq": 0,
-		"space-in-parens": ["warn", "never"]
+		"space-in-parens": ["warn", "never"],
+		"computed-property-spacing": ["warn", "never"]
 	}
 }
