@@ -109,10 +109,11 @@ function jsInt() {
  * WATCH
  */
 function watchFiles() {
-	gulp.watch('./src/sass/**/*.scss', gulp.parallel(styleMain, styleInt));
-	gulp.watch('./src/js/**/*.js', gulp.parallel(jsMain, jsInt));
+	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles-int.scss' ], styleMain);
+	gulp.watch([ './src/sass/**/styles-int.scss' ], styleInt);
+	gulp.watch([ './src/js/**/*.js', '!./src/js/**/app-int.js' ], jsMain);
+	gulp.watch('./src/js/**/app-int.js', jsInt);
 }
-
 function browserWatch() {
 	browserSync.init({
 		open: false,
