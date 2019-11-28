@@ -1,6 +1,6 @@
 {
 	"name": "project",
-	"version": "1.0.0",
+	"version": "4.0",
 	"description": "Onyx Wordpress Starter Theme",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
