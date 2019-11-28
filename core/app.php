@@ -77,7 +77,7 @@ function onyx_footer_elements() {
 
 	/* dev: livereload/browsersync */
 	if (isset($_GET['lr'])) {
-		onyx_js_url('//'.$_SERVER['HTTP_HOST'].':'.$_GET['lr'].'/livereload.js?snipver=1');
+		onyx_js_livereload($_GET['lr'], 'localhost');
 	}
 }
 

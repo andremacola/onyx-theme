@@ -311,6 +311,12 @@ $path_file = '<script '.$async.' src="'.$js.'"></script>' . "\n";
 	endif;
 }
 
+/* função para o funcionamento do gulp-livereload */
+function onyx_js_livereload($port = 3010, $host = null) {
+	$host = ($host) ? $host : $_SERVER['HTTP_HOST'];
+	onyx_js_url("//$host:$port/livereload.js?snipver=1");
+}
+
 /* adicionar google analytics */
 function onyx_ganalytics($uax, $script = null) {
 	if ($script == true) {
