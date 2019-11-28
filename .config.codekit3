@@ -108,6 +108,14 @@
 		"oF": 1,
 		"oS": 0
 		},
+	"/assets/fonts/.gitkeep": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 2,
+		"oAP": "/assets/fonts/.gitkeep",
+		"oF": 0
+		},
 	"/assets/images/admin/favicon-20.png": {
 		"ft": 32768,
 		"iS": 924,
@@ -129,58 +137,6 @@
 		"opt": 0,
 		"oT": 1,
 		"q": 100
-		},
-	"/assets/images/icons/favicon-180.png": {
-		"ft": 32768,
-		"iS": 93901,
-		"oA": 0,
-		"oAP": "/assets/images/icons/favicon-180.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/assets/images/icons/favicon-192.png": {
-		"ft": 32768,
-		"iS": 93901,
-		"oA": 0,
-		"oAP": "/assets/images/icons/favicon-192.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/assets/images/icons/favicon-32.png": {
-		"ft": 32768,
-		"iS": 93784,
-		"oA": 0,
-		"oAP": "/assets/images/icons/favicon-32.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/assets/images/icons/favicon-512.png": {
-		"ft": 32768,
-		"iS": 93737,
-		"oA": 0,
-		"oAP": "/assets/images/icons/favicon-512.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/assets/images/icons/favicon.ico": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 2,
-		"oAP": "/assets/images/icons/favicon.ico",
-		"oF": 0
 		},
 	"/assets/images/logo-facebook.png": {
 		"ft": 32768,
@@ -222,28 +178,6 @@
 		"mi": 1,
 		"oA": 1,
 		"oAP": "/assets/app.min.min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/assets/js/bundle.int.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "/assets/bundle.int.min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/assets/js/bundle.main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "/assets/bundle.main.min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -440,14 +374,6 @@
 		"oAP": "/core/vendor/composer/ClassLoader.php",
 		"oF": 0
 		},
-	"/core/vendor/composer/installed.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/core/vendor/composer/installed-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
 	"/core/vendor/composer/LICENSE": {
 		"cB": 0,
 		"ft": 8192,
@@ -553,17 +479,6 @@
 		"mi": 1,
 		"oA": 1,
 		"oAP": "/src/dfp.min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/js/ismobile.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "/src/ismobile.min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1202,17 +1117,6 @@
 		"oA": 1,
 		"oAP": "/views/tag.php",
 		"oF": 0
-		},
-	"/webpack.config.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "/webpack.config.min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
 		},
 	"/yarn.lock": {
 		"cB": 0,
