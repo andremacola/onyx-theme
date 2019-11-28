@@ -114,6 +114,7 @@ function watchFiles() {
 	gulp.watch([ './src/js/**/*.js', '!./src/js/**/app-int.js' ], jsMain);
 	gulp.watch('./src/js/**/app-int.js', jsInt);
 }
+
 function browserWatch() {
 	browserSync.init({
 		open: false,
