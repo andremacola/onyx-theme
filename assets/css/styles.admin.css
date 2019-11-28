@@ -1,0 +1,117 @@
+/************************************
+* @ ADMIN
+************************************/
+
+/* background para edição clássica e admin */
+body,
+#wp-content-editor-tools { background: #f9f9f9 !important; }
+
+/************************************
+* @ BLOCK EDITOR
+************************************/
+
+/* background */
+body.block-editor-page { background: #FFF !important; }
+body.block-editor-page .edit-post-sidebar { background: #F9F9F9 !important; }
+
+/************************************
+* @ EDITOR CLÁSSICO
+************************************/
+
+/* fix de alinhamento para botão adicionar em pt-br */
+.tagsdiv .newtag { width: 170px !important; }
+
+/************************************
+* @ ADVANCED CUSTOM FIELDS
+************************************/
+
+/* fix para alinhamento no block editor */
+body.block-editor-page .acf-fields > .acf-field { box-sizing: border-box; }
+
+/* object field customization */
+body .select2-results__option .id,
+body .select2-selection__rendered .id { color: #0173AA; }
+body .select2-results__option .title,
+body .select2-selection__rendered .title { font-weight: bold; }
+body .select2-results__option--highlighted .ref { color: #FFF; }
+
+/* select2 customization */
+body .select2-container--default,
+body .select2-selection--multiple,
+body .select2-container--default .select2-selection--single,
+body .select2-container--default .select2-selection--multiple {
+	border-color: #ddd !important;
+}
+
+body .select2-container--default.select2-container--focus .select2-selection--single,
+body .select2-container--default.select2-container--open .select2-selection--single,
+body .select2-container--default.select2-container--focus .select2-selection--multiple {
+	border-color: #aaa !important;
+}
+
+/************************************
+* @ ADMIN COLUMNS PRO
+************************************/
+
+/* esconder notificação de atualização */
+[data-slug='admin-columns-pro.php'].plugin-update-tr { display: none; }
+
+/************************************
+* @ LOGIN
+************************************/
+
+.login h1 a {
+	background-image: url('../images/admin/logo-admin.png') !important;
+	margin-bottom: 0px !important;
+	width: 275px !important;
+	height: 100px !important;
+	background-size: 275px 100px !important;
+}
+.login form { border-radius: 10px; }
+.login form .input, .login form input[type=checkbox], .login input[type=text] { border-radius: 3px; }
+
+/************************************
+* @ ADMIN BAR
+************************************/
+
+#wpadminbar #wp-admin-bar-site-name > .ab-item:before {
+	content: url('../images/admin/favicon-20.png') !important;
+}
+
+/************************************
+* @ GENERAL STYLES
+************************************/
+
+body input[type=color],
+body input[type=date],
+body input[type=datetime-local],
+body input[type=datetime],
+body input[type=email],
+body input[type=month],
+body input[type=number],
+body input[type=password],
+body input[type=search],
+body input[type=tel],
+body input[type=text],
+body input[type=time],
+body input[type=url],
+body input[type=week],
+body select,
+body textarea {
+	border-color: #ddd;
+}
+
+body .postbox,
+body .postbox .hndle,
+body .stuffbox .hndle {
+	border-color: #e5e5e5;
+}
+
+body input[type=checkbox],
+body input[type=radio] {
+	border-color: #b4b9be;
+}
+
+/* input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, input[type=datetime-local]:focus, input[type=datetime]:focus, input[type=email]:focus, input[type=month]:focus, input[type=number]:focus, input[type=password]:focus, input[type=radio]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=text]:focus, input[type=time]:focus, input[type=url]:focus, input[type=week]:focus, select:focus, textarea:focus {
+	box-shadow: none !important;
+} */

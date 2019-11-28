@@ -1,0 +1,54 @@
+/*************************************************/
+/* IMAGE BLOCKS                                  */
+/*************************************************/
+
+.post-entry {
+	.wp-block-image {
+		margin: 0 0 #{$elBtMargin} 0;
+		figcaption {
+			font-size: 14px;
+			color: #666666;
+			padding: 5px 0px 0px 0px;
+			margin: 0px;
+			line-height: 1.3;
+			text-align: left;
+		}
+		&.alignwide,
+		&.alignfull {
+			margin: 0 -15px #{$elBtMargin} -15px;
+			figcaption {
+				padding: 5px 15px 0 15px;
+			}
+		}
+		img {
+			display: block;
+			margin: auto;
+		}
+	}
+}
+
+@media #{$from-ptb} {
+	.post-entry {
+		.wp-block-image {
+			&.alignwide,
+			&.alignfull {
+				margin: 0 0 #{$elBtMargin} -20px;
+				figcaption {
+					padding: 5px 0px 0 0px;
+				}
+			}
+		}
+	}
+}
+
+@media #{$to-desk} {
+	.post-entry {
+		.wp-block-image {
+			margin-bottom: #{$elBtDeskMargin};
+			&.alignwide,
+			&.alignfull {
+				margin: 0 0 #{$elBtDeskMargin} -#{$elLeftDeskMargin};
+			}
+		}
+	}
+}

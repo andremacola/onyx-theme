@@ -1,0 +1,81 @@
+/*************************************************/
+/*	@  ONYX Pagenavi                              */
+/*************************************************/
+
+ul.page-numbers {
+	clear: both;
+	font-size: 13px;
+	text-align: center;
+	padding: 20px 0 20px 0;
+	li {
+		display: inline-block;
+	}
+	li a, li > span {
+		display: block;
+		text-decoration: none;
+		border: 1px solid #BFBFBF;
+		border-radius: 20px;
+		padding: 5px 10px;
+		margin: 2px;
+	}
+	li a:hover, span.current {
+		border-color: var(--catColor); background: var(--catColor); color: #FFF;
+	}
+}
+
+@media #{$to-mb} {
+	ul.page-numbers {
+		padding: 10px 0 30px 0;
+		li,
+		li span.nav-text { display: none; }
+		li:nth-child(-n+3),
+		li:nth-last-child(-n+3),
+		li.current { display: inline-block; }
+	}
+}
+
+/*************************************************/
+/*	@ POST PAGINATION                             */
+/*************************************************/
+
+.post-page-link {
+	width: 100%;
+	clear: both;
+	text-align: left;
+	margin-bottom: 30px;
+	position: relative;
+}
+.post-page-link a {
+	background: $green2;
+	color: #FFF;
+	padding: 10px 20px 10px 20px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 3px;
+	text-decoration: none;
+	font: $fontFamily2;
+}
+.post-page-link a:hover {
+	background: $green1;
+	color: #FFF !important;
+	box-shadow: none;
+	text-shadow: none;
+}
+.post-page-link a:active {
+	text-decoration: none;
+	box-shadow: 2px 2px 0px 0px rgba(#000, 0.1), inset 6px 6px 0px 0px rgba(#000, 0.1);
+}
+.post-pages {
+	position: absolute;
+	right: 0px;
+	font-size: 16px;
+	top: 0px;
+	background: #f0f0f0;
+	padding: 10px;
+	display: block;
+	border-radius: 3px;
+	color: #999;
+	span {
+		font-weight: bold;
+	}
+}

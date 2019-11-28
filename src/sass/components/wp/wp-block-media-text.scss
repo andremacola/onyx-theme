@@ -1,0 +1,63 @@
+/*************************************************/
+/* MEDIA TEXT BLOCK                              */
+/*************************************************/
+
+.wp-block-media-text {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	margin: 0 0 calc(#{$elBtMargin} - 20px) 0;
+	.wp-block-media-text__media,
+	.wp-block-media-text__content {
+		display: block;
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	.wp-block-media-text__media {
+		
+	}
+	.wp-block-media-text__content {
+		border-bottom: 1px #ccc solid;
+		padding-bottom: 15px;
+		p:last-child {
+			margin: 0;
+		}
+	}
+
+}
+
+@media #{$from-ptb} {
+
+	// 
+
+}
+
+@media #{$from-ltb} {
+
+.wp-block-media-text {
+	flex-flow: row;
+	margin: 0 0 #{$elBtDeskMargin} -100px;
+	.wp-block-media-text__media,
+	.wp-block-media-text__content {
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+	.wp-block-media-text__media {
+		width: 50%;
+		margin: 0;
+	}
+	.wp-block-media-text__content {
+		width: 50%;
+		padding: 0 0 0 20px;
+		margin: 0;
+	}
+	&.has-media-on-the-right {
+		flex-flow: row-reverse;
+		.wp-block-media-text__content {
+			padding: 0 20px 0 0;
+		}
+	}
+}
+
+}

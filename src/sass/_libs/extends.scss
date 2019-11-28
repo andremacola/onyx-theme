@@ -1,0 +1,19 @@
+/*
+* @ Extends
+*/
+
+%clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+%clearfixBefore {
+	&:before {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}

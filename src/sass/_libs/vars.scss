@@ -1,0 +1,35 @@
+/*
+* @ Variáveis, mixins e elementos do SCSS do Starter Theme
+*/
+
+// Media Queries
+$to-smb: "only screen and (max-width: 320px)";
+$to-mb: "only screen and (max-width: 767px)";
+$from-lmb: "only screen and (min-width: 540px)";
+$from-ptb: "only screen and (min-width: 767px)";
+$from-ltb: "only screen and (min-width: 1023px)";
+$to-desk: "only screen and (min-width: 1200px)";
+
+// Width, Heights
+$site-width: 1140px;
+
+// Colors
+$color1: #333;
+$color2: #333;
+$color3: #333;
+$color4: #333;
+$color5: #333;
+$color6: #333;
+$color-bg: #FFF;
+$color-footer-bg: #F0F0F0;
+$color-link: #333;
+$color-link-hover: #333;
+$color-post-title: #333;
+$color-post-link: #333;
+$color-post-link-hover: #333;
+$color-post-border: #333;
+$color-post-elements: #333;
+
+// Fonts
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-size: 100%;

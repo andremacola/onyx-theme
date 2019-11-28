@@ -1,0 +1,25 @@
+{
+	"name": "onyx/wp",
+	"description": "Onyx WP Theme",
+	"authors": [
+		{
+			"name": "Andre Macola",
+			"email": "andremacola@gmail.com"
+		}
+	],
+	"scripts": {
+		"onyx-dump": [
+			"composer dump-autoload -o"
+		]
+	},
+	"config": {
+		"vendor-dir": "core/vendor"
+	},
+	"autoload": {
+		"classmap": [
+			"core/api",
+			"core/classes"
+		]
+	},
+	"require": {}
+}

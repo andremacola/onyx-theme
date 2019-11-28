@@ -1,0 +1,82 @@
+/*************************************************/
+/* IMAGE COVER BLOCKS                            */
+/*************************************************/
+
+.post-entry {
+	.wp-block-cover {
+		position: relative;
+		margin: 0 -15px #{$elBtMargin} -15px;
+		background-color: #000;
+		background-size: cover;
+		background-position: 50%;
+		min-height: 470px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		&.has-parallax {
+			background-attachment: fixed;
+		}
+	}
+	.wp-block-cover.has-background-dim:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background-color: inherit;
+		opacity: .5;
+		z-index: 1;
+	}
+	.wp-block-cover-text {
+		color: #FFF;
+		z-index: 1;
+		text-align: center;
+		font-size: 30px;
+		line-height: 1.3;
+		padding: 15px;
+		font-weight: bold;
+		font-style: italic;
+	}
+}
+
+/*************************************************/
+/*	@ FROM TABLET P >=768px                       */
+/*************************************************/
+
+@media #{$from-ptb} {
+	.post-entry {
+		.wp-block-cover {
+			position: relative;
+			margin: 0 0 #{$elBtMargin} -20px;
+		}
+	}
+}
+
+/*************************************************/
+/*	@ TO DESK >=1200                            */
+/*************************************************/
+
+@media #{$to-desk} {
+	.post-entry {
+		.wp-block-cover {
+			margin: 0 0 #{$elBtDeskMargin} -#{$elLeftDeskMargin};
+			width: calc(100% + #{$elLeftDeskMargin});
+			max-width: calc(100% + #{$elLeftDeskMargin});
+		}
+	}
+}
+
+@media only screen and (min-width: 1270px) {
+	.post-entry {
+		.wp-block-cover {
+			&.alignfull {
+				margin-left: calc(-100vw / 2 + 440px / 2);
+				margin-right: calc(-100vw / 2 + 440px / 2);
+				max-width: initial;
+				width: auto;
+			}
+		}
+	}
+}

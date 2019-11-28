@@ -1,0 +1,71 @@
+/*************************************************/
+/*	@ GOOGLE CSE                                  */
+/*************************************************/
+
+body.search .content-left { position: relative; }
+
+.load-cse {
+	position: absolute;
+	top: 60px;
+	left: 50%;
+	z-index: 1;
+	width: 100px;
+	text-align: center;
+	transform: translateX(-50%);
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+	box-sizing: content-box !important;
+	border-color: #3079ed !important;
+	background-color: #4d90fe !important;
+	background-image: linear-gradient(top,#4d90fe,#4787ed) !important;
+}
+
+.cse .gsc-control-cse, .gsc-control-cse {
+	padding: 0px !important;
+	margin: 0 0 30px 0;
+	position: relative;
+	z-index: 2;
+}
+.gsc-results .gsc-cursor-box {
+	height: 40px !important;
+	max-width: 100% !important;
+	overflow: hidden !important;
+	padding: 10px 0px 0px 0px !important;
+	text-align: center !important;
+	margin: 10px 0px 0px 0px !important;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+	border: 1px #ccc solid !important;
+	padding: 5px 10px 5px 10px !important;
+	border-radius: 100px !important;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page:hover,
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+	text-decoration: none !important;
+	border-color: #FF9900 !important;
+}
+.gsc-results .gs-title {
+	font-size: 18px !important;
+	font-family: 'Open Sans', sans-serif !important;
+}
+.gsc-control-cse, .gsc-control-cse .gsc-table-result {
+	font-size: 14px !important;
+	font-family: 'Open Sans', sans-serif !important;
+}
+.gs-image-box.gs-web-image-box.gs-web-image-box-landscape {
+	width: 110px !important;
+}
+.gs-image-box.gs-web-image-box.gs-web-image-box-portrait {
+	width: 90px !important;
+	height: 80px !important;
+}
+.gs-web-image-box-landscape img.gs-image {
+	max-width: 100px !important;
+	max-height: 80px !important;
+}
+.gs-web-image-box-portrait img.gs-image {
+	max-width: 80px !important;
+	max-height: 150px !important;
+}
+
+.gsc-adBlock{ display:none !important }

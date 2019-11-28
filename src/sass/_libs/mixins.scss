@@ -1,0 +1,54 @@
+/*
+* @ Mixins & Functions
+*/
+
+@mixin word-wrap() {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-ms-word-break: break-all;
+	word-break: break-word;
+}
+
+@mixin simple-gradient($var1: $color3, $var2: $color1, $location1: 0%, $location2: 100%) {
+	background: $var1;
+	background: -moz-linear-gradient(left, $var1 $location1, $var2 $location2);
+	background: -webkit-gradient(linear, left top, right top, color-stop($location1,$var1), color-stop($location2,$var2));
+	background: -webkit-linear-gradient(left, $var1 $location1,$var2 $location2);
+	background: -o-linear-gradient(left, $var1 $location1,$var2 $location2);
+	background: -ms-linear-gradient(left, $var1 $location1,$var2 $location2);
+	background: linear-gradient(to right, $var1 $location1,$var2 $location2);
+}
+
+@mixin placeholder($color) {
+	&:-moz-placeholder { color: $color; }
+	&::-moz-placeholder { color: $color; }
+	&:-ms-input-placeholder { color: $color; }
+	&::-webkit-input-placeholder { color: $color; }
+}
+
+@mixin acc-hardware($backface: true, $perspective: 1000) {
+	@if $backface {
+		backface-visibility: hidden;
+	}
+	perspective: $perspective;
+}
+
+@function onyxScale3d($var: 1) {
+	@return scale3d($var,$var,$var);
+}
+
+@mixin to-smb { @media #{$to-smb} { @content; } }
+@mixin to-mb { @media #{$to-mb} { @content; } }
+@mixin from-lmb { @media #{$from-lmb} { @content; } }
+@mixin from-ptb { @media #{$from-ptb} { @content; } }
+@mixin from-ltb { @media #{$from-ltb} { @content; } }
+@mixin to-desk { @media #{$to-desk} { @content; } }
+
+
+// workaround for min() and max() functions (fancybox)
+@function max($numbers...) {
+  @return m#{a}x(#{$numbers});
+}
+@function min($numbers...) {
+  @return m#{i}n(#{$numbers});
+}

@@ -1,0 +1,29 @@
+/*************************************************/
+/* Onyx Framework                                */
+/*************************************************/
+
+// Library
+// @import "libs/fonts";
+	@import "_libs/vars";
+	@import "_libs/mixins";
+	@import "_libs/extends";
+	@import "_libs/normas";
+	@import "_libs/helpers";
+	@import "_libs/grid";
+
+// vendors
+	// @import "_vendor/owl/owl.carousel.min";
+	// @import "_vendor/owl/owl.theme.default.min";
+	// @import "_vendor/fancybox/fancybox.min";
+
+// layout
+	@import "layout/theme";
+	@import "layout/header";
+	@import "layout/content";
+	@import "layout/footer";
+
+/*************************************************/
+/* Components                                    */
+/*************************************************/
+	
+	// @import 'components/slide';

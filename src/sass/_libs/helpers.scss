@@ -1,0 +1,176 @@
+/*
+* @ Padrões e classes de CSS do Starter Theme
+*/
+
+/*************************************************/
+/* Padrões                                       */
+/*************************************************/
+
+:root {
+	--color1: #{$color1};
+	--color2: #{$color2};
+	--color3: #{$color3};
+	--color4: #{$color4};
+	--color5: #{$color5};
+	--color6: #{$color6};
+	--color-bg: #{$color-bg};
+	--color-footer-bg: #{$color-footer-bg};
+	--color-link: #{$color-link};
+	--color-link-hover: #{$color-link-hover};
+	--color-post-title: #{$color-post-title};
+	--color-post-link: #{$color-post-link};
+	--color-post-link-hover: #{$color-post-link-hover};
+	--color-post-border: #{$color-post-border};
+}
+
+body {
+	background: $color-bg;
+	&.no-scroll {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+	}
+}
+
+footer, #footer { background: $color-footer-bg; }
+
+/*************************************************/
+/* Links e Botões (genéricos)                    */
+/*************************************************/
+
+a {
+	text-decoration: none;
+	color: $color-link;
+	transition: color 200ms, text-indent 200ms, background 200ms;
+	&:hover {
+		text-decoration: none;
+		color: $color-link-hover;
+	}
+}
+
+/*************************************************/
+/* Títulos                                       */
+/*************************************************/
+
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+h5 { font-size: 15px; }
+h6 { font-size: 12px; }
+
+/*************************************************/
+/* Classes                                       */
+/*************************************************/
+
+.left		{ float: left; }
+.right	{ float: right; }
+.cleft	{ clear: left; }
+.cright	{ clear: right; }
+.center	{ text-align: center; }
+
+.clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+.font-normal { font-weight: normal; }
+.font-italic { font-style: italic; }
+.strong, strong, b { font-weight: bold; }
+
+.dnone { display: none !important; }
+.hidden { visibility: hidden !important; }
+.dblock { display: block !important; }
+.visible { visibility: visible !important; }
+
+.noborder { border: none !important; }
+.nobg { background: none !important; }
+
+.nomargin { margin: 0 !important; }
+.nomargin-top { margin-top: 0 !important; }
+.nomargin-bottom { margin-bottom: 0 !important; }
+.nomargin-left { margin-left: 0 !important; }
+.nomargin-right { margin-right: 0 !important; }
+
+.nopadding { padding: 0 !important; }
+.nopadding-top { padding-top: 0 !important; }
+.nopadding-bottom { padding-bottom: 0 !important; }
+.nopadding-left { padding-left: 0 !important; }
+.nopadding-right { padding-right: 0 !important; }
+
+.indent { text-indent: -100%; white-space: nowrap; overflow: hidden; }
+
+/*************************************************/
+/*	@ TO SMALL MOBILE <=320px                     */
+/*************************************************/
+
+@media #{$to-smb} {
+
+	.hide-smb {
+		display: none;
+	}
+
+}
+
+/*************************************************/
+/*	@ TO MOBILE <=767px                           */
+/*************************************************/
+
+@media #{$to-mb} {
+
+	.hide-mb {
+		display: none;
+	}
+
+}
+
+/*************************************************/
+/*	@ FROM MOBILE L >=540px                       */
+/*************************************************/
+
+@media #{$from-lmb} {
+
+	.hide-lmb {
+		display: none;
+	}
+
+}
+
+/*************************************************/
+/*	@ FROM TABLET P >=768px                       */
+/*************************************************/
+
+@media #{$from-ptb} {
+
+	.hide-ptb {
+		display: none;
+	}
+
+}
+
+/*************************************************/
+/*	@ FROM TABLET L >=1024px                      */
+/*************************************************/
+
+@media #{$from-ltb} {
+
+	.hide-ltb {
+		display: none;
+	}
+
+}
+
+/*************************************************/
+/*	@ TO DESK >=1200                            */
+/*************************************************/
+
+@media #{$to-desk} {
+
+	.hide-desk {
+		display: none;
+	}
+
+}

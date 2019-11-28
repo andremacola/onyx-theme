@@ -1,0 +1,63 @@
+/*
+* @ GRID do Starter Theme
+*/
+
+.container { max-width: $site-width; position: relative; margin: auto; }
+.container-limit { margin: 0 15px 0 15px; }
+.container.container-limit { margin: auto; padding: 0 15px 0 15px; }
+
+/*************************************************/
+/*	@ TO SMALL MOBILE <=320px
+/*************************************************/
+
+@media #{$to-smb} {
+
+}
+
+/*************************************************/
+/*	@ TO MOBILE <=767px
+/*************************************************/
+
+@media #{$to-mb} {
+
+}
+
+/*************************************************/
+/*	@ FROM MOBILE L >=540px
+/*************************************************/
+
+@media #{$from-lmb} {
+
+}
+
+/*************************************************/
+/*	@ FROM TABLET P >=768px
+/*************************************************/
+
+@media #{$from-ptb} {
+
+	/* padroes */
+	.container-limit { margin: 0 20px 0 20px; }
+	.container.container-limit { padding: 0 20px 0 20px; }
+
+}
+
+/*************************************************/
+/*	@ FROM TABLET L >=1024px
+/*************************************************/
+
+@media #{$from-ltb} {
+
+}
+
+/*************************************************/
+/*	@ TO DESK >=1200
+/*************************************************/
+
+@media #{$to-desk} {
+
+	/* padroes */
+	.container-limit { margin: 0; }
+	.container.container-limit { padding: 0; }
+
+}
