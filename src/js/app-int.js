@@ -1,8 +1,8 @@
 /**
 	@ Funcões diversas das internas do tema
-*/
+ */
 
-(function ($, window, document) {
+(function($, window, document) {
 	$(function() {
 		// função para adicionar modo fancybox galeria nas imagens
 		$('.wp-block-gallery a').attr('data-fancybox', 'gallery');
@@ -12,4 +12,4 @@
 		// 	// Options will go here
 		// });
 	});
-})(window.jQuery, window, document);
+}(window.jQuery, window, document));
