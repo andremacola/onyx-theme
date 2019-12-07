@@ -6,6 +6,28 @@
  * 
  */
 
+/* retornar título da área em páginas de listagens/arquivos */
+function onyx_get_section_title() {
+	if (is_post_type_archive()) {
+		$title = post_type_archive_title('', false);
+	} elseif (is_category()) {    
+		$title = single_cat_title('', false);
+	} elseif (is_tag()) {
+		$title = single_tag_title('', false);
+	} elseif (is_author() ) {
+		$title = get_the_author();
+	} elseif (is_tax()) { //for custom post types
+		$title = single_term_title('', false);
+	}
+
+	return $title;
+}
+
+	/* variação da onyx_get_section_title para echo; */
+	function onyx_section_title() {
+		echo onyx_get_section_title();
+	}
+
 /* mostrar menu de navegação */
 function onyx_menu($menu = null) {
 	wp_nav_menu(array('menu' => $menu, 'container' => '', 'items_wrap' => '%3$s'));
