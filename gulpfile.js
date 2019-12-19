@@ -11,6 +11,7 @@ const include = require('gulp-include');
 const terser = require('gulp-terser');
 const browserSync = require('browser-sync').create();
 const livereload = require('gulp-livereload');
+const purgecss = require('gulp-purgecss');
 sass.compiler = require('node-sass');
 
 const config = {
@@ -78,6 +79,17 @@ function styleInt() {
 // 		.pipe(browserSync.stream());
 // }
 
+function purgeCSS() {
+	return gulp
+		.src([ 'assets/css/main.css', 'assets/css/int.css' ])
+		.pipe(
+			purgecss({
+				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php' ],
+			})
+		)
+		.pipe(gulp.dest(config.destCSS));
+}
+
 /*
  * JAVASCRIPTS
  */
@@ -144,6 +156,7 @@ function liveReloadWatch() {
 // exports.styleExtras = styleExtras;
 exports.styleMain = styleMain;
 exports.styleInt = styleInt;
+exports.purgecss = purgeCSS;
 exports.jsMain = jsMain;
 exports.jsInt = jsInt;
 exports.watch = watchFiles;
