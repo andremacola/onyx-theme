@@ -53,6 +53,9 @@ body .select2-container--default.select2-container--focus .select2-selection--mu
 * @ ADMIN COLUMNS PRO
 ************************************/
 
+/* alinhar botões de ação em tabelas de listagens */
+body .ac-table-actions { margin-top: 0; margin-bottom: 0; }
+
 /* esconder notificação de atualização */
 [data-slug='admin-columns-pro.php'].plugin-update-tr { display: none; }
 
