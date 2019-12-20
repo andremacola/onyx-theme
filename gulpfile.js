@@ -81,10 +81,42 @@ function styleInt() {
 
 function purgeCSS() {
 	return gulp
-		.src([ 'assets/css/main.css', 'assets/css/int.css' ])
+		.src([ 'assets/css/main.css' ])
 		.pipe(
 			purgecss({
-				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php' ],
+				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'src/js/**/*.js' ],
+				whitelist: [
+					'rtl',
+					'home',
+					'blog',
+					'archive',
+					'date',
+					'error404',
+					'logged-in',
+					'admin-bar',
+					'no-customize-support',
+					'custom-background',
+					'wp-custom-logo',
+				],
+				whitelistPatterns: [
+					/^wp-block(-.*)?$/,
+					/^active(-.*)?$/,
+					/^owl-(.*)?$/,
+					/^search(-.*)?$/,
+					/^(.*)-template(-.*)?$/,
+					/^(.*)?-?single(-.*)?$/,
+					/^postid-(.*)?$/,
+					/^attachmentid-(.*)?$/,
+					/^attachment(-.*)?$/,
+					/^page(-.*)?$/,
+					/^(post-type-)?archive(-.*)?$/,
+					/^author(-.*)?$/,
+					/^category(-.*)?$/,
+					/^tag(-.*)?$/,
+					/^tax-(.*)?$/,
+					/^term-(.*)?$/,
+					/^(.*)?-?paged(-.*)?$/,
+				],
 			})
 		)
 		.pipe(gulp.dest(config.destCSS));
@@ -162,4 +194,4 @@ exports.jsInt = jsInt;
 exports.watch = watchFiles;
 exports.server = browserWatch;
 exports.live = liveReloadWatch;
-exports.default = gulp.series(styleMain, styleInt, jsMain, jsInt);
+exports.default = gulp.series(styleMain, styleInt, purgeCSS, jsMain, jsInt);

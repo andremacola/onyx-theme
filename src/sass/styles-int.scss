@@ -12,25 +12,14 @@
 	// @import "_vendor/owl/owl.theme.default.min";
 	// @import "_vendor/fancybox/fancybox.min";
 
+// layout
+	@import "layout/content";
+
 /*************************************************/
 /* Components                                    */
 /*************************************************/
 	
 	// @import 'components/forms';
+	// @import 'components/pagenavi';
 	// @import 'components/wp/wp-blocks';
-	// @import 'components/wp/wp-block-quotes';
-	// @import 'components/wp/wp-block-backgrounds';
-	// @import 'components/wp/wp-block-image';
-	// @import 'components/wp/wp-block-cover';
-	// @import 'components/wp/wp-gallery-block';
-	// @import 'components/wp/wp-block-media-text';
-	// @import 'components/wp/wp-embed';
-	// @import 'components/wp/wp-block-file';
-	// @import 'components/wp/wp-tables';
-	// @import 'components/wp/wp-legado';
-	// @import 'components/wp/wp-plugins';
 	// @import 'components/google-search';
-
-	p {
-		background: blue;
-	}
