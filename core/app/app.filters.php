@@ -22,6 +22,7 @@ remove_action('wp_head', 'feed_links', 2);										// remover feeds (posts e co
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);						// remover shortlink
 remove_action('wp_print_styles', 'print_emoji_styles');						// remover style emoji do wp
 remove_action('wp_head', 'rest_output_link_wp_head', 10);					// remover link json api
+remove_action('wp_head', 'wp_oembed_add_discovery_links');					// remover oembed links
 remove_action('template_redirect', 'rest_output_link_header', 11, 0);	// remover link json api do header http
 add_filter('the_generator', '__return_false');									// remover meta tag do wp do feed
 add_filter('use_default_gallery_style', '__return_false');					// desabilitar style da galeria

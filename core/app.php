@@ -90,6 +90,8 @@ add_action('init', function() {
 	if (!is_admin()) {
 		// add_filter('show_admin_bar', '__return_false');					// desabilitar admin bar
 		remove_action('wp_head', 'print_emoji_detection_script', 7);	// remover script emoji do wp
+		remove_action('wp_head', 'wp_resource_hints', 2);					// remover dns prefetch s.w.org
+		remove_action('wp_head', 'rel_canonical');							// remover url canonica
 	}
 });
 
