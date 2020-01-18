@@ -49,6 +49,11 @@ body .select2-container--default.select2-container--focus .select2-selection--mu
 	border-color: #aaa !important;
 }
 
+/* input customization */
+body .acf-input-prepend, body .acf-input-append {
+	border-color: #ddd !important;
+}
+
 /************************************
 * @ ADMIN COLUMNS PRO
 ************************************/
@@ -113,6 +118,10 @@ body .stuffbox .hndle {
 body input[type=checkbox],
 body input[type=radio] {
 	border-color: #b4b9be;
+}
+
+body.wp-core-ui select {
+	border-color: #ddd;
 }
 
 /* input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, input[type=datetime-local]:focus, input[type=datetime]:focus, input[type=email]:focus, input[type=month]:focus, input[type=number]:focus, input[type=password]:focus, input[type=radio]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=text]:focus, input[type=time]:focus, input[type=url]:focus, input[type=week]:focus, select:focus, textarea:focus {
