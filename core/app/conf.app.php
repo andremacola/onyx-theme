@@ -89,7 +89,7 @@ function onyx_plugins_loaded() {
 	// renomear "Campos Personalizados" do wp-admin
 	if(class_exists('acf')) {
 		add_filter('gettext', function($menu){
-			$menu = str_ireplace( 'Campos Personalizados', 'Campos', $menu );
+			$menu = str_ireplace('Campos Personalizados', 'Campos', $menu);
 			return $menu;
 		});
 	}
@@ -119,7 +119,7 @@ function acf_post_object_query($args, $field, $post) {
 }
 
 /* adicionar página de opções do layout/tema */
-// if( function_exists('acf_add_options_page') ) {
+// if(function_exists('acf_add_options_page')) {
 // 	$options = acf_add_options_page(array(
 // 		'page_title'	=> 'Options',
 // 		'menu_slug'		=> 'acf-options-site',
@@ -144,4 +144,4 @@ function acf_post_object_query($args, $field, $post) {
 /* desativar smart filtering */
 add_filter('acp/search/is_active', '__return_false');
 /* remover notices e warnings */
-add_filter( 'ac/suppress_site_wide_notices', '__return_true' );
+add_filter('ac/suppress_site_wide_notices', '__return_true');

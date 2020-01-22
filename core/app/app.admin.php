@@ -22,7 +22,7 @@ function onyx_change_footer_admin () {
 }
 
 /* customizar barra do wordpress admin */
-add_action( 'wp_before_admin_bar_render', 'onyx_admin_bar' );
+add_action('wp_before_admin_bar_render', 'onyx_admin_bar');
 function onyx_admin_bar() {
 	global $wp_admin_bar;
 	$wp_admin_bar->remove_menu('wp-logo');
@@ -30,10 +30,10 @@ function onyx_admin_bar() {
 }
 
 /* clean dashboard */
-add_action('wp_dashboard_setup', 'onyx_dashboard_widgets' );
+add_action('wp_dashboard_setup', 'onyx_dashboard_widgets');
 function onyx_dashboard_widgets() {
 	global $wp_meta_boxes;
-	remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	remove_action('welcome_panel', 'wp_welcome_panel');
 	unset($wp_meta_boxes['dashboard']['normal']['high']['dashboard_browser_nag']); // browse happy
 	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);	 // rascunho rápido
 	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);		 // wordpress.com
@@ -81,12 +81,12 @@ function onyx_enable_midia_cat() {
 add_action('admin_init', 'onyx_default_imagelink', 10);
 add_filter('media_view_settings', 'onyx_default_gallerylink');
 function onyx_default_imagelink() {
-	$image_set = get_option( 'image_default_link_type' );
+	$image_set = get_option('image_default_link_type');
 	if ($image_set !== 'none') {
 		update_option('image_default_link_type', 'none');
 	}
 }
-function onyx_default_gallerylink( $settings ) {
+function onyx_default_gallerylink($settings) {
 	$settings['galleryDefaults']['link'] = 'file';
 	$settings['galleryDefaults']['columns'] = '4';
 	return $settings;
@@ -151,14 +151,14 @@ function onyx_upload_limit() {
 
 /* remover campos desnecessários do perfil do usuário */
 add_filter('user_contactmethods' , 'onyx_user_contactmethods' , 10 , 1);
-function onyx_user_contactmethods( $contactmethods ) {
+function onyx_user_contactmethods($contactmethods) {
 	// Adicionar campos de contato
 	// $contactmethods['twitter'] = 'Twitter ID';
 	// $contactmethods['facebook'] = 'Facebook ID';
 
 	// Remover campos de contato
-	unset($contactmethods['aim'] );
-	unset($contactmethods['yim'] );
+	unset($contactmethods['aim']);
+	unset($contactmethods['yim']);
 	unset($contactmethods['jabber']);
 
 	return $contactmethods;

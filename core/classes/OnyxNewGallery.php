@@ -135,12 +135,12 @@ class OnyxNewGallery {
 
 			$attr = (trim($attachment->post_excerpt)) ? array('aria-describedby' => "$selector-$id") : '';
 			if (!empty($atts['link']) && 'file' === $atts['link']) {
-				// $image_output = wp_get_attachment_link( $id, $atts['size'], false, false, false, $attr );
+				// $image_output = wp_get_attachment_link($id, $atts['size'], false, false, false, $attr);
 				$image_output = "<a data-fancybox='gallery-$sgid' data-caption='" . wptexturize($attachment->post_excerpt) . "' href='" . wp_get_attachment_url($id) . "'> " . wp_get_attachment_image($id, $atts['size'], false, $attr) . "</a>";
 			} elseif (!empty($atts['link']) && 'none' === $atts['link']) {
 				$image_output = wp_get_attachment_image($id, $atts['size'], false, $attr);
 			} else {
-				// $image_output = wp_get_attachment_link( $id, $atts['size'], true, false, false, $attr );
+				// $image_output = wp_get_attachment_link($id, $atts['size'], true, false, false, $attr);
 				$image_output = "<a data-fancybox='gallery-$sgid' data-caption='" . wptexturize($attachment->post_excerpt) . "' href='" . wp_get_attachment_url($id) . "'> " . wp_get_attachment_image($id, $atts['size'], false, $attr) . "</a>";
 			}
 			$image_meta  = wp_get_attachment_metadata($id);

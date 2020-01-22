@@ -1,3 +1,3 @@
 <?php 
-	wp_redirect( home_url() );
+	wp_redirect(home_url());
 ?>

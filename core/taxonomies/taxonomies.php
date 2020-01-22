@@ -9,14 +9,14 @@
 Categoria para post type: Modelo
 ===========================================================*/
 
-// add_action( 'init', 'register_taxonomy_onyxtax' );
+// add_action('init', 'register_taxonomy_onyxtax');
 // function register_taxonomy_onyxtax() {
 // 	$name		= 'Categoria';
 // 	$namep	= 'Categorias';
 // 	$name_l	= strtolower($name);
 // 	$namep_l	= strtolower($namep);
 
-// 	$labels = array( 
+// 	$labels = array(
 // 		'name'								=> $namep,
 // 		'singular_name'					=> $name,
 // 		'search_items'						=> "Buscar $namep_l",
@@ -34,7 +34,7 @@ Categoria para post type: Modelo
 // 		'menu_name'							=> $namep
 // 	);
 
-// 	$args = array( 
+// 	$args = array(
 // 		'labels'					=> $labels,
 // 		'public'					=> true,
 // 		'show_admin_column'	=> true,
@@ -53,7 +53,7 @@ Categoria para post type: Modelo
 
 /* adicionar taxonomy na coluna de visualização */
 
-// add_filter( "manage_post_type_modelo_posts_columns", "filter_post_type_modelo_columns" );
+// add_filter("manage_post_type_modelo_posts_columns", "filter_post_type_modelo_columns");
 // function filter_post_type_modelo_columns($defaults) {
 // 	$defaults['onyxtax']	= 'Categorias';
 // 	$defaults['author']		= 'Autor';
@@ -66,21 +66,21 @@ Categoria para post type: Modelo
 // 	$post_type	= get_post_type($post_id);
 // 	$terms		= get_the_terms($post_id, $taxonomy);
 
-// 	if ( !empty($terms) ) {
-// 		foreach ( $terms as $term ):
+// 	if (!empty($terms)) {
+// 		foreach ($terms as $term):
 // 			$post_terms[] = "<a href='edit.php?post_type={$post_type}&{$taxonomy}={$term->slug}'> " . esc_html(sanitize_term_field('name', $term->name, $term->term_id, $taxonomy, 'edit')) . "</a>";
-// 			echo join( ', ', $post_terms );
+// 			echo join(', ', $post_terms);
 // 		endforeach;
 // 	} else {
 // 		echo '<i>Sem categoria.</i>';
 // 	}
 // }
 
-// add_action( 'restrict_manage_posts', 'filter_post_type_modelo_tax' );
+// add_action('restrict_manage_posts', 'filter_post_type_modelo_tax');
 // function filter_post_type_modelo_tax() {
 // 	global $typenow;
 // 	$taxonomies = array('onyxtax');
-// 	if( $typenow == 'post_type_modelo' ) {
+// 	if($typenow == 'post_type_modelo') {
 // 		foreach ($taxonomies as $tax_slug):
 
 // 			$tax_obj		= get_taxonomy($tax_slug);

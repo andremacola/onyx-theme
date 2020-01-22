@@ -12,7 +12,7 @@
 // 	$name_l	= strtolower($name);
 // 	$namep_l	= strtolower($namep);
 
-// 	$labels = array( 
+// 	$labels = array(
 // 		'name'					=> $namep,
 // 		'singular_name'		=> $name,
 // 		'all_items'				=> "Todos os $namep_l",
@@ -56,7 +56,7 @@
 // 		'edit_published_posts'	=> "edit_published_$caps"
 // 	);
 
-// 	$args = array( 
+// 	$args = array(
 // 		'labels'					=> $labels,
 // 		'hierarchical'			=> false,
 // 		'description'			=> "Inclusão de novos $namep_l",

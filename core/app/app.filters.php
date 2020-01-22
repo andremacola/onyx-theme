@@ -57,7 +57,7 @@ function onyx_body_classes($classes) {
 	if (!is_home()) {
 		$classes[] = 'int';
 	}
-	if (isset( $post ) && is_page()) {
+	if (isset($post) && is_page()) {
 		$classes[] = $post->post_type . '-' . $post->post_name;
 	}
 	return $classes;
@@ -73,7 +73,7 @@ function onyx_remove_private_title($title) {
 /* VERIFICAR: Necessidade com Gutenberg */
 add_filter('default_hidden_meta_boxes', 'onyx_show_hidden_excerpt', 10, 2);
 function onyx_show_hidden_excerpt($hidden, $screen) {
-if ('post' == $screen->base ) {
+if ('post' == $screen->base) {
 	foreach($hidden as $key=>$value) {
 		if ('postexcerpt' == $value) {
 			unset($hidden[$key]);
@@ -86,14 +86,14 @@ if ('post' == $screen->base ) {
 
 /* customizar SINGLE templates por categoria */
 add_filter('single_template', 'onyx_cat_single_template');
-function onyx_cat_single_template( $t ) {
-	foreach( get_the_category() as $cat ):
-		if ( file_exists(TEMPLATEPATH . "/single-cat-{$cat->slug}.php") ) {
+function onyx_cat_single_template($t) {
+	foreach(get_the_category() as $cat):
+		if (file_exists(TEMPLATEPATH . "/single-cat-{$cat->slug}.php")) {
 			return TEMPLATEPATH . "/single-cat-{$cat->slug}.php";
 		}
 		if($cat->parent) {
-			$cat = get_category( $cat->parent );
-			if ( file_exists(TEMPLATEPATH . "/single-cat-{$cat->slug}.php") ) {
+			$cat = get_category($cat->parent);
+			if (file_exists(TEMPLATEPATH . "/single-cat-{$cat->slug}.php")) {
 				return TEMPLATEPATH . "/single-cat-{$cat->slug}.php";
 			}
 		}
@@ -104,7 +104,7 @@ function onyx_cat_single_template( $t ) {
 /* fix redirect pagina wp-signup em uma network  */
 add_action('signup_header', 'onyx_prevent_multisite_signup');
 function onyx_prevent_multisite_signup() {
-	wp_redirect( site_url() );
+	wp_redirect(site_url());
 	die();
 }
 

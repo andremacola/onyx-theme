@@ -29,7 +29,7 @@ FILTROS / ACTIONS
 
 /* limitar main query para evitar slow query na página principal */
 add_filter('posts_request', 'onyx_supress_main_query', 10, 2);
-function onyx_supress_main_query( $request, $query ){
+function onyx_supress_main_query($request, $query){
 	if(is_home() && $query->is_main_query() && ! $query->is_admin)
 		return false;
 	else

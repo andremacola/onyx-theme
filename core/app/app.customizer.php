@@ -140,7 +140,7 @@ function onyx_customizer() {
 	wp_enqueue_script(
 		'onyx_customizer',
 		$app->dir . '/src/js/onyx-customizer.js',
-		array( 'jquery','customize-preview' ),
+		array('jquery','customize-preview'),
 		'',
 		true
 	);
@@ -156,7 +156,7 @@ function onyx_customizer_preview_js() {
 	wp_enqueue_script(
 		'onyx_customizer',
 		$app->dir . '/src/js/onyx-customizer.js',
-		array( 'jquery','customize-preview' ),
+		array('jquery','customize-preview'),
 		'',
 		true
 	);

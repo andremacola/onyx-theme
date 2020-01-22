@@ -44,8 +44,8 @@ function onyx_remove_page_support() {
 POST: Customizar
 ===========================================================*/
 
-// add_action( 'admin_menu', 'post_type_label' );
-// add_action( 'init', 'post_type_object' );
+// add_action('admin_menu', 'post_type_label');
+// add_action('init', 'post_type_object');
 // function post_type_label() {
 // 	global $menu;
 // 	global $submenu;
@@ -86,16 +86,16 @@ POST: Customizar
 // 	$labels->menu_name				= 'Posts';
 // 	$labels->name_admin_bar			= 'Posts';
 
-// 	remove_post_type_support( 'post', 'editor' );
-// 	remove_post_type_support( 'post', 'author' );
-// 	remove_post_type_support( 'post', 'thumbnail' );
-// 	remove_post_type_support( 'post', 'excerpt' );
-// 	remove_post_type_support( 'post', 'trackbacks' );
-// 	remove_post_type_support( 'post', 'custom-fields' );
-// 	remove_post_type_support( 'post', 'comments' );
-// 	remove_post_type_support( 'post', 'revisions' );
-// 	remove_post_type_support( 'post', 'page-attributes' );
-// 	remove_post_type_support( 'post', 'post-formats' );
+// 	remove_post_type_support('post', 'editor');
+// 	remove_post_type_support('post', 'author');
+// 	remove_post_type_support('post', 'thumbnail');
+// 	remove_post_type_support('post', 'excerpt');
+// 	remove_post_type_support('post', 'trackbacks');
+// 	remove_post_type_support('post', 'custom-fields');
+// 	remove_post_type_support('post', 'comments');
+// 	remove_post_type_support('post', 'revisions');
+// 	remove_post_type_support('post', 'page-attributes');
+// 	remove_post_type_support('post', 'post-formats');
 // }
 
  ?>

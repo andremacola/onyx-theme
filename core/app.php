@@ -103,7 +103,7 @@ add_action('init', function() {
 /* desabilitar templates desnecessários */
 add_action('template_redirect', function() {
 	if (is_category() || is_tag() || is_archive() || is_date() || is_search() || is_attachment() || is_author() || is_404() || is_single()) {
-		wp_redirect( home_url() );
+		wp_redirect(home_url());
 	}
 });
 

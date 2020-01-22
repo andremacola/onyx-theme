@@ -14,7 +14,7 @@ function onyx_get_section_title() {
 		$title = single_cat_title('', false);
 	} elseif (is_tag()) {
 		$title = single_tag_title('', false);
-	} elseif (is_author() ) {
+	} elseif (is_author()) {
 		$title = get_the_author();
 	} elseif (is_tax()) { //for custom post types
 		$title = single_term_title('', false);
@@ -51,7 +51,7 @@ function onyx_first_tag() {
 		$count = 0;
 		foreach($posttags as $tag):
 			$count++;
-			if ($count == 1 ):
+			if ($count == 1):
 				echo $tag->name . ' ';
 			endif;
 		endforeach;
@@ -194,7 +194,7 @@ function onyx_in_catparent($cats, $_post = null) {
 /* como usar: <?php if (onyx_is_tree(2)) {  // coisas } ?> */
 function onyx_is_tree($pid) {
 	global $post;
-	$anc = get_post_ancestors( $post->ID );
+	$anc = get_post_ancestors($post->ID);
 	foreach($anc as $ancestor):
 		if (is_page() && $ancestor == $pid) {
 			return true;
@@ -209,7 +209,7 @@ function onyx_is_tree($pid) {
 	/* hack para onyx_is_tree baseado na url sem precisar consultar db */
 	function onyx_in_permalink($slug) {
 		global $wp;
-		if (preg_match( "#^$slug(/.+)?$#", $wp->request )) {
+		if (preg_match("#^$slug(/.+)?$#", $wp->request)) {
 			return true;
 		} else {
 			return false;
@@ -220,7 +220,7 @@ function onyx_is_tree($pid) {
 /* modo de uso: <img src="<?php echo onyx_get_thumb('thumbnail'); ?>" /> */
 function onyx_get_thumb($thumb_size = 'thumbnail', $post_id = NULL) {
 	global $id;
-	$post_id	= ( NULL === $post_id ) ? $id : $post_id;
+	$post_id	= (NULL === $post_id) ? $id : $post_id;
 	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), $thumb_size);
 	$src = $src[0];
 	return $src;
@@ -389,13 +389,13 @@ function onyx_pagenavi($query = null) {
 
 	$total = $query->max_num_pages;
 	// only bother with the rest if we have more than 1 page!
-	if ( $total > 1 )  {
+	if ($total > 1)  {
 		// get the current page
-		if ( !$current_page = get_query_var('paged') ) {
+		if (!$current_page = get_query_var('paged')) {
 			$current_page = 1;
 		}
 		// structure of "format" depends on whether we're using pretty permalinks
-		$format = empty( get_option('permalink_structure') ) ? '&page=%#%' : 'page/%#%/';
+		$format = empty(get_option('permalink_structure')) ? '&page=%#%' : 'page/%#%/';
 		$pages = paginate_links(array(
 			'base'					=> get_pagenum_link(1) . '%_%',
 			'format'					=> $format,
@@ -413,7 +413,7 @@ function onyx_pagenavi($query = null) {
 			'before_page_number'	=> '',
 			'after_page_number'	=> ''
 		));
-		if( is_array( $pages ) ) {
+		if(is_array($pages)) {
 			echo '<div class="onyx-pagination"><ul class="page-numbers">';
 				foreach ($pages as $page) {
 					$current = false;
