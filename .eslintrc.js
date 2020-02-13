@@ -39,6 +39,7 @@ module.exports = {
 		"no-console": 0,
 		"eqeqeq": 0,
 		"space-in-parens": ["warn", "never"],
+		"template-curly-spacing": ["warn", "never"],
 		"computed-property-spacing": ["warn", "never"]
 	}
 }
