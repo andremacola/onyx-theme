@@ -19,19 +19,19 @@ FILTROS / ACTIONS
 ================================ */
 
 /* limitar acesso api */
-add_filter('rest_authentication_errors', function($result) {
-	global $app;
-	if (!empty($result)) {
-		return $result;
-	}
-	if (isset($_REQUEST['key']) && $_REQUEST['key'] === $app->key) {
-		return $result;
-	}
-	if (!is_user_logged_in()) {
-		return new WP_Error('unauthorized', 'Acesso não autorizado.', array('status' => 401));
-	}
-	return $result;
-});
+// add_filter('rest_authentication_errors', function($result) {
+// 	global $app;
+// 	if (!empty($result)) {
+// 		return $result;
+// 	}
+// 	if (isset($_REQUEST['key']) && $_REQUEST['key'] === $app->key) {
+// 		return $result;
+// 	}
+// 	if (!is_user_logged_in()) {
+// 		return new WP_Error('unauthorized', 'Acesso não autorizado.', array('status' => 401));
+// 	}
+// 	return $result;
+// });
 
 /* bloquear user enumeration via wp rest api */
 // add_filter('rest_endpoints', function($endpoints){
