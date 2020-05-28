@@ -41,6 +41,9 @@ require_once(__DIR__ . '/app.php');
 // funcionamento/criação de post types
 require_once(__DIR__ . '/types/types.php');
 
+// funções para funcionamento das áreas dos widgets
+require_once(__DIR__ . '/app/app.widgets.php');
+
 // funções para personalização do Tema
 // require_once(__DIR__ . '/app/app.customizer.php');
 

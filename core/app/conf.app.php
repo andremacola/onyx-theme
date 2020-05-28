@@ -20,9 +20,7 @@ $onyx_ver = 1;
 
 $onyx_usr = (object) array(
 	'devs'	=> array(
-		'andremacola@gmail.com',
-		'igorfpessoa@gmail.com',
-		'rosie.baltazar.carvalho@gmail.com'
+		'andremacola@gmail.com'
 	),
 	'user' => wp_get_current_user()->user_email
 );
