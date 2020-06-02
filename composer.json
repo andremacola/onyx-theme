@@ -1,6 +1,8 @@
 {
-	"name": "onyx/wp",
+	"name": "andremacola/onyx-theme",
 	"description": "Onyx WP Theme",
+	"homepage": "https://github.com/andremacola/onyx-theme",
+	"type": "wordpress-theme",
 	"authors": [
 		{
 			"name": "Andre Macola",
