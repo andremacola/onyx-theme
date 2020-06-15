@@ -334,9 +334,15 @@ $path_file = '<script '.$async.' src="'.$js.'"></script>' . "\n";
 }
 
 /* função para o funcionamento do gulp-livereload */
-function onyx_js_livereload($port = 3010, $host = null) {
-	$host = ($host) ? $host : $_SERVER['HTTP_HOST'];
-	onyx_js_url("//$host:$port/livereload.js?snipver=1");
+function onyx_js_livereload($port = 3010, $host = 'localhost') {
+	if (pathinfo($_SERVER['SERVER_NAME'])['extension'] === 'local') {
+		$file = "//$host:$port/livereload.js?snipver=1";
+		$file_headers = @get_headers("http:$file");
+		if ($file_headers) {
+			return onyx_js_url($file);
+		}
+	}
+	return false;
 }
 
 /* adicionar google analytics */

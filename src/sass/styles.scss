@@ -12,9 +12,8 @@
 	@import "_libs/grid";
 
 // vendors
-	// @import "_vendor/owl/owl.carousel.min";
-	// @import "_vendor/owl/owl.theme.default.min";
-	// @import "_vendor/fancybox/fancybox.min";
+	@import "tiny-slider/dist/tiny-slider";
+	@import "@fancyapps/fancybox/dist/jquery.fancybox.min";
 
 // layout
 	@import "layout/theme";

@@ -181,7 +181,7 @@ function onyx_gutenberg_js() {
 	global $app;
 	wp_enqueue_script(
 		'onyx-gutenberg',
-		$app->dir.'/src/js/onyx-gutenberg.js',
+		$app->dir.'/src/js/admin/gutenberg.js',
 		array('wp-blocks', 'wp-dom-ready', 'wp-edit-post'),
 		$app->v
 	);

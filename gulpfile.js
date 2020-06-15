@@ -35,7 +35,10 @@ const config = {
 function styleMain() {
 	return gulp
 		.src(config.mainCSS)
-		.pipe(sass({ outputStyle: config.cssout }).on('error', sass.logError))
+		.pipe(sass({
+			outputStyle: config.cssout,
+			includePaths: [ './node_modules/' ],
+		}).on('error', sass.logError))
 		.pipe(rename('main.css'))
 		.pipe(
 			gulpif(
@@ -128,7 +131,13 @@ function purgeCSS() {
 function jsMain() {
 	return gulp
 		.src('./src/js/app.js')
-		.pipe(include())
+		.pipe(include({
+			extensions: 'js',
+			includePaths: [
+				__dirname + '/node_modules',
+				__dirname + '/src/js/plugins',
+			],
+		}))
 		.on('error', console.log)
 		.pipe(gulpif(config.terser, terser()))
 		.pipe(rename('app.min.js'))

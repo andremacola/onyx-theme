@@ -131,7 +131,7 @@ function onyx_theme_customizer($wp_customize) {
 }
 
 /* ================================
-Carregar javascript de customização
+Carregar JAVASCRIPT de customização
 ================================ */
 
 add_action('customize_preview_init', 'onyx_customizer');
@@ -139,7 +139,7 @@ function onyx_customizer() {
 	global $app;
 	wp_enqueue_script(
 		'onyx_customizer',
-		$app->dir . '/src/js/onyx-customizer.js',
+		$app->dir . '/src/js/admin/customizer.js',
 		array('jquery','customize-preview'),
 		'',
 		true
@@ -155,7 +155,7 @@ function onyx_customizer_preview_js() {
 	global $app, $onyx_color_fields;
 	wp_enqueue_script(
 		'onyx_customizer',
-		$app->dir . '/src/js/onyx-customizer.js',
+		$app->dir . '/src/js/admin/customizer.js',
 		array('jquery','customize-preview'),
 		'',
 		true

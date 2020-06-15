@@ -59,26 +59,14 @@ function onyx_footer_elements() {
 	----------------------------------------- */
 
 	/* Javascript Libraries */
-	if (ONYX_LOCAL_DEV) {
-		onyx_js_src('vendor/jquery.min.js');
-		// onyx_js_src('vendor/jquery.owl.carousel.min.js');
-		// onyx_js_src('vendor/jquery.fancybox.min.js', false);
-		// onyx_js_src('vendor/jquery.mask.min.js', false);
-		// onyx_js_src('dfp.js?v='.$app->v);
-		onyx_js_src('app.js?v='.$app->v);
-		onyx_js_src('app-int.js?v='.$app->v, false);
-	} else {
-		onyx_js('app.min.js?v='.$app->v);
-		onyx_js('app-int.min.js?v='.$app->v, false);
-	}
+	onyx_js('app.min.js?v='.$app->v);
+	onyx_js('app-int.min.js?v='.$app->v, false);
 
 	/* Google Analytics */
 	// onyx_ganalytics('UA-XXXXXX-X');
 
 	/* dev: livereload/browsersync */
-	if (isset($_GET['lr'])) {
-		onyx_js_livereload($_GET['lr'], 'localhost');
-	}
+	onyx_js_livereload(3010);
 }
 
 /* ================================
