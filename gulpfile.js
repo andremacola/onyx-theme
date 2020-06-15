@@ -197,7 +197,7 @@ function liveReloadWatch() {
 // exports.styleExtras = styleExtras;
 exports.styleMain = styleMain;
 exports.styleInt = styleInt;
-exports.purgecss = purgeCSS;
+exports.purgeCSS = purgeCSS;
 exports.jsMain = jsMain;
 exports.jsInt = jsInt;
 exports.watch = watchFiles;
