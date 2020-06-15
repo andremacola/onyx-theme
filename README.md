@@ -2,6 +2,14 @@
 
 Onyx Theme é um starter kit para auxílio no desenvolvimento de temas em Wordpress.
 
+## Estrutura de pastas
+
+A pasta `core/` é onde reside toda a estrutura principal do tema.
+
+- `helpers.php` Funções auxiliares usadas em todo o tema.
+- `filters.php` Adicione filtros do WordPress neste arquivo.
+- `thumbs.php` Customizar tamanhos das thumbnails no Wordpress.
+
 ## Gulp
 
 O Gulp é utilizado para processamento de javascripts, scss e livereload. Para ser utilizado junto com um servidor WEB como o LocalbyFlywheel ou MAMP.
