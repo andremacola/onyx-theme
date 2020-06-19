@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Edit this file to set up custom thumbnails
  *

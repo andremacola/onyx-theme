@@ -6,7 +6,7 @@
  * @see https://developer.wordpress.org/reference/functions/add_theme_support/
  */
 
-return (object) [
+return [
 	/*
 	|--------------------------------------------------------------------------
 	| WORDPRESS FEATURES SUPPORT

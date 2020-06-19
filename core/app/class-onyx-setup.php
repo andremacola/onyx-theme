@@ -16,12 +16,12 @@ final class Onyx_Setup {
 	private $support;
 
 	public function __construct() {
-		$this->app      = $this->load('app');
-		$this->assets   = $this->load('assets');
-		$this->hooks    = $this->load('hooks');
-		$this->images   = $this->load('images');
-		$this->mail     = $this->load('mail');
-		$this->support  = $this->load('support');
+		$this->app      = (object) O::load('app');
+		$this->assets   = O::load('assets');
+		$this->hooks    = O::load('hooks');
+		$this->images   = O::load('images');
+		$this->mail     = O::load('mail');
+		$this->support  = O::load('support');
 
 		if(!defined('ONYX_THEME')) {
 			define('ONYX_THEME', true);
@@ -111,20 +111,6 @@ final class Onyx_Setup {
 		foreach ($this->support as $feature) {
 			add_theme_support($feature);
 		}
-	}
-
-	/**
-	 * Load configuration file.
-	 * The configuration file must be returning an array
-	 *
-	 * @param string $file File name [required]
-	 * @return array|object|false
-	 */
-	private function load($file) {
-		if (file_exists($file = __DIR__."/../config/$file.php")) {
-			return require_once $file;
-		}
-		return false;
 	}
 
 	/**

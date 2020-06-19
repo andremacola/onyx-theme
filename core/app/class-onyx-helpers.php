@@ -8,6 +8,61 @@
 
 Class O {
 
+	private static $conf;
+
+	/**
+	 * Return enviroment settings.
+	 * Use with caution
+	 *
+	 * @param string $name Config name variable app|assets|hooks|images|mail|support [optional]
+	 * @return array|object|false
+	 */
+	static function conf($name = false) {
+
+		$filter = ['pass', 'password', 'key', 'keys', 'dev', 'devs'];
+
+		$confs = self::array_filter_keys(self::$conf, $filter);
+
+		// $confs = self::$conf;
+		$config = (!empty($name)) ? $confs[$name] : $confs;
+
+		return $config;
+	}
+
+	/**
+	 * Load configuration file.
+	 * The configuration file must be returning an array
+	 *
+	 * @param string $file File name [required]
+	 * @return array|object|false
+	 */
+	static function load($file) {
+		if (file_exists($require = __DIR__."/../config/$file.php")) {
+			self::$conf[$file] = require_once $require;
+		}
+		return self::$conf[$file];
+	}
+
+	/**
+	 * Filter multidimensional array recursively
+	 *
+	 * @param array $arr Array source [required]
+	 * @param array $filter Keys to remove [required]
+	 * @return array
+	 */
+	static function array_filter_keys(array $arr, array $filter) {
+		foreach ($arr as $key => $value) {
+			if (is_array($value) && !is_numeric(array_keys($value)[0])) {
+				// $arr[$key] = call_user_func(array(__CLASS__, __FUNCTION__), $value, $filter);
+				$arr[$key] = self::array_filter_keys($value, $filter);
+			}
+			elseif (in_array($key, $filter)) {
+				unset($arr[ $key ]);
+			}
+		}
+		return $arr;
+	}
+
 	/**
 	 * Return the current section title depending on route section type of Wordpress
 	 * 
