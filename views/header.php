@@ -20,7 +20,7 @@
 
 		<link rel="apple-touch-icon" sizes="180x180" href="<?php echo $app->dir_uri; ?>/assets/images/icons/favicon-180.png">
 		<link rel="icon" type="image/png" href="<?php echo $app->dir_uri; ?>/assets/images/icons/favicon-32.png">
-		<link rel="manifest" href="<?php echo $app->dir_uri; ?>/manifest.json">
+		<link rel="manifest" href="<?php echo $app->dir_uri; ?>/site.webmanifest">
 		<meta name="theme-color" content="#FFF">
 		<meta name="apple-mobile-web-app-title" content="<?php echo $app->dir_uri; ?>">
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">

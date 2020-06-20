@@ -1,0 +1,19 @@
+{
+	"name": "Onyx",
+	"short_name": "Onyx",
+	"icons": [
+		{
+			"src": "assets/images/icons/favicon-192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "assets/images/icons/favicon-512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"start_url": "/?utm_source=homescreen",
+	"background_color": "#FFF",
+	"theme_color": "#FFF"
+}
