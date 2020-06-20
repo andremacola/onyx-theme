@@ -39,6 +39,22 @@ final class Onyx_Setup {
 		$this->register_theme_support();
 		$this->manage_actions();
 		$this->manage_filters();
+		$this->register_image_sizes();
+	}
+
+
+	/**
+	 * Register custom image sizes
+	 * 
+	 * @see config/images.php
+	 * @return void
+	 */
+	private function register_image_sizes() {
+		if (empty((array) $this->images)) {
+			foreach ($this->images as $name => $param) {
+				add_image_size($name, $param[0], $param[1], $param[2]);
+			}
+		}
 	}
 
 	/**
@@ -63,7 +79,8 @@ final class Onyx_Setup {
 	 */
 	private function manage_filters() {
 		foreach ($this->hooks->filters as $key => $hooks) {
-			$this->register_hooks("{$key}_filter", $hooks);
+			$s = ($key === 'apply') ? 's' : null; // oh hack day
+			$this->register_hooks("{$key}_filter{$s}", $hooks);
 		}
 	}
 

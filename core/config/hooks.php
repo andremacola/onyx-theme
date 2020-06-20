@@ -55,10 +55,10 @@ return [
 			// remove private|protected prefix from title
 			['private_title_format', 'onyx_remove_private_title'],
 			['protected_title_format', 'onyx_remove_private_title'],
-
+		],
+		'apply' => [
 			// show excerpt by default
 			['default_hidden_meta_boxes', 'onyx_show_hidden_excerpt', 10, 2],
-
 		]
 	],
 
@@ -112,6 +112,8 @@ return [
 			['template_redirect', 'rest_output_link_header', 11],
 		],
 		'add' => [
+			// set smtp email configuration
+			['phpmailer_init', 'onyx_smtp_config'],
 			// load onyx styles
 			['wp_head', 'onyx_load_styles'],
 			// load onyx javascripts

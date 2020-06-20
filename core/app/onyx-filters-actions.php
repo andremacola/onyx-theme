@@ -89,7 +89,8 @@ function onyx_single_cat_template($t) {
 }
 
 /**
- * Action to add Onyx Theme Styles
+ * Action to add Onyx Theme Styles.
+ * Registered at actions->add->wp_head config/hook.php
  *
  * @return void
  */
@@ -102,6 +103,7 @@ function onyx_load_styles() {
 
 /**
  * Action to add Onyx Theme Javascripts
+ * Registered at actions->add->wp_head config/hook.php
  *
  * @return void
  */
@@ -114,13 +116,34 @@ function onyx_load_javascripts() {
 }
 
 /**
- * Action to inject gulp-livereload server for development.
- * Only works with .local domains
+ * Action to inject gulp-livereload server for development,
+ * only works with `.local` domains.
+ * Registered at actions->add->wp_head config/hook.php
  *
  * @return void
  */
 function onyx_load_liverelaod() {
 	O::livereload();
+}
+
+/**
+ * Action to configure WordPress send an email via SMTP.
+ * Registered at actions->add->wp_head phpmailer_init/hook.php.
+ *
+ * @see config/mail.php
+ * @return void
+ */
+function onyx_smtp_config($phpmailer) {
+	$mail = O::conf('mail');
+	$phpmailer->isSMTP();
+	$phpmailer->From        = $mail->from;
+	$phpmailer->FromName    = $mail->name;
+	$phpmailer->Host        = $mail->host;
+	$phpmailer->Port        = $mail->port;
+	$phpmailer->SMTPSecure  = $mail->secure;
+	$phpmailer->SMTPAuth    = $mail->auth;
+	$phpmailer->Username    = $mail->user;
+	$phpmailer->Password    = $mail->pass;
 }
 
 /**
@@ -144,14 +167,14 @@ function onyx_remove_private_title($title) {
  * @return bool
  */
 function onyx_show_hidden_excerpt($hidden, $screen) {
-if ('post' == $screen->base) {
-	foreach($hidden as $key=>$value) {
-		if ('postexcerpt' == $value) {
-			unset($hidden[$key]);
-			break;
+	if ('post' == $screen->base) {
+		foreach($hidden as $key=>$value) {
+			if ('postexcerpt' == $value) {
+				unset($hidden[$key]);
+				break;
+			}
 		}
 	}
-}
 	return $hidden;
 }
 
@@ -164,34 +187,34 @@ if ('post' == $screen->base) {
  * @return mixed
  */
 function onyx_better_img_caption($output, $attr, $content) {
-	// ignorar caption caso seja no feed
+	// skip caption if in feed
 	if (is_feed())
 		return $output;
-	// configurações dos argumentos padrões
+	// default argument settings
 	$defaults = array(
 		'id'			=> '',
 		'align'		=> 'alignnone',
 		'width'		=> '',
 		'caption'	=> ''
 	);
-	// combinar argumentos com o input do usuário
+	// combine arguments with user input
 	$attr = shortcode_atts($defaults, $attr);
-	// se o width for menor que 1, não existe caption, retornar a imagem normalmente.
+	// if the width is less than 1, there is no caption, return the image normally.
 	if (1 > $attr['width'] || empty($attr['caption']))
 		return $content;
-	// setar os atributos da div do caption
+	// set the caption div attributes
 	$attributes = (!empty($attr['id']) ? ' id="' . esc_attr($attr['id']) . '"' : '');
 	$attributes .= ' class="wp-caption ' . esc_attr($attr['align']) . '"';
 	$attributes .= ' style="width: ' . esc_attr($attr['width']) . 'px"';
-	// abrir a div do caption
+	// open a caption div
 	$output = '<div' . $attributes . '>';
-	// Permitir shortcodes
+	// allow shortcodes
 	$output .= do_shortcode($content);
-	// adicionar o texto do caption
+	// add caption text
 	$output .= '<span class="wp-caption-text">' . $attr['caption'] . '</span>';
-	// fechar a div do caption
+	// close the caption div
 	$output .= '</div>';
-	// retornar a lagenda (caption) formatado corretamente
+	// return caption formatted correctly
 	return $output;
 }
 

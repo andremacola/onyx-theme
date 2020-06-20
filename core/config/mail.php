@@ -8,7 +8,7 @@
 
 return [
 	'from'     => "email@domain.tld",
-	'fromname' => "Client Name",
+	'name'     => "Client Name",
 	'host'     => 'smtp.gmail.com',
 	'port'     => 465,
 	'secure'   => "ssl",

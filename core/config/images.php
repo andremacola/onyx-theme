@@ -13,8 +13,7 @@
  */
 
 return [
-	'thumbnail' => [150, 150, true],
-	'onyx_size' => [150, 150, true]
+	// 'Onyx Size' => [300, 200, true]
 ];
 
 ?>
