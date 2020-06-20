@@ -31,8 +31,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'js'  => [
-		['https://google.com.br/gtag.js', true],
-		['assets/js/app.min.js', true, 'async'],
+		['assets/js/app.min.js', true],
 		['assets/js/app-int.min.js', false]
 	],
 ];
