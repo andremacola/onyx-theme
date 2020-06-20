@@ -35,7 +35,7 @@ O Gulp é utilizado para processamento de javascripts, scss e livereload. Para s
 **Outros comandos**
 `styleMain`, `styleInt`, `purgecss`, `jsMain`, `jsInt`
 
-## Fazendo require de dependencias no javascript
+## Fazendo require de dependências no javascript
 
 Adicionar no topo do `app.js` `//=require "path/of/script.js"`
 
