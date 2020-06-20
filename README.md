@@ -4,11 +4,19 @@ Onyx Theme é um starter kit para auxílio no desenvolvimento de temas em Wordpr
 
 ## Estrutura de pastas
 
-A pasta `core/` é onde reside toda a estrutura principal do tema.
+- **`core/`** é onde reside toda a estrutura principal do tema
+	- `./api`
+	- `./app`
+	- `./config`
+	- `./types`
+	- `./taxs`
 
-- `helpers.php` Funções auxiliares usadas em todo o tema.
-- `filters.php` Adicione filtros do WordPress neste arquivo.
-- `thumbs.php` Customizar tamanhos das thumbnails no Wordpress.
+- **`src/`** arquivos fontes de estilos e javascripts
+	- `./sass`
+	- `./js`
+
+- **`templates/`** --
+- **`views/`** --
 
 ## Gulp
 
@@ -22,7 +30,7 @@ O Gulp é utilizado para processamento de javascripts, scss e livereload. Para s
 |--------------|--------------------------------------------|
 |gulp watch    | Escuta e processa os arquivos ao salvar
 |gulp server   | Utiliza o BrowserSync para servir
-|gulp live     | Utiliza o LiveReload para servir
+|gulp live     | Utiliza o LiveReload para servir (recomendado)
 
 **Outros comandos**
 `styleMain`, `styleInt`, `purgecss`, `jsMain`, `jsInt`

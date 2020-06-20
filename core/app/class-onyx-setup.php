@@ -41,22 +41,6 @@ final class Onyx_Setup {
 		$this->manage_filters();
 	}
 
-	// /**
-	//  * Manage assets,
-	//  * 
-	//  * @see config/assets.php
-	//  * @return void
-	//  */
-	// public function manage_assets() {
-	// 	foreach ($this->assets as $type => $assets) {
-	// 		if (!empty($assets)) {
-	// 			foreach ($assets as $asset) {
-	// 				O::$type($asset[0], $asset[1]);
-	// 			}
-	// 		}
-	// 	}
-	// }
-
 	/**
 	 * Manage (remove/add) actions,
 	 * 
