@@ -16,6 +16,7 @@ desktop.ini
 *.env
 node_modules/
 bower_components/
+core/config/app.php
 
 # ftp/sftp
 ######################

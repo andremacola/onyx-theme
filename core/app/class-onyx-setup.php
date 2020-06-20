@@ -16,19 +16,17 @@ final class Onyx_Setup {
 	private $support;
 
 	public function __construct() {
-		$this->app      = (object) O::load('app');
+		$this->app      = O::load('app');
 		$this->assets   = O::load('assets');
 		$this->hooks    = O::load('hooks');
 		$this->images   = O::load('images');
 		$this->mail     = O::load('mail');
 		$this->support  = O::load('support');
 
-		if(!defined('ONYX_THEME')) {
-			define('ONYX_THEME', true);
-			define('ONYX_THEME_VERSION', $this->version());
-			define('ONYX_STATIC', $this->app->static);
-		}
-
+		define('ONYX_THEME', true);
+		define('ONYX_THEME_VERSION', $this->version());
+		define('ONYX_STATIC', $this->app->static);
+		
 		add_action('after_setup_theme', [$this, 'setup']);
 	}
 
@@ -43,6 +41,22 @@ final class Onyx_Setup {
 		$this->manage_filters();
 	}
 
+	// /**
+	//  * Manage assets,
+	//  * 
+	//  * @see config/assets.php
+	//  * @return void
+	//  */
+	// public function manage_assets() {
+	// 	foreach ($this->assets as $type => $assets) {
+	// 		if (!empty($assets)) {
+	// 			foreach ($assets as $asset) {
+	// 				O::$type($asset[0], $asset[1]);
+	// 			}
+	// 		}
+	// 	}
+	// }
+
 	/**
 	 * Manage (remove/add) actions,
 	 * 
@@ -50,7 +64,7 @@ final class Onyx_Setup {
 	 * @return void
 	 */
 	private function manage_actions() {
-		foreach ($this->hooks['actions'] as $key => $hooks) {
+		foreach ($this->hooks->actions as $key => $hooks) {
 			$this->register_hooks("{$key}_action", $hooks);
 		}
 	}
@@ -64,7 +78,7 @@ final class Onyx_Setup {
 	 * @return void
 	 */
 	private function manage_filters() {
-		foreach ($this->hooks['filters'] as $key => $hooks) {
+		foreach ($this->hooks->filters as $key => $hooks) {
 			$this->register_hooks("{$key}_filter", $hooks);
 		}
 	}

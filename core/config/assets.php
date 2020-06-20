@@ -8,17 +8,31 @@
  * @see https://developer.wordpress.org/reference/functions/wp_enqueue_style/
  * @see https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
- * @param string      the file path [required]
+ * @param string      the file path or url [required]
  * @param bool        Show in home? [required]
+ * @param string      async|defer for javascript [optional]
  */
 
 return [
+
+	/*
+	|--------------------------------------------------------------------------
+	| LOAD CSS
+	|--------------------------------------------------------------------------
+	*/
 	'css' => [
 		['assets/css/main.css', true],
 		['assets/css/int.css', false]
 	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| LOAD JAVASCRIPTS
+	|--------------------------------------------------------------------------
+	*/
 	'js'  => [
-		['assets/js/app.min.js', true],
+		['https://google.com.br/gtag.js', true],
+		['assets/js/app.min.js', true, 'async'],
 		['assets/js/app-int.min.js', false]
 	],
 ];

@@ -88,6 +88,25 @@ function onyx_single_cat_template($t) {
 	return $t;
 }
 
+function onyx_load_liverelaod() {
+	O::livereload();
+}
+
+function onyx_load_javascripts() {
+	$assets = O::conf('assets')->js;
+	foreach ($assets as $js) {
+		$js[2] = (!isset($js[2])) ?: $js[2];
+		O::js($js[0], $js[1], $js[2]);
+	}
+}
+
+function onyx_load_styles() {
+	$assets = O::conf('assets')->css;
+	foreach ($assets as $css) {
+		O::css($css[0], $css[1]);
+	}
+} 
+
 /**
  * Remove Private or Protected prefix from title.
  * Registered at filters->add->private_title_format|protected_title_format at config/hook.php

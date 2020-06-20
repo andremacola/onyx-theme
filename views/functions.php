@@ -26,6 +26,6 @@ require_once(__DIR__."/../core/app/onyx-filters-actions.php");
 |--------------------------------------------------------------------------
 */
 
-$app = new Onyx_Setup();
+new Onyx_Setup();
 
 ?>

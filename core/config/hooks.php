@@ -112,8 +112,14 @@ return [
 			['template_redirect', 'rest_output_link_header', 11],
 		],
 		'add' => [
+			// load onyx styles
+			['wp_head', 'onyx_load_styles'],
+			// load onyx javascripts
+			['wp_footer', 'onyx_load_javascripts'],
+			// load live reload on development enviroment
+			['wp_footer', 'onyx_load_liverelaod'],
 			// reallocate javascripts from header to footer and remove wp jquery
-			['wp_enqueue_scripts', 'onyx_header_footer_scripts']
+			['wp_enqueue_scripts', 'onyx_header_footer_scripts'],
 		]
 	]
 ]

@@ -15,18 +15,18 @@ Class O {
 	 * Use with caution
 	 *
 	 * @param string $name Config name variable app|assets|hooks|images|mail|support [optional]
-	 * @return array|object|false
+	 * @return object|false
 	 */
 	static function conf($name = false) {
-
+		$confs = self::$conf;
 		$filter = ['pass', 'password', 'key', 'keys', 'dev', 'devs'];
+	
+		$confs['app'] = self::array_filter_keys($confs['app'], $filter);
+		$confs['mail'] = self::array_filter_keys($confs['mail'], $filter);
 
-		$confs = self::array_filter_keys(self::$conf, $filter);
-
-		// $confs = self::$conf;
 		$config = (!empty($name)) ? $confs[$name] : $confs;
 
-		return $config;
+		return (object) $config;
 	}
 
 	/**
@@ -34,13 +34,15 @@ Class O {
 	 * The configuration file must be returning an array
 	 *
 	 * @param string $file File name [required]
+	 * @param bool $obj Return as object. Default object [optional]
 	 * @return array|object|false
 	 */
-	static function load($file) {
+	static function load($file, $obj = true) {
 		if (file_exists($require = __DIR__."/../config/$file.php")) {
 			self::$conf[$file] = require_once $require;
+			return ($obj) ? (object) self::$conf[$file] : self::$conf[$file];
 		}
-		return self::$conf[$file];
+		return false;
 	}
 
 	/**
@@ -50,7 +52,7 @@ Class O {
 	 * @param array $filter Keys to remove [required]
 	 * @return array
 	 */
-	static function array_filter_keys(array $arr, array $filter) {
+	static function array_filter_keys($arr, $filter) {
 		foreach ($arr as $key => $value) {
 			if (is_array($value) && !is_numeric(array_keys($value)[0])) {
 				// $arr[$key] = call_user_func(array(__CLASS__, __FUNCTION__), $value, $filter);
@@ -173,7 +175,8 @@ Class O {
 
 	/**
 	 * Return assets directory based on ambient variable|constant
-	 * If ONYX_STATIC is defined, it will use a static subdomain to serve the files
+	 * If ONYX_STATIC is defined, it will use a static subdomain to serve the files.
+	 * The subdomain pattern will be: `//subdomain.domain.tld/THEME_FOLDER/assets`
 	 * 
 	 * @param string $uri [required]
 	 * @param string $subdomain [optional] Default 'static'
@@ -183,39 +186,63 @@ Class O {
 		if (!ONYX_STATIC) {
 			return $uri;
 		} else {
-			$app_folder = str_replace('%2F', '/', rawurlencode(get_template()));
-			$static_uri = (!ONYX_STATIC) ? $uri : '//' . $subdomain . '.' . $_SERVER['HTTP_HOST'] . "/$app_folder";
+			$app = (object) self::$conf['app'];
+			$static_uri = '//' . $subdomain . '.' . $_SERVER['HTTP_HOST'] . "/$app->theme";
 			return $static_uri;
 		}
 	}
 
-	// /**
-	//  * Add javascript from assets
-	//  * @param string $url [required]
-	//  * @param bool $home Display script on Home [optional]
-	//  * @param string $attr Is async|defer script [optional]
-	//  * @return void Script html tag
-	//  */
-	// function js($js, $home = true, $async = null) {
-	// 	global $app;
-	// 	$static_path = onyx_get_static($app->dir);
-	// 	$path_file = '<script '.$async.' src="'.$static_path.'/assets/js/'.$js.'"></script>' . "\n";
-	// 	if ($home): 
-	// 		echo $path_file;
-	// 	else:
-	// 		if (!is_home()) echo $path_file;
-	// 	endif;
-	// }
+	/**
+	 * Validate url from a string
+	 * 
+	 * @param $uri Provide url with protocol (ex: https://domain.tld/somefile.js)
+	 * @return bool
+	 */
+	static function valid_url($uri) {
+		return filter_var($uri, FILTER_VALIDATE_URL);
+	}
+
+	static function static_path($file) {
+		if (self::valid_url($file)) {
+			$asset = $file;
+		} else {
+			$dir_uri = self::static_uri(self::$conf['app']['dir_uri']);
+			$asset = $dir_uri.'/'.$file;
+		}
+
+		return $asset;
+	}
 
 	/**
-	 * Add javascript from url
+	 * Add CSS from assets
+	 * 
 	 * @param string $url [required]
+	 * @param bool $home Display CSS on Home [optional]
+	 * @return void Link style html tag
+	 */
+	static function css($css, $home = true) {
+		$src = self::static_path($css);
+		$css = "<link rel='stylesheet' href='$src'>\n";
+
+		if ($home):
+			echo $css;
+		else:
+			if (!is_home()) echo $css;
+		endif;
+	}
+
+	/**
+	 * Add javascript from assets
+	 * 
+	 * @param string $js file|url [required]
 	 * @param bool $home Display script on Home [optional]
 	 * @param string $attr Is async|defer script [optional]
 	 * @return void Script html tag
 	 */
-	static function js_url($js, $home = true, $attr = null) {
-		$script = '<script '.$attr.' src="'.$js.'"></script>' . "\n";
+	static function js($js, $home = true, $attr = '') {
+		$src = self::static_path($js);
+		$script = "<script $attr src='$src'></script>\n";
+
 		if ($home):
 			echo $script;
 		else:
@@ -228,17 +255,17 @@ Class O {
 	*
 	* @return void|false
 	*/
-	static function livereload($port = 3010, $host = 'localhost') {
+	static function livereload($port = 3010) {
 		if (pathinfo($_SERVER['SERVER_NAME'])['extension'] === 'local') {
-			$url = "//$host:$port/livereload.js?snipver=1";
-			$headers = @get_headers("http:$url");
+			$url = "http://".$_SERVER['HTTP_HOST'].":$port/livereload.js?snipver=1";
+			$headers = @get_headers($url);
 			if ($headers) {
-				return self::js_url($url);
+				return self::js($url);
 			}
 		}
 		return false;
 	}
-		
+
 }
 
 ?>
