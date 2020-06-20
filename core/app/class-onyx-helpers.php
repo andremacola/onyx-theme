@@ -66,104 +66,6 @@ Class O {
 	}
 
 	/**
-	 * Return the current section title depending on route section type of Wordpress
-	 * 
-	 * This need another approach, maybe using self::section_type()
-	 * 
-	 * @param bool Whether to display or retrieve title. Default true [optional]
-	 * @param string $prefix What to display before the title [optional]
-	 * @return void|string
-	 */
-	static function section_title($echo = true, $prefix = '') {
-		if (is_post_type_archive()) {
-			$title = post_type_archive_title($prefix, false);
-		} elseif (is_category()) {    
-			$title = single_cat_title($prefix, false);
-		} elseif (is_tag()) {
-			$title = single_tag_title($prefix, false);
-		} elseif (is_author()) {
-			$title = get_the_author();
-		} elseif (is_tax()) { //for custom post types
-			$title = single_term_title($prefix, false);
-		}
-
-		if ($echo) {
-			echo $title;
-		} else {
-			return $title;
-		}
-	}
-
-	/**
-	 * Return the section route type on Wordpress. Ex: is_page, is_home, is_archive etc...
-	 * 
-	 * @return string
-	 */
-	static function section_type() {
-		global $wp_query;
-
-		$types = array_filter((array) $wp_query, function($key) {
-			return strpos($key, 'is_') === 0;
-		}, ARRAY_FILTER_USE_KEY);
-
-		$type = key(array_filter($types));
-
-		return $type;
-	}
-
-	/**
-	* Add google analytics script html (main method)
-	*
-	* @param string $uax Google UAX ID required [required]
-	* @param bool $script Load google tag manager (gtag.js) script. Default false [optional]
-	* @return void Google Tag Manager html and (or) tag
-	*/
-	static function gtag($uax, $script = false) {
-		if ($script == true) {
-			echo "<script async src='https://www.googletagmanager.com/gtag/js?id=$uax'></script>";
-		}
-		$ganalytics	= "
-			<script>
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date()); gtag('config', '$uax');
-			</script>
-		";
-		echo $ganalytics;
-	}
-
-	/**
-	* Alternative way to add google analytics script html
-	* @see https://github.com/h5bp/html5-boilerplate/issues/2014
-	*
-	* @param string $uax Google UAX ID [required]
-	* @param bool $script Load analytics.js script from google [optional]
-	* @return void Google Analytics html and (or) tag
-	*/
-	static function analytics($uax, $script = false) {
-		$ganalytics = "
-			<script>
-				window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-				ga('create', '$uax', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
-			</script>
-		";
-		echo $ganalytics;
-		if ($script == true) {
-			echo "<script async src='https://www.google-analytics.com/analytics.js'></script>\n";
-		}
-	}
-
-	/**
-	* Show navigation menu
-	*
-	* @param string $menu The menu name [required]
-	* @return void
-	*/
-	static function menu($menu = null) {
-		wp_nav_menu(array('menu' => $menu, 'container' => '', 'items_wrap' => '%3$s'));
-	}
-
-	/**
 	* Checks whether it is an AMP page
 	* This is needed for https://br.wordpress.org/plugins/amp/
 	*
@@ -171,6 +73,34 @@ Class O {
 	*/
 	static function is_amp() {
 		return function_exists('is_amp_endpoint') && is_amp_endpoint();
+	}
+
+	/**
+	 * Validate url from a string
+	 * 
+	 * @param $uri Provide url with protocol (ex: https://domain.tld/somefile.js)
+	 * @return bool
+	 */
+	static function valid_url($uri) {
+		return filter_var($uri, FILTER_VALIDATE_URL);
+	}
+
+	/**
+	 * Returns the path url based on the file location
+	 * if is a remote or local file.
+	 * 
+	 * @param string $uri File location or URL
+	 * @return string
+	 */
+	static function static_path($file) {
+		if (self::valid_url($file)) {
+			$asset = $file;
+		} else {
+			$dir_uri = self::static_uri(self::$conf['app']['dir_uri']);
+			$asset = $dir_uri.'/'.ltrim($file, '/');
+		}
+
+		return $asset;
 	}
 
 	/**
@@ -193,24 +123,35 @@ Class O {
 	}
 
 	/**
-	 * Validate url from a string
+	 * Get image from theme folder
 	 * 
-	 * @param $uri Provide url with protocol (ex: https://domain.tld/somefile.js)
-	 * @return bool
+	 * @param string $img Image path [required]
+	 * @param string $title Image title/alt attributes [optional]
+	 * @param string $w Width [optional]
+	 * @param string $h Height [optional]
+	 * @return string
 	 */
-	static function valid_url($uri) {
-		return filter_var($uri, FILTER_VALIDATE_URL);
+	static function get_img($img, $title = null, $w = null, $h = null) {
+		$src = self::static_path($img);
+
+		$alt = ($title) ? " alt='$title'" : false;
+		$title = ($title) ? " title='$title'" : false;
+		$w = ($w) ? " width='$w'" : false;
+		$h = ($h) ? " height='$h'" : false;
+
+		$img = "<img src='$src'$w$h$title$alt>";
+
+		return $img;
 	}
 
-	static function static_path($file) {
-		if (self::valid_url($file)) {
-			$asset = $file;
-		} else {
-			$dir_uri = self::static_uri(self::$conf['app']['dir_uri']);
-			$asset = $dir_uri.'/'.$file;
-		}
-
-		return $asset;
+	/**
+	 * Show image from theme folder
+	 * 
+	 * @see selff::get_img();
+	 * @return void
+	 */
+	static function img($img, $title = null, $w = null, $h = null) {
+		echo self::get_img($img, $title, $w, $h);
 	}
 
 	/**
@@ -264,6 +205,160 @@ Class O {
 			}
 		}
 		return false;
+	}
+
+	/**
+	* Add google analytics script html (main method)
+	*
+	* @param string $uax Google UAX ID required [required]
+	* @param bool $script Load google tag manager (gtag.js) script. Default false [optional]
+	* @return void Google Tag Manager html and (or) tag
+	*/
+	static function gtag($uax, $script = false) {
+		if ($script == true) {
+			echo "<script async src='https://www.googletagmanager.com/gtag/js?id=$uax'></script>";
+		}
+		$ganalytics	= "
+			<script>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date()); gtag('config', '$uax');
+			</script>
+		";
+		echo $ganalytics;
+	}
+
+	/**
+	* Alternative way to add google analytics script html
+	* @see https://github.com/h5bp/html5-boilerplate/issues/2014
+	*
+	* @param string $uax Google UAX ID [required]
+	* @param bool $script Load analytics.js script from google [optional]
+	* @return void Google Analytics html and (or) tag
+	*/
+	static function analytics($uax, $script = false) {
+		$ganalytics = "
+			<script>
+				window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+				ga('create', '$uax', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+			</script>
+		";
+		echo $ganalytics;
+		if ($script == true) {
+			echo "<script async src='https://www.google-analytics.com/analytics.js'></script>\n";
+		}
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| ONLY HELPERS FOR WORDPRESS NATIVE FUNCTIONS FROM HERE
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Return the current section title depending on route section type of Wordpress
+	 * 
+	 * This need another approach, maybe using self::section_type()
+	 * 
+	 * @param bool Whether to display or retrieve title. Default true [optional]
+	 * @param string $prefix What to display before the title [optional]
+	 * @return void|string
+	 */
+	static function section_title($echo = true, $prefix = '') {
+		if (is_post_type_archive()) {
+			$title = post_type_archive_title($prefix, false);
+		} elseif (is_category()) {    
+			$title = single_cat_title($prefix, false);
+		} elseif (is_tag()) {
+			$title = single_tag_title($prefix, false);
+		} elseif (is_author()) {
+			$title = get_the_author();
+		} elseif (is_tax()) { //for custom post types
+			$title = single_term_title($prefix, false);
+		}
+
+		if ($echo) {
+			echo $title;
+		} else {
+			return $title;
+		}
+	}
+
+	/**
+	 * Return the section route type on Wordpress. Ex: is_page, is_home, is_archive etc...
+	 * 
+	 * @return string
+	 */
+	static function section_type() {
+		global $wp_query;
+
+		$types = array_filter((array) $wp_query, function($key) {
+			return strpos($key, 'is_') === 0;
+		}, ARRAY_FILTER_USE_KEY);
+
+		$type = key(array_filter($types));
+
+		return $type;
+	}
+
+	/**
+	* Show navigation menu
+	*
+	* @param string $menu The menu name [required]
+	* @return void
+	*/
+	static function menu($menu = null) {
+		wp_nav_menu(array('menu' => $menu, 'container' => '', 'items_wrap' => '%3$s'));
+	}
+
+	/**
+	 * Onyx Pagenavi. Show posts/pages pagination
+	 * 
+	 * @return void
+	 */
+	static function pagenavi($query = null) {
+		global $wp_query;
+
+		if (!$query) {
+			$query = $wp_query;
+		}
+
+		$total = $query->max_num_pages;
+		// only bother with the rest if we have more than 1 page!
+		if ($total > 1)  {
+			// get the current page
+			if (!$current_page = get_query_var('paged')) {
+				$current_page = 1;
+			}
+			// structure of "format" depends on whether we're using pretty permalinks
+			$format = empty(get_option('permalink_structure')) ? '&page=%#%' : 'page/%#%/';
+			$pages  = paginate_links(array(
+				'base'               => get_pagenum_link(1) . '%_%',
+				'format'             => $format,
+				'current'            => $current_page,
+				'total'              => $total,
+				'mid_size'           => 4,
+				'end_size'           => 1,
+				'type'               => 'array',
+				'show_all'           => false,
+				'prev_next'          => true,
+				'prev_text'          => __('« <span class="nav-text">Anterior</span>'),
+				'next_text'          => __('<span class="nav-text">Próxima</span> »'),
+				'add_args'           => false,
+				'add_fragment'       => '',
+				'before_page_number' => '',
+				'after_page_number'  => ''
+			));
+			if(is_array($pages)) {
+				echo '<div class="onyx-pagination"><ul class="page-numbers">';
+					foreach ($pages as $page) {
+						$current = false;
+						if (strpos($page, 'current') !== false) $current = ' class="current"';
+						echo "<li$current>$page</li>";
+					}
+				echo '</ul></div>';
+			}
+		}
 	}
 
 }
