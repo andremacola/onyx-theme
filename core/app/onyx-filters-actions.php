@@ -88,10 +88,23 @@ function onyx_single_cat_template($t) {
 	return $t;
 }
 
-function onyx_load_liverelaod() {
-	O::livereload();
+/**
+ * Action to add Onyx Theme Styles
+ *
+ * @return void
+ */
+function onyx_load_styles() {
+	$assets = O::conf('assets')->css;
+	foreach ($assets as $css) {
+		O::css($css[0], $css[1]);
+	}
 }
 
+/**
+ * Action to add Onyx Theme Javascripts
+ *
+ * @return void
+ */
 function onyx_load_javascripts() {
 	$assets = O::conf('assets')->js;
 	foreach ($assets as $js) {
@@ -100,12 +113,15 @@ function onyx_load_javascripts() {
 	}
 }
 
-function onyx_load_styles() {
-	$assets = O::conf('assets')->css;
-	foreach ($assets as $css) {
-		O::css($css[0], $css[1]);
-	}
-} 
+/**
+ * Action to inject gulp-livereload server for development.
+ * Only works with .local domains
+ *
+ * @return void
+ */
+function onyx_load_liverelaod() {
+	O::livereload();
+}
 
 /**
  * Remove Private or Protected prefix from title.
