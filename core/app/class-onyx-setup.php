@@ -15,6 +15,9 @@ final class Onyx_Setup {
 	private $mail;
 	private $support;
 
+	/**
+	 * Constructor
+	 */
 	public function __construct() {
 		$this->app      = O::load('app');
 		$this->assets   = O::load('assets');
