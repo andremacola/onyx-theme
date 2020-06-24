@@ -14,6 +14,8 @@ final class Onyx_Setup {
 	private $images;
 	private $mail;
 	private $support;
+	private $cpts;
+	private $taxs;
 
 	/**
 	 * Constructor
