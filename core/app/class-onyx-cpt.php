@@ -70,12 +70,14 @@ class Onyx_Cpt {
 	 * Constructor
 	 * 
 	 * @param string|array $names A string for the name, or an array of names [required]
+	 * @param array $arguments Arguments to register a post type with register_post_type [optional]
+	 * @param array $labels Custom labels to create the post type [optional]
 	 * @return void
 	 */
 	public function __construct($names, $arguments = [], $labels = []) {
 		$this->names($names);
-		$this->labels($labels);
 		$this->options($arguments);
+		$this->labels($labels);
 	}
 
 	/**
