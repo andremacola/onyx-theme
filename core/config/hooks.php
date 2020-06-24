@@ -84,7 +84,7 @@ return [
 			// remove Windows Live Writer
 			['wp_head', 'wlwmanifest_link', 10],
 
-			// remove wp meta tag generator
+			// remove wp meta tag generator (deprecated)
 			['wp_head', 'wp_generator', 10],
 
 			// remove extra feeds links (ex: categories)
@@ -119,12 +119,11 @@ return [
 			// load onyx javascripts
 			['wp_footer', 'onyx_load_javascripts'],
 			// load live reload on development enviroment
-			['wp_footer', 'onyx_load_liverelaod'],
+			['wp_footer', 'onyx_load_livereload'],
 			// reallocate javascripts from header to footer and remove wp jquery
 			['wp_enqueue_scripts', 'onyx_header_footer_scripts'],
 		]
 	]
-
 ]
 
 ?>

@@ -122,7 +122,7 @@ function onyx_load_javascripts() {
  *
  * @return void
  */
-function onyx_load_liverelaod() {
+function onyx_load_livereload() {
 	O::livereload();
 }
 
