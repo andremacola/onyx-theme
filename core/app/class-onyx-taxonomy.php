@@ -2,66 +2,60 @@
 
 /**
  * 
- * Onyx Custom Post Types
+ * Onyx Custom Taxonomies
  * 
  */
 
-class Onyx_Cpt {
+class Onyx_Taxonomy {
 
 	/**
-	 * The key for post type
+	 * The key for taxonomy
 	 * @var string
 	 */
     public $key;
 
 	/**
-	 * The names params to create the keys passed to the post type
+	 * The names params to create the keys passed to the taxonomy
 	 * [name, singular, plural, slug]
 	 * @var array
 	 */
     public $names;
 
 	/**
-	 * The name (singular) for post type
+	 * The name (singular) for taxonomy
 	 * @var string
 	 */
 	 public $name;
 
 	/**
-	 * The plural name for post type
+	 * The plural name for taxonomy
 	 * @var string
 	 */
 	 public $plural;
 
 	/**
-	 * The slug for post type
+	 * The slug for taxonomy
 	 * @var string
 	 */
 	 public $slug;
 
 	/**
-	 * Taxonomies for post type
-	 * @var string|array
+	 * Related post types
+	 * @var array
 	 */
-	public $taxonomies;
+	public $cpts;
 
 	/**
-	 * Arguments for post type
+	 * Arguments for taxonomy
 	 * @var array
 	 */
 	public $arguments;
 
 	/**
-	 * Labels for post type
+	 * Labels for taxonomy
 	 * @var array
 	 */
 	public $labels;
-
-	/**
-	 * Icon for post type
-	 * @var string
-	 */
-	public $icon;
 
 
 	/**
@@ -70,14 +64,15 @@ class Onyx_Cpt {
 	 * @param string|array $names A string for the name, or an array of names [required]
 	 * @return void
 	 */
-	public function __construct($names, $arguments = [], $labels = []) {
+	public function __construct($names, $cpts = null, $arguments = [], $labels = []) {
 		$this->names($names);
+		$this->cpts($cpts);
 		$this->labels($labels);
 		$this->options($arguments);
 	}
 
 	/**
-	 * Set the names and key for the post type
+	 * Set the names and key for the taxonomy
 	 * 
 	 * @param string|array $names A string for the name, or an array of names [required]
 	 * @return void
@@ -103,9 +98,19 @@ class Onyx_Cpt {
 	}
 
 	/**
-	 * Set the options for post type
+	 * Register related post types to the taxonomy
 	 * 
-	 * @param array $arguments An array of arguments for post type
+	 * @param array $cpts An array of arguments for taxonomy
+	 * @return void
+	 */
+	public function cpts($cpts = null) {
+		$this->cpts = $cpts;
+	}
+
+	/**
+	 * Set the options for taxonomy
+	 * 
+	 * @param array $arguments An array of arguments for taxonomy
 	 * @return void
 	 */
 	public function options($arguments) {
@@ -113,9 +118,9 @@ class Onyx_Cpt {
 	}
 
 	/**
-	 * Set the labels for post type
+	 * Set the labels for the taxonomy
 	 * 
-	 * @param  array $labels An array of labels for post type
+	 * @param  array $labels An array of labels for the taxonomy
 	 * @return void
 	 */
 	public function labels($labels) {
@@ -123,32 +128,7 @@ class Onyx_Cpt {
 	}
 
 	/**
-	 * Set the icon for the post type
-	 * 
-	 * @link https://developer.wordpress.org/resource/dashicons/
-	 * @param string $icon A dashicon class for the menu icon
-	 * @return void
-	 */
-    public function icon($icon) {
-		$this->icon = $icon;
-    }
-
-	/**
-	 * Register a taxonomy to the post type
-	 * 
-	 * @param  mixed $taxonomies The Taxonomy name(s) to add
-	 * @return void
-	 */
-	public function taxonomies($taxonomies) {
-		$taxonomies = is_string($taxonomies) ? [$taxonomies] : $taxonomies;
-
-		foreach ($taxonomies as $taxonomy) {
-			$this->taxonomies[] = $taxonomy;
-		}
-	}
-
-	/**
-	 * Get the formated post type name
+	 * Get the formated taxonomy name
 	 * 
 	 * @return string
 	 */
@@ -175,28 +155,31 @@ class Onyx_Cpt {
 	}
 
 	/**
-	 * Create the labels for post type
+	 * Create the labels for taxonomy
 	 * @return array
 	 */
 	private function create_labels() {
 		// default labels
 		$labels = [
-			'name'                  => __($this->plural),
-			'singular_name'         => __($this->name),
-			'menu_name'             => __($this->plural),
-			'all_items'             => __($this->plural),
-			'add_new'               => __("Add New"),
-			'add_new_item'          => __("Add New {$this->name}"),
-			'edit_item'             => __("Edit {$this->name}"),
-			'new_item'              => __("New {$this->name}"),
-			'view_item'             => __("View {$this->name}"),
-			'search_items'          => __("Search {$this->plural}"),
-			'not_found'             => __("No ".strtolower($this->plural)." found"),
-			'not_found_in_trash'    => __("No ".strtolower($this->plural)." found in Trash"),
-			'parent_item_colon'     => __("Parent {$this->name}:")
+			'name'                       => __($this->plural),
+			'singular_name'              => __($this->name),
+			'menu_name'                  => __($this->plural),
+			'all_items'                  => __("All {$this->plural}"),
+			'edit_item'                  => __("Edit {$this->name}"),
+			'view_item'                  => __("View {$this->name}"),
+			'update_item'                => __("Update {$this->name}"),
+			'add_new_item'               => __("Add New {$this->name}"),
+			'new_item_name'              => __("New {$this->name} Name"),
+			'parent_item'                => __("Parent {$this->plural}"),
+			'parent_item_colon'          => __("Parent {$this->plural}:"),
+			'search_items'               => __("Search {$this->plural}"),
+			'popular_items'              => __("Popular {$this->plural}"),
+			'separate_items_with_commas' => __("Seperate {$this->plural} with commas"),
+			'add_or_remove_items'        => __("Add or remove {$this->plural}"),
+			'choose_from_most_used'      => __("Choose from most used ".strtolower($this->plural)),
+			'not_found'                  => __("No ".strtolower($this->plural)." found"),
+			'back_to_items'              => __("Back to {$this->plural}")
 		];
-
-		;
 
 		// replace defaults with custom labels passed and return
 		return array_replace_recursive($labels, $this->labels);
@@ -207,31 +190,22 @@ class Onyx_Cpt {
 	 * 
 	 * @return array Arguments to pass to register_cpt
 	 */
-    private function create_cpt_arguments() {
+    private function create_tax_arguments() {
 		// default arguments
 		$arguments = [
-			'public'   => true,
-			'rewrite'  => [
-				'slug' => $this->slug
-			]
+			'hierarchical' => true,
+			'show_admin_column' => true,
+			'rewrite' => [
+				'slug' => $this->slug,
+			],
 		];
 
 		// replace defaults with the options passed
 		$arguments = array_replace_recursive($arguments, $this->arguments);
 
-		// register taxonomies
-		if(!isset($arguments['taxonomies']) && !empty($this->taxonomies)) {
-			$arguments['taxonomies'] = $this->taxonomies;
-		}
-
 		// create and set labels
 		if (!isset($arguments['labels'])) {
 			$arguments['labels'] = $this->create_labels();
-		}
-
-		// set the menu icon
-		if (!isset($arguments['menu_icon']) && isset($this->icon)) {
-			$arguments['menu_icon'] = $this->icon;
 		}
 
 		return $arguments;
@@ -240,13 +214,13 @@ class Onyx_Cpt {
 	/**
 	 * Register the custom post type
 	 * 
-	 * @return WP_Post_Type|WP_Error
+	 * @return void
 	 */
-	public function register_cpt() {
-		$arguments = $this->create_cpt_arguments();
+	public function register_taxonomy() {
+		$arguments = $this->create_tax_arguments();
 		
-		if (!post_type_exists($this->key)) {
-			return register_post_type($this->key, $arguments);
+		if (!taxonomy_exists($this->key)) {
+			register_taxonomy($this->key, $this->cpts, $arguments);
 		}
 	}
 
@@ -256,10 +230,7 @@ class Onyx_Cpt {
 	 * @return bool
 	 */
 	public function register() {
-		return add_action('init', [$this, 'register_cpt']);
+		return add_action('init', [$this, 'register_taxonomy']);
 	}
-
 }
-
-
 ?>

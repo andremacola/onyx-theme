@@ -5,23 +5,26 @@
  * This file is related to app/class-onyx-cpt.php
  *
  * @see https://developer.wordpress.org/reference/functions/register_post_type/
+ * @see https://developer.wordpress.org/reference/functions/get_post_type_labels/
  *
- * @param array       names => Post type keys (singular, plural, slug) [required]
- * @param array       options => Post type argument options [optional]
- * @param array       labels => Post type labels [optional]
+ * @param array names => Post type keys (singular, plural, slug) [required]
+ * @param array options => Post type argument options [optional]
+ * @param array labels => Post type labels [optional]
  */
 
 return [
 
 	/*
 	|--------------------------------------------------------------------------
-	| PRODUTOS
+	| My CPT
 	|--------------------------------------------------------------------------
 	*/
 	[
-		'names' => [
-			'name'   => 'Produto'
-		]
+		'names'   => [
+			'name'   => 'Cpt'
+		],
+		'options' => [],
+		'labels'  => []
 	],
 
 ]

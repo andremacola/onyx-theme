@@ -26,6 +26,7 @@ final class Onyx_Setup {
 		$this->mail     = O::load('mail');
 		$this->support  = O::load('support');
 		$this->cpts     = O::load('cpt');
+		$this->taxs     = O::load('taxonomies');
 
 		define('ONYX_THEME', true);
 		define('ONYX_THEME_VERSION', $this->version());
@@ -45,12 +46,13 @@ final class Onyx_Setup {
 		$this->manage_filters();
 		$this->register_image_sizes();
 		$this->register_post_types();
+		$this->register_taxonomies();
 	}
 
 	/**
 	 * Register custom post types
 	 * 
-	 * @see config/images.php
+	 * @see config/cpts.php
 	 * @return void
 	 */
 	public function register_post_types() {
@@ -60,6 +62,24 @@ final class Onyx_Setup {
 				$labels  = (!empty($cpt['labels']))  ? $cpt['labels']  : [];
 				$pt = new Onyx_Cpt($cpt['names'], $options, $labels);
 				$pt->register();
+			}
+		}
+	}
+
+	/**
+	 * Register custom taxonomies
+	 * 
+	 * @see config/taxonomies.php
+	 * @return void
+	 */
+	public function register_taxonomies() {
+		if (!empty($this->taxs)) {		
+			foreach ($this->taxs as $tax) {
+				$types = (!empty($tax['types'])) ? $tax['types'] : null;
+				$options = (!empty($tax['options'])) ? $tax['options'] : [];
+				$labels  = (!empty($tax['labels']))  ? $tax['labels']  : [];
+				$tax = new Onyx_Taxonomy($tax['names'], $types, $options, $labels);
+				$tax->register();
 			}
 		}
 	}
