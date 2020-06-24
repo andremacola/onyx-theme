@@ -249,6 +249,16 @@ Class O {
 		}
 	}
 
+	/**
+	 * Check if logged user is a developer
+	 * 
+	 * @return bool
+	 */
+	static function is_dev() {
+		$app = (object) self::$conf['app'];
+		return in_array($app->user, $app->devs);
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| ONLY HELPERS FOR WORDPRESS NATIVE FUNCTIONS FROM HERE
