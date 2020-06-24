@@ -34,8 +34,8 @@ $names = [
 	'slug'     => 'produtos'
 ];
 
-
 $cpt = new Onyx_Cpt('Produto');
+$cpt->taxonomies(['category']);
 $cpt->register();
 
 ?>

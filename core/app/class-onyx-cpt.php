@@ -40,6 +40,12 @@ class Onyx_Cpt {
 	 public $slug;
 
 	/**
+	 * Taxonomies for post type
+	 * @var string}array
+	 */
+	public $taxonomies;
+
+	/**
 	 * Arguments for post type
 	 * @var array
 	 */
@@ -128,6 +134,20 @@ class Onyx_Cpt {
     }
 
 	/**
+	 * Register a taxonomy to the post type
+	 * 
+	 * @param  mixed $taxonomies The Taxonomy name(s) to add
+	 * @return void
+	 */
+	public function taxonomies($taxonomies) {
+		$taxonomies = is_string($taxonomies) ? [$taxonomies] : $taxonomies;
+
+		foreach ($taxonomies as $taxonomy) {
+			$this->taxonomies[] = $taxonomy;
+		}
+	}
+
+	/**
 	 * Get the formated post type name
 	 * 
 	 * @return string
@@ -182,6 +202,7 @@ class Onyx_Cpt {
 
 	/**
 	 * Create arguments to register post type
+	 * 
 	 * @return array Arguments to pass to register_cpt
 	 */
     private function create_cpt_arguments() {
@@ -189,12 +210,17 @@ class Onyx_Cpt {
 		$arguments = [
 			'public'   => true,
 			'rewrite'  => [
-					'slug' => $this->slug
+				'slug' => $this->slug
 			]
 		];
 
 		// replace defaults with the options passed
 		$arguments = array_replace_recursive($arguments, $this->arguments);
+
+		// register taxonomies
+		if(!empty($this->taxonomies)) {
+			$arguments['taxonomies'] = $this->taxonomies;
+		}
 
 		// create and set labels
 		if (!isset($arguments['labels'])) {
@@ -225,6 +251,18 @@ class Onyx_Cpt {
 	public function register() {
 		add_action('init', [$this, 'register_cpt']);
 	}
+
+	// /**
+	//  * Register Taxonomies to the PostType
+	//  * @return void
+	//  */
+	// public function register_taxonomies() {
+	// 	if (!empty($this->taxonomies)) {
+	// 		foreach ($this->taxonomies as $taxonomy) {
+	// 			register_taxonomy_for_object_type($taxonomy, $this->name);
+	// 		}
+	// 	}
+	// }
 
 }
 
