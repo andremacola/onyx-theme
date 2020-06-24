@@ -191,10 +191,12 @@ class Onyx_Cpt {
 			'new_item'              => __("New {$this->name}"),
 			'view_item'             => __("View {$this->name}"),
 			'search_items'          => __("Search {$this->plural}"),
-			'not_found'             => __("No {$this->plural} found"),
-			'not_found_in_trash'    => __("No {$this->plural} found in Trash"),
+			'not_found'             => __("No ".strtolower($this->plural)." found"),
+			'not_found_in_trash'    => __("No ".strtolower($this->plural)." found in Trash"),
 			'parent_item_colon'     => __("Parent {$this->name}:")
 		];
+
+		;
 
 		// replace defaults with custom labels passed and return
 		return array_replace_recursive($labels, $this->labels);
@@ -218,7 +220,7 @@ class Onyx_Cpt {
 		$arguments = array_replace_recursive($arguments, $this->arguments);
 
 		// register taxonomies
-		if(!empty($this->taxonomies)) {
+		if(!isset($arguments['taxonomies']) && !empty($this->taxonomies)) {
 			$arguments['taxonomies'] = $this->taxonomies;
 		}
 

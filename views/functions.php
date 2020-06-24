@@ -28,14 +28,4 @@ require_once(__DIR__."/../core/app/onyx-filters-actions.php");
 
 new Onyx_Setup();
 
-$names = [
-	'name'     => 'Produto',
-	'plural'   => 'Plural de Produtos',
-	'slug'     => 'produtos'
-];
-
-$cpt = new Onyx_Cpt('Produto');
-$cpt->taxonomies(['category']);
-$cpt->register();
-
 ?>

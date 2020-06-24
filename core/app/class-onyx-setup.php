@@ -25,6 +25,7 @@ final class Onyx_Setup {
 		$this->images   = O::load('images');
 		$this->mail     = O::load('mail');
 		$this->support  = O::load('support');
+		$this->cpts     = O::load('cpt');
 
 		define('ONYX_THEME', true);
 		define('ONYX_THEME_VERSION', $this->version());
@@ -43,8 +44,25 @@ final class Onyx_Setup {
 		$this->manage_actions();
 		$this->manage_filters();
 		$this->register_image_sizes();
+		$this->register_post_types();
 	}
 
+	/**
+	 * Register custom post types
+	 * 
+	 * @see config/images.php
+	 * @return void
+	 */
+	public function register_post_types() {
+		if (!empty($this->cpts)) {		
+			foreach ($this->cpts as $cpt) {
+				$options = (!empty($cpt['options'])) ? $cpt['options'] : [];
+				$labels  = (!empty($cpt['labels']))  ? $cpt['labels']  : [];
+				$pt = new Onyx_Cpt($cpt['names'], $options, $labels);
+				$pt->register();
+			}
+		}
+	}
 
 	/**
 	 * Register custom image sizes
