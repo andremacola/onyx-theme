@@ -1,5 +1,7 @@
 # Wiki
 
+**THIS THEME IS SUFFERING SEVERAL UPDATES. DO NOT USE IN PRODUCTION YET**
+
 Onyx Theme is a starter kit for for assistance in developing themes in Wordpress. It can be considered a kind of framework.
 
 This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](https://www.themosis.com/) but uncomplicated because we do not need thousands of dependencies to develop a wordpress theme.
