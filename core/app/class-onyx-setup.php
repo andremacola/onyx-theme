@@ -93,7 +93,7 @@ final class Onyx_Setup {
 	 * @return void
 	 */
 	private function register_image_sizes() {
-		if (empty((array) $this->images)) {
+		if (!empty((array) $this->images)) {
 			foreach ($this->images as $name => $param) {
 				add_image_size($name, $param[0], $param[1], $param[2]);
 			}
