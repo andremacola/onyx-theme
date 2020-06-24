@@ -4,6 +4,8 @@
  * 
  * Onyx Custom Post Types
  * 
+ * This class was inspired by https://github.com/jjgrainger/PostTypes/
+ * Thanks to Joe Grainger https://github.com/jjgrainger
  */
 
 class Onyx_Cpt {

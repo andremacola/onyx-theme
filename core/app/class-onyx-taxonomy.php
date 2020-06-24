@@ -4,6 +4,9 @@
  * 
  * Onyx Custom Taxonomies
  * 
+ * This class was inspired by https://github.com/jjgrainger/PostTypes/
+ * Thanks to Joe Grainger https://github.com/jjgrainger
+ * 
  */
 
 class Onyx_Taxonomy {
