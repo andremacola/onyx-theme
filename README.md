@@ -62,3 +62,13 @@ vanilla-lazyload   | yarn add vanilla-lazyload    | https://github.com/verlok/va
 body-scroll-lock   | yarn add body-scroll-lock    | https://github.com/willmcpo/body-scroll-lock      |
 object-fit-images  | yarn add object-fit-images   | https://github.com/fregante/object-fit-images     |
 
+## Some projects using Onyx
+
+- [O Imparcial](https://oimparcial.com.br/)
+- [Rofe Distribuidora](https://www.rofedistribuidora.com.br/)
+- [Linhares Jr](https://linharesjr.com)
+- [Grupo Dimensão](http://grupodimensao.com/) (legacy version)
+- [Jornal Pequeno](https://jornalpequeno.com.br/) (legacy version)
+
+...and many others
+
