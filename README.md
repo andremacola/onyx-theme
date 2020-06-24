@@ -1,47 +1,58 @@
 # Wiki
 
-Onyx Theme é um starter kit para auxílio no desenvolvimento de temas em Wordpress.
+Onyx Theme is a starter kit for for assistance in developing themes in Wordpress. It can be considered a kind of framework.
 
-## Estrutura de pastas
+This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](https://www.themosis.com/) but uncomplicated because we do not need thousands of dependencies to develop a wordpress theme.
 
-- **`core/`** é onde reside toda a estrutura principal do tema
+<!-- Better used with [Onyx Starter Kit](https://github.com/andremacola/wp-onyx-starter) (members only) -->
+
+WIKI IN DEVELOPMENT...
+
+## Folder structure
+
+- **`core/`** - is where all the main structure of the theme resides
 	- `./api`
 	- `./app`
 	- `./config`
-	- `./types`
-	- `./taxs`
 
-- **`src/`** arquivos fontes de estilos e javascripts
+- **`src/`** - source files for styles and javascripts
 	- `./sass`
 	- `./js`
 
-- **`templates/`** --
-- **`views/`** --
+- **`templates/`** - template part folders
+- **`views/`** - wordpress main files
+
+## Composer
+
+  - `composer onyx-dump` inside theme folder to create the autoload
 
 ## Gulp
 
-O Gulp é utilizado para processamento de javascripts, scss e livereload. Para ser utilizado junto com um servidor WEB como o LocalbyFlywheel ou MAMP.
+Gulp is used for processing javascripts, scss and livereload. To be used in conjunction with a WEB server such as LocalbyFlywheel or MAMP.
 
   - Configurar o ambiente pelo arquivo **.env** dentro da
    pasta do tema.
-  - Executar `yarn install` dentro da pasta do tema.
+  - Configure the environment through the file **.env** inside the theme folder.
+  - Execute `yarn|npm install` inside theme folder.
 
-|Comandos      | Funcionalidade                             |
+|Commands      | Functionality                              |
 |--------------|--------------------------------------------|
-|gulp watch    | Escuta e processa os arquivos ao salvar
-|gulp server   | Utiliza o BrowserSync para servir
-|gulp live     | Utiliza o LiveReload para servir (recomendado)
+|gulp watch    | Listen and process files when saving
+|gulp server   | Uses BrowserSync to serve
+|gulp live     | Uses LiveReload to serve (recommended). Need a `.local` domain to work
 
-**Outros comandos**
+**Other commands**
 `styleMain`, `styleInt`, `purgecss`, `jsMain`, `jsInt`
 
-## Fazendo require de dependências no javascript
+## Requiring dependencies in javascript
 
-Adicionar no topo do `app.js` `//=require "path/of/script.js"`
+For compatibility reasons with old projects, we do not use `import/require`
 
-## Bibliotecas opcionais
+Add on top of `app.js` => `//=require "path/of/script.js"`
 
-|Dependência       | Instalar                     | Repo                                              |
+## Optional libraries
+
+|Dependency        | Install                      | Repository                                        |
 |------------------|------------------------------|---------------------------------------------------|
 jquery             | yarn add jquery              | https://github.com/jquery/jquery                  |
 jquery-mask-plugin | yarn add jquery-mask-plugin  | https://github.com/igorescobar/jQuery-Mask-Plugin |
