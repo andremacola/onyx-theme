@@ -21,9 +21,9 @@ return [
 	*/
 	[
 		'names'   => [
-			'name'   => 'Tax',
+			'name'   => 'tax',
 		],
-		'types'   => ['cpt'],
+		'types'   => ['cpts'],
 		'options' => [],
 		'labels'  => []
 	],
