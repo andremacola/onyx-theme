@@ -7,6 +7,7 @@
  */
 
 return [
+
 	/*
 	|--------------------------------------------------------------------------
 	| WORDPRESS FEATURES SUPPORT
@@ -27,6 +28,7 @@ return [
 	'wp-block-styles',
 	'align-wide',
 	'responsive-embeds',
+
 ];
 
 ?>

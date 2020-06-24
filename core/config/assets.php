@@ -34,6 +34,7 @@ return [
 		['assets/js/app.min.js', true],
 		['assets/js/app-int.min.js', false]
 	],
+
 ];
 
 ?>

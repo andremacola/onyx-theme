@@ -124,6 +124,7 @@ return [
 			['wp_enqueue_scripts', 'onyx_header_footer_scripts'],
 		]
 	]
+
 ]
 
 ?>
