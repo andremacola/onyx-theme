@@ -31,7 +31,8 @@ final class Onyx_Setup {
 		$this->taxs     = O::load('taxonomies');
 
 		define('ONYX_THEME', true);
-		define('ONYX_THEME_VERSION', $this->version());
+		define('ONYX_THEME_VERSION', $this->app->version);
+		define('ONYX_STATIC_VERSION', $this->version());
 		define('ONYX_STATIC', $this->app->static);
 		
 		add_action('after_setup_theme', [$this, 'setup']);
@@ -173,11 +174,12 @@ final class Onyx_Setup {
 
 	/**
 	 * Define theme version
+	 * Mostly used for development purpose (cachebuster)
 	 *
 	 * @return int
 	 */
 	private function version() {
-		return (in_array($this->app->user, $this->app->devs)) ? rand(0,99999) : $this->app->v;
+		return (in_array($this->app->user, $this->app->devs)) ? rand(0,99999) : $this->app->version;
 	}
 
 	/**

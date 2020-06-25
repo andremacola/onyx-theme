@@ -163,7 +163,8 @@ Class O {
 	 */
 	static function css($css, $home = true) {
 		$src = self::static_path($css);
-		$css = "<link rel='stylesheet' href='$src'>\n";
+		$v   = ONYX_STATIC_VERSION;
+		$css = "<link rel='stylesheet' href='$src?ver=$v'>\n";
 
 		if ($home):
 			echo $css;
@@ -182,7 +183,8 @@ Class O {
 	 */
 	static function js($js, $home = true, $attr = '') {
 		$src = self::static_path($js);
-		$script = "<script $attr src='$src'></script>\n";
+		$v   = ONYX_STATIC_VERSION;
+		$script = "<script $attr src='$src?ver=$v'></script>\n";
 
 		if ($home):
 			echo $script;
