@@ -1,6 +1,8 @@
 <?php 
 
-class Onyx_Columns{
+namespace Onyx;
+
+class Columns{
 	
 }
 

@@ -1,4 +1,4 @@
-<?php $app = O::conf('app'); ?>
+<?php $app = \Onyx\O::conf('app'); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>

@@ -6,6 +6,8 @@
  * 
  */
 
+namespace Onyx;
+
 Class O {
 
 	private static $conf;

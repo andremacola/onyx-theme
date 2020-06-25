@@ -10,6 +10,8 @@
  *
  */
 
+use \Onyx\O;
+
 /**
  * Remove wordpress frontend jquery
  * and reallocate js from header to footer.

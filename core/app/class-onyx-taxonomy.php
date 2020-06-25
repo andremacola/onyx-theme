@@ -9,7 +9,9 @@
  * 
  */
 
-class Onyx_Taxonomy {
+namespace Onyx;
+
+class Taxonomy {
 
 	/**
 	 * The key for taxonomy
@@ -153,7 +155,7 @@ class Onyx_Taxonomy {
 		} else if (is_array($names)) {
 			$this->names = $names;
 		} else {
-			throw new Exception("Please, provide a string or array as param on constructor", 1);
+			throw new \Exception("Please, provide a string or array as param on constructor", 1);
 		}
 	}
 

@@ -6,8 +6,9 @@
  * 
  */
 
+namespace Onyx;
 
-final class Onyx_Setup {
+final class Setup {
 
 	private $app;
 	private $assets;
@@ -63,7 +64,7 @@ final class Onyx_Setup {
 			foreach ($this->cpts as $cpt) {
 				$options = (!empty($cpt['options'])) ? $cpt['options'] : [];
 				$labels  = (!empty($cpt['labels']))  ? $cpt['labels']  : [];
-				$pt = new Onyx_Cpt($cpt['names'], $options, $labels);
+				$pt = new Cpt($cpt['names'], $options, $labels);
 				$pt->register();
 			}
 		}
@@ -81,7 +82,7 @@ final class Onyx_Setup {
 				$types = (!empty($tax['types'])) ? $tax['types'] : null;
 				$options = (!empty($tax['options'])) ? $tax['options'] : [];
 				$labels  = (!empty($tax['labels']))  ? $tax['labels']  : [];
-				$tax = new Onyx_Taxonomy($tax['names'], $types, $options, $labels);
+				$tax = new Taxonomy($tax['names'], $types, $options, $labels);
 				$tax->register();
 			}
 		}
