@@ -238,3 +238,76 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 	// return caption formatted correctly.
 	return $output;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| ACF CUSTOM FILTERS
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Show ACF in admin menu only for developers
+ * Registered at filters->add->acf/settings/show_admin at config/hook.php
+ *
+ * @return bool
+ */
+function onyx_acf_show_admin() {
+	return ( O::is_dev() ) ? true : false;
+}
+
+/**
+ * Rename ACF in portuguese language for better UI
+ * Registered at filters->add->acf/init at config/hook.php
+ *
+ * @return mixed
+ */
+function onyx_acf_rename() {
+	if ( class_exists( 'acf' ) ) {
+		add_filter(
+			'gettext',
+			function( $menu ) {
+				$menu = str_ireplace( 'Campos Personalizados', 'Campos', $menu );
+				return $menu;
+			}
+		);
+	}
+}
+
+/**
+ * Customize html return in the post object field of the blocks
+ * Registered at filters->add->acf/fields/post_object/result at config/hook.php
+ *
+ * @param string $title object field title
+ * @param object $post WP_Post object
+ * @param array  $field The field array containing all settings
+ * @param int    $post_id The current post ID being edited
+ * @return string
+ */
+function acf_object_result( $title, $post, $field, $post_id ) {
+	$title = "<span class='id ref'>[$post->ID]</span> / <span class='title'>$title</span>";
+	return $title;
+}
+
+/**
+ * Customize post query from object field
+ * Registered at filters->add->acf/fields/post_object/query at config/hook.php
+ *
+ * @param array      $args The query args. See WP_Query for available args.
+ * @param array      $field The field array containing all settings.
+ * @param int|string $post_id he current post ID being edited.
+ * @return array
+ */
+function acf_post_object_query( $args, $field, $post_id ) {
+	$args['order']   = 'DESC';
+	$args['orderby'] = 'ID';
+
+	// buscar post por ID
+	$search = ( ! empty( $args['s'] ) ) ? $args['s'] : false;
+	if ( $search && is_numeric( $search ) ) {
+		$args['post__in'] = array( $search );
+		unset( $args['s'] );
+	}
+
+	return $args;
+}

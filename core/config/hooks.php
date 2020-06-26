@@ -32,6 +32,10 @@ return [
 		'remove' => [
 			// remove <p> from excerpt.
 			[ 'the_excerpt', 'wpautop', 10 ],
+
+			// The SEO FrameWork
+			// [ 'the_seo_framework_seobox_output', '__return_false' ],
+			// [ 'the_seo_framework_indicator', '__return_false' ],
 		],
 		'add'    => [
 			// remove meta tag from wp feed.
@@ -55,6 +59,16 @@ return [
 			// remove private|protected prefix from title.
 			[ 'private_title_format', 'onyx_remove_private_title' ],
 			[ 'protected_title_format', 'onyx_remove_private_title' ],
+
+			// ACF
+			[ 'acf/init', 'onyx_acf_rename' ],
+			[ 'acf/settings/show_admin', 'onyx_acf_show_admin' ],
+			[ 'acf/fields/post_object/result', 'onyx_acf_object_result', 10, 4 ],
+			[ 'acf/fields/post_object/query', 'onyx_acf_post_object_query', 10, 3 ],
+
+			// ADMIN COLUMNS PRO
+			// [ 'acp/search/is_active', '__return_false' ],
+			// [ 'ac/suppress_site_wide_notices', '__return_true' ],
 		],
 		'apply'  => [
 			// show excerpt by default.
