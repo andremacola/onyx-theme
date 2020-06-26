@@ -76,6 +76,12 @@ class Cpt {
 	 */
 	public $icon;
 
+	/**
+	 * The column manager for the post type
+	 *
+	 * @var mixed
+	 */
+	public $columns;
 
 	/**
 	 * Constructor
@@ -269,10 +275,114 @@ class Cpt {
 	/**
 	 * Hook post type to WordPress
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function register() {
-		return add_action( 'init', [ $this, 'register_cpt' ] );
+		add_action( 'init', [ $this, 'register_cpt' ] );
+
+		if ( isset( $this->columns ) ) {
+			// manage/motify the admin edit columns.
+			add_filter( "manage_{$this->key}_posts_columns", [ $this, 'manage_columns' ], 10, 1 );
+
+			// add custom columns
+			add_filter( "manage_{$this->key}_posts_custom_column", [ $this, 'custom_columns' ], 10, 2 );
+
+			// run filter to make columns sortable.
+			add_filter( "manage_edit-{$this->key}_sortable_columns", [ $this, 'sortable_columns' ] );
+
+			// run action that sorts columns on request.
+			add_action( 'pre_get_posts', [ $this, 'orderby_columns' ] );
+		}
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| MANAGE ADMIN COLUMNS
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Manage/Modify the columns for post type
+	 *
+	 * @param  array $columns Default WordPress columns
+	 * @return array The modified columns
+	 */
+	public function manage_columns( $columns ) {
+		$columns = $this->columns->manage_columns( $columns );
+
+		return $columns;
+	}
+
+	/**
+	 * Populate custom columns for post type
+	 *
+	 * @param string $column   The column slug
+	 * @param int    $post_id  The post ID
+	 */
+	public function custom_columns( $column, $post_id ) {
+		if ( isset( $this->columns->populate[$column] ) ) {
+			// $this->columns()->populate[$column] = [ $column, $post_id ];
+			call_user_func_array( $this->columns()->populate[$column], [ $column, $post_id ] );
+		}
+	}
+
+	/**
+	 * Make custom columns sortable
+	 *
+	 * @param array $columns  Default WordPress sortable columns
+	 */
+	public function sortable_columns( $columns ) {
+		if ( ! empty( $this->columns()->sortable ) ) {
+			$columns = array_merge( $columns, $this->columns()->sortable );
+		}
+
+		return $columns;
+	}
+
+	/**
+	 * Set query to sort custom columns
+	 *
+	 * @param object $query WP_Query
+	 */
+	public function orderby_columns( $query ) {
+		// don't modify the query if we're not in the post type admin
+		if ( ! is_admin() || $query->get( 'post_type' ) !== $this->key ) {
+			return;
+		}
+
+		$orderby = $query->get( 'orderby' );
+
+		// if the sorting a custom column
+		if ( $this->columns()->is_sortable( $orderby ) ) {
+			// get the custom column options
+			$meta = $this->columns()->sortable_meta( $orderby );
+
+			// determine type of ordering
+			if ( is_string( $meta ) ) {
+				$meta_key   = $meta;
+				$meta_value = 'meta_value';
+			} else {
+				$meta_key   = $meta[0];
+				$meta_value = 'meta_value_num';
+			}
+
+			// set the custom order
+			$query->set( 'meta_key', $meta_key );
+			$query->set( 'orderby', $meta_value );
+		}
+	}
+
+	/**
+	 * Get the Column Manager for the PostType
+	 *
+	 * @return \Onyx\Columns
+	 */
+	public function columns() {
+		if ( ! isset( $this->columns ) ) {
+			$this->columns = new \Onyx\Columns();
+		}
+
+		return $this->columns;
 	}
 
 }

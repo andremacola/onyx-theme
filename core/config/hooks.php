@@ -7,7 +7,7 @@
  *
  * Closure ex:
  *
- * [ 'wp_enqueue_scripts', function() {
+ * ['wp_enqueue_scripts', function() {
  *     print_r('My Clojure');
  * }],
  *

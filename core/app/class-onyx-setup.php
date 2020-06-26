@@ -107,8 +107,34 @@ final class Setup {
 				$options = ( ! empty( $cpt['options'] )) ? $cpt['options'] : [];
 				$labels  = ( ! empty( $cpt['labels'] )) ? $cpt['labels'] : [];
 				$pt      = new Cpt( $cpt['names'], $options, $labels );
+
+				if ( ! empty( $cpt['columns']['hide'] ) || ! empty( $cpt['columns']['add'] ) ) {
+					$this->manage_post_type_columns( $pt, $cpt['columns'] );
+				}
+
 				$pt->register();
 			}
+		}
+	}
+
+	/**
+	 * Register custom admin post types columns
+	 *
+	 * @param object $pt \Onyx\Cpt Post Type Object [required]
+	 * @param array  $columns Custom columns  [required]
+	 * @return void
+	 */
+	public function manage_post_type_columns( $pt, $columns ) {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		if ( ! empty( $columns['add'] ) ) {
+			$pt->columns()->register_columns( $columns['add'] );
+		}
+
+		if ( ! empty( $columns['hide'] ) ) {
+			$pt->columns()->hide( $columns['hide'] );
 		}
 	}
 
