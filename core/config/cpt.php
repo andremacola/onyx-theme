@@ -1,9 +1,9 @@
 <?php
-
 /**
  * Edit this file to register your custom post types
  * This file is related to app/class-onyx-cpt.php
  *
+ * @package Onyx Theme
  * @see https://developer.wordpress.org/reference/functions/register_post_type/
  * @see https://developer.wordpress.org/reference/functions/get_post_type_labels/
  *
@@ -21,12 +21,10 @@ return [
 	*/
 	[
 		'names'   => [
-			'name'   => 'Cpt'
+			'name' => 'Cpt',
 		],
 		'options' => [],
-		'labels'  => []
+		'labels'  => [],
 	],
 
-]
-
-?>
+];

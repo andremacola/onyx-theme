@@ -1,14 +1,17 @@
-<?php get_header(); ?>
-
 <?php
+/**
+ * Single Template.
+ *
+ * @package Onyx Theme
+ */
 
-	while(have_posts()): the_post();
+get_header();
+
+while ( have_posts() ) : the_post();
 
 	the_content();
 
-	endwhile;
+endwhile;
 
-?>
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+get_sidebar();
+get_footer();

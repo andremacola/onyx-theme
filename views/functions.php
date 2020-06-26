@@ -1,4 +1,9 @@
 <?php
+/**
+ * Onyx Theme autoloader and requirements
+ *
+ * @package Onyx Theme
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -6,8 +11,9 @@
 |--------------------------------------------------------------------------
 */
 
-if (!file_exists($autoload = __DIR__ . '/../core/vendor/autoload.php')) {
-	wp_die('Please, run <code>composer install</code> inside your theme directory.');
+$autoload = __DIR__ . '/../core/vendor/autoload.php';
+if ( ! file_exists( $autoload ) ) {
+	wp_die( 'Please, run <code>composer install</code> inside your theme directory.' );
 }
 
 require_once $autoload;
@@ -18,7 +24,7 @@ require_once $autoload;
 |--------------------------------------------------------------------------
 */
 
-require_once(__DIR__."/../core/app/onyx-filters-actions.php");
+require_once __DIR__ . '/../core/app/onyx-filters-actions.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +33,3 @@ require_once(__DIR__."/../core/app/onyx-filters-actions.php");
 */
 
 new \Onyx\Setup();
-
-?>

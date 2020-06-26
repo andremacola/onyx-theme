@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Edit this file to add theme support features.
  *
+ * @package Onyx Theme
  * @see https://developer.wordpress.org/reference/functions/add_theme_support/
  */
 
@@ -30,5 +30,3 @@ return [
 	'responsive-embeds',
 
 ];
-
-?>

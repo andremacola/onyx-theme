@@ -1,3 +1,10 @@
-<?php get_header(); ?>
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+/**
+ * Page Template.
+ *
+ * @package Onyx Theme
+ */
+
+get_header();
+get_sidebar();
+get_footer();

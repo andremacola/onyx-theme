@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="WordPress" namespace="WordPressCS\WordPress" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+
+	<description>WordPress Coding Standards</description>
+
+	<!--
+	Included via WordPress-Extra.
+	<rule ref="WordPress-Core"/>
+	-->
+	<rule ref="WordPress-Docs" />
+	<rule ref="WordPress-Extra">
+		<!-- Prevent duplicate messages + deprecation notice from deprecated sniff. -->
+		<exclude name="WordPress.WP.TimezoneChange.timezone_change_date_default_timezone_set"/>
+		<exclude name="WordPress.WP.TimezoneChange.DeprecatedSniff"/>
+
+		<!-- ONYX CUSTOM CONFIGURATION -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys"/>
+		<exclude name="WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet"/>
+		<exclude name="WordPress.WP.EnqueuedResources.NonEnqueuedScript"/>
+		<exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"/>
+		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralText"/>
+		<exclude name="WordPress.WP.I18n.InterpolatedVariableText"/>
+
+		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
+		<exclude name="Squiz.PHP.CommentedOutCode.Found"/>
+		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+		<exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace"/>
+
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+		<exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen"/>
+		<exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceBeforeClose"/>
+
+		<!-- <exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket" /> -->
+		<!-- <exclude name="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket" /> -->
+		
+	</rule>
+
+</ruleset>

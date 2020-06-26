@@ -30,11 +30,7 @@ module.exports = {
 		isMobile: true,
 	},
 	rules: {
-		quotes: [
-			'error',
-			'single',
-			{ allowTemplateLiterals: true },
-		],
+		quotes: [ 'error', 'single', { allowTemplateLiterals: true } ],
 		'no-var': 0,
 		'no-console': 0,
 		eqeqeq: 0,
