@@ -20,7 +20,7 @@ const rollup = require('@rollup/stream');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const terser = require('rollup-plugin-terser').terser;
-const buffer = require('vinyl-buffer');
+// const buffer = require('vinyl-buffer');
 
 const config = {
 	url: process.env.URL,
