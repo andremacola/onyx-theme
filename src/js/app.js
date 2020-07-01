@@ -1,5 +1,5 @@
 /**
-	@ PREPEND FRAMEWORKS E BIBLIOTECAS
+ * IMPORT FRAMEWORKS AND LIBRARIES
  */
 
 //=require "jquery/dist/jquery.min.js"
@@ -9,13 +9,12 @@
 // require "./plugins/dfp.js"
 
 /**
-	@ Funcões diversas do tema
+ * APP FUNCTIONS
  */
 
 (function($, window, document) {
 	$(function() {
 		// ios ::active hack
 		document.addEventListener('touchstart', function() {}, true);
-		// dfpLoadBanners();
 	});
 }(window.jQuery, window, document));

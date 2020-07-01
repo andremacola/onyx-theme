@@ -13,6 +13,7 @@ desktop.ini
 .idea
 .dropbox
 .codekit-cache
+.cache/
 *.env
 node_modules/
 bower_components/
