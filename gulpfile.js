@@ -1,18 +1,26 @@
 'use strict';
 
 require('dotenv/config');
+
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const rename = require('gulp-rename');
-const autoprefixer = require('gulp-autoprefixer');
-const sass = require('gulp-sass');
-const include = require('gulp-include');
-// const concat = require('gulp-concat');
-const terser = require('gulp-terser');
+const source = require('vinyl-source-stream');
+
 const browserSync = require('browser-sync').create();
 const livereload = require('gulp-livereload');
+
+const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
+const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
+
+// const terser = require('gulp-terser');
+const rollup = require('@rollup/stream');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const terser = require('rollup-plugin-terser').terser;
+const buffer = require('vinyl-buffer');
 
 const config = {
 	url: process.env.URL,
@@ -128,19 +136,28 @@ function purgeCSS() {
 /*
  * JAVASCRIPTS
  */
+// declare the cache variable outside of task scopes
+let cache;
 function jsMain() {
-	return gulp
-		.src('./src/js/app.js')
-		.pipe(include({
-			extensions: 'js',
-			includePaths: [
-				__dirname + '/node_modules',
-				__dirname + '/src/js/plugins',
-			],
-		}))
-		.on('error', console.log)
-		.pipe(gulpif(config.terser, terser()))
-		.pipe(rename('app.min.js'))
+	const options = {
+		input: './src/js/app.js',
+		output: {
+			file: './assets/js/app.min.js',
+			format: 'cjs',
+		},
+		plugins: [
+			nodeResolve(),
+			commonjs(),
+			config.terser && terser({ output: { comments: false } }),
+		],
+		cache,
+	};
+	return rollup(options)
+		.on('bundle', (bundle) => {
+			cache = bundle;
+		})
+		.pipe(source('app.min.js'))
+		// .pipe(buffer())
 		.pipe(gulp.dest('./assets/js'))
 		.pipe(gulpif(config.liveReload, livereload()))
 		.pipe(gulpif(config.browserSync, browserSync.stream()));
@@ -149,7 +166,6 @@ function jsMain() {
 function jsInt() {
 	return gulp
 		.src('./src/js/app-int.js')
-		.pipe(include())
 		.on('error', console.log)
 		.pipe(gulpif(config.terser, terser()))
 		.pipe(rename('app-int.min.js'))
