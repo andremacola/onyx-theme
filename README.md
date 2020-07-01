@@ -37,28 +37,27 @@ Gulp is used for processing javascripts, scss and livereload. To be used in conj
   - Configure the environment through the file **.env** inside the theme folder.
   - Execute `yarn|npm install` inside theme folder.
 
-|Commands      | Functionality                              |
-|--------------|--------------------------------------------|
-|gulp watch    | Listen and process files when saving
-|gulp server   | Uses BrowserSync to serve
-|gulp live     | Uses LiveReload to serve (recommended). Need a `.local` domain to work
+|Commands          | Functionality                              |
+|------------------|--------------------------------------------|
+| yarn serve       | Listen and process files when saving. Need a `.local` domain to work
+| yarn serve:prod  | Same as `serve` but using production environment
+| yarn build       | Build assets (css/js)
 
-**Other commands**
-`styleMain`, `styleInt`, `purgecss`, `jsMain`, `jsInt`
+**Other gulp commands**
+`yarn gulp styles`, `yarn gulp stylesHome`, `yarn gulp stylesPurge`, `yarn gulp js`, `yarn gulp jsHome`, `yarn gulp watch`
 
 ## Requiring dependencies in javascript
 
-For compatibility reasons with old projects, we do not use `import/require`
+Please, use ES6 Modules or CommonJS to import your dependencies (see app.js)
 
-Add on top of `app.js` => `//=require "path/of/script.js"`
-
-## Optional libraries
+## Some JS libraries
 
 |Dependency        | Install                      | Repository                                        |
 |------------------|------------------------------|---------------------------------------------------|
 jquery             | yarn add jquery              | https://github.com/jquery/jquery                  |
 jquery-mask-plugin | yarn add jquery-mask-plugin  | https://github.com/igorescobar/jQuery-Mask-Plugin |
 jquery fancybox    | yarn add @fancyapps/fancybox | https://github.com/fancyapps/fancybox             |
+imask              | yarn add imask               | https://github.com/uNmAnNeR/imaskjs               |
 tiny-slider        | yarn add tiny-slider         | https://github.com/ganlanyuan/tiny-slider         |
 vanilla-lazyload   | yarn add vanilla-lazyload    | https://github.com/verlok/vanilla-lazyload        |
 body-scroll-lock   | yarn add body-scroll-lock    | https://github.com/willmcpo/body-scroll-lock      |

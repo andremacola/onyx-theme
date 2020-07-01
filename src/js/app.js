@@ -7,7 +7,6 @@
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
 // import '@fancyapps/fancybox';
-// import 'jquery-mask-plugin';
 // import { tns } from 'tiny-slider';
 // import './plugins/dfp';
 
