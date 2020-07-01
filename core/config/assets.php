@@ -9,7 +9,7 @@
  * @see https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * @param string the file path or url [required]
- * @param bool   Show in home? [required]
+ * @param bool   Show only in home? Default false [required]
  * @param string async|defer for javascript [optional]
  */
 
@@ -21,8 +21,8 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'css' => [
-		[ 'assets/css/main.css', true ],
-		[ 'assets/css/int.css', false ],
+		[ 'assets/css/main.css' ],
+		[ 'assets/css/home.css', true ],
 	],
 
 	/*
@@ -31,8 +31,8 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'js'  => [
-		[ 'assets/js/app.min.js', true ],
-		[ 'assets/js/app-int.min.js', false ],
+		[ 'assets/js/app.min.js' ],
+		[ 'assets/js/home.min.js', true ],
 	],
 
 ];

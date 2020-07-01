@@ -3,7 +3,9 @@
 	"version": "1.0.0",
 	"description": "Onyx Wordpress Starter Theme",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"serve": "yarn gulp live",
+		"serve:prod": "env NODE_ENV=prod yarn gulp live",
+		"build": "env NODE_ENV=prod yarn gulp"
 	},
 	"author": "Andre Machado",
 	"license": "MIT",
@@ -17,9 +19,8 @@
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^13.0.0",
 		"@rollup/plugin-node-resolve": "^8.1.0",
-		"@rollup/stream": "^1.0.0",
+		"@rollup/stream": "https://github.com/andremacola/stream.git",
 		"@wordpress/eslint-plugin": "^7.0.0",
-		"browser-sync": "^2.26.7",
 		"dotenv": "^8.2.0",
 		"eslint": "^6.8.0",
 		"gulp": "^4.0.2",
@@ -30,10 +31,8 @@
 		"gulp-purgecss": "^2.3.0",
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^4.1.0",
-		"gulp-terser": "^1.2.0",
 		"rollup": "^2.18.1",
 		"rollup-plugin-terser": "^6.1.0",
-		"vinyl-buffer": "^1.0.1",
 		"vinyl-source-stream": "^2.0.0"
 	},
 	"browserslist": [

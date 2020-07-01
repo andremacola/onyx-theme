@@ -7,7 +7,6 @@ const gulpif = require('gulp-if');
 const rename = require('gulp-rename');
 const source = require('vinyl-source-stream');
 
-const browserSync = require('browser-sync').create();
 const livereload = require('gulp-livereload');
 
 const autoprefixer = require('gulp-autoprefixer');
@@ -15,34 +14,91 @@ const purgecss = require('gulp-purgecss');
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
 
-// const terser = require('gulp-terser');
 const rollup = require('@rollup/stream');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
-const terser = require('rollup-plugin-terser').terser;
-// const buffer = require('vinyl-buffer');
+const { terser } = require('rollup-plugin-terser');
+
+/*
+|--------------------------------------------------------------------------
+| CONFIGURATION VARIABLES
+|--------------------------------------------------------------------------
+*/
 
 const config = {
 	url: process.env.URL,
 	port: parseInt(process.env.PORT, 10),
 	uiport: parseInt(process.env.UIPORT, 10),
-	cssout: process.env.CSSOUTPUT,
-	prefixer: process.env.PREFIXER === 'true',
-	terser: process.env.TERSER === 'true',
-	liveReload: process.env.LIVERELOAD === 'true',
-	browserSync: process.env.BROWSERSYNC === 'true',
-	destCSS: './assets/css',
-	mainCSS: './src/sass/styles.scss',
-	intCSS: './src/sass/styles-int.scss',
-	extraCSS: [],
+
+	cssout: 'compact',
+	prefixer: false,
+	terser: false,
+
+	style: './src/sass/styles.scss',
+	styleHome: './src/sass/home.scss',
+	styleDest: './assets/css',
+
+	js: './src/js/app.js',
+	jsHome: './src/js/home.js',
+	jsDest: './assets/js',
+};
+
+if (process.env.NODE_ENV === 'prod') {
+	config.cssout = 'compressed';
+	config.prefixer = true;
+	config.terser = true;
+}
+
+const wpCSS = {
+	whitelist: [
+		'rtl',
+		'home',
+		'blog',
+		'archive',
+		'date',
+		'error404',
+		'logged-in',
+		'admin-bar',
+		'no-customize-support',
+		'custom-background',
+		'wp-custom-logo',
+		'alignnone',
+		'alignright',
+		'alignleft',
+		'wp-caption',
+		'wp-caption-text',
+		'screen-reader-text',
+		'comment-list',
+	],
+	whitelistPatterns: [
+		/^wp-block(-.*)?$/,
+		/^active(-.*)?$/,
+		/^search(-.*)?$/,
+		/^(.*)-template(-.*)?$/,
+		/^(.*)?-?single(-.*)?$/,
+		/^postid-(.*)?$/,
+		/^attachmentid-(.*)?$/,
+		/^attachment(-.*)?$/,
+		/^page(-.*)?$/,
+		/^(post-type-)?archive(-.*)?$/,
+		/^author(-.*)?$/,
+		/^category(-.*)?$/,
+		/^tag(-.*)?$/,
+		/^tax-(.*)?$/,
+		/^term-(.*)?$/,
+		/^(.*)?-?paged(-.*)?$/,
+	],
 };
 
 /*
- * SASS/STYLES
- */
-function styleMain() {
+|--------------------------------------------------------------------------
+| STYLES
+|--------------------------------------------------------------------------
+*/
+
+function styles() {
 	return gulp
-		.src(config.mainCSS)
+		.src(config.style)
 		.pipe(sass({
 			outputStyle: config.cssout,
 			includePaths: [ './node_modules/' ],
@@ -56,16 +112,15 @@ function styleMain() {
 				})
 			)
 		)
-		.pipe(gulp.dest(config.destCSS))
-		.pipe(gulpif(config.liveReload, livereload()))
-		.pipe(gulpif(config.browserSync, browserSync.stream()));
+		.pipe(gulp.dest(config.styleDest))
+		.pipe(livereload());
 }
 
-function styleInt() {
+function stylesHome() {
 	return gulp
-		.src(config.intCSS)
+		.src(config.styleHome)
 		.pipe(sass({ outputStyle: config.cssout }).on('error', sass.logError))
-		.pipe(rename('int.css'))
+		.pipe(rename('home.css'))
 		.pipe(
 			gulpif(
 				config.prefixer,
@@ -74,80 +129,40 @@ function styleInt() {
 				})
 			)
 		)
-		.pipe(gulp.dest(config.destCSS))
-		.pipe(gulpif(config.liveReload, livereload()))
-		.pipe(gulpif(config.browserSync, browserSync.stream()));
+		.pipe(gulp.dest(config.styleDest))
+		.pipe(livereload());
 }
 
-// function styleExtras() {
-// 	return gulp
-// 		.src(config.extraCSS)
-// 		.pipe(sass({ outputStyle: config.cssout }).on('error', sass.logError))
-// 		.pipe(gulpif(config.prefixer, autoprefixer({
-// 			cascade: false,
-// 		})))
-// 		.pipe(gulp.dest(config.destCSS))
-// 		.pipe(browserSync.stream());
-// }
-
-function purgeCSS() {
+function stylesPurge() {
 	return gulp
-		.src([ 'assets/css/main.css' ])
+		.src([ 'assets/css/main.css', 'assets/css/home.css' ])
 		.pipe(
 			purgecss({
 				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'src/js/**/*.js' ],
-				whitelist: [
-					'rtl',
-					'home',
-					'blog',
-					'archive',
-					'date',
-					'error404',
-					'logged-in',
-					'admin-bar',
-					'no-customize-support',
-					'custom-background',
-					'wp-custom-logo',
-				],
-				whitelistPatterns: [
-					/^wp-block(-.*)?$/,
-					/^active(-.*)?$/,
-					/^owl-(.*)?$/,
-					/^search(-.*)?$/,
-					/^(.*)-template(-.*)?$/,
-					/^(.*)?-?single(-.*)?$/,
-					/^postid-(.*)?$/,
-					/^attachmentid-(.*)?$/,
-					/^attachment(-.*)?$/,
-					/^page(-.*)?$/,
-					/^(post-type-)?archive(-.*)?$/,
-					/^author(-.*)?$/,
-					/^category(-.*)?$/,
-					/^tag(-.*)?$/,
-					/^tax-(.*)?$/,
-					/^term-(.*)?$/,
-					/^(.*)?-?paged(-.*)?$/,
-				],
+				whitelist: wpCSS.whitelist,
+				whitelistPatterns: wpCSS.whitelistPatterns,
 			})
 		)
-		.pipe(gulp.dest(config.destCSS));
+		.pipe(gulp.dest(config.styleDest));
 }
 
 /*
- * JAVASCRIPTS
- */
-// declare the cache variable outside of task scopes
+|--------------------------------------------------------------------------
+| JAVASCRIPTS
+|--------------------------------------------------------------------------
+*/
+
 let cache;
-function jsMain() {
+function js() {
 	const options = {
-		input: './src/js/app.js',
+		input: config.js,
 		output: {
-			file: './assets/js/app.min.js',
+			file: config.jsDest,
 			format: 'cjs',
 		},
 		plugins: [
-			nodeResolve(),
 			commonjs(),
+			nodeResolve(),
 			config.terser && terser({ output: { comments: false } }),
 		],
 		cache,
@@ -158,65 +173,66 @@ function jsMain() {
 		})
 		.pipe(source('app.min.js'))
 		// .pipe(buffer())
-		.pipe(gulp.dest('./assets/js'))
-		.pipe(gulpif(config.liveReload, livereload()))
-		.pipe(gulpif(config.browserSync, browserSync.stream()));
+		.pipe(gulp.dest(config.jsDest))
+		.pipe(livereload());
 }
 
-function jsInt() {
-	return gulp
-		.src('./src/js/app-int.js')
-		.on('error', console.log)
-		.pipe(gulpif(config.terser, terser()))
-		.pipe(rename('app-int.min.js'))
-		.pipe(gulp.dest('./assets/js'))
-		.pipe(gulpif(config.liveReload, livereload()))
-		.pipe(gulpif(config.browserSync, browserSync.stream()));
+function jsHome() {
+	const options = {
+		input: config.jsHome,
+		output: {
+			dir: config.jsDest,
+			format: 'cjs',
+		},
+		plugins: [
+			commonjs(),
+			nodeResolve(),
+			config.terser && terser({ output: { comments: false } }),
+		],
+		cache,
+	};
+	return rollup(options)
+		.on('bundle', (bundle) => {
+			cache = bundle;
+		})
+		.pipe(source('home.min.js'))
+		// .pipe(buffer())
+		.pipe(gulp.dest(config.jsDest))
+		.pipe(livereload());
 }
 
 /*
- * WATCH
- */
-function watchFiles() {
-	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles-int.scss' ], styleMain);
-	gulp.watch([ './src/sass/**/styles-int.scss' ], styleInt);
-	gulp.watch([ './src/js/**/*.js', '!./src/js/**/app-int.js' ], jsMain);
-	gulp.watch('./src/js/**/app-int.js', jsInt);
-}
+|--------------------------------------------------------------------------
+| WATCH FUNCTIONS
+|--------------------------------------------------------------------------
+*/
 
-function browserWatch() {
-	browserSync.init({
-		open: false,
-		proxy: config.url ? config.url : 'http://localhost',
-		ghostMode: false,
-		port: config.port ? config.port : 3000,
-		minify: false,
-		ui: {
-			port: config.uiport ? config.uiport : 3001,
-		},
-	});
-	watchFiles();
-	gulp.watch('./**/*.php').on('change', browserSync.reload);
-}
-
-function liveReloadWatch() {
-	livereload.listen(config.port);
-	watchFiles();
-	gulp.watch('**/*.php').on('change', function(file) {
+function watch() {
+	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles-home.scss' ], styles);
+	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles.scss' ], stylesHome);
+	gulp.watch([ './src/js/**/*.js', '!./src/js/**/home.js' ], js);
+	gulp.watch('./src/js/**/home.js', jsHome);
+	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php' ]).on('change', function(file) {
 		livereload.reload(file);
 	});
 }
 
+function live() {
+	livereload.listen(config.port);
+	watch();
+}
+
 /*
- * EXPORTS
- */
-// exports.styleExtras = styleExtras;
-exports.styleMain = styleMain;
-exports.styleInt = styleInt;
-exports.purgeCSS = purgeCSS;
-exports.jsMain = jsMain;
-exports.jsInt = jsInt;
-exports.watch = watchFiles;
-exports.server = browserWatch;
-exports.live = liveReloadWatch;
-exports.default = gulp.series(styleMain, styleInt, purgeCSS, jsMain, jsInt);
+|--------------------------------------------------------------------------
+| EXPORTS
+|--------------------------------------------------------------------------
+*/
+
+exports.styles = styles;
+exports.stylesHome = stylesHome;
+exports.stylesPurge = stylesPurge;
+exports.js = js;
+exports.jsHome = jsHome;
+exports.watch = watch;
+exports.live = live;
+exports.default = gulp.series(styles, stylesHome, stylesPurge, js, jsHome);

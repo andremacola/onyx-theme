@@ -101,6 +101,7 @@ function onyx_single_cat_template( $t ) {
 function onyx_load_styles() {
 	$assets = O::conf( 'assets' )->css;
 	foreach ( $assets as $css ) {
+		$css[1] = ( isset( $css[1] ) ) ? $css[1] : false;
 		O::css( $css[0], $css[1] );
 	}
 }
@@ -114,6 +115,7 @@ function onyx_load_styles() {
 function onyx_load_javascripts() {
 	$assets = O::conf( 'assets' )->js;
 	foreach ( $assets as $js ) {
+		$js[1] = ( isset( $js[1] ) ) ? $js[1] : false;
 		$js[2] = ( isset( $js[2] ) ) ? $js[2] : '';
 		O::js( $js[0], $js[1], $js[2] );
 	}

@@ -1,36 +1,24 @@
-/**
- * IMPORT FRAMEWORKS AND LIBRARIES
- */
-
-//=require "jquery/dist/jquery.min.js"
-// require "jquery-mask-plugin/dist/jquery.mask.min.js"
-// require "@fancyapps/fancybox/dist/jquery.fancybox.min.js"
-// require "tiny-slider/dist/min/tiny-slider.js"
-// require "./plugins/dfp.js"
-
-// const jquery = require('jquery');
-// const appTeste = require('./app-int');
-// const jquery = require('../../node_modules/jquery/dist/jquery.min.js');
-// import jquery from '../../node_modules/jquery/dist/jquery.min.js';
+/*
+|--------------------------------------------------------------------------
+| IMPORT FRAMEWORKS AND LIBRARIES
+|--------------------------------------------------------------------------
+*/
 
 import jquery from 'jquery';
-// import './app-int';
-
 window.$ = window.jQuery = jquery;
-
+// import '@fancyapps/fancybox';
+// import 'jquery-mask-plugin';
 // import { tns } from 'tiny-slider';
+// import './plugins/dfp';
 
-// const { tns } = require('tiny-slider');
+/*
+|--------------------------------------------------------------------------
+| APP FUNCTIONS
+|--------------------------------------------------------------------------
+*/
 
-/**
- * APP FUNCTIONS
- */
-
-(function($, window, document) {
+(function() {
 	$(function() {
-		// ios ::active hack
-		document.addEventListener('touchstart', function() {}, true);
-
-		$('body').css('background', 'green');
+		// start here
 	});
-}(window.jQuery, window, document));
+}());

@@ -13,21 +13,10 @@ module.exports = {
 		wp: true,
 		// framework
 		onyx: true,
-		onyxLoadBanners: true,
-		onyxIgnorePosts: true,
-		onyxPostID: true,
-		onyxPostType: true,
-		onyxViewsCount: true,
-		onyxThemeColors: true,
 		// dependencies
 		$: true,
 		jQuery: true,
-		ga: true,
-		googletag: true,
-		objectFitImages: true,
-		LazyLoad: true,
-		bodyScrollLock: true,
-		isMobile: true,
+		jquery: true,
 	},
 	rules: {
 		quotes: [ 'error', 'single', { allowTemplateLiterals: true } ],

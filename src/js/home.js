@@ -1,7 +1,11 @@
 /*
 |--------------------------------------------------------------------------
-| CUSTOMIZE GUTENBERG BLOCKS (ON FRONT-END)
+| HOME PAGE SPECIFIC FUNCTIONS
 |--------------------------------------------------------------------------
 */
 
-// .wp-block {}
+(function() {
+	$(function() {
+		// start here
+	});
+}());

@@ -1,12 +1,11 @@
 /*
-* @ Normas do Starter Theme
+|--------------------------------------------------------------------------
+| DEFAULT STYLES
+| Onyx Normalize and Reset V1.1
+|--------------------------------------------------------------------------
 */
 
-/*************************************************/
-/* Normas (Onyx Normalize and Reset V1.1)        */
-/*************************************************/
-
-/* correct the line height in all browsers and several fix on html root and * */
+// correct the line height in all browsers and several fix on html root and
 html {
 	-webkit-tap-highlight-color: transparent;
 	-webkit-box-sizing: border-box;
@@ -26,10 +25,10 @@ body {
 	margin: 0;
 }
 
-/* render the `main` element consistently in IE. */
+// render the `main` element consistently in IE.
 main { display: block; }
 
-/* reset padding, margin and inherit font */
+// reset padding, margin and inherit font
 h1, h2, h3, h4, h5, h6, p, blockquote, figure, ol, ul, li,
 fieldset, form, label, legend, button, input, optgroup, select, textarea {
 	margin: 0;
@@ -37,19 +36,19 @@ fieldset, form, label, legend, button, input, optgroup, select, textarea {
 	font-size: inherit;
 }
 
-/* remove default list style */
+// remove default list style
 ol, ul { list-style: none; }
 
-/* remove the default vertical scrollbar in IE10+ (normalize 8.0.0) */
+// remove the default vertical scrollbar in IE10+ (normalize 8.0.0)
 textarea { overflow: auto; }
 
-/* add the correct font size in all browsers (normalize 8.0.0) */
+// add the correct font size in all browsers (normalize 8.0.0)
 small { font-size: 80%; }
 
-/* disable default outline that appears when focusing */
+// disable default outline that appears when focusing
 :focus { outline: 0; }
 
-/* remove the inner border and padding in Firefox (normalize 8.0.0)  */
+// remove the inner border and padding in Firefox (normalize 8.0.0)
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
@@ -58,10 +57,10 @@ button::-moz-focus-inner,
   padding: 0;
 }
 
-/* cursor pointer on buttons */
+// cursor pointer on buttons
 button, input[type="submit"] { cursor: pointer; }
 
-/* show the overflow in IE and reset appearance in all browsers */
+// show the overflow in IE and reset appearance in all browsers
 button, input {
 	overflow: visible;
 	border: 0;
@@ -71,7 +70,7 @@ button, input {
 	background: none;
 }
 
-/* adjust better images */
+// adjust better images
 img {
 	max-width: 100%;
 	height: auto;

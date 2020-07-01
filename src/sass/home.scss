@@ -1,31 +1,21 @@
 /*
 |--------------------------------------------------------------------------
-| ONYX FRAMEWORK
+| ONYX FRAMEWORK - HOME STYLES
 |--------------------------------------------------------------------------
 */
 
 // Library
-	@import "_libs/fonts";
 	@import "_libs/vars";
 	@import "_libs/mixins";
 	@import "_libs/extends";
-	@import "_libs/reset";
-	@import "_libs/helpers";
 
-// layout
-	@import "layout/theme";
-	@import "layout/header";
-	@import "layout/content";
-	@import "layout/footer";
+// vendors
+	// @import "tiny-slider/dist/tiny-slider";
 
 /*
 |--------------------------------------------------------------------------
 | COMPONENTS
 |--------------------------------------------------------------------------
 */
-
-	// @import 'components/post-content';
-	// @import 'components/forms';
-	// @import 'components/pagenavi';
-	// @import 'components/wp/wp-blocks';
-	// @import 'components/google-search';
+	
+// @import 'components/home-slide';

@@ -169,18 +169,18 @@ class O {
 	 * Add CSS from assets
 	 *
 	 * @param string $css [required]
-	 * @param bool   $home Display CSS on Home [optional]
+	 * @param bool   $home Display CSS only on Home [optional]
 	 * @return void Link style html tag
 	 */
-	public static function css( $css, $home = true ) {
+	public static function css( $css, $home = false ) {
 		$src = self::static_path( $css );
 		$v   = ONYX_STATIC_VERSION;
 		$css = "<link rel='stylesheet' href='$src?ver=$v'>\n";
 
-		if ( $home ) :
+		if ( ! $home ) :
 			echo $css;
 		else :
-			if ( ! is_home() ) {
+			if ( is_home() ) {
 				echo $css;
 			}
 		endif;
@@ -190,19 +190,19 @@ class O {
 	 * Add javascript from assets
 	 *
 	 * @param string $js file|url [required]
-	 * @param bool   $home Display script on Home [optional]
+	 * @param bool   $home Display script only on Home [optional]
 	 * @param string $attr Is async|defer script [optional]
 	 * @return void Script html tag
 	 */
-	public static function js( $js, $home = true, $attr = '' ) {
+	public static function js( $js, $home = false, $attr = '' ) {
 		$src    = self::static_path( $js );
 		$v      = ONYX_STATIC_VERSION;
 		$script = "<script $attr src='$src?ver=$v'></script>\n";
 
-		if ( $home ) :
+		if ( ! $home ) :
 			echo $script;
 		else :
-			if ( ! is_home() ) {
+			if ( is_home() ) {
 				echo $script;
 			}
 		endif;
