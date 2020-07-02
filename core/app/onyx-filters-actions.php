@@ -249,7 +249,7 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 */
 
 /**
- * Show ACF in admin menu only for developers
+ * Show ACF in admin menu only for developers.
  * Registered at filters->add->acf/settings/show_admin at config/hook.php
  *
  * @return bool
@@ -259,7 +259,7 @@ function onyx_acf_show_admin() {
 }
 
 /**
- * Rename ACF in portuguese language for better UI
+ * Rename ACF in portuguese language for better UI.
  * Registered at filters->add->acf/init at config/hook.php
  *
  * @return mixed
@@ -277,7 +277,7 @@ function onyx_acf_rename() {
 }
 
 /**
- * Customize html return in the post object field of the blocks
+ * Customize html return in the post object field of the blocks.
  * Registered at filters->add->acf/fields/post_object/result at config/hook.php
  *
  * @param string $title object field title
@@ -292,7 +292,7 @@ function acf_object_result( $title, $post, $field, $post_id ) {
 }
 
 /**
- * Customize post query from object field
+ * Customize post query from object field.
  * Registered at filters->add->acf/fields/post_object/query at config/hook.php
  *
  * @param array      $args The query args. See WP_Query for available args.
@@ -312,4 +312,148 @@ function acf_post_object_query( $args, $field, $post_id ) {
 	}
 
 	return $args;
+}
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN CUSTOM FILTERS
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Customize styles and scripts from admin;
+ * Add custom favicon.
+ * Registered at actions->add->login_enqueue_scripts|admin_enqueue_scripts at config/hook.php
+ *
+ * @return void
+ */
+function onyx_admin_scripts() {
+	$dir_uri = O::conf( 'app' )->dir_uri;
+	echo "<link rel='shortcut icon' href='" . esc_attr( $dir_uri ) . "/assets/images/icons/favicon-32.png' />";
+	O::css( 'assets/css/styles.admin.css' );
+}
+
+/**
+ * Customize admin footer text label
+ * Registered at filters->add->admin_footer_text at config/hook.php
+ *
+ * @return string
+ */
+function onyx_change_footer_text_admin() {
+	return O::conf( 'app' )->name;
+}
+
+/**
+ * Customize admin bar
+ * Registered at action->add->wp_before_admin_bar_render at config/hook.php
+ *
+ * @return void
+ */
+function onyx_customize_admin_bar() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu( 'wp-logo' );
+	$wp_admin_bar->remove_menu( 'comments' );
+}
+
+/**
+ * Customize admin dashboard widgets
+ * Registered at action->add->wp_dashboard_setup at config/hook.php
+ *
+ * @return void
+ */
+function onyx_dashboard_widgets() {
+	global $wp_meta_boxes;
+	remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	unset( $wp_meta_boxes['dashboard']['normal']['high']['dashboard_browser_nag'] ); // browse happy
+	// unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'] );   // quick draft
+	unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'] );       // wordpress.com
+	unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary'] );     // WordPress news
+}
+
+/**
+ * Force 2 columns on admin dashboard.
+ * Registered at filters->add->screen_layout_columns at config/hook.php
+ *
+ * @param array $columns Column options
+ * @return array
+ */
+function onyx_screen_layout_columns( $columns ) {
+	$columns['dashboard'] = 2;
+	return $columns;
+}
+
+/**
+ * Force user 2 columns dashboard option.
+ * Registered at filters->add->get_user_option_screen_layout_dashboard at config/hook.php
+ */
+function onyx_force_user_dashboard_option() {
+	return 2;
+}
+
+/**
+ * Disable comments and trackbacks
+ * Registered at actions->add->admin_menu at config/hook.php
+ *
+ * @return void
+ */
+function onyx_disable_comments_trackbacks() {
+	global $pagenow;
+	$post_types = get_post_types();
+	remove_menu_page( 'edit-comments.php' );
+	if ( 'edit-comments.php' === $pagenow ) {
+		wp_safe_redirect( admin_url() );
+		exit;
+	}
+	foreach ( $post_types as $post_type ) {
+		if ( post_type_supports( $post_type, 'comments' ) ) {
+			remove_post_type_support( $post_type, 'comments' );
+			remove_post_type_support( $post_type, 'trackbacks' );
+		}
+	}
+}
+
+/**
+ * Filter allowed mime types to upload.
+ * Registered at filters->add->upload_mimes at config/hook.php
+ *
+ * @param array $existing_mimes Mime types array to return
+ * @return array
+ */
+function onyx_remove_mime_types( $existing_mimes = [] ) {
+	$uploads = O::conf( 'app' )->uploads;
+
+	foreach ( $uploads['allowed_types'] as $type ) {
+		unset( $existing_mimes[$type] );
+	}
+
+	return $existing_mimes;
+}
+
+/**
+ * Limit upload file size inside admin.
+ * Registered at filters->add->upload_size_limit at config/hook.php
+ *
+ * @return int
+ */
+function onyx_upload_limit() {
+	$max_size = O::conf( 'app' )->uploads['max_file_size'];
+	return $max_size * 1024;
+}
+
+/**
+ * Add nextpage/pagebreak button to mce editor.
+ * Registered at filters->add->mce_buttons at config/hook.php
+ *
+ * @deprecated
+ * @param array $mce_buttons Tinymce buttons to filter
+ * @return int
+ */
+function onyx_editor_page_break( $mce_buttons ) {
+	$pos = array_search( 'wp_more', $mce_buttons, true );
+	if ( false === $pos ) {
+		$buttons     = array_slice( $mce_buttons, 0, $pos + 1 );
+		$buttons[]   = 'wp_page';
+		$mce_buttons = array_merge( $buttons, array_slice( $mce_buttons, $pos + 1 ) );
+	}
+	return $mce_buttons;
 }

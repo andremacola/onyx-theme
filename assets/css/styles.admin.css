@@ -1,29 +1,37 @@
-/************************************
-* @ ADMIN
-************************************/
+/*
+|-------------------------------------
+| ADMIN
+|-------------------------------------
+*/
 
-/* background para edição clássica e admin */
+/* background for classic editing and admin */
 body,
 #wp-content-editor-tools { background: #f9f9f9 !important; }
 
-/************************************
-* @ BLOCK EDITOR
-************************************/
+/*
+|-------------------------------------
+| BLOCK EDITOR
+|-------------------------------------
+*/
 
 /* background */
 body.block-editor-page { background: #FFF !important; }
 body.block-editor-page .edit-post-sidebar { background: #F9F9F9 !important; }
 
-/************************************
-* @ EDITOR CLÁSSICO
-************************************/
+/*
+|-------------------------------------
+| CLASSIC EDITOR
+|-------------------------------------
+*/
 
-/* fix de alinhamento para botão adicionar em pt-br */
+/* alignment fix for pt-br add button */
 .tagsdiv .newtag { width: 170px !important; }
 
-/************************************
-* @ ADVANCED CUSTOM FIELDS
-************************************/
+/*
+|-------------------------------------
+| ADVANCED CUSTOM FIELDS
+|-------------------------------------
+*/
 
 /* fix para alinhamento no block editor */
 body.block-editor-page .acf-fields > .acf-field { box-sizing: border-box; }
@@ -54,19 +62,23 @@ body .acf-input-prepend, body .acf-input-append {
 	border-color: #ddd !important;
 }
 
-/************************************
-* @ ADMIN COLUMNS PRO
-************************************/
+/*
+|-------------------------------------
+| ADMIN COLUMNS PRO
+|-------------------------------------
+*/
 
-/* alinhar botões de ação em tabelas de listagens */
+/* align list table action buttons */
 body .ac-table-actions { margin-top: 0; margin-bottom: 0; }
 
-/* esconder notificação de atualização */
+/* hide update notification */
 [data-slug='admin-columns-pro.php'].plugin-update-tr { display: none; }
 
-/************************************
-* @ LOGIN
-************************************/
+/*
+|-------------------------------------
+| LOGIN
+|-------------------------------------
+*/
 
 .login h1 a {
 	background-image: url('../images/admin/logo-admin.png') !important;
@@ -78,17 +90,30 @@ body .ac-table-actions { margin-top: 0; margin-bottom: 0; }
 .login form { border-radius: 10px; }
 .login form .input, .login form input[type=checkbox], .login input[type=text] { border-radius: 3px; }
 
-/************************************
-* @ ADMIN BAR
-************************************/
+/*
+|-------------------------------------
+| ADMIN BAR
+|-------------------------------------
+*/
 
 #wpadminbar #wp-admin-bar-site-name > .ab-item:before {
 	content: url('../images/admin/favicon-20.png') !important;
 }
 
-/************************************
-* @ GENERAL STYLES
-************************************/
+/*
+|-------------------------------------
+| ADMIN DASHBOARD
+|-------------------------------------
+*/
+
+/* .postbox-container { min-width: 100% !important; } */
+/* .meta-box-sortables.ui-sortable.empty-container { display: none; } */
+
+/*
+|-------------------------------------
+| GENERAL STYLES
+|-------------------------------------
+*/
 
 body input[type=color],
 body input[type=date],

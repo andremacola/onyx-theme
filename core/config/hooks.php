@@ -33,7 +33,7 @@ return [
 			// remove <p> from excerpt.
 			[ 'the_excerpt', 'wpautop', 10 ],
 
-			// The SEO FrameWork
+			// ADMIN: The SEO FrameWork
 			// [ 'the_seo_framework_seobox_output', '__return_false' ],
 			// [ 'the_seo_framework_indicator', '__return_false' ],
 		],
@@ -60,15 +60,29 @@ return [
 			[ 'private_title_format', 'onyx_remove_private_title' ],
 			[ 'protected_title_format', 'onyx_remove_private_title' ],
 
-			// ACF
+			// ADMIN: ACF
 			[ 'acf/init', 'onyx_acf_rename' ],
 			[ 'acf/settings/show_admin', 'onyx_acf_show_admin' ],
 			[ 'acf/fields/post_object/result', 'onyx_acf_object_result', 10, 4 ],
 			[ 'acf/fields/post_object/query', 'onyx_acf_post_object_query', 10, 3 ],
 
-			// ADMIN COLUMNS PRO
+			// ADMIN: COLUMNS PRO
 			// [ 'acp/search/is_active', '__return_false' ],
 			// [ 'ac/suppress_site_wide_notices', '__return_true' ],
+
+			// ADMIN: customize admin footer text label
+			[ 'admin_footer_text', 'onyx_change_footer_text_admin' ],
+
+			// ADMIN: force 2 columns on admin dashboard
+			[ 'screen_layout_columns', 'onyx_screen_layout_columns' ],
+			[ 'get_user_option_screen_layout_dashboard', 'onyx_force_user_dashboard_option' ],
+
+			// ADMIN: Upload filters
+			[ 'upload_mimes', 'onyx_remove_mime_types' ],
+			[ 'upload_size_limit', 'onyx_upload_limit' ],
+
+			// ADMIN: add nextpage/pagebreak button to mce editor (deprecated).
+			[ 'mce_buttons', 'onyx_editor_page_break' ],
 		],
 		'apply'  => [
 			// show excerpt by default.
@@ -128,14 +142,31 @@ return [
 		'add'    => [
 			// set smtp email configuration.
 			[ 'phpmailer_init', 'onyx_smtp_config' ],
+
 			// load onyx styles.
 			[ 'wp_head', 'onyx_load_styles' ],
+
 			// load onyx javascripts.
 			[ 'wp_footer', 'onyx_load_javascripts' ],
+
 			// load live reload on development enviroment.
 			[ 'wp_footer', 'onyx_load_livereload' ],
+
 			// reallocate javascripts from header to footer and remove wp jquery.
 			[ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
+
+			// ADMIN: customize styles and scripts
+			[ 'login_enqueue_scripts', 'onyx_admin_scripts' ],
+			[ 'admin_enqueue_scripts', 'onyx_admin_scripts' ],
+
+			// ADMIN: customize admin bar
+			[ 'wp_before_admin_bar_render', 'onyx_customize_admin_bar' ],
+
+			// ADMIN: customize panel dashboard
+			[ 'wp_dashboard_setup', 'onyx_dashboard_widgets' ],
+
+			// ADMIN: disable comments and trackbacks
+			[ 'admin_menu', 'onyx_disable_comments_trackbacks' ],
 		],
 	],
 ];
