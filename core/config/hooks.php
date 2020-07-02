@@ -167,6 +167,10 @@ return [
 
 			// ADMIN: disable comments and trackbacks
 			[ 'admin_menu', 'onyx_disable_comments_trackbacks' ],
+
+			// GUTENBEG: add style and script
+			[ 'enqueue_block_editor_assets', 'onyx_gutenberg_js' ],
+			[ 'admin_init', 'onyx_gutenberg_style' ],
 		],
 	],
 ];

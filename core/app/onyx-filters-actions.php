@@ -457,3 +457,37 @@ function onyx_editor_page_break( $mce_buttons ) {
 	}
 	return $mce_buttons;
 }
+
+/*
+|--------------------------------------------------------------------------
+| GUTENBERG
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Add editor style
+ * Registered at actions->add->admin_init at config/hook.php
+ *
+ * @return void
+ */
+function onyx_gutenberg_style() {
+	add_theme_support( 'editor-styles' );
+	add_editor_style( '../assets/css/styles.editor.css' );
+}
+
+/**
+ * Add editor custom javascript
+ * Registered at actions->add->enqueue_block_editor_assets at config/hook.php
+ *
+ * @return void
+ */
+function onyx_gutenberg_js() {
+	$app = O::conf( 'app' );
+	wp_enqueue_script(
+		'onyx-gutenberg',
+		$app->dir_uri . '/src/js/admin/gutenberg.js',
+		array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
+		$app->version,
+		true
+	);
+}

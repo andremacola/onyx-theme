@@ -1,9 +1,11 @@
-//	/**
-// @ CUSTOMIZAÇÃO DO GUTENBERG
-//	*/
+/*
+|--------------------------------------------------------------------------
+| CUSTOMIZE GUTENBERG
+|--------------------------------------------------------------------------
+*/
 
 wp.domReady(function() {
-	// remover painel de discussão
+	// remove discussion panel
 	const { removeEditorPanel } = wp.data.dispatch('core/edit-post');
 	removeEditorPanel('discussion-panel');
 });
