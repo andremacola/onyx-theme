@@ -17,6 +17,7 @@ return [
 	'desc'    => get_bloginfo( 'description' ),
 	'name'    => get_bloginfo( 'name' ),
 	'url'     => get_home_url(),
+	'rest'    => 'wp-json',
 	'user'    => wp_get_current_user()->user_email,
 	'devs'    => [ 'dev@domain.tld' ],
 	'uploads' => [

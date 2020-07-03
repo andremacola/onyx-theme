@@ -95,6 +95,23 @@ final class Setup {
 		$this->register_post_types();
 		$this->register_taxonomies();
 		$this->register_sidebars();
+		$this->manage_rest_api();
+	}
+
+	/**
+	 * Rest api base configurations
+	 *
+	 * @see config/app.php
+	 * @return void
+	 */
+	private function manage_rest_api() {
+		// change default WordPress rest api prefix
+		add_filter(
+			'rest_url_prefix',
+			function() {
+				return $this->app->rest;
+			}
+		);
 	}
 
 	/**
@@ -103,7 +120,7 @@ final class Setup {
 	 * @see config/sidebars.php
 	 * @return void
 	 */
-	public function register_sidebars() {
+	private function register_sidebars() {
 		if ( ! empty( $this->sidebars ) ) {
 			foreach ( $this->sidebars as $sidebar ) {
 				$sidebar = new \Onyx\Sidebar( $sidebar['name'], $sidebar );
@@ -118,7 +135,7 @@ final class Setup {
 	 * @see config/cpts.php
 	 * @return void
 	 */
-	public function register_post_types() {
+	private function register_post_types() {
 		if ( ! empty( $this->cpts ) ) {
 			foreach ( $this->cpts as $cpt ) {
 				$options = ( ! empty( $cpt['options'] )) ? $cpt['options'] : [];
@@ -141,7 +158,7 @@ final class Setup {
 	 * @param array  $columns Custom columns  [required]
 	 * @return void
 	 */
-	public function manage_post_type_columns( $pt, $columns ) {
+	private function manage_post_type_columns( $pt, $columns ) {
 		if ( ! is_admin() ) {
 			return;
 		}
@@ -161,7 +178,7 @@ final class Setup {
 	 * @see config/taxonomies.php
 	 * @return void
 	 */
-	public function register_taxonomies() {
+	private function register_taxonomies() {
 		if ( ! empty( $this->taxs ) ) {
 			foreach ( $this->taxs as $tax ) {
 				$types   = ( ! empty( $tax['types'] )) ? $tax['types'] : null;
