@@ -16,6 +16,7 @@
  * @param array names => Post type keys (singular, plural, slug) [required]
  * @param array options => Post type argument options [optional]
  * @param array labels => Post type labels [optional]
+ * @param array filters => Post type custom form taxonomy filters. [optional]
  * @param array columns => Post type columns. [add, order, hide] [optional]
  */
 
@@ -32,6 +33,7 @@ return [
 		],
 		'options' => [],
 		'labels'  => [],
+		'filters' => [ 'taxs' ],
 		'columns' => [
 			'add'   => [
 				'column-1' => [

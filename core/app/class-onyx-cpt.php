@@ -49,13 +49,6 @@ class Cpt {
 	public $slug;
 
 	/**
-	 * Taxonomies for post type
-	 *
-	 * @var string|array
-	 */
-	public $taxonomies;
-
-	/**
 	 * Arguments for post type
 	 *
 	 * @var array
@@ -91,11 +84,18 @@ class Cpt {
 	public $icon;
 
 	/**
-	 * The column manager for the post type
+	 * The column manager instance class for post type
 	 *
 	 * @var mixed
 	 */
 	public $columns;
+
+	/**
+	 * Filters for the post type
+	 *
+	 * @var array
+	 */
+	public $filters = [];
 
 	/**
 	 * Constructor
@@ -186,20 +186,6 @@ class Cpt {
 	 */
 	public function icon( $icon ) {
 		$this->icon = $icon;
-	}
-
-	/**
-	 * Register a taxonomy to the post type
-	 *
-	 * @param mixed $taxonomies The Taxonomy name(s) to add
-	 * @return void
-	 */
-	public function taxonomies( $taxonomies ) {
-		$taxonomies = is_string( $taxonomies ) ? [ $taxonomies ] : $taxonomies;
-
-		foreach ( $taxonomies as $taxonomy ) {
-			$this->taxonomies[] = $taxonomy;
-		}
 	}
 
 	/**
@@ -316,7 +302,18 @@ class Cpt {
 			return register_post_type( $this->key, $arguments );
 		}
 	}
-
+	/**
+	 * Register Taxonomies to the PostType
+	 *
+	 * @return void
+	 */
+	public function register_taxonomies() {
+		if ( ! empty( $this->taxonomies ) ) {
+			foreach ( $this->taxonomies as $taxonomy ) {
+				register_taxonomy_for_object_type( $taxonomy, $this->key );
+			}
+		}
+	}
 	/**
 	 * Hook post type to WordPress
 	 *
@@ -324,6 +321,10 @@ class Cpt {
 	 */
 	public function register() {
 		add_action( 'init', [ $this, 'register_cpt' ] );
+		add_action( 'init', [ $this, 'register_taxonomies' ] );
+
+		// modify filters on the admin edit screen
+		add_action( 'restrict_manage_posts', [ $this, 'manage_filters' ] );
 
 		if ( isset( $this->columns ) ) {
 			// manage/motify the admin edit columns.
@@ -345,6 +346,19 @@ class Cpt {
 	| MANAGE ADMIN COLUMNS
 	|--------------------------------------------------------------------------
 	*/
+
+	/**
+	 * Get the Column Manager Instance for post type
+	 *
+	 * @return \Onyx\Columns
+	 */
+	public function columns() {
+		if ( ! isset( $this->columns ) ) {
+			$this->columns = new \Onyx\Columns();
+		}
+
+		return $this->columns;
+	}
 
 	/**
 	 * Manage/Modify the columns for post type
@@ -417,19 +431,6 @@ class Cpt {
 	}
 
 	/**
-	 * Get the Column Manager for the PostType
-	 *
-	 * @return \Onyx\Columns
-	 */
-	public function columns() {
-		if ( ! isset( $this->columns ) ) {
-			$this->columns = new \Onyx\Columns();
-		}
-
-		return $this->columns;
-	}
-
-	/**
 	 * Register custom admin post types columns
 	 *
 	 * @param array $columns Custom columns [required]
@@ -450,6 +451,87 @@ class Cpt {
 
 		if ( ! empty( $columns['order'] ) ) {
 			$this->columns()->order( array_flip( $columns['order'] ) );
+		}
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| MANAGE COLUMN TAXONOMIES FILTERS
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Add filters to post type
+	 *
+	 * @param string|array $filters An array of taxonomy filters
+	 * @return void
+	 */
+	public function filters( $filters ) {
+		$filters = is_string( $filters ) ? [ $filters ] : $filters;
+
+		foreach ( $filters as $filters ) {
+			$this->filters[] = $filters;
+		}
+	}
+
+	/**
+	 * Modify and display filters on the admin edit screen
+	 *
+	 * @param string $posttype The current screen post type
+	 * @return void
+	 */
+	public function manage_filters( $posttype ) {
+		// first check we are working with the this PostType
+		if ( $posttype === $this->key ) {
+			// calculate what filters to add
+			$filters = $this->filters;
+
+			foreach ( $filters as $taxonomy ) {
+				// if the taxonomy doesn't exist, ignore it
+				if ( ! taxonomy_exists( $taxonomy ) ) {
+					continue;
+				}
+
+				// get the taxonomy object
+				$tax = get_taxonomy( $taxonomy );
+
+				// get the terms for the taxonomy
+				$terms = get_terms(
+					[
+						'taxonomy'   => $taxonomy,
+						'orderby'    => 'name',
+						'hide_empty' => false,
+					]
+				);
+
+				// if there are no terms in the taxonomy, ignore it
+				if ( empty( $terms ) ) {
+					continue;
+				}
+
+				// start the html for the filter dropdown
+				$selected  = null;
+				$query_var = get_query_var( $taxonomy );
+				if ( isset( $query_var ) ) {
+					$selected = sanitize_title( $query_var );
+				}
+
+				$dropdown_args = [
+					'option_none_value' => '',
+					'hide_empty'        => 0,
+					'hide_if_empty'     => false,
+					'show_count'        => true,
+					'taxonomy'          => $tax->name,
+					'name'              => $taxonomy,
+					'orderby'           => 'name',
+					'hierarchical'      => true,
+					'show_option_none'  => __( "Show all {$tax->label}" ),
+					'value_field'       => 'slug',
+					'selected'          => $selected,
+				];
+
+				wp_dropdown_categories( $dropdown_args );
+			}
 		}
 	}
 

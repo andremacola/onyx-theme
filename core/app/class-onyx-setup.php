@@ -142,6 +142,10 @@ final class Setup {
 				$labels  = ( ! empty( $cpt['labels'] )) ? $cpt['labels'] : [];
 				$pt      = new Cpt( $cpt['names'], $options, $labels );
 
+				if ( ! empty( $cpt['filters'] ) ) {
+					$pt->filters( $cpt['filters'] );
+				}
+
 				if ( ! empty( $cpt['columns']['hide'] ) || ! empty( $cpt['columns']['add'] ) ) {
 					$pt->register_columns( $cpt['columns'] );
 				}
