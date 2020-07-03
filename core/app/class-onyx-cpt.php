@@ -272,11 +272,6 @@ class Cpt {
 			$arguments['map_meta_cap'] = ( ! empty( $this->arguments['map_meta_cap'] )) ? $this->arguments['map_meta_cap'] : true;
 		}
 
-		// register taxonomies.
-		if ( ! isset( $arguments['taxonomies'] ) && ! empty( $this->taxonomies ) ) {
-			$arguments['taxonomies'] = $this->taxonomies;
-		}
-
 		// create and set labels.
 		if ( ! isset( $arguments['labels'] ) ) {
 			$arguments['labels'] = $this->create_labels();
@@ -302,18 +297,7 @@ class Cpt {
 			return register_post_type( $this->key, $arguments );
 		}
 	}
-	/**
-	 * Register Taxonomies to the PostType
-	 *
-	 * @return void
-	 */
-	public function register_taxonomies() {
-		if ( ! empty( $this->taxonomies ) ) {
-			foreach ( $this->taxonomies as $taxonomy ) {
-				register_taxonomy_for_object_type( $taxonomy, $this->key );
-			}
-		}
-	}
+
 	/**
 	 * Hook post type to WordPress
 	 *
@@ -321,9 +305,6 @@ class Cpt {
 	 */
 	public function register() {
 		add_action( 'init', [ $this, 'register_cpt' ] );
-		add_action( 'init', [ $this, 'register_taxonomies' ] );
-
-		// modify filters on the admin edit screen
 		add_action( 'restrict_manage_posts', [ $this, 'manage_filters' ] );
 
 		if ( isset( $this->columns ) ) {
