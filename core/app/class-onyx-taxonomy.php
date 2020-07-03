@@ -135,7 +135,7 @@ class Taxonomy {
 	/**
 	 * Set the labels for the taxonomy
 	 *
-	 * @param  array $labels An array of labels for the taxonomy
+	 * @param array $labels An array of labels for the taxonomy
 	 * @return void
 	 */
 	public function labels( $labels ) {

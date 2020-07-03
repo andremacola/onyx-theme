@@ -70,6 +70,20 @@ class Cpt {
 	public $labels;
 
 	/**
+	 * Custom capability for post type
+	 *
+	 * @var string
+	 */
+	public $capability;
+
+	/**
+	 * Custom capabilities for post type
+	 *
+	 * @var array
+	 */
+	public $capabilities;
+
+	/**
 	 * Icon for post type
 	 *
 	 * @var string
@@ -134,9 +148,29 @@ class Cpt {
 	}
 
 	/**
+	 * Set custom capability for post type
+	 *
+	 * @param string $capability
+	 * @return void
+	 */
+	public function capability( $capability ) {
+		$this->capability = $capability;
+	}
+
+	/**
+	 * Set custom capabilities for post type
+	 *
+	 * @param array $capabilities
+	 * @return void
+	 */
+	public function capabilities( $capabilities = [] ) {
+		$this->capabilities = $capabilities;
+	}
+
+	/**
 	 * Set the labels for post type
 	 *
-	 * @param  array $labels An array of labels for post type
+	 * @param array $labels An array of labels for post type
 	 * @return void
 	 */
 	public function labels( $labels ) {
@@ -157,7 +191,7 @@ class Cpt {
 	/**
 	 * Register a taxonomy to the post type
 	 *
-	 * @param  mixed $taxonomies The Taxonomy name(s) to add
+	 * @param mixed $taxonomies The Taxonomy name(s) to add
 	 * @return void
 	 */
 	public function taxonomies( $taxonomies ) {
@@ -241,6 +275,17 @@ class Cpt {
 		// replace defaults with the options passed.
 		$arguments = array_replace_recursive( $arguments, $this->arguments );
 
+		// set capability.
+		if ( ! isset( $arguments['capability_type'] ) && ! empty( $this->capability ) ) {
+			$arguments['capability_type'] = $this->capability;
+		}
+
+		// set capability.
+		if ( ! isset( $arguments['capabilities'] ) && ! empty( $this->capabilities ) ) {
+			$arguments['capabilities'] = $this->capabilities;
+			$arguments['map_meta_cap'] = ( ! empty( $this->arguments['map_meta_cap'] )) ? $this->arguments['map_meta_cap'] : true;
+		}
+
 		// register taxonomies.
 		if ( ! isset( $arguments['taxonomies'] ) && ! empty( $this->taxonomies ) ) {
 			$arguments['taxonomies'] = $this->taxonomies;
@@ -304,7 +349,7 @@ class Cpt {
 	/**
 	 * Manage/Modify the columns for post type
 	 *
-	 * @param  array $columns Default WordPress columns
+	 * @param array $columns Default WordPress columns
 	 * @return array The modified columns
 	 */
 	public function manage_columns( $columns ) {
