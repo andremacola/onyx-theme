@@ -64,14 +64,15 @@ final class Setup {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->app     = O::load( 'app' );
-		$this->assets  = O::load( 'assets' );
-		$this->hooks   = O::load( 'hooks' );
-		$this->images  = O::load( 'images' );
-		$this->mail    = O::load( 'mail' );
-		$this->support = O::load( 'support' );
-		$this->cpts    = O::load( 'cpt' );
-		$this->taxs    = O::load( 'taxonomies' );
+		$this->app      = O::load( 'app' );
+		$this->assets   = O::load( 'assets' );
+		$this->hooks    = O::load( 'hooks' );
+		$this->images   = O::load( 'images' );
+		$this->mail     = O::load( 'mail' );
+		$this->sidebars = O::load( 'sidebars' );
+		$this->support  = O::load( 'support' );
+		$this->cpts     = O::load( 'cpts' );
+		$this->taxs     = O::load( 'taxonomies' );
 
 		define( 'ONYX_THEME', true );
 		define( 'ONYX_THEME_VERSION', $this->app->version );
@@ -93,6 +94,22 @@ final class Setup {
 		$this->register_image_sizes();
 		$this->register_post_types();
 		$this->register_taxonomies();
+		$this->register_sidebars();
+	}
+
+	/**
+	 * Register custom sidebars
+	 *
+	 * @see config/sidebars.php
+	 * @return void
+	 */
+	public function register_sidebars() {
+		if ( ! empty( $this->sidebars ) ) {
+			foreach ( $this->sidebars as $sidebar ) {
+				$sidebar = new \Onyx\Sidebar( $sidebar['name'], $sidebar );
+				$sidebar->register();
+			}
+		}
 	}
 
 	/**

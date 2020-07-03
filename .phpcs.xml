@@ -27,6 +27,7 @@
 		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
 		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
 		<exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace"/>
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
 
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
 		<exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen"/>
