@@ -33,3 +33,12 @@ require_once __DIR__ . '/../core/app/onyx-filters-actions.php';
 */
 
 new \Onyx\Setup();
+
+/*
+|--------------------------------------------------------------------------
+| Register REST Api routes
+|--------------------------------------------------------------------------
+*/
+
+// $api = new \Onyx\MyCustomApi();
+// $api->initialize();

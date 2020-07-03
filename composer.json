@@ -19,7 +19,9 @@
 	},
 	"autoload": {
 		"classmap": [
-			"core/app"
+			"core/app",
+			"core/includes",
+			"core/api"
 		]
 	},
 	"require": {}
