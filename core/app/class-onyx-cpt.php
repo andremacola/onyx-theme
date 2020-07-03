@@ -354,7 +354,6 @@ class Cpt {
 	 */
 	public function manage_columns( $columns ) {
 		$columns = $this->columns->manage_columns( $columns );
-
 		return $columns;
 	}
 
@@ -428,6 +427,30 @@ class Cpt {
 		}
 
 		return $this->columns;
+	}
+
+	/**
+	 * Register custom admin post types columns
+	 *
+	 * @param array $columns Custom columns [required]
+	 * @return void
+	 */
+	public function register_columns( $columns ) {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		if ( ! empty( $columns['add'] ) ) {
+			$this->columns()->register_columns( $columns['add'] );
+		}
+
+		if ( ! empty( $columns['hide'] ) ) {
+			$this->columns()->hide( $columns['hide'] );
+		}
+
+		if ( ! empty( $columns['order'] ) ) {
+			$this->columns()->order( array_flip( $columns['order'] ) );
+		}
 	}
 
 }

@@ -124,7 +124,7 @@ class Columns {
 	 */
 	public function order( $columns ) {
 		foreach ( $columns as $column => $position ) {
-			$this->positions[$column] = $position;
+			$this->positions[$column] = $position + 1;
 		}
 	}
 
@@ -190,6 +190,7 @@ class Columns {
 	 * @return array The modified columns
 	 */
 	public function manage_columns( $columns ) {
+
 		// if user defined set columns, return those
 		if ( ! empty( $this->items ) ) {
 			return $this->items;
