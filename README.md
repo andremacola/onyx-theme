@@ -16,6 +16,7 @@ WIKI IN DEVELOPMENT...
 	- `./api`
 	- `./app`
 	- `./config`
+	- `./includes`
 
 - **`src/`** - source files for styles and javascripts
 	- `./sass`
