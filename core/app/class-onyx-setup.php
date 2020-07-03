@@ -142,6 +142,10 @@ final class Setup {
 				$labels  = ( ! empty( $cpt['labels'] )) ? $cpt['labels'] : [];
 				$pt      = new Cpt( $cpt['names'], $options, $labels );
 
+				if ( ! empty( $cpt['icon'] ) ) {
+					$pt->icon( $cpt['icon'] );
+				}
+
 				if ( ! empty( $cpt['filters'] ) ) {
 					$pt->filters( $cpt['filters'] );
 				}
