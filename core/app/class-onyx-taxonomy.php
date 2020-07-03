@@ -177,25 +177,26 @@ class Taxonomy {
 	 */
 	private function create_labels() {
 		// default labels
-		$labels = [
-			'name'                       => __( $this->plural ),
-			'singular_name'              => __( $this->name ),
-			'menu_name'                  => __( $this->plural ),
-			'all_items'                  => __( "All {$this->plural}" ),
-			'edit_item'                  => __( "Edit {$this->name}" ),
-			'view_item'                  => __( "View {$this->name}" ),
-			'update_item'                => __( "Update {$this->name}" ),
-			'add_new_item'               => __( "Add New {$this->name}" ),
-			'new_item_name'              => __( "New {$this->name} Name" ),
-			'parent_item'                => __( "Parent {$this->plural}" ),
-			'parent_item_colon'          => __( "Parent {$this->plural}:" ),
-			'search_items'               => __( "Search {$this->plural}" ),
-			'popular_items'              => __( "Popular {$this->plural}" ),
-			'separate_items_with_commas' => __( "Seperate {$this->plural} with commas" ),
-			'add_or_remove_items'        => __( "Add or remove {$this->plural}" ),
-			'choose_from_most_used'      => __( 'Choose from most used ' . strtolower( $this->plural ) ),
-			'not_found'                  => __( 'No ' . strtolower( $this->plural ) . ' found' ),
-			'back_to_items'              => __( "Back to {$this->plural}" ),
+		$plural_lower = strtolower( $this->plural );
+		$labels       = [
+			'name'                       => $this->plural,
+			'singular_name'              => $this->name,
+			'menu_name'                  => $this->plural,
+			'all_items'                  => sprintf( __( 'All %s', 'onyx-theme' ), $this->plural ),
+			'edit_item'                  => sprintf( __( 'Edit %s', 'onyx-theme' ), $this->name ),
+			'view_item'                  => sprintf( __( 'View %s', 'onyx-theme' ), $this->name ),
+			'update_item'                => sprintf( __( 'Update %s', 'onyx-theme' ), $this->name ),
+			'add_new_item'               => sprintf( __( 'Add New %s', 'onyx-theme' ), $this->name ),
+			'new_item_name'              => sprintf( __( 'New %s Name', 'onyx-theme' ), $this->name ),
+			'parent_item'                => sprintf( __( 'Parent %s', 'onyx-theme' ), $this->plural ),
+			'parent_item_colon'          => sprintf( __( 'Parent %s:', 'onyx-theme' ), $this->plural ),
+			'search_items'               => sprintf( __( 'Search %s', 'onyx-theme' ), $this->plural ),
+			'popular_items'              => sprintf( __( 'Popular %s', 'onyx-theme' ), $this->plural ),
+			'separate_items_with_commas' => sprintf( __( 'Seperate %s with commas', 'onyx-theme' ), $this->plural ),
+			'add_or_remove_items'        => sprintf( __( 'Add or remove %s', 'onyx-theme' ), $this->plural ),
+			'choose_from_most_used'      => sprintf( __( 'Choose from most used %s', 'onyx-theme' ), $plural_lower ),
+			'not_found'                  => sprintf( __( 'No %s found', 'onyx-theme' ), $plural_lower ),
+			'back_to_items'              => sprintf( __( 'Back to %s', 'onyx-theme' ), $this->plural ),
 		];
 
 		// replace defaults with custom labels passed and return

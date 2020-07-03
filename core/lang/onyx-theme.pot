@@ -1,0 +1,121 @@
+# Copyright (C) 2020 André Mácola
+# This file is distributed under the .
+msgid ""
+msgstr ""
+"Project-Id-Version: Onyx Theme 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/onyx\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-07-03T08:06:09+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: onyx-theme\n"
+
+#. Theme Name of the theme
+msgid "Onyx Theme"
+msgstr ""
+
+#. Description of the theme
+msgid "Onyx Theme/Framework to develop a WordPress themes or apps"
+msgstr ""
+
+#. Author of the theme
+msgid "André Mácola"
+msgstr ""
+
+#: core/app/class-onyx-columns.php:241
+msgid "No data provided"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:232
+msgid "Add New"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:233
+#: core/app/class-onyx-taxonomy.php:189
+msgid "Add New %s"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:234
+#: core/app/class-onyx-taxonomy.php:186
+msgid "Edit %s"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:235
+msgid "New %s"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:236
+#: core/app/class-onyx-taxonomy.php:187
+msgid "View %s"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:237
+#: core/app/class-onyx-taxonomy.php:193
+msgid "Search %s"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:238
+#: core/app/class-onyx-taxonomy.php:198
+msgid "No %s found"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:239
+msgid "No %s found in Trash"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:240
+#: core/app/class-onyx-taxonomy.php:192
+msgid "Parent %s:"
+msgstr ""
+
+#: core/app/class-onyx-cpt.php:509
+msgid "Show all %s"
+msgstr ""
+
+#: core/app/class-onyx-helpers.php:398
+msgid "Previous"
+msgstr ""
+
+#: core/app/class-onyx-helpers.php:399
+msgid "Next"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:185
+msgid "All %s"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:188
+msgid "Update %s"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:190
+msgid "New %s Name"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:191
+msgid "Parent %s"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:194
+msgid "Popular %s"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:195
+msgid "Seperate %s with commas"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:196
+msgid "Add or remove %s"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:197
+msgid "Choose from most used %s"
+msgstr ""
+
+#: core/app/class-onyx-taxonomy.php:199
+msgid "Back to %s"
+msgstr ""

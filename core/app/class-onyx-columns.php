@@ -238,7 +238,7 @@ class Columns {
 	 * @return void
 	 */
 	public function populate_empty() {
-		echo '<i>' . esc_html__( 'No data provided' ) . '</i>';
+		echo '<i>' . esc_html__( 'No data provided', 'onyx-theme' ) . '</i>';
 	}
 
 	/**

@@ -96,6 +96,16 @@ final class Setup {
 		$this->register_taxonomies();
 		$this->register_sidebars();
 		$this->manage_rest_api();
+		$this->load_text_domain();
+	}
+
+	/**
+	 * Load language localization
+	 *
+	 * @return void
+	 */
+	private function load_text_domain() {
+		load_theme_textdomain( 'onyx-theme', $this->app->dir . '/core/lang' );
 	}
 
 	/**

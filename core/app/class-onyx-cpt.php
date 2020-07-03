@@ -225,19 +225,19 @@ class Cpt {
 		// default labels.
 		$plural_lower = strtolower( $this->plural );
 		$labels       = [
-			'name'               => __( $this->plural ),
-			'singular_name'      => __( $this->name ),
-			'menu_name'          => __( $this->plural ),
-			'all_items'          => __( $this->plural ),
-			'add_new'            => __( 'Add New' ),
-			'add_new_item'       => __( "Add New {$this->name}" ),
-			'edit_item'          => __( "Edit {$this->name}" ),
-			'new_item'           => __( "New {$this->name}" ),
-			'view_item'          => __( "View {$this->name}" ),
-			'search_items'       => __( "Search {$this->plural}" ),
-			'not_found'          => __( "No $plural_lower found" ),
-			'not_found_in_trash' => __( "No $plural_lower found in Trash'" ),
-			'parent_item_colon'  => __( "Parent {$this->name}:" ),
+			'name'               => $this->plural,
+			'singular_name'      => $this->name,
+			'menu_name'          => $this->plural,
+			'all_items'          => $this->plural,
+			'add_new'            => __( 'Add New', 'onyx-theme' ),
+			'add_new_item'       => sprintf( __( 'Add New %s', 'onyx-theme' ), $this->name ),
+			'edit_item'          => sprintf( __( 'Edit %s', 'onyx-theme' ), $this->name ),
+			'new_item'           => sprintf( __( 'New %s', 'onyx-theme' ), $this->name ),
+			'view_item'          => sprintf( __( 'View %s', 'onyx-theme' ), $this->name ),
+			'search_items'       => sprintf( __( 'Search %s', 'onyx-theme' ), $this->plural ),
+			'not_found'          => sprintf( __( 'No %s found', 'onyx-theme' ), $plural_lower ),
+			'not_found_in_trash' => sprintf( __( 'No %s found in Trash', 'onyx-theme' ), $plural_lower ),
+			'parent_item_colon'  => sprintf( __( 'Parent %s:', 'onyx-theme' ), $this->name ),
 		];
 
 		// replace defaults with custom labels passed and return
@@ -506,7 +506,7 @@ class Cpt {
 					'name'              => $taxonomy,
 					'orderby'           => 'name',
 					'hierarchical'      => true,
-					'show_option_none'  => __( "Show all {$tax->label}" ),
+					'show_option_none'  => sprintf( __( 'Show all %s', 'onyx-theme' ), $tax->label ),
 					'value_field'       => 'slug',
 					'selected'          => $selected,
 				];
