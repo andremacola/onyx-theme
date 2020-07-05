@@ -70,19 +70,22 @@ return [
 			// [ 'acp/search/is_active', '__return_false' ],
 			// [ 'ac/suppress_site_wide_notices', '__return_true' ],
 
-			// ADMIN: customize admin footer text label
+			// ADMIN: customize admin footer text label.
 			[ 'admin_footer_text', 'onyx_change_footer_text_admin' ],
 
-			// ADMIN: force 2 columns on admin dashboard
+			// ADMIN: force 2 columns on admin dashboard.
 			[ 'screen_layout_columns', 'onyx_screen_layout_columns' ],
 			[ 'get_user_option_screen_layout_dashboard', 'onyx_force_user_dashboard_option' ],
 
-			// ADMIN: Upload filters
+			// ADMIN: Upload filters.
 			[ 'upload_mimes', 'onyx_remove_mime_types' ],
 			[ 'upload_size_limit', 'onyx_upload_limit' ],
 
 			// ADMIN: add nextpage/pagebreak button to mce editor (deprecated).
 			[ 'mce_buttons', 'onyx_editor_page_break' ],
+
+			// QUERY: Supress main query on front/home page for performance.
+			[ 'posts_request', 'onyx_supress_main_query', 10, 2 ],
 		],
 		'apply'  => [
 			// show excerpt by default.
@@ -153,7 +156,7 @@ return [
 			[ 'wp_footer', 'onyx_load_livereload' ],
 
 			// reallocate javascripts from header to footer and remove wp jquery.
-			[ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
+			// [ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
 
 			// ADMIN: customize styles and scripts
 			[ 'login_enqueue_scripts', 'onyx_admin_scripts' ],

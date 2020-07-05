@@ -33,8 +33,6 @@ WIKI IN DEVELOPMENT...
 
 Gulp is used for processing javascripts, scss and livereload. To be used in conjunction with a WEB server such as LocalbyFlywheel or MAMP.
 
-  - Configurar o ambiente pelo arquivo **.env** dentro da
-   pasta do tema.
   - Configure the environment through the file **.env** inside the theme folder.
   - Execute `yarn|npm install` inside theme folder.
 

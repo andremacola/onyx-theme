@@ -1,0 +1,23 @@
+{#
+ * Base (wrapper) theme template
+ * @package Onyx Theme
+#}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		{% include 'header.twig' %}
+		{% block header %}{% endblock %}
+	</head>
+
+		<body class="{{body_class}}">
+			{% block content %}{% endblock %}
+			{% block sidebar %}
+				{% include 'sidebar.twig' %}
+			{% endblock %}
+			<footer>
+				{% include 'footer.twig' %}
+				{% block footer %}{% endblock %}
+			</footer>
+		</body>
+</html>

@@ -15,6 +15,7 @@ desktop.ini
 .codekit-cache
 .cache/
 *.env
+.vscode/
 node_modules/
 bower_components/
 core/config/app.php

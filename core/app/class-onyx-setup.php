@@ -9,7 +9,7 @@
 
 namespace Onyx;
 
-final class Setup {
+final class Setup extends \Timber\Site {
 
 	/**
 	 * App enviroment variables
@@ -80,6 +80,8 @@ final class Setup {
 		define( 'ONYX_STATIC', $this->app->static );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
+
+		parent::__construct();
 	}
 
 	/**
@@ -240,7 +242,7 @@ final class Setup {
 	private function register_hooks( $key, $hooks ) {
 		foreach ( $hooks as $hook ) {
 			$hook = $this->get_hook_params( $hook );
-			$key( $hook->tag, $hook->function, $hook->priority );
+			$key( $hook->tag, $hook->function, $hook->priority, $hook->args );
 		}
 	}
 
@@ -256,7 +258,7 @@ final class Setup {
 			'tag'      => $arr[0],
 			'function' => $arr[1],
 			'priority' => (isset( $arr[2] )) ? $arr[2] : 10,
-			'args'     => (isset( $arr[3] )) ? $arr[3] : false,
+			'args'     => (isset( $arr[3] )) ? $arr[3] : 1,
 		];
 	}
 

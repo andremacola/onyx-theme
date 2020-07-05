@@ -1,0 +1,29 @@
+{#
+ * The template for displaying the header.
+ * @package Onyx Theme
+#}
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{# ------------------------------------
+@ MOBILE/TABLET SPECIFICATIONS
+------------------------------------ #}
+
+<meta name="application-name" content="{{ site.name }}">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="mobile-web-app-capable" content="no">
+<meta name="apple-mobile-web-app-capable" content="no">
+
+{# ------------------------------------
+@ COLORS, ICONS AND FAVICON
+------------------------------------ #}
+
+<link rel="apple-touch-icon" sizes="180x180" href="{{ site.theme.uri }}/assets/images/icons/favicon-180.png">
+<link rel="icon" type="image/png" href="{{ site.theme.uri }}/assets/images/icons/favicon-32.png">
+<link rel="manifest" href="{{ site.theme.uri }}/site.webmanifest">
+<meta name="theme-color" content="#FFF">
+<meta name="apple-mobile-web-app-title" content="{{ site.url }}">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+{{ function('wp_head') }}

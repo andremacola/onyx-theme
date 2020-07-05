@@ -491,3 +491,25 @@ function onyx_gutenberg_js() {
 		true
 	);
 }
+
+/*
+|--------------------------------------------------------------------------
+| QUERIES
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Supress main query on front/home page for performance. Always use custom query
+ * Registered at filters->add->posts_request at config/hook.php
+ *
+ * @param string    $request The complete SQL query
+ * @param \WP_Query $query The WP_Query instance (passed by reference)
+ * @return mixed
+ */
+function onyx_supress_main_query( $request, $query ) {
+	if ( is_home() && $query->is_main_query() && ! $query->is_admin ) {
+		return false;
+	} else {
+		return $request;
+	}
+}
