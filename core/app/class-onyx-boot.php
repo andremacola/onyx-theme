@@ -1,36 +1,49 @@
 <?php
+/**
+ * Onyx Theme Boot
+ *
+ * Load and assign Templates and Controllers
+ *
+ * @package Onyx Theme
+ */
 
 namespace Onyx;
 
 class Boot {
 
+	/**
+	 * Template hierarchy requested from WordPress
+	 *
+	 * @var array
+	 */
 	protected $templates = array();
 
+	/**
+	 * Constructor
+	 */
 	public function __construct() {
-		$this->add_filters();
-		add_filter( 'template_include', [ $this, 'template_include' ], 100 );
+		$this->hierarchy_template_filter();
+		$this->include_template_controller_filter();
+
 	}
 
-	public function run() {
+	/**
+	 * Get and filter required template hierarchy array
+	 *
+	 * @return array
+	 */
+	protected function get_templates() {
+		return array_unique( call_user_func_array( 'array_merge', $this->templates ) );
 	}
 
-	protected function get_controller_name( $file ) {
-		$search     = [ '_', '-', '.php' ];
-		$replace    = [ ' ', ' ', '' ];
-		$controller = ucwords( str_replace( $search, $replace, $file ) );
-		$controller = trim( str_replace( ' ', '_', $controller ) );
-		return ( '404' === $controller ) ? 'Error_404' : $controller;
-	}
-
-	protected function get_controller_file( $file ) {
-		$search     = [ '_', '-', '.php' ];
-		$replace    = [ ' ', '', '' ];
-		$controller = str_replace( $search, $replace, $file );
-		$controller = trim( str_replace( ' ', '_', $controller ) );
-		return ( '404' === $controller ) ? 'class-404-controller.php' : "class-$controller-controller.php";
-	}
-
-	protected function add_filters() {
+	/**
+	 * Itinerante through WordPress template hierarchy
+	 * and add filter to get the templates WordPress loader order
+	 *
+	 * @see https://wphierarchy.com/
+	 * @see https://developer.wordpress.org/reference/hooks/type_template_hierarchy/
+	 */
+	protected function hierarchy_template_filter() {
 		$hierarchies = [
 			'index_template_hierarchy',
 			'404_template_hierarchy',
@@ -55,28 +68,91 @@ class Boot {
 		}
 	}
 
-	public function template_include( $template ) {
+	/**
+	 * Set templates variable with all the WordPress requested templates
+	 *
+	 * @see https://developer.wordpress.org/reference/hooks/type_template_hierarchy/
+	 * @param array $files Passed by `{type}_template_hierarchy`
+	 */
+	public function set_template_hierarchy( $files ) {
+		$this->templates[] = $files;
+		return $files;
+	}
+
+	/**
+	 * Use `template_include` WordPress filter to include proper template
+	 * and his Controller class
+	 *
+	 * @see https://wphierarchy.com/
+	 * @see https://developer.wordpress.org/reference/hooks/type_template_hierarchy/
+	 */
+	protected function include_template_controller_filter() {
+		add_filter( 'template_include', [ $this, 'load_template_controller_class' ], 100 );
+	}
+
+	/**
+	 * Load proper controller class based on template hierarchy
+	 * The class name convetion follow the WordPress Standard
+	 *
+	 * @see https://wphierarchy.com/
+	 * @param string $template Default WordPress template path
+	 */
+	public function load_template_controller_class( $template ) {
 		foreach ( $this->get_templates() as $t ) {
-			$t = locate_template( "core/controllers/{$this->get_controller_file( $t )}" );
-			if ( $t ) {
-				return $t;
+			$controller_file = locate_template( "core/controllers/{$this->get_controller_file( $t )}" );
+			if ( $controller_file ) {
+				/**
+				 * Instantiate Controller Class if exists
+				 */
+				$controller = $this->get_controller_name( $t );
+				if ( class_exists( $controller ) ) {
+					new $controller();
+				}
+
+				/**
+				 * If first occurrence found in template hierarchy,
+				 * return it and ignore other template files
+				 */
+				return $template;
 			}
 		}
 
 		return $template;
 	}
 
-	public function set_template_hierarchy( $files ) {
-		$this->templates[] = $files;
-		return $files;
+	/**
+	 * Rename and get Class file name following WordPress Coding Standards
+	 *
+	 * @see https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
+	 * @param string $file The name of the template file loaded from hierarchy
+	 * @return string
+	 */
+	protected function get_controller_file( $file ) {
+		$search     = [ '_', '-', '.php' ];
+		$replace    = [ ' ', '', '' ];
+		$controller = str_replace( $search, $replace, $file );
+		$controller = trim( str_replace( ' ', '_', $controller ) );
+		return ( '404' === $controller ) ? 'class-404-controller.php' : "class-$controller-controller.php";
 	}
 
-	protected function set_templates( $files ) {
-		$this->templates[] = $files;
-	}
+	/**
+	 * Rename and get controller class name following WordPress Coding Standards
+	 *
+	 * @see https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
+	 * @param string $file The name of the template file loaded from hierarchy
+	 * @return string
+	 */
+	protected function get_controller_name( $file ) {
 
-	protected function get_templates() {
-		return array_unique( call_user_func_array( 'array_merge', $this->templates ) );
+		$namespace = '\Onyx\Controller\\';
+		$search    = [ '_', '-', '.php' ];
+		$replace   = [ ' ', ' ', '', '' ];
+
+		$controller = str_replace( $search, $replace, $file );
+		$controller = trim( str_replace( ' ', '_', ucwords( $controller ) ) );
+
+		$controller = $namespace . $controller;
+		return ( '404' === $controller ) ? "${$namespace}Error_404_Controller" : "{$controller}_Controller";
 	}
 
 }

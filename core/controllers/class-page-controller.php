@@ -1,13 +1,19 @@
 <?php
+/**
+ * Page Controller
+ *
+ * @package Onyx Theme
+ */
 
-// namespace Onyx\Controllers;
+namespace Onyx\Controller;
 
-// class Page {
+class Page_Controller extends Controller {
 
-// public function __construct() {
-// echo 'Page Loaded';
-// }
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		echo 'Page Controller <br>';
+	}
 
-// }
-
-echo 'PAGE CONTROLLER';
+}

@@ -1,13 +1,19 @@
 <?php
+/**
+ * Single Controller
+ *
+ * @package Onyx Theme
+ */
 
-// namespace Onyx\Controllers;
+namespace Onyx\Controller;
 
-// class Single {
+class Single_Controller extends Controller {
 
-// public function __construct() {
-// echo 'Single Loaded';
-// }
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		echo 'Single Controller <br>';
+	}
 
-// }
-
-echo 'SINGLE CONTROLLER';
+}

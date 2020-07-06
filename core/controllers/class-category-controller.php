@@ -1,3 +1,19 @@
 <?php
+/**
+ * Category Controller
+ *
+ * @package Onyx Theme
+ */
 
-echo 'CATEGORY CONTROLLER';
+namespace Onyx\Controller;
+
+class Category_Controller extends Controller {
+
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		echo '<p>Category Controller <br></p>';
+	}
+
+}

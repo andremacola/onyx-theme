@@ -1,3 +1,19 @@
 <?php
+/**
+ * Archive Controller
+ *
+ * @package Onyx Theme
+ */
 
-echo 'ARCHIVE CONTROLLER';
+namespace Onyx\Controller;
+
+class Archive_Controller extends Controller {
+
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		echo 'Archive Controller <br>';
+	}
+
+}
