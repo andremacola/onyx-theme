@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	<h1>Archive Page</h1>
+	
+	<hr>
+
+	<ul>
+		{% for post in posts %}
+			<p><strong>Post:</strong> <a href="{{ post.link }}">{{ post.title }}</a></p>
+		{% endfor %}
+	</ul>
+
+	<hr>
+
+{% endblock %}

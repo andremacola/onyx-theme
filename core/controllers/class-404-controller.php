@@ -7,13 +7,16 @@
 
 namespace Onyx\Controller;
 
+use Timber\Timber;
+
 class Error_404_Controller extends Controller {
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		echo 'Error_404_Controller Controller <br>';
+		$context = Timber::get_context();
+		Timber::render( 'pages/error404.twig', $context );
 	}
 
 }

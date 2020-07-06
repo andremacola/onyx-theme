@@ -7,13 +7,18 @@
 
 namespace Onyx\Controller;
 
+use Timber\Timber;
+use Timber\PostQuery;
+
 class Archive_Controller extends Controller {
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		echo 'Archive Controller <br>';
+		$context          = Timber::get_context();
+		$context['posts'] = new PostQuery();
+		Timber::render( 'pages/archive.twig', $context );
 	}
 
 }

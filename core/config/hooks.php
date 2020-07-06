@@ -156,7 +156,7 @@ return [
 			[ 'wp_footer', 'onyx_load_livereload' ],
 
 			// reallocate javascripts from header to footer and remove wp jquery.
-			// [ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
+			[ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
 
 			// ADMIN: customize styles and scripts
 			[ 'login_enqueue_scripts', 'onyx_admin_scripts' ],

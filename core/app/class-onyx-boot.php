@@ -99,12 +99,14 @@ class Boot {
 	 */
 	public function load_template_controller_class( $template ) {
 		foreach ( $this->get_templates() as $t ) {
+
 			$controller_file = locate_template( "core/controllers/{$this->get_controller_file( $t )}" );
 			if ( $controller_file ) {
 				/**
 				 * Instantiate Controller Class if exists
 				 */
 				$controller = $this->get_controller_name( $t );
+
 				if ( class_exists( $controller ) ) {
 					new $controller();
 				}
@@ -152,7 +154,7 @@ class Boot {
 		$controller = trim( str_replace( ' ', '_', ucwords( $controller ) ) );
 
 		$controller = $namespace . $controller;
-		return ( '404' === $controller ) ? "${$namespace}Error_404_Controller" : "{$controller}_Controller";
+		return ( '\Onyx\Controller\404' === $controller ) ? "{$namespace}Error_404_Controller" : "{$controller}_Controller";
 	}
 
 }
