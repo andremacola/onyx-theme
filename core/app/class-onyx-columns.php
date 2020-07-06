@@ -252,6 +252,7 @@ class Columns {
 		$add_columns      = [];
 		$sort_columns     = [];
 		$populate_columns = [];
+
 		foreach ( $columns as $key => $column ) {
 			$add_columns[$key]      = $column['label'];
 			$populate_columns[$key] = $column['populate'];
