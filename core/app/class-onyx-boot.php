@@ -146,7 +146,7 @@ class Boot {
 	 */
 	protected function get_controller_name( $file ) {
 
-		$namespace = '\Onyx\Controller\\';
+		$namespace = '\Onyx\Controllers\\';
 		$search    = [ '_', '-', '.php' ];
 		$replace   = [ ' ', ' ', '', '' ];
 
@@ -154,7 +154,7 @@ class Boot {
 		$controller = trim( str_replace( ' ', '_', ucwords( $controller ) ) );
 
 		$controller = $namespace . $controller;
-		return ( '\Onyx\Controller\404' === $controller ) ? "{$namespace}Error_404_Controller" : "{$controller}_Controller";
+		return ( '\Onyx\Controllers\404' === $controller ) ? "{$namespace}Error_404_Controller" : "{$controller}_Controller";
 	}
 
 }

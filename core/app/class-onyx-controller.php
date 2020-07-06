@@ -5,7 +5,7 @@
  * @package Onyx Theme
  */
 
-namespace Onyx\Controller;
+namespace Onyx\Controllers;
 
 class Controller {
 

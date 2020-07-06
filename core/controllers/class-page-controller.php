@@ -5,7 +5,7 @@
  * @package Onyx Theme
  */
 
-namespace Onyx\Controller;
+namespace Onyx\Controllers;
 
 use Timber\Timber;
 use Timber\Post;
