@@ -11,15 +11,16 @@
 	</head>
 
 		<body class="{{body_class}}">
-			<p><a href="/"><u>Home</u></a></p>
-			<hr>
-			{% block content %}{% endblock %}
-			{% block sidebar %}
-				{% include 'sidebar.twig' %}
-			{% endblock %}
-			<footer>
-				{% include 'footer.twig' %}
+			<div style="max-width: 900px; margin: 30px auto;">
+				<p><a href="/"><u>Home</u></a></p>
+				<hr>
+				{% block content %}{% endblock %}
+				{% block sidebar %}
+					{% include 'sidebar.twig' %}
+				{% endblock %}
+
 				{% block footer %}{% endblock %}
-			</footer>
+				{% include 'footer.twig' %}
+			</div>
 		</body>
 </html>
