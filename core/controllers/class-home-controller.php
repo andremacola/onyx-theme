@@ -23,7 +23,13 @@ class Home_Controller extends Controller {
 
 		$context          = Timber::get_context();
 		$context['posts'] = new PostQuery( $args );
-		Timber::render( 'pages/index.twig', $context );
+
+		$templates = [
+			'pages/index.twig',
+			'pages/home.twig',
+		];
+
+		Timber::render( $templates, $context );
 	}
 
 }

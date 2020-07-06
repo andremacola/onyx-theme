@@ -10,14 +10,14 @@
 		{% block header %}{% endblock %}
 	</head>
 
-		<body class="{{body_class}}">
+		<body class="{{ body_class }}">
 			<div style="max-width: 900px; margin: 30px auto;">
 				<p><a href="/"><u>Home</u></a></p>
 				<hr>
 				{% block content %}{% endblock %}
-				{% block sidebar %}
-					{% include 'sidebar.twig' %}
-				{% endblock %}
+
+				{% include 'sidebar.twig' %}
+				{% block sidebar %}{% endblock %}
 
 				{% block footer %}{% endblock %}
 				{% include 'footer.twig' %}
