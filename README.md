@@ -16,14 +16,15 @@ WIKI IN DEVELOPMENT...
 	- `./api`
 	- `./app`
 	- `./config`
+	- `./controllers`
 	- `./includes`
+	- `./lang`
 
 - **`src/`** - source files for styles and javascripts
 	- `./sass`
 	- `./js`
 
-- **`templates/`** - template part folders
-- **`views/`** - wordpress main files
+- **`views/`** - Twig templates
 
 ## Composer
 
