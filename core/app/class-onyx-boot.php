@@ -24,7 +24,6 @@ class Boot {
 	public function __construct() {
 		$this->hierarchy_template_filter();
 		$this->include_template_controller_filter();
-
 	}
 
 	/**
@@ -105,10 +104,10 @@ class Boot {
 				/**
 				 * Instantiate Controller Class if exists
 				 */
-				$controller = $this->get_controller_name( $t );
+				$controller_class = $this->get_controller_name( $t );
 
-				if ( class_exists( $controller ) ) {
-					new $controller();
+				if ( class_exists( $controller_class ) ) {
+					new $controller_class();
 				}
 
 				/**
@@ -130,8 +129,8 @@ class Boot {
 	 * @return string
 	 */
 	protected function get_controller_file( $file ) {
-		$search     = [ '_', '-', '.php' ];
-		$replace    = [ ' ', '', '' ];
+		$search     = [ '_', '.php' ];
+		$replace    = [ '-', '' ];
 		$controller = str_replace( $search, $replace, $file );
 		$controller = trim( str_replace( ' ', '_', $controller ) );
 		return ( '404' === $controller ) ? 'class-404-controller.php' : "class-$controller-controller.php";
