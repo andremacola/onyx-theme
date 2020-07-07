@@ -16,6 +16,7 @@ desktop.ini
 .cache/
 *.env
 .vscode/
+tests/
 node_modules/
 bower_components/
 core/config/app.php
