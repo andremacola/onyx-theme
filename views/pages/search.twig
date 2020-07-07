@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	<h1>Search Page: {{ function('get_search_query') }}</h1>
+	
+	<hr>
+
+	<ul>
+		{% for post in posts %}
+			<p><strong>- </strong> <a href="{{ post.link }}">{{ post.title }}</a></p>
+		{% else %}
+			<p><i>No posts found for your search</i></p>
+		{% endfor %}
+	</ul>
+
+	<hr>
+
+{% endblock %}

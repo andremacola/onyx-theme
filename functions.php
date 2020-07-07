@@ -36,14 +36,6 @@ $timber              = new \Timber\Timber();
 $timber::$dirname    = array( 'views', 'twig' );
 $timber::$autoescape = false;
 
-add_filter(
-	'timber/context',
-	function( $context ) {
-		$context['theme']->uri = \Onyx\O::conf( 'app' )->dir_uri;
-		return $context;
-	}
-);
-
 /*
 |--------------------------------------------------------------------------
 | Initiate Theme Setup

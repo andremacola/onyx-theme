@@ -1,13 +1,15 @@
 <?php
 /**
- * Error 404 Controller
+ * Search Controller
  *
  * @package Onyx Theme
  */
 
 namespace Onyx\Controllers;
 
-class Error_404_Controller extends Controller {
+use Timber\Timber;
+
+class Search_Controller extends Controller {
 
 	/**
 	 * Constructor
@@ -15,7 +17,8 @@ class Error_404_Controller extends Controller {
 	public function __construct() {
 		parent::__construct();
 
-		$this->templates = [ 'pages/error404.twig' ];
+		$this->templates        = [ 'pages/search.twig' ];
+		$this->context['posts'] = $this->get_posts();
 
 		$this->render_view();
 	}

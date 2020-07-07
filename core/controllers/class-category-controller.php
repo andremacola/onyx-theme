@@ -2,13 +2,13 @@
 /**
  * Category Controller
  *
+ * @phpcs:disable PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket
+ * @phpcs:disable PEAR.Functions.FunctionCallSignature.CloseBracketLine
+ *
  * @package Onyx Theme
  */
 
 namespace Onyx\Controllers;
-
-use Timber\Timber;
-use Timber\PostQuery;
 
 class Category_Controller extends Controller {
 
@@ -16,9 +16,12 @@ class Category_Controller extends Controller {
 	 * Constructor
 	 */
 	public function __construct() {
-		$context          = Timber::get_context();
-		$context['posts'] = new PostQuery();
-		Timber::render( 'pages/category.twig', $context );
+		parent::__construct();
+
+		$this->context['posts'] = $this->get_posts();
+
+		$this->set_taxonomy_templates();
+		$this->render_view();
 	}
 
 }

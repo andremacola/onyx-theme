@@ -7,25 +7,18 @@
 
 namespace Onyx\Controllers;
 
-use Timber\Timber;
-use Timber\Post;
-
 class Single_Controller extends Controller {
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$timber_post     = new Post();
-		$context         = Timber::get_context();
-		$context['post'] = $timber_post;
-		$templates       = [
-			'pages/single-' . $timber_post->ID . '.twig',
-			'pages/single-' . $timber_post->post_type . '.twig',
-			'pages/single-' . $timber_post->slug . '.twig',
-			'pages/single.twig',
-		];
-		Timber::render( $templates, $context );
+		parent::__construct();
+
+		$this->context['post'] = $this->get_post();
+
+		$this->set_page_templates( $this->context['post'], 'single' );
+		$this->render_view();
 	}
 
 }
