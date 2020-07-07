@@ -10,6 +10,17 @@ This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](h
 
 WIKI IN DEVELOPMENT...
 
+## How to Install
+
+Download latest version from [releases](https://github.com/andremacola/onyx-theme/releases) extract in the themes folder, then:
+
+- ***1*** / Run `yarn|npm install`
+- ***2*** / Run `composer install`
+- ***3*** / Rename the file from `core/config/app.example.php` to `app.php`
+- ***4*** / Rename `.env.example` file inside the onyx theme folder to `.env` and configure it
+- ***5*** / Activate the theme inside WordPress
+- ***6*** / Run `yarn serve` or `npm run serve` (live reload will only work if you develop with a `.local` domain)
+
 ## Folder structure
 
 - **`core/`** - is where all the main structure of the theme resides
@@ -28,7 +39,8 @@ WIKI IN DEVELOPMENT...
 
 ## Composer
 
-  - `composer onyx-dump` inside theme folder to create the autoload
+- `composer install` inside theme folder to create the autoload and install dependencies
+- `composer onyx-dump` inside theme folder to dump the autoload
 
 ## Gulp
 
