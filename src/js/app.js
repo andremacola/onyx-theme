@@ -8,7 +8,6 @@ import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
 // import '@fancyapps/fancybox';
 // import { tns } from 'tiny-slider';
-// import './plugins/dfp';
 
 /*
 |--------------------------------------------------------------------------
