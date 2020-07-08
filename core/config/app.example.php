@@ -22,7 +22,7 @@ return [
 	'devs'    => [ 'dev@domain.tld' ],
 	'uploads' => [
 		'max_file_size' => 5000,
-		'allowed_types' => [
+		'unset_types'   => [
 			'mp4|m4v',
 			'mov|qt',
 			'wmv',

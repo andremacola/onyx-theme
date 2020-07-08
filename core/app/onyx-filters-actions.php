@@ -422,7 +422,7 @@ function onyx_disable_comments_trackbacks() {
 function onyx_remove_mime_types( $existing_mimes = [] ) {
 	$uploads = O::conf( 'app' )->uploads;
 
-	foreach ( $uploads['allowed_types'] as $type ) {
+	foreach ( $uploads['unset_types'] as $type ) {
 		unset( $existing_mimes[$type] );
 	}
 
