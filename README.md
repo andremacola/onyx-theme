@@ -1,14 +1,19 @@
 # Wiki
 
-**THIS THEME IS SUFFERING SEVERAL UPDATES. DO NOT USE IN PRODUCTION YET**
+> **THE PUBLIC RELEASE IS IN ALPHA VERSION.**  
+> **WE ALREADY USE THIS VERSION IN PRODUCTION BUT USE WITH CAUTION.**
 
 Onyx Theme is a starter kit for for assistance in developing themes in Wordpress. It can be considered a kind of framework.
 
-This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](https://www.themosis.com/) but uncomplicated because we do not need thousands of dependencies to develop a wordpress theme.
+This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](https://www.themosis.com/) but ligther because we do not need thousands of dependencies to develop a wordpress theme.
 
 <!-- Better used with [Onyx Starter Kit](https://github.com/andremacola/wp-onyx-starter) (members only) -->
 
-WIKI IN DEVELOPMENT...
+## [Documentation](https://andremacola.github.io/onyx-theme-doc/)
+
+**Documentation is in development...**
+
+The full documentation is [available here ](https://andremacola.github.io/onyx-theme-doc/). Unfortunately only PT-BR is available for now.
 
 ## How to Install
 
