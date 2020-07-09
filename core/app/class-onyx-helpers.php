@@ -209,7 +209,7 @@ class O {
 	}
 
 	/**
-	 * Method to call gulp-livereload script (see gulp.js)
+	 * Method to call gulp-livereload script (see gulpfile.js)
 	 *
 	 * @param int $port Port number for livereload to listen
 	 * @return void|false
