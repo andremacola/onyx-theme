@@ -1,3 +1,8 @@
+<p align="center">
+  <img width="457" height="211" src="https://andremacola.github.io/onyx-theme-doc/img/logo.png">
+</p>
+
+
 # Wiki
 
 > **THE PUBLIC RELEASE IS IN ALPHA VERSION.**  
