@@ -125,15 +125,16 @@ class Boot {
 	 * Rename and get Class file name following WordPress Coding Standards
 	 *
 	 * @see https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
-	 * @param string $file The name of the template file loaded from hierarchy
+	 * @param string $file The name of the template file loaded from hierarchy [required]
+	 * @param string $suffix Filename suffix [optional]
 	 * @return string
 	 */
-	protected function get_controller_file( $file ) {
+	protected function get_controller_file( $file, $suffix = '-controller' ) {
 		$search     = [ '_', '.php' ];
 		$replace    = [ '-', '' ];
 		$controller = str_replace( $search, $replace, $file );
 		$controller = trim( str_replace( ' ', '_', $controller ) );
-		return ( '404' === $controller ) ? 'class-404-controller.php' : "class-$controller-controller.php";
+		return ( '404' === $controller ) ? 'error404-controller.php' : "$controller$suffix.php";
 	}
 
 	/**
@@ -144,7 +145,6 @@ class Boot {
 	 * @return string
 	 */
 	protected function get_controller_name( $file ) {
-
 		$namespace = '\Onyx\Controllers\\';
 		$search    = [ '_', '-', '.php' ];
 		$replace   = [ ' ', ' ', '', '' ];
