@@ -131,24 +131,21 @@ class Columns {
 	/**
 	 * Set columns that are sortable
 	 *
-	 * @param array $sortable the slug of the column
+	 * @param array $sort_columns Columns to sort
 	 */
-	public function sortable( $sortable ) {
-		foreach ( $sortable as $column => $options ) {
-			$this->sortable[sanitize_key( $column )] = $options;
+	public function set_sortable( $sort_columns ) {
+		foreach ( $sort_columns as $column => $options ) {
+			$this->sortable[$column] = $options;
 		}
 	}
 
 	/**
 	 * Check if an orderby field is a custom sort option.
+	 * Refactor for better understanding \Onyx\Cpt->orderby_columns()
 	 *
 	 * @param string $orderby the orderby value from query params
 	 */
 	public function is_sortable( $orderby ) {
-		if ( is_string( $orderby ) && array_key_exists( $orderby, $this->sortable ) ) {
-			return true;
-		}
-
 		foreach ( $this->sortable as $column => $options ) {
 			if ( is_string( $options ) && $options === $orderby ) {
 				return true;
@@ -163,19 +160,15 @@ class Columns {
 
 	/**
 	 * Get meta key for an orderby.
+	 * Callable from \Onyx\Cpt->orderby_columns()
 	 *
 	 * @param string $orderby the orderby value from query params
 	 */
-	public function sortable_meta( $orderby ) {
-		if ( array_key_exists( $orderby, $this->sortable ) ) {
-			return $this->sortable[$orderby];
-		}
-
+	public function sortable_meta_options( $orderby ) {
 		foreach ( $this->sortable as $column => $options ) {
-			if ( is_string( $options ) && $options === $orderby ) {
-				return $options;
-			}
-			if ( is_array( $options ) && isset( $options[0] ) && $options[0] === $orderby ) {
+			$sort_field = $options[0];
+			$sort_type  = $options[1];
+			if ( is_array( $options ) && isset( $sort_field ) && $sort_field === $orderby ) {
 				return $options;
 			}
 		}
@@ -267,7 +260,7 @@ class Columns {
 		}
 
 		if ( ! empty( $sort_columns ) ) {
-			$this->sortable( $sort_columns );
+			$this->set_sortable( $sort_columns );
 		}
 
 		if ( ! empty( $populate_columns ) ) {

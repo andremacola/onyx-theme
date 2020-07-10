@@ -150,9 +150,11 @@ final class Setup extends \Timber\Site {
 	private function register_post_types() {
 		if ( ! empty( $this->cpts ) ) {
 			foreach ( $this->cpts as $cpt ) {
+
+				$names   = ( isset( $cpt['names'] ) ) ? $cpt['names'] : $cpt[0];
 				$options = ( ! empty( $cpt['options'] )) ? $cpt['options'] : [];
 				$labels  = ( ! empty( $cpt['labels'] )) ? $cpt['labels'] : [];
-				$pt      = new Cpt( $cpt['names'], $options, $labels );
+				$pt      = new Cpt( $names, $options, $labels );
 
 				if ( ! empty( $cpt['icon'] ) ) {
 					$pt->icon( $cpt['icon'] );

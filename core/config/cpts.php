@@ -24,38 +24,9 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
-	| My CPT
+	| For parameters information:
+	| https://andremacola.github.io/onyx-theme-doc/docs/cpts
 	|--------------------------------------------------------------------------
 	*/
-	[
-		'names'   => [
-			'name' => 'Cpt',
-		],
-		'options' => [],
-		'labels'  => [],
-		'filters' => [ 'taxs' ],
-		'columns' => [
-			'add'   => [
-				'column-1' => [
-					'label'    => 'Column 1',
-					'sort'     => '',
-					'numeric'  => false,
-					'populate' => '',
-				],
-				'column-2' => [
-					'label'    => 'Column 2',
-					'sort'     => '',
-					'numeric'  => true,
-					'populate' => '',
-				],
-			],
-			'order' => [
-				'title',
-				'column-1',
-				'column-2',
-			],
-			'hide'  => [],
-		],
-	],
 
 ];

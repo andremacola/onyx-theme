@@ -357,20 +357,27 @@ class Cpt {
 	 *
 	 * @param string $column   The column slug
 	 * @param int    $post_id  The post ID
+	 * @throws \Exception If the callable function does not exist.
 	 */
 	public function custom_columns( $column, $post_id ) {
 		if ( isset( $this->columns->populate[$column] ) ) {
 			// $this->columns()->populate[$column] = [ $column, $post_id ];
-			call_user_func_array( $this->columns()->populate[$column], [ $column, $post_id ] );
+			if ( function_exists( $this->columns()->populate[$column] ) ) {
+				call_user_func_array( $this->columns()->populate[$column], [ $column, $post_id ] );
+			} else {
+				throw new \Exception( 'Function does not exist', 1 );
+			}
 		}
 	}
 
 	/**
 	 * Make custom columns sortable
+	 * Callable from manage_edit-{$this->key}_sortable_columns
 	 *
-	 * @param array $columns  Default WordPress sortable columns
+	 * @param array $columns Default WordPress sortable columns
 	 */
 	public function sortable_columns( $columns ) {
+
 		if ( ! empty( $this->columns()->sortable ) ) {
 			$columns = array_merge( $columns, $this->columns()->sortable );
 		}
@@ -380,6 +387,7 @@ class Cpt {
 
 	/**
 	 * Set query to sort custom columns
+	 * Callable from pre_get_posts
 	 *
 	 * @param object $query WP_Query
 	 */
@@ -394,16 +402,11 @@ class Cpt {
 		// if the sorting a custom column
 		if ( $this->columns()->is_sortable( $orderby ) ) {
 			// get the custom column options
-			$meta = $this->columns()->sortable_meta( $orderby );
+			$meta_options = $this->columns()->sortable_meta_options( $orderby );
 
 			// determine type of ordering
-			if ( is_string( $meta ) ) {
-				$meta_key   = $meta;
-				$meta_value = 'meta_value';
-			} else {
-				$meta_key   = $meta[0];
-				$meta_value = 'meta_value_num';
-			}
+			$meta_key   = $meta_options[0];
+			$meta_value = ($meta_options[1]) ? 'meta_value_num' : 'meta_value';
 
 			// set the custom order
 			$query->set( 'meta_key', $meta_key );
