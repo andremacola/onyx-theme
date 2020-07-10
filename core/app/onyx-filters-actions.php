@@ -12,6 +12,19 @@
 use \Onyx\O;
 
 /**
+ * Remove WordPress frontend jquery.
+ *
+ * @return void
+ */
+function onyx_remove_wp_jquery() {
+	if ( ! is_admin() ) {
+		wp_deregister_script( 'jquery' );
+		wp_enqueue_script( 'jquery' );
+		wp_deregister_script( 'wp-embed' );
+	}
+}
+
+/**
  * Remove WordPress frontend jquery
  * and reallocate js from header to footer.
  * Registered at actions->add->wp_enqueue_scripts at config/hook.php
@@ -19,13 +32,6 @@ use \Onyx\O;
  * @return void
  */
 function onyx_header_footer_scripts() {
-	// remove WordPress frontend jquery.
-	if ( ! is_admin() ) {
-		wp_deregister_script( 'jquery' );
-		wp_enqueue_script( 'jquery' );
-		wp_deregister_script( 'wp-embed' );
-	}
-
 	// relocate javascripts to footer.
 	remove_action( 'wp_head', 'wp_print_scripts' );
 	remove_action( 'wp_head', 'wp_print_head_scripts', 9 );
