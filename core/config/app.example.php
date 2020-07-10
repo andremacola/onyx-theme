@@ -11,7 +11,7 @@ return [
 	'static'  => false,
 	'home'    => false,
 	'single'  => false,
-	'theme'   => explode( '/', get_template() )[0],
+	'theme'   => get_template(),
 	'dir_uri' => get_template_directory_uri(),
 	'dir'     => get_template_directory(),
 	'desc'    => get_bloginfo( 'description' ),

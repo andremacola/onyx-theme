@@ -114,18 +114,16 @@ class O {
 	/**
 	 * Return assets directory based on ambient variable|constant
 	 * If ONYX_STATIC is defined, it will use a static subdomain to serve the files.
-	 * The subdomain pattern will be: `//subdomain.domain.tld/THEME_FOLDER/assets`
+	 * The domain pattern is configured in `static` parameter at: `./core/config/app.php`
 	 *
 	 * @param string $uri [required]
-	 * @param string $subdomain [optional] Default 'static'
 	 * @return string Path of the file
 	 */
-	public static function static_uri( $uri, $subdomain = 'static' ) {
+	public static function static_uri( $uri ) {
 		if ( ! ONYX_STATIC ) {
 			return $uri;
 		} else {
-			$app        = (object) self::$conf['app'];
-			$static_uri = '//' . $subdomain . '.' . $_SERVER['HTTP_HOST'] . "/$app->theme";
+			$static_uri = '//' . ONYX_STATIC;
 			return $static_uri;
 		}
 	}
