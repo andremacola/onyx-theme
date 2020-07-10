@@ -16,16 +16,9 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
-	| My Taxonomy
+	| For parameters information:
+	| https://andremacola.github.io/onyx-theme-doc/docs/taxonomies
 	|--------------------------------------------------------------------------
 	*/
-	[
-		'names'   => [
-			'name' => 'tax',
-		],
-		'types'   => [ 'cpts' ],
-		'options' => [],
-		'labels'  => [],
-	],
 
 ];

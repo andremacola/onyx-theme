@@ -73,9 +73,9 @@ class Columns {
 	 *
 	 * @param string $columns the slug of the column
 	 * @param string $label the label for the column
+	 * @return void
 	 */
 	public function add( $columns, $label = null ) {
-
 		if ( ! is_array( $columns ) ) {
 			$columns = [ $columns => $label ];
 		}
@@ -84,12 +84,10 @@ class Columns {
 			if ( is_null( $label ) ) {
 				$label = str_replace( [ '_', '-' ], ' ', ucfirst( $column ) );
 			}
-			$column = sanitize_key( $column );
+			$column = sanitize_title( $column );
 
 			$this->add[$column] = $label;
 		}
-
-		return $this;
 	}
 
 	/**
@@ -103,7 +101,7 @@ class Columns {
 		}
 
 		foreach ( $columns as $column ) {
-			$this->hide[] = $column;
+			$this->hide[] = sanitize_title( $column );
 		}
 	}
 
@@ -114,7 +112,7 @@ class Columns {
 	 * @param mixed  $callback callback function
 	 */
 	public function populate( $column, $callback ) {
-		$this->populate[$column] = $callback;
+		$this->populate[sanitize_title( $column )] = $callback;
 	}
 
 	/**
@@ -123,8 +121,9 @@ class Columns {
 	 * @param array $columns an array of columns
 	 */
 	public function order( $columns ) {
+		$columns = array_flip( $columns );
 		foreach ( $columns as $column => $position ) {
-			$this->positions[$column] = $position + 1;
+			$this->positions[sanitize_title( $column )] = $position + 1;
 		}
 	}
 
@@ -135,7 +134,7 @@ class Columns {
 	 */
 	public function set_sortable( $sort_columns ) {
 		foreach ( $sort_columns as $column => $options ) {
-			$this->sortable[$column] = $options;
+			$this->sortable[sanitize_title( $column )] = $options;
 		}
 	}
 
@@ -245,7 +244,6 @@ class Columns {
 		$add_columns      = [];
 		$sort_columns     = [];
 		$populate_columns = [];
-
 		foreach ( $columns as $key => $column ) {
 			$add_columns[$key]      = $column['label'];
 			$populate_columns[$key] = $column['populate'];

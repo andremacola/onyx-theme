@@ -105,7 +105,7 @@ class Cpt {
 	 * @param array        $labels Custom labels to create the post type [optional]
 	 * @return void
 	 */
-	public function __construct( $names, $arguments = [], $labels = [] ) {
+	public function __construct( $names = '', $arguments = [], $labels = [] ) {
 		$this->names( $names );
 		$this->options( $arguments );
 		$this->labels( $labels );
@@ -434,7 +434,7 @@ class Cpt {
 		}
 
 		if ( ! empty( $columns['order'] ) ) {
-			$this->columns()->order( array_flip( $columns['order'] ) );
+			$this->columns()->order( $columns['order'] );
 		}
 	}
 
