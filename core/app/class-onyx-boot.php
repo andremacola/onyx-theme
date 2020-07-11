@@ -97,8 +97,9 @@ class Boot {
 	 * @param string $template Default WordPress template path
 	 */
 	public function load_controller_class( $template ) {
-		foreach ( $this->get_templates() as $t ) {
+		O::set_hierarchy( $this->get_templates() ); // most for debug purpose
 
+		foreach ( $this->get_templates() as $t ) {
 			$controller_file = locate_template( "core/controllers/{$this->get_controller_file( $t )}" );
 			if ( $controller_file ) {
 				/**
