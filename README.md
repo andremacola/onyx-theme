@@ -18,7 +18,7 @@ This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](h
 
 **Documentation is in development...**
 
-The full documentation is [available here ](https://andremacola.github.io/onyx-theme-doc/). Unfortunately only PT-BR is available for now.
+The full documentation is [available here ](https://andremacola.github.io/onyx-theme-doc/). Unfortunately only PT-BR is available for now.github
 
 ## How to Install
 
@@ -95,3 +95,6 @@ object-fit-images  | yarn add object-fit-images   | https://github.com/fregante/
 
 ...and many others
 
+## License
+
+The Onyx Theme is open-source software licensed under [GPL-2+ license](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
