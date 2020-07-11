@@ -1,6 +1,10 @@
 <p align="center">
   <img width="457" height="211" src="https://andremacola.github.io/onyx-theme-doc/img/logo.png">
 </p>
+<p align="center">
+  <a href="https://andremacola.github.io/onyx-theme-doc/"><u>Documentation</u></a>
+</p>
+
 
 
 # Wiki
@@ -15,8 +19,6 @@ This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](h
 <!-- Better used with [Onyx Starter Kit](https://github.com/andremacola/wp-onyx-starter) (members only) -->
 
 ## [Documentation](https://andremacola.github.io/onyx-theme-doc/)
-
-**Documentation is in development...**
 
 The full documentation is [available here ](https://andremacola.github.io/onyx-theme-doc/). Unfortunately only PT-BR is available for now.github
 
