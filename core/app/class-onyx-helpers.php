@@ -19,6 +19,13 @@ class O {
 	private static $conf;
 
 	/**
+	 * Templates hierarchy from current page
+	 *
+	 * @var array
+	 */
+	private static $hierarchy;
+
+	/**
 	 * Return enviroment settings.
 	 * Use with caution
 	 *
@@ -52,6 +59,25 @@ class O {
 			return ($obj) ? (object) self::$conf[$file] : self::$conf[$file];
 		}
 		return false;
+	}
+
+	/**
+	 * Set template files hierarchy loaded from boot.
+	 *
+	 * @param array $hierarchy Hierarchy templates array.
+	 * @return void
+	 */
+	public static function set_hierarchy( $hierarchy = [] ) {
+		self::$hierarchy = $hierarchy;
+	}
+
+	/**
+	 * Get template files hierarchy loaded from boot.
+	 *
+	 * @return array
+	 */
+	public static function get_hierarchy() {
+		return self::$hierarchy;
 	}
 
 	/**
