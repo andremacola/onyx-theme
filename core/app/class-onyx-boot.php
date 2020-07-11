@@ -23,7 +23,7 @@ class Boot {
 	 */
 	public function __construct() {
 		$this->hierarchy_template_filter();
-		$this->include_template_controller_filter();
+		$this->include_template_filter(); // include template controller filter
 	}
 
 	/**
@@ -85,8 +85,8 @@ class Boot {
 	 * @see https://wphierarchy.com/
 	 * @see https://developer.wordpress.org/reference/hooks/type_template_hierarchy/
 	 */
-	protected function include_template_controller_filter() {
-		add_filter( 'template_include', [ $this, 'load_template_controller_class' ], 100 );
+	protected function include_template_filter() {
+		add_filter( 'template_include', [ $this, 'load_controller_class' ], 100 );
 	}
 
 	/**
@@ -96,7 +96,7 @@ class Boot {
 	 * @see https://wphierarchy.com/
 	 * @param string $template Default WordPress template path
 	 */
-	public function load_template_controller_class( $template ) {
+	public function load_controller_class( $template ) {
 		foreach ( $this->get_templates() as $t ) {
 
 			$controller_file = locate_template( "core/controllers/{$this->get_controller_file( $t )}" );

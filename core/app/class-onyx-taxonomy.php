@@ -79,9 +79,9 @@ class Taxonomy {
 	 * @param array        $labels Custom labels to create the taxonomy [optional]
 	 * @return void
 	 */
-	public function __construct( $names, $cpts = null, $arguments = [], $labels = [] ) {
+	public function __construct( $names = '', $cpts = null, $arguments = [], $labels = [] ) {
 		$this->names( $names );
-		$this->cpts( $cpts );
+		$this->post_types( $cpts );
 		$this->labels( $labels );
 		$this->options( $arguments );
 	}
@@ -118,7 +118,7 @@ class Taxonomy {
 	 * @param array $cpts An array of arguments for taxonomy
 	 * @return void
 	 */
-	public function cpts( $cpts = null ) {
+	public function post_types( $cpts = null ) {
 		$this->cpts = $cpts;
 	}
 

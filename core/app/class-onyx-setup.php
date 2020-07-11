@@ -182,10 +182,11 @@ final class Setup extends \Timber\Site {
 	private function register_taxonomies() {
 		if ( ! empty( $this->taxs ) ) {
 			foreach ( $this->taxs as $tax ) {
+				$names   = ( isset( $tax['names'] ) ) ? $tax['names'] : $tax[0];
 				$types   = ( ! empty( $tax['types'] )) ? $tax['types'] : null;
 				$options = ( ! empty( $tax['options'] )) ? $tax['options'] : [];
 				$labels  = ( ! empty( $tax['labels'] )) ? $tax['labels'] : [];
-				$tax     = new Taxonomy( $tax['names'], $types, $options, $labels );
+				$tax     = new Taxonomy( $names, $types, $options, $labels );
 				$tax->register();
 			}
 		}
