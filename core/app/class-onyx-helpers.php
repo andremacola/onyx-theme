@@ -73,6 +73,7 @@ class O {
 
 	/**
 	 * Get template files hierarchy loaded from boot.
+	 * Provide suffix `-controller` to the filename to get the controller file.
 	 *
 	 * @return array
 	 */
