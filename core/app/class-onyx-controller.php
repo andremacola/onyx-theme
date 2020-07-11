@@ -104,6 +104,51 @@ class Controller {
 	}
 
 	/**
+	 * Set Archives templates for each type of archive
+	 *
+	 * @return void
+	 */
+	protected function set_archive_templates() {
+		if ( is_post_type_archive() ) {
+			$this->set_post_types_templates();
+		} elseif ( is_date() ) {
+			$this->set_date_templates();
+		} else {
+			$this->set_taxonomy_templates();
+		}
+	}
+
+	/**
+	 * Set Dates Archive controller templates hierarchy
+	 *
+	 * @param string $folder Default is `pages` [optional]
+	 * @return void
+	 */
+	protected function set_date_templates( $folder = 'pages' ) {
+		$this->templates = [
+			"$folder/archive-date.twig",
+			"$folder/archive.twig",
+		];
+	}
+
+	/**
+	 * Set Post Types Archive controller templates hierarchy
+	 *
+	 * @param string $folder Default is `pages` [optional]
+	 * @return void
+	 */
+	protected function set_post_types_templates( $folder = 'pages' ) {
+		$post_type = get_post_type();
+
+		$this->templates = [
+			"$folder/home-$post_type.twig",
+			"$folder/index-$post_type.twig",
+			"$folder/archive-$post_type.twig",
+			"$folder/archive.twig",
+		];
+	}
+
+	/**
 	 * Set Category/Tags/Taxonomies controller templates hierarchy
 	 *
 	 * @param string $folder Default is `pages` [optional]

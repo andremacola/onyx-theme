@@ -20,7 +20,7 @@ class Archive_Controller extends Controller {
 
 		$this->context['posts'] = $this->get_posts();
 
-		$this->set_taxonomy_templates();
+		$this->set_archive_templates();
 		$this->render_view();
 	}
 
