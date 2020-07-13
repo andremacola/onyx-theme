@@ -52,5 +52,5 @@ new \Onyx\Boot();
 |--------------------------------------------------------------------------
 */
 
-// $api = new \Onyx\MyCustomApi();
+// $api = new \Onyx\Api\MyEndpointController();
 // $api->initialize();
