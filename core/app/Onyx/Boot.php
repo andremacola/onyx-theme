@@ -126,9 +126,9 @@ class Boot {
 	}
 
 	/**
-	 * Rename and get Class file name following WordPress Coding Standards
+	 * Rename and get Class file name following PSR4 Autoloader
 	 *
-	 * @see https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
+	 * @see https://www.php-fig.org/psr/psr-4/
 	 * @param string $file The name of the template file loaded from hierarchy [required]
 	 * @param string $suffix Filename suffix [optional]
 	 * @return string
@@ -142,9 +142,9 @@ class Boot {
 	}
 
 	/**
-	 * Rename and get controller class name following WordPress Coding Standards
+	 * Rename and get controller class name following PSR4 Autoloader
 	 *
-	 * @see https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
+	 * @see https://www.php-fig.org/psr/psr-4/
 	 * @param string $file The name of the template file loaded from hierarchy
 	 * @param string $namespace Controller namespace
 	 * @param string $suffix Controller suffix
