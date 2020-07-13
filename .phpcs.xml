@@ -16,6 +16,8 @@
 
 		<!-- ONYX CUSTOM CONFIGURATION -->
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+
 		<exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys"/>
 		<exclude name="WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet"/>
 		<exclude name="WordPress.WP.EnqueuedResources.NonEnqueuedScript"/>

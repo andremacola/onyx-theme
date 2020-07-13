@@ -7,9 +7,9 @@
 
 namespace Onyx\Controllers;
 
-use Timber\Timber;
+use Onyx\Controller;
 
-class Search_Controller extends Controller {
+class SearchController extends Controller {
 
 	/**
 	 * Constructor

@@ -9,6 +9,8 @@
 
 namespace Onyx;
 
+use Onyx\Helpers as O;
+
 final class Setup extends \Timber\Site {
 
 	/**

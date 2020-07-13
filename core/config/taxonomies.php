@@ -1,7 +1,7 @@
 <?php
 /**
  * Edit this file to register your custom taxonomies
- * This file is related to app/class-onyx-taxonomy.php
+ * This file is related to core/app/Onyx/Taxonomy.php
  *
  * @package Onyx Theme
  * @see https://codex.wordpress.org/Function_Reference/register_taxonomy

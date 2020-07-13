@@ -24,7 +24,7 @@ require_once $autoload;
 |--------------------------------------------------------------------------
 */
 
-require_once __DIR__ . '/core/app/onyx-filters-actions.php';
+require_once __DIR__ . '/core/includes/hook-functions.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ require_once __DIR__ . '/core/app/onyx-filters-actions.php';
 */
 
 $timber              = new \Timber\Timber();
-$timber::$dirname    = array( 'views', 'twig' );
+$timber::$dirname    = array( 'views' );
 $timber::$autoescape = false;
 
 /*

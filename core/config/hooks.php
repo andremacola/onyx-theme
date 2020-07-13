@@ -2,7 +2,7 @@
 /**
  * Edit this file to register WordPress filters and actions
  * To add custom hooks please assign to a function previous declared or add to a closure
- * This file is related to app/onyx-filters-actions.php
+ * This file is related to core/includes/hook-functions.php
  * Please do not add functions in this file except closures
  *
  * Closure ex:

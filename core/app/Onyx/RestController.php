@@ -9,7 +9,7 @@
 
 namespace Onyx;
 
-class MyCustomApi {
+class RestController {
 
 	/**
 	 * The namespace for the rest endpoint api

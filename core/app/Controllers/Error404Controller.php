@@ -7,7 +7,9 @@
 
 namespace Onyx\Controllers;
 
-class Error_404_Controller extends Controller {
+use Onyx\Controller;
+
+class Error404Controller extends Controller {
 
 	/**
 	 * Constructor

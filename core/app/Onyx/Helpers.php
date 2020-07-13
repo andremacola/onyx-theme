@@ -9,7 +9,7 @@
 
 namespace Onyx;
 
-class O {
+class Helpers {
 
 	/**
 	 * Configuration enviroments parameters
@@ -23,7 +23,7 @@ class O {
 	 *
 	 * @var array
 	 */
-	private static $hierarchy;
+	private static $hierarchy = [];
 
 	/**
 	 * Return enviroment settings.
@@ -53,7 +53,7 @@ class O {
 	 * @return array|object|false
 	 */
 	public static function load( $file, $obj = true ) {
-		$require = __DIR__ . "/../config/$file.php";
+		$require = __DIR__ . "/../../config/$file.php";
 		if ( file_exists( $require ) ) {
 			self::$conf[$file] = require_once $require;
 			return ($obj) ? (object) self::$conf[$file] : self::$conf[$file];
@@ -68,7 +68,7 @@ class O {
 	 * @return void
 	 */
 	public static function set_hierarchy( $hierarchy = [] ) {
-		self::$hierarchy = $hierarchy;
+		self::$hierarchy[] = $hierarchy;
 	}
 
 	/**

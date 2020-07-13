@@ -1,7 +1,7 @@
 <?php
 /**
  * Edit this file to register your custom post types
- * This file is related to app/class-onyx-cpt.php
+ * This file is related to core/app/Onyx/Cpt.php
  *
  * To sort a custom column, provide an array like ['meta_key', true];
  * The second parameter check if is numerically (true) or alphabetically (false).

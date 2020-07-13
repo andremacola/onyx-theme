@@ -1,13 +1,15 @@
 <?php
 /**
- * Page Controller
+ * Single Controller
  *
  * @package Onyx Theme
  */
 
 namespace Onyx\Controllers;
 
-class Page_Controller extends Controller {
+use Onyx\Controller;
+
+class SingleController extends Controller {
 
 	/**
 	 * Constructor
@@ -17,7 +19,7 @@ class Page_Controller extends Controller {
 
 		$this->context['post'] = $this->get_post();
 
-		$this->set_page_templates( $this->context['post'], 'page' );
+		$this->set_page_templates( $this->context['post'], 'single' );
 		$this->render_view();
 	}
 

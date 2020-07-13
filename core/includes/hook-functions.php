@@ -9,7 +9,7 @@
  * @see https://codex.wordpress.org/Plugin_API/Action_Reference
  */
 
-use \Onyx\O;
+use \Onyx\Helpers as O;
 
 /**
  * Remove WordPress frontend jquery.
@@ -27,7 +27,7 @@ function onyx_remove_wp_jquery() {
 /**
  * Remove WordPress frontend jquery
  * and reallocate js from header to footer.
- * Registered at actions->add->wp_enqueue_scripts at config/hook.php
+ * Registered at actions->add->wp_enqueue_scripts at config/hooks.php
  *
  * @return void
  */
@@ -43,7 +43,7 @@ function onyx_header_footer_scripts() {
 
 /**
  * Add custom internal and slug classes to body_class.
- * Registered at filters->add->body_class at config/hook.php
+ * Registered at filters->add->body_class at config/hooks.php
  *
  * @param array $classes Classes received from body_class filter.
  * @return array
@@ -61,7 +61,7 @@ function onyx_body_classes( $classes ) {
 
 /**
  * Remove empty paragraphs
- * Registered at filters->add->the_content at config/hook.php
+ * Registered at filters->add->the_content at config/hooks.php
  *
  * @param array $content Content received from the_content filter.
  * @return mixed
@@ -77,7 +77,7 @@ function onyx_remove_empty_p( $content ) {
 /**
  * Add single templates by categories.
  * single-catslug.php
- * Registered at filters->add->single_template at config/hook.php
+ * Registered at filters->add->single_template at config/hooks.php
  *
  * @param string $t Template name received from single_template filter.
  * @return string
@@ -100,7 +100,7 @@ function onyx_single_cat_template( $t ) {
 
 /**
  * Action to add Onyx Theme Styles.
- * Registered at actions->add->wp_head config/hook.php
+ * Registered at actions->add->wp_head config/hooks.php
  *
  * @return void
  */
@@ -114,7 +114,7 @@ function onyx_load_styles() {
 
 /**
  * Action to add Onyx Theme Javascripts
- * Registered at actions->add->wp_head config/hook.php
+ * Registered at actions->add->wp_head config/hooks.php
  *
  * @return void
  */
@@ -130,7 +130,7 @@ function onyx_load_javascripts() {
 /**
  * Action to inject gulp-livereload server for development,
  * only works with `.local` domains.
- * Registered at actions->add->wp_head config/hook.php
+ * Registered at actions->add->wp_head config/hooks.php
  *
  * @return void
  */
@@ -163,7 +163,7 @@ function onyx_smtp_config( $phpmailer ) {
 
 /**
  * Remove Private or Protected prefix from title.
- * Registered at filters->add->private_title_format|protected_title_format at config/hook.php
+ * Registered at filters->add->private_title_format|protected_title_format at config/hooks.php
  *
  * @deprecated
  * @param string $title Received from hooks.
@@ -177,7 +177,7 @@ function onyx_remove_private_title( $title ) {
 /**
  * Show excerpt by default
  * Not needed for Gutenberg.
- * Registered at filters->add->default_hidden_meta_boxes at config/hook.php
+ * Registered at filters->add->default_hidden_meta_boxes at config/hooks.php
  *
  * @deprecated
  * @param string[] $hidden An array of IDs of meta boxes hidden by default.
@@ -199,7 +199,7 @@ function onyx_show_hidden_excerpt( $hidden, $screen ) {
 /**
  * Adjust a better wp-caption without <p>
  * and removing the additional 10px.
- * Registered at filters->add->img_caption_shortcode at config/hook.php
+ * Registered at filters->add->img_caption_shortcode at config/hooks.php
  *
  * @deprecated
  * @param string $output The caption output. Default empty.
@@ -256,7 +256,7 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 
 /**
  * Show ACF in admin menu only for developers.
- * Registered at filters->add->acf/settings/show_admin at config/hook.php
+ * Registered at filters->add->acf/settings/show_admin at config/hooks.php
  *
  * @return bool
  */
@@ -266,7 +266,7 @@ function onyx_acf_show_admin() {
 
 /**
  * Rename ACF in portuguese language for better UI.
- * Registered at filters->add->acf/init at config/hook.php
+ * Registered at filters->add->acf/init at config/hooks.php
  *
  * @return mixed
  */
@@ -284,7 +284,7 @@ function onyx_acf_rename() {
 
 /**
  * Customize html return in the post object field of the blocks.
- * Registered at filters->add->acf/fields/post_object/result at config/hook.php
+ * Registered at filters->add->acf/fields/post_object/result at config/hooks.php
  *
  * @param string $title object field title
  * @param object $post WP_Post object
@@ -299,7 +299,7 @@ function acf_object_result( $title, $post, $field, $post_id ) {
 
 /**
  * Customize post query from object field.
- * Registered at filters->add->acf/fields/post_object/query at config/hook.php
+ * Registered at filters->add->acf/fields/post_object/query at config/hooks.php
  *
  * @param array      $args The query args. See WP_Query for available args.
  * @param array      $field The field array containing all settings.
@@ -329,7 +329,7 @@ function acf_post_object_query( $args, $field, $post_id ) {
 /**
  * Customize styles and scripts from admin;
  * Add custom favicon.
- * Registered at actions->add->login_enqueue_scripts|admin_enqueue_scripts at config/hook.php
+ * Registered at actions->add->login_enqueue_scripts|admin_enqueue_scripts at config/hooks.php
  *
  * @return void
  */
@@ -341,7 +341,7 @@ function onyx_admin_scripts() {
 
 /**
  * Customize admin footer text label
- * Registered at filters->add->admin_footer_text at config/hook.php
+ * Registered at filters->add->admin_footer_text at config/hooks.php
  *
  * @return string
  */
@@ -351,7 +351,7 @@ function onyx_change_footer_text_admin() {
 
 /**
  * Customize admin bar
- * Registered at action->add->wp_before_admin_bar_render at config/hook.php
+ * Registered at action->add->wp_before_admin_bar_render at config/hooks.php
  *
  * @return void
  */
@@ -363,7 +363,7 @@ function onyx_customize_admin_bar() {
 
 /**
  * Customize admin dashboard widgets
- * Registered at action->add->wp_dashboard_setup at config/hook.php
+ * Registered at action->add->wp_dashboard_setup at config/hooks.php
  *
  * @return void
  */
@@ -378,7 +378,7 @@ function onyx_dashboard_widgets() {
 
 /**
  * Force 2 columns on admin dashboard.
- * Registered at filters->add->screen_layout_columns at config/hook.php
+ * Registered at filters->add->screen_layout_columns at config/hooks.php
  *
  * @param array $columns Column options
  * @return array
@@ -390,7 +390,7 @@ function onyx_screen_layout_columns( $columns ) {
 
 /**
  * Force user 2 columns dashboard option.
- * Registered at filters->add->get_user_option_screen_layout_dashboard at config/hook.php
+ * Registered at filters->add->get_user_option_screen_layout_dashboard at config/hooks.php
  */
 function onyx_force_user_dashboard_option() {
 	return 2;
@@ -398,7 +398,7 @@ function onyx_force_user_dashboard_option() {
 
 /**
  * Disable comments and trackbacks
- * Registered at actions->add->admin_menu at config/hook.php
+ * Registered at actions->add->admin_menu at config/hooks.php
  *
  * @return void
  */
@@ -420,7 +420,7 @@ function onyx_disable_comments_trackbacks() {
 
 /**
  * Filter allowed mime types to upload.
- * Registered at filters->add->upload_mimes at config/hook.php
+ * Registered at filters->add->upload_mimes at config/hooks.php
  *
  * @param array $existing_mimes Mime types array to return
  * @return array
@@ -437,7 +437,7 @@ function onyx_remove_mime_types( $existing_mimes = [] ) {
 
 /**
  * Limit upload file size inside admin.
- * Registered at filters->add->upload_size_limit at config/hook.php
+ * Registered at filters->add->upload_size_limit at config/hooks.php
  *
  * @return int
  */
@@ -448,7 +448,7 @@ function onyx_upload_limit() {
 
 /**
  * Add nextpage/pagebreak button to mce editor.
- * Registered at filters->add->mce_buttons at config/hook.php
+ * Registered at filters->add->mce_buttons at config/hooks.php
  *
  * @deprecated
  * @param array $mce_buttons Tinymce buttons to filter
@@ -472,7 +472,7 @@ function onyx_editor_page_break( $mce_buttons ) {
 
 /**
  * Add editor style
- * Registered at actions->add->admin_init at config/hook.php
+ * Registered at actions->add->admin_init at config/hooks.php
  *
  * @return void
  */
@@ -483,7 +483,7 @@ function onyx_gutenberg_style() {
 
 /**
  * Add editor custom javascript
- * Registered at actions->add->enqueue_block_editor_assets at config/hook.php
+ * Registered at actions->add->enqueue_block_editor_assets at config/hooks.php
  *
  * @return void
  */
@@ -506,7 +506,7 @@ function onyx_gutenberg_js() {
 
 /**
  * Supress main query on front/home page for performance. Always use custom query
- * Registered at filters->add->posts_request at config/hook.php
+ * Registered at filters->add->posts_request at config/hooks.php
  *
  * @param string    $request The complete SQL query
  * @param \WP_Query $query The WP_Query instance (passed by reference)

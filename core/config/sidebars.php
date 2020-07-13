@@ -1,7 +1,7 @@
 <?php
 /**
  * Edit this file to register WordPress sidebars
- * This file is related to app/class-onyx-sidebar.php
+ * This file is related to core/app/Onyx/Sidebar.php
  *
  * @package Onyx Theme
  * @see https://developer.wordpress.org/reference/functions/register_sidebar/

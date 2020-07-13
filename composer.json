@@ -18,12 +18,10 @@
 		"vendor-dir": "core/vendor"
 	},
 	"autoload": {
-		"classmap": [
-			"core/app",
-			"core/includes",
-			"core/api",
-			"core/controllers"
-		]
+		"psr-4": {
+			"Onyx\\" : "core/app/Onyx",
+			"Onyx\\Controllers\\" : "core/app/Controllers"
+		}
 	},
 	"require": {
 		"timber/timber": "^1.16"

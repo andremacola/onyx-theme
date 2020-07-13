@@ -1,6 +1,6 @@
 <?php
 /**
- * Archive Controller
+ * Category Controller
  *
  * @phpcs:disable PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket
  * @phpcs:disable PEAR.Functions.FunctionCallSignature.CloseBracketLine
@@ -10,7 +10,9 @@
 
 namespace Onyx\Controllers;
 
-class Archive_Controller extends Controller {
+use Onyx\Controller;
+
+class CategoryController extends Controller {
 
 	/**
 	 * Constructor
@@ -20,7 +22,7 @@ class Archive_Controller extends Controller {
 
 		$this->context['posts'] = $this->get_posts();
 
-		$this->set_archive_templates();
+		$this->set_taxonomy_templates();
 		$this->render_view();
 	}
 

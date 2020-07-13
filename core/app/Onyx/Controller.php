@@ -8,8 +8,9 @@
  * @package Onyx Theme
  */
 
-namespace Onyx\Controllers;
+namespace Onyx;
 
+use Onyx\Helpers as O;
 use Timber\Timber;
 use Timber\PostQuery;
 use Timber\Post;
@@ -53,7 +54,7 @@ class Controller {
 	 * @param mixed $context Received from `timber/context` filter
 	 */
 	public function set_global_context( $context ) {
-		$context['theme']->uri = \Onyx\O::conf( 'app' )->dir_uri;
+		$context['theme']->uri = O::conf( 'app' )->dir_uri;
 		return $context;
 	}
 

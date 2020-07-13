@@ -9,6 +9,8 @@
 
 namespace Onyx;
 
+use Onyx\Helpers as O;
+
 class Boot {
 
 	/**
@@ -97,11 +99,12 @@ class Boot {
 	 * @param string $template Default WordPress template path
 	 */
 	public function load_controller_class( $template ) {
-		O::set_hierarchy( $this->get_templates() ); // most for debug purpose
-
 		foreach ( $this->get_templates() as $t ) {
-			$controller_file = locate_template( "core/controllers/{$this->get_controller_file( $t )}" );
-			if ( $controller_file ) {
+			$controller_file  = $this->get_controller_file( $t );
+			$controller_exist = locate_template( "core/app/Controllers/$controller_file" );
+			O::set_hierarchy( $controller_file );
+
+			if ( $controller_exist ) {
 				/**
 				 * Instantiate Controller Class if exists
 				 */
@@ -130,12 +133,12 @@ class Boot {
 	 * @param string $suffix Filename suffix [optional]
 	 * @return string
 	 */
-	protected function get_controller_file( $file, $suffix = '-controller' ) {
-		$search     = [ '_', '.php' ];
-		$replace    = [ '-', '' ];
+	protected function get_controller_file( $file, $suffix = 'Controller' ) {
+		$search     = [ '-', '.php' ];
+		$replace    = [ ' ', '' ];
 		$controller = str_replace( $search, $replace, $file );
-		$controller = trim( str_replace( ' ', '_', $controller ) );
-		return ( '404' === $controller ) ? 'error404-controller.php' : "$controller$suffix.php";
+		$controller = trim( str_replace( ' ', '', ucwords( $controller ) ) );
+		return ( '404' === $controller ) ? "Error404$suffix.php" : "$controller$suffix.php";
 	}
 
 	/**
@@ -143,18 +146,19 @@ class Boot {
 	 *
 	 * @see https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
 	 * @param string $file The name of the template file loaded from hierarchy
+	 * @param string $namespace Controller namespace
+	 * @param string $suffix Controller suffix
 	 * @return string
 	 */
-	protected function get_controller_name( $file ) {
-		$namespace = '\Onyx\Controllers\\';
-		$search    = [ '_', '-', '.php' ];
-		$replace   = [ ' ', ' ', '', '' ];
+	protected function get_controller_name( $file, $namespace = '\Onyx\Controllers\\', $suffix = 'Controller' ) {
+		$search  = [ '_', '-', '.php' ];
+		$replace = [ ' ', ' ', '' ];
 
 		$controller = str_replace( $search, $replace, $file );
-		$controller = trim( str_replace( ' ', '_', ucwords( $controller ) ) );
+		$controller = trim( str_replace( ' ', '', ucwords( $controller ) ) );
 
 		$controller = $namespace . $controller;
-		return ( '\Onyx\Controllers\404' === $controller ) ? "{$namespace}Error_404_Controller" : "{$controller}_Controller";
+		return ( '\Onyx\Controllers\404' === $controller ) ? "{$namespace}Error404{$suffix}" : "$controller$suffix";
 	}
 
 }

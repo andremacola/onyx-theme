@@ -10,9 +10,10 @@
 
 namespace Onyx\Controllers;
 
+use Onyx\Controller;
 use Timber\PostQuery;
 
-class Home_Controller extends Controller {
+class HomeController extends Controller {
 
 	/**
 	 * Constructor
