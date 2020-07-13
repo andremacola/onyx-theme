@@ -14,7 +14,7 @@
 
 Onyx Theme is a starter kit for for assistance in developing themes in Wordpress. It can be considered a kind of framework.
 
-This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](https://www.themosis.com/) but ligther because we do not need thousands of dependencies to develop a wordpress theme.
+This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](https://www.themosis.com/) but ligther because we do not need thousands of dependencies to develop a WordPress theme.
 
 <!-- Better used with [Onyx Starter Kit](https://github.com/andremacola/wp-onyx-starter) (members only) -->
 
@@ -28,26 +28,26 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
 
 - ***1*** / Run `yarn|npm install`
 - ***2*** / Run `composer install`
-- ***3*** / Rename the file from `core/config/app.example.php` to `app.php`
-- ***4*** / Rename `.env.example` file inside the onyx theme folder to `.env` and configure it
-- ***5*** / Activate the theme inside WordPress
-- ***6*** / Run `yarn serve` or `npm run serve` (live reload will only work if you develop with a `.local` domain)
+- ***3*** / Rename `.env.example` file inside the onyx theme folder to `.env` and configure it
+- ***4*** / Activate the theme inside WordPress
+- ***5*** / Run `yarn serve` or `npm run serve` (live reload will only work if you develop with a `.local` domain)
 
 ## Folder structure
 
-- **`core/`** - is where all the main structure of the theme resides
-	- `./api`
-	- `./app`
-	- `./config`
-	- `./controllers`
-	- `./includes`
-	- `./lang`
+- **`core/`** - <sup>É onde reside toda a estrutura principal do tema</sup>
+  - `./app` - <sup>Classes para funcionamento do tema</sup>
+    - `./Api` - <sup>Controllers dos endpoints da WP REST API</sup>
+    - `./Controllers` - <sup>Controllers das requisições</sup>
+    - `./Onyx` - <sup>Classes do Onyx</sup>
+  - `./config` - <sup>Reside todas as principais configurações de funcionamento do seu projeto.</sup>
+  - `./includes` - <sup>Suas funções e classes próprias.</sup>
+  - `./lang` - <sup>Traduções</sup>
 
-- **`src/`** - source files for styles and javascripts
-	- `./sass`
-	- `./js`
+- **`src/`** - <sup>Arquivos fontes para estilos e javascripts.</sup>
+  - `./sass`
+  - `./js`
 
-- **`views/`** - Twig templates
+- **`views/`** - <sup>Templates Twig</sup>
 
 ## Composer
 
