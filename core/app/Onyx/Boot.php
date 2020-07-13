@@ -93,7 +93,7 @@ class Boot {
 
 	/**
 	 * Load proper controller class based on template hierarchy
-	 * The class name convetion follow the WordPress Standard
+	 * The class name convetion follow PSR4
 	 *
 	 * @see https://wphierarchy.com/
 	 * @param string $template Default WordPress template path
