@@ -36,8 +36,8 @@ class Helpers {
 		$confs  = self::$conf;
 		$filter = [ 'pass', 'password', 'key', 'keys', 'dev', 'devs' ];
 
-		$confs['app']  = self::array_filter_keys( $confs['app'], $filter );
-		$confs['mail'] = self::array_filter_keys( $confs['mail'], $filter );
+		$confs['app'] = self::array_filter_keys( $confs['app'], $filter );
+		// $confs['mail'] = self::array_filter_keys( $confs['mail'], $filter );
 
 		$config = ( ! empty( $name ) ) ? $confs[$name] : $confs;
 

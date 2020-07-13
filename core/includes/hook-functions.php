@@ -140,7 +140,7 @@ function onyx_load_livereload() {
 
 /**
  * Action to configure WordPress send an email via SMTP.
- * Registered at actions->add->wp_head phpmailer_init/hook.php.
+ * Registered at actions->add->phpmailer_init config/hooks.php.
  *
  * @see config/mail.php
  * @param object $phpmailer PHPMailer Object received from phpmailer_init action.
