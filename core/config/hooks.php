@@ -143,8 +143,8 @@ return [
 			[ 'template_redirect', 'rest_output_link_header', 11 ],
 		],
 		'add'    => [
-			// set smtp email configuration.
-			[ 'phpmailer_init', 'onyx_smtp_config' ],
+			// set smtp email configuration. (disable for local development)
+			// [ 'phpmailer_init', 'onyx_smtp_config' ],
 
 			// disable WordPress jQuery on front-end
 			[ 'wp_enqueue_scripts', 'onyx_remove_wp_jquery' ],
