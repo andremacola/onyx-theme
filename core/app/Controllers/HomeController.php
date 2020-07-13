@@ -2,9 +2,6 @@
 /**
  * Home Controller
  *
- * @phpcs:disable PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket
- * @phpcs:disable PEAR.Functions.FunctionCallSignature.CloseBracketLine
- *
  * @package Onyx Theme
  */
 

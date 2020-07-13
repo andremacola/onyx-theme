@@ -20,7 +20,7 @@
 	"autoload": {
 		"psr-4": {
 			"Onyx\\" : "core/app/Onyx",
-			"Onyx\\Controllers\\" : "core/app/Controllers"
+			"Onyx\\Controllers\\" : ["core/app/Controllers", "core/app/Api"]
 		}
 	},
 	"require": {
