@@ -66,8 +66,8 @@ return [
 			// ADMIN: ACF
 			[ 'acf/init', 'onyx_acf_rename' ],
 			[ 'acf/settings/show_admin', 'onyx_acf_show_admin' ],
-			[ 'acf/fields/post_object/result', 'onyx_acf_object_result', 10, 4 ],
-			[ 'acf/fields/post_object/query', 'onyx_acf_post_object_query', 10, 3 ],
+			// [ 'acf/fields/post_object/result', 'onyx_acf_object_result', 10, 4 ],
+			// [ 'acf/fields/post_object/query', 'onyx_acf_post_object_query', 10, 3 ],
 
 			// ADMIN: COLUMNS PRO
 			// [ 'acp/search/is_active', '__return_false' ],
@@ -84,7 +84,7 @@ return [
 			[ 'upload_mimes', 'onyx_remove_mime_types' ],
 			[ 'upload_size_limit', 'onyx_upload_limit' ],
 
-			// ADMIN: add nextpage/pagebreak button to mce editor (deprecated).
+			// EDITOR: add nextpage/pagebreak button to mce editor (deprecated).
 			[ 'mce_buttons', 'onyx_editor_page_break' ],
 
 			// QUERY: Supress main query on front/home page for performance.

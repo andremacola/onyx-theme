@@ -292,7 +292,7 @@ function onyx_acf_rename() {
  * @param int    $post_id The current post ID being edited
  * @return string
  */
-function acf_object_result( $title, $post, $field, $post_id ) {
+function onyx_acf_object_result( $title, $post, $field, $post_id ) {
 	$title = "<span class='id ref'>[$post->ID]</span> / <span class='title'>$title</span>";
 	return $title;
 }
@@ -306,7 +306,7 @@ function acf_object_result( $title, $post, $field, $post_id ) {
  * @param int|string $post_id he current post ID being edited.
  * @return array
  */
-function acf_post_object_query( $args, $field, $post_id ) {
+function onyx_acf_post_object_query( $args, $field, $post_id ) {
 	$args['order']   = 'DESC';
 	$args['orderby'] = 'ID';
 
