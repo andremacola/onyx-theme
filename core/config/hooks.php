@@ -41,6 +41,9 @@ return [
 			// remove meta tag from wp feed.
 			[ 'the_generator', '__return_false', 10 ],
 
+			// disable xmlrpc
+			[ 'xmlrpc_enabled', '__return_false', 10 ],
+
 			// disable default gallery style (todo: verify with gutenberg).
 			[ 'use_default_gallery_style', '__return_false', 10 ],
 
