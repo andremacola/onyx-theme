@@ -118,7 +118,7 @@ class Boot {
 				 * If first occurrence found in template hierarchy,
 				 * return it and ignore other template files
 				 */
-				return $template;
+				die;
 			}
 		}
 
