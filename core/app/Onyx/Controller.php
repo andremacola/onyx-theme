@@ -17,14 +17,14 @@ abstract class Controller {
 	/**
 	 * Twig Templates
 	 *
-	 * @var array
+	 * @var string|array
 	 */
 	protected $templates;
 
 	/**
-	 * Global context for Timber
+	 * Context for Timber
 	 *
-	 * @var object
+	 * @var array
 	 */
 	protected $context;
 
@@ -32,7 +32,7 @@ abstract class Controller {
 	 * Automatic render templates
 	 * Default: true
 	 *
-	 * @var array
+	 * @var bool
 	 */
 	protected $render = true;
 
