@@ -29,6 +29,14 @@ abstract class Controller {
 	protected $context;
 
 	/**
+	 * Automatic render templates
+	 * Default: true
+	 *
+	 * @var array
+	 */
+	protected $render = true;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {
@@ -74,7 +82,21 @@ abstract class Controller {
 		if ( empty( $this->templates ) ) {
 			throw new \Exception( 'No templates found', 1 );
 		}
-		return Timber::render( $this->templates, $this->context );
+
+		if ( $this->render ) {
+			return Timber::render( $this->templates, $this->context );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Disable Timber::render
+	 *
+	 * @return void
+	 */
+	protected function no_render() {
+		$this->render = false;
 	}
 
 	/**
@@ -139,11 +161,11 @@ abstract class Controller {
 	/**
 	 * Set Page/Single controller templates hierarchy
 	 *
-	 * @param string $folder Default is `pages` [optional]
 	 * @param string $prefix Default is `default` [optional]
+	 * @param string $folder Default is `pages` [optional]
 	 * @return void
 	 */
-	protected function set_page_templates( $folder = 'pages', $prefix = 'default' ) {
+	protected function set_page_templates( $prefix = 'default', $folder = 'pages' ) {
 		$post = $this->get_context( 'post' );
 
 		if ( $post ) {
@@ -176,11 +198,11 @@ abstract class Controller {
 	/**
 	 * Set Dates Archive controller templates hierarchy
 	 *
-	 * @param string $folder Default is `pages` [optional]
 	 * @param string $prefix Default is `archive` [optional]
+	 * @param string $folder Default is `pages` [optional]
 	 * @return void
 	 */
-	protected function set_date_templates( $folder = 'pages', $prefix = 'archive' ) {
+	protected function set_date_templates( $prefix = 'archive', $folder = 'pages' ) {
 		$this->templates = [
 			"$folder/$prefix-date.twig",
 			"$folder/$prefix.twig",
@@ -190,11 +212,11 @@ abstract class Controller {
 	/**
 	 * Set Post Types Archive controller templates hierarchy
 	 *
-	 * @param string $folder Default is `pages` [optional]
 	 * @param string $prefix Default is `archive` [optional]
+	 * @param string $folder Default is `pages` [optional]
 	 * @return void
 	 */
-	protected function set_post_types_templates( $folder = 'pages', $prefix = 'archive' ) {
+	protected function set_post_types_templates( $prefix = 'archive', $folder = 'pages' ) {
 		$post_type = get_post_type();
 
 		$this->templates = [
@@ -208,11 +230,11 @@ abstract class Controller {
 	/**
 	 * Set Category/Tags/Taxonomies controller templates hierarchy
 	 *
-	 * @param string $folder Default is `pages` [optional]
 	 * @param string $prefix Default is `archive` [optional]
+	 * @param string $folder Default is `pages` [optional]
 	 * @return void
 	 */
-	protected function set_taxonomy_templates( $folder = 'pages', $prefix = 'archive' ) {
+	protected function set_taxonomy_templates( $prefix = 'archive', $folder = 'pages' ) {
 		$term           = get_queried_object();
 		$term->taxonomy = ('post_tag' === $term->taxonomy) ? 'tag' : $term->taxonomy;
 
