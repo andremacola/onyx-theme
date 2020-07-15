@@ -151,7 +151,7 @@ abstract class Controller {
 	/**
 	 * Set templates
 	 *
-	 * @param array $templates Twig templates [required];
+	 * @param string|array $templates Twig templates [required];
 	 * @return void
 	 */
 	protected function set_templates( $templates ) {
