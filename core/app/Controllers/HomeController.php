@@ -13,14 +13,11 @@ use Timber\PostQuery;
 class HomeController extends Controller {
 
 	/**
-	 * Constructor
+	 * Initialize
 	 */
-	public function __construct() {
-		parent::__construct();
-
-		$this->templates        = [ 'pages/index.twig', 'pages/home.twig' ];
-		$this->context['posts'] = $this->get_home_posts();
-		$this->render_view();
+	public function initialize() {
+		$this->set_context( 'posts', $this->get_home_posts() );
+		$this->set_templates( [ 'pages/index.twig', 'pages/home.twig' ] );
 	}
 
 	/**

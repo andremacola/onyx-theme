@@ -12,7 +12,7 @@ use Timber\Timber;
 use Timber\PostQuery;
 use Timber\Post;
 
-class Controller {
+abstract class Controller {
 
 	/**
 	 * Twig Templates
@@ -32,17 +32,26 @@ class Controller {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->add_timber_context_filter();
-		$this->context = Timber::get_context();
+		$this->get_timber_context();
+		$this->initialize();
+		$this->render_view();
 	}
 
 	/**
-	 * Add Timber Context Filter
+	 * Initialize function
+	 *
+	 * Required on child classes. Need to pass `context` and `template` parameters
+	 */
+	abstract public function initialize();
+
+	/**
+	 * Add and get Timber Context Filter
 	 *
 	 * @return void
 	 */
-	protected function add_timber_context_filter() {
+	protected function get_timber_context() {
 		add_filter( 'timber/context', [ $this, 'set_global_context' ] );
+		$this->context = Timber::get_context();
 	}
 
 	/**
@@ -59,8 +68,12 @@ class Controller {
 	 * Render Timber/Twig templates
 	 *
 	 * @return bool|string — The echoed output.
+	 * @throws \Exception If no templates passed.
 	 */
 	protected function render_view() {
+		if ( empty( $this->templates ) ) {
+			throw new \Exception( 'No templates found', 1 );
+		}
 		return Timber::render( $this->templates, $this->context );
 	}
 
@@ -85,20 +98,64 @@ class Controller {
 	}
 
 	/**
-	 * Set Page/Single controller templates hierarchy
+	 * Set context parameter
 	 *
-	 * @param Post   $post The post object [required]
-	 * @param string $prefix Default is `default` [optional]
-	 * @param string $folder Default is `pages` [optional]
+	 * @param string|array $data Twig templates [required];
+	 * @param mixed        $value Twig templates [optional];
 	 * @return void
 	 */
-	protected function set_page_templates( Post $post, $prefix = 'default', $folder = 'pages' ) {
-		$this->templates = [
-			"$folder/$prefix-$post->ID.twig",
-			"$folder/$prefix-$post->post_type.twig",
-			"$folder/$prefix-$post->slug.twig",
-			"$folder/$prefix.twig",
-		];
+	protected function set_context( $data, $value = null ) {
+		if ( is_string( $data ) ) {
+			$this->context[$data] = $value;
+		} else {
+			$this->context = $data;
+		}
+	}
+
+	/**
+	 * Get context
+	 *
+	 * @param string $context [optional];
+	 * @return mixed
+	 */
+	protected function get_context( $context = false ) {
+		if ( isset( $context ) && is_string( $context ) ) {
+			return (isset( $this->context[$context] )) ? $this->context[$context] : false;
+		}
+
+		return (isset( $this->context )) ? $this->context : false;
+	}
+
+	/**
+	 * Set templates
+	 *
+	 * @param array $templates Twig templates [required];
+	 * @return void
+	 */
+	protected function set_templates( $templates ) {
+		$this->templates = $templates;
+	}
+
+	/**
+	 * Set Page/Single controller templates hierarchy
+	 *
+	 * @param string $folder Default is `pages` [optional]
+	 * @param string $prefix Default is `default` [optional]
+	 * @return void
+	 */
+	protected function set_page_templates( $folder = 'pages', $prefix = 'default' ) {
+		$post = $this->get_context( 'post' );
+
+		if ( $post ) {
+			$this->templates = [
+				"$folder/$prefix-$post->ID.twig",
+				"$folder/$prefix-$post->post_type.twig",
+				"$folder/$prefix-$post->slug.twig",
+				"$folder/$prefix.twig",
+			];
+		}
+
+		$this->templates[] = "$folder/$prefix.twig";
 	}
 
 	/**
@@ -120,12 +177,13 @@ class Controller {
 	 * Set Dates Archive controller templates hierarchy
 	 *
 	 * @param string $folder Default is `pages` [optional]
+	 * @param string $prefix Default is `archive` [optional]
 	 * @return void
 	 */
-	protected function set_date_templates( $folder = 'pages' ) {
+	protected function set_date_templates( $folder = 'pages', $prefix = 'archive' ) {
 		$this->templates = [
-			"$folder/archive-date.twig",
-			"$folder/archive.twig",
+			"$folder/$prefix-date.twig",
+			"$folder/$prefix.twig",
 		];
 	}
 
@@ -133,16 +191,17 @@ class Controller {
 	 * Set Post Types Archive controller templates hierarchy
 	 *
 	 * @param string $folder Default is `pages` [optional]
+	 * @param string $prefix Default is `archive` [optional]
 	 * @return void
 	 */
-	protected function set_post_types_templates( $folder = 'pages' ) {
+	protected function set_post_types_templates( $folder = 'pages', $prefix = 'archive' ) {
 		$post_type = get_post_type();
 
 		$this->templates = [
 			"$folder/home-$post_type.twig",
 			"$folder/index-$post_type.twig",
-			"$folder/archive-$post_type.twig",
-			"$folder/archive.twig",
+			"$folder/$prefix-$post_type.twig",
+			"$folder/$prefix.twig",
 		];
 	}
 
@@ -150,9 +209,10 @@ class Controller {
 	 * Set Category/Tags/Taxonomies controller templates hierarchy
 	 *
 	 * @param string $folder Default is `pages` [optional]
+	 * @param string $prefix Default is `archive` [optional]
 	 * @return void
 	 */
-	protected function set_taxonomy_templates( $folder = 'pages' ) {
+	protected function set_taxonomy_templates( $folder = 'pages', $prefix = 'archive' ) {
 		$term           = get_queried_object();
 		$term->taxonomy = ('post_tag' === $term->taxonomy) ? 'tag' : $term->taxonomy;
 
@@ -160,7 +220,7 @@ class Controller {
 			"$folder/$term->taxonomy-$term->term_id.twig",
 			"$folder/$term->taxonomy-$term->slug.twig",
 			"$folder/$term->taxonomy.twig",
-			"$folder/archive.twig",
+			"$folder/$prefix.twig",
 		];
 	}
 

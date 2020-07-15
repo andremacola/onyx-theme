@@ -12,15 +12,11 @@ use Onyx\Controller;
 class SearchController extends Controller {
 
 	/**
-	 * Constructor
+	 * Initialize
 	 */
-	public function __construct() {
-		parent::__construct();
-
-		$this->templates        = [ 'pages/search.twig' ];
-		$this->context['posts'] = $this->get_posts();
-
-		$this->render_view();
+	public function initialize() {
+		$this->set_templates( [ 'pages/search.twig' ] );
+		$this->set_context( 'posts', $this->get_posts() );
 	}
 
 }

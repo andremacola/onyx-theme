@@ -12,15 +12,11 @@ use Onyx\Controller;
 class CategoryController extends Controller {
 
 	/**
-	 * Constructor
+	 * Initialize
 	 */
-	public function __construct() {
-		parent::__construct();
-
-		$this->context['posts'] = $this->get_posts();
-
+	public function initialize() {
+		$this->set_context( 'posts', $this->get_posts() );
 		$this->set_taxonomy_templates();
-		$this->render_view();
 	}
 
 }

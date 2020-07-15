@@ -12,15 +12,11 @@ use Onyx\Controller;
 class SingleController extends Controller {
 
 	/**
-	 * Constructor
+	 * Initialize
 	 */
-	public function __construct() {
-		parent::__construct();
-
-		$this->context['post'] = $this->get_post();
-
-		$this->set_page_templates( $this->context['post'], 'single' );
-		$this->render_view();
+	public function initialize() {
+		$this->set_context( 'post', $this->get_post() );
+		$this->set_page_templates( 'single' );
 	}
 
 }
