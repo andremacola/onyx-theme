@@ -11,7 +11,7 @@ namespace Onyx;
 
 use Onyx\Helpers as O;
 
-final class Setup extends \Timber\Site {
+final class Setup {
 
 	/**
 	 * App enviroment variables
@@ -84,8 +84,6 @@ final class Setup extends \Timber\Site {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
 		class_alias( '\Onyx\Helpers', '\Onyx\O' ); // for old versions
-
-		parent::__construct();
 	}
 
 	/**
