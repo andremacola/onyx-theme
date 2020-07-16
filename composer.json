@@ -3,6 +3,7 @@
 	"description": "Onyx WP Theme",
 	"homepage": "https://github.com/andremacola/onyx-theme",
 	"type": "wordpress-theme",
+	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
 			"name": "Andre Macola",
@@ -10,7 +11,7 @@
 		}
 	],
 	"scripts": {
-		"onyx-dump": [
+		"onyx:dump": [
 			"composer dump-autoload -o"
 		]
 	},
