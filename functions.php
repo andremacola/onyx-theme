@@ -42,8 +42,8 @@ $timber::$autoescape = false;
 |--------------------------------------------------------------------------
 */
 
-new \Onyx\Setup();
-new \Onyx\Boot();
+new \Onyx\Setup(); // setup theme configuration `after_setup_theme`
+new \Onyx\Boot();  // boot controllers routes functionality
 
 
 /*
