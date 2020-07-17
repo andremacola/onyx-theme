@@ -44,10 +44,10 @@ class ExampleRestController extends RestController {
 	 * Generic Callback
 	 *
 	 * @param \WP_REST_Request $req
-	 * @return \WP_REST_Response|mixed
+	 * @return mixed
 	 */
 	public function generic_callback( \WP_REST_Request $req ) {
-		return rest_ensure_response( $req->get_params(), 200 );
+		return $this->rest_response( $req->get_params() );
 	}
 
 }

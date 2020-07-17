@@ -71,14 +71,13 @@ abstract class RestController {
 	/**
 	 * Ensures a REST response is a response object (for consistency).
 	 *
-	 * @see \rest_ensure_response();
-	 * @param WP_HTTP_Response|WP_Error|mixed $data esponse to check
-	 * @return WP_REST_Response|mixed If response generated an error, WP_Error, if response
-	 *                                is already an instance, WP_HTTP_Response, otherwise
-	 *                                returns a new WP_REST_Response instance.
+	 * @param mixed $data Response data. Default null.
+	 * @param int   $status HTTP status code. Default 200. [optional]
+	 * @param array $headers HTTP header map. Default empty array. [optional]
+	 * @return mixed
 	 */
-	protected function response( $data ) {
-		return rest_ensure_response( $data );
+	protected function rest_response( $data, $status = 200, $headers = [] ) {
+		return new \WP_REST_Response( $data, $status, $headers );
 	}
 
 }
