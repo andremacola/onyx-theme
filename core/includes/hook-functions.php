@@ -358,7 +358,6 @@ function onyx_change_footer_text_admin() {
 function onyx_customize_admin_bar() {
 	global $wp_admin_bar;
 	$wp_admin_bar->remove_menu( 'wp-logo' );
-	$wp_admin_bar->remove_menu( 'comments' );
 }
 
 /**
@@ -405,11 +404,21 @@ function onyx_force_user_dashboard_option() {
 function onyx_disable_comments_trackbacks() {
 	global $pagenow;
 	$post_types = get_post_types();
+
 	remove_menu_page( 'edit-comments.php' );
+
+	add_action('wp_before_admin_bar_render',
+		function() {
+			global $wp_admin_bar;
+			$wp_admin_bar->remove_menu( 'comments' );
+		}
+	);
+
 	if ( 'edit-comments.php' === $pagenow ) {
 		wp_safe_redirect( admin_url() );
 		exit;
 	}
+
 	foreach ( $post_types as $post_type ) {
 		if ( post_type_supports( $post_type, 'comments' ) ) {
 			remove_post_type_support( $post_type, 'comments' );

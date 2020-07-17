@@ -175,7 +175,7 @@ return [
 			[ 'wp_dashboard_setup', 'onyx_dashboard_widgets' ],
 
 			// ADMIN: disable comments and trackbacks
-			[ 'admin_menu', 'onyx_disable_comments_trackbacks' ],
+			// [ 'admin_menu', 'onyx_disable_comments_trackbacks' ],
 
 			// GUTENBEG: add style and script
 			[ 'enqueue_block_editor_assets', 'onyx_gutenberg_js' ],
