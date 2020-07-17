@@ -9,5 +9,5 @@
 namespace Onyx\Controllers;
 
 return [
-	ExampleRestController::class,
+	// ExampleRestController::class,
 ];

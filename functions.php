@@ -44,3 +44,12 @@ $timber::$autoescape = false;
 
 new \Onyx\Setup(); // setup theme configuration `after_setup_theme`
 new \Onyx\Boot();  // boot controllers routes functionality
+
+
+/*
+|--------------------------------------------------------------------------
+| Tests and debugs
+|--------------------------------------------------------------------------
+*/
+
+require_once __DIR__ . '/tests/functions.php';
