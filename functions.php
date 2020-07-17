@@ -44,13 +44,3 @@ $timber::$autoescape = false;
 
 new \Onyx\Setup(); // setup theme configuration `after_setup_theme`
 new \Onyx\Boot();  // boot controllers routes functionality
-
-
-/*
-|--------------------------------------------------------------------------
-| Register REST Api routes
-|--------------------------------------------------------------------------
-*/
-
-// $api = new \Onyx\Api\MyEndpointController();
-// $api->initialize();

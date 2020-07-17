@@ -71,6 +71,7 @@ final class Setup extends \Timber\Site {
 		$this->hooks    = O::load( 'hooks' );
 		$this->images   = O::load( 'images' );
 		$this->mail     = O::load( 'mail' );
+		$this->rest     = O::load( 'rest' );
 		$this->sidebars = O::load( 'sidebars' );
 		$this->support  = O::load( 'support' );
 		$this->cpts     = O::load( 'cpts' );
@@ -118,6 +119,7 @@ final class Setup extends \Timber\Site {
 	 * Rest api base configurations
 	 *
 	 * @see config/app.php
+	 * @see config/rest.php
 	 * @return void
 	 */
 	private function manage_rest_api() {
@@ -128,6 +130,15 @@ final class Setup extends \Timber\Site {
 				return $this->app->rest;
 			}
 		);
+
+		// register rest routes
+		if ( ! empty( $this->rest ) ) {
+			foreach ( $this->rest as $rest_controller ) {
+				if ( class_exists( $rest_controller ) ) {
+					new $rest_controller();
+				}
+			}
+		}
 	}
 
 	/**

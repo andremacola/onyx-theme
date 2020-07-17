@@ -2,6 +2,7 @@
 /**
  * Error 404 Controller
  *
+ * @see https://andremacola.github.io/onyx-theme-doc/docs/controllers
  * @package Onyx Theme
  */
 

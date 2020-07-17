@@ -2,6 +2,7 @@
 /**
  * Home Controller
  *
+ * @see https://andremacola.github.io/onyx-theme-doc/docs/controllers
  * @package Onyx Theme
  */
 
