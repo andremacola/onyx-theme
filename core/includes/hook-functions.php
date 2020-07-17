@@ -376,26 +376,6 @@ function onyx_dashboard_widgets() {
 }
 
 /**
- * Force 2 columns on admin dashboard.
- * Registered at filters->add->screen_layout_columns at config/hooks.php
- *
- * @param array $columns Column options
- * @return array
- */
-function onyx_screen_layout_columns( $columns ) {
-	$columns['dashboard'] = 2;
-	return $columns;
-}
-
-/**
- * Force user 2 columns dashboard option.
- * Registered at filters->add->get_user_option_screen_layout_dashboard at config/hooks.php
- */
-function onyx_force_user_dashboard_option() {
-	return 2;
-}
-
-/**
  * Disable comments and trackbacks
  * Registered at actions->add->admin_menu at config/hooks.php
  *

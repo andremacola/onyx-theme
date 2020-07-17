@@ -76,10 +76,6 @@ return [
 			// ADMIN: customize admin footer text label.
 			[ 'admin_footer_text', 'onyx_change_footer_text_admin' ],
 
-			// ADMIN: force 2 columns on admin dashboard.
-			[ 'screen_layout_columns', 'onyx_screen_layout_columns' ],
-			[ 'get_user_option_screen_layout_dashboard', 'onyx_force_user_dashboard_option' ],
-
 			// ADMIN: Upload filters.
 			[ 'upload_mimes', 'onyx_remove_mime_types' ],
 			[ 'upload_size_limit', 'onyx_upload_limit' ],
