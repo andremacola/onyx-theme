@@ -357,16 +357,11 @@ class Cpt {
 	 *
 	 * @param string $column   The column slug
 	 * @param int    $post_id  The post ID
-	 * @throws \Exception If the callable function does not exist.
 	 */
 	public function custom_columns( $column, $post_id ) {
 		if ( isset( $this->columns->populate[$column] ) ) {
 			// $this->columns()->populate[$column] = [ $column, $post_id ];
-			if ( function_exists( $this->columns()->populate[$column] ) ) {
-				call_user_func_array( $this->columns()->populate[$column], [ $column, $post_id ] );
-			} else {
-				throw new \Exception( 'Function does not exist', 1 );
-			}
+			call_user_func_array( $this->columns()->populate[$column], [ $column, $post_id ] );
 		}
 	}
 
