@@ -34,20 +34,20 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
 
 ## Folder structure
 
-- **`core/`** - <sup>É onde reside toda a estrutura principal do tema</sup>
-  - `./app` - <sup>Classes para funcionamento do tema</sup>
-    - `./Api` - <sup>Controllers dos endpoints da WP REST API</sup>
-    - `./Controllers` - <sup>Controllers das requisições</sup>
-    - `./Onyx` - <sup>Classes do Onyx</sup>
-  - `./config` - <sup>Reside todas as principais configurações de funcionamento do seu projeto.</sup>
-  - `./includes` - <sup>Suas funções e classes próprias.</sup>
-  - `./lang` - <sup>Traduções</sup>
+- **`core/`** - <sup>This is where the main structure of the theme resides</sup>
+  - `./app` - <sup>Classes for theme setup</sup>
+    - `./Api` - <sup>WP REST Api Controllers</sup>
+    - `./Controllers` - <sup>Main Controllers</sup>
+    - `./Onyx` - <sup>Onyx Classes</sup>
+  - `./config` - <sup>Resides all the main configurations of your project.</sup>
+  - `./includes` - <sup>Its own functions and classes.</sup>
+  - `./lang` - <sup>Translations</sup>
 
-- **`src/`** - <sup>Arquivos fontes para estilos e javascripts.</sup>
+- **`src/`** - <sup>Source files for styles and javascripts.</sup>
   - `./sass`
   - `./js`
 
-- **`views/`** - <sup>Templates Twig</sup>
+- **`views/`** - <sup>Twig templates</sup>
 
 ## Composer
 
