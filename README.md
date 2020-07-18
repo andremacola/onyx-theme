@@ -34,20 +34,20 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
 
 ## Folder structure
 
-- **`core/`** - <sup>This is where the main structure of the theme resides</sup>
-  - `./app` - <sup>Classes for theme setup</sup>
-    - `./Api` - <sup>WP REST Api Controllers</sup>
-    - `./Controllers` - <sup>Main Controllers</sup>
-    - `./Onyx` - <sup>Onyx Classes</sup>
-  - `./config` - <sup>Resides all the main configurations of your project.</sup>
-  - `./includes` - <sup>Its own functions and classes.</sup>
-  - `./lang` - <sup>Translations</sup>
+- **`core/`** - This is where the main structure of the theme resides
+  - `./app` - Classes for theme setup
+    - `./Api` - WP REST Api Controllers
+    - `./Controllers` - Main Controllers
+    - `./Onyx` - Onyx Classes
+  - `./config` - Resides all the main configurations of your project.
+  - `./includes` - Its own functions and classes.
+  - `./lang` - Translations
 
-- **`src/`** - <sup>Source files for styles and javascripts.</sup>
+- **`src/`** - Source files for styles and javascripts.
   - `./sass`
   - `./js`
 
-- **`views/`** - <sup>Twig templates</sup>
+- **`views/`** - Twig templates
 
 ## Composer
 
