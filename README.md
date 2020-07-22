@@ -1,8 +1,9 @@
 <p align="center">
-  <img width="457" height="211" src="https://andremacola.github.io/onyx-theme-doc/img/logo.png">
+	<img width="457" height="211" src="https://andremacola.github.io/onyx-theme-doc/img/logo.png">
 </p>
 <p align="center">
-  <a href="https://andremacola.github.io/onyx-theme-doc/"><u>Documentation</u></a>
+	<a href="https://andremacola.github.io/onyx-theme-doc/en/"><u>Documentation (EN)</u></a> | 
+	<a href="https://andremacola.github.io/onyx-theme-doc/"><u>Documentation (PT-BR)</u></a>
 </p>
 
 
