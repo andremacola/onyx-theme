@@ -295,6 +295,7 @@ final class Setup extends \Timber\Site {
 
 	/**
 	 * Require tests if exist
+	 * Documentation: needed
 	 *
 	 * @return void
 	 */
@@ -302,7 +303,7 @@ final class Setup extends \Timber\Site {
 		if ( ONYX_TESTS ) {
 			$test = __DIR__ . '/../../../tests/functions.php';
 			if ( file_exists( $test ) ) {
-				require __DIR__ . '/../../../tests/functions.php';
+				require $test;
 			}
 		}
 	}
