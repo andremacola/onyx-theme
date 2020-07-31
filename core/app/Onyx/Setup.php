@@ -104,6 +104,7 @@ final class Setup extends \Timber\Site {
 		$this->register_sidebars();
 		$this->manage_rest_api();
 		$this->load_text_domain();
+		$this->load_tests_if_exist();
 	}
 
 	/**
@@ -289,6 +290,20 @@ final class Setup extends \Timber\Site {
 	private function register_theme_support() {
 		foreach ( $this->support as $feature ) {
 			add_theme_support( $feature );
+		}
+	}
+
+	/**
+	 * Require tests if exist
+	 *
+	 * @return void
+	 */
+	private function load_tests_if_exist() {
+		if ( ONYX_TESTS ) {
+			$test = __DIR__ . '/../../../tests/functions.php';
+			if ( file_exists( $test ) ) {
+				require __DIR__ . '/../../../tests/functions.php';
+			}
 		}
 	}
 
