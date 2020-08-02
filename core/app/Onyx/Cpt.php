@@ -313,6 +313,32 @@ class Cpt {
 	}
 
 	/**
+	 * Add a custom CPT Action to WordPress
+	 *
+	 * @param string   $tag The name of the filter to hook [required]
+	 * @param callable $callable The callback to be run when the filter is applied [required]
+	 * @param int      $priority Specify the order in which the functions are executed [optional]
+	 * @param int      $args The number of arguments the function accepts [optional]
+	 * @return bool
+	 */
+	public function add_action( $tag, $callable, $priority = 10, $args = 1 ) {
+		return add_action( $tag, [ $this, $callable ], $priority, $args );
+	}
+
+	/**
+	 * Add a custom CPT Filter to WordPress
+	 *
+	 * @param string   $tag The name of the filter to hook [required]
+	 * @param callable $callable The callback to be run when the filter is applied [required]
+	 * @param int      $priority Specify the order in which the functions are executed [optional]
+	 * @param int      $args The number of arguments the function accepts [optional]
+	 * @return bool
+	 */
+	public function add_filter( $tag, $callable, $priority = 10, $args = 1 ) {
+		return add_filter( $tag, [ $this, $callable ], $priority, $args );
+	}
+
+	/**
 	 * Register the custom post type
 	 *
 	 * @return WP_Post_Type|WP_Error
