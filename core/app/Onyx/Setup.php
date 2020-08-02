@@ -95,6 +95,7 @@ final class Setup extends \Timber\Site {
 	 * @return void
 	 */
 	public function setup() {
+		$this->load_tests_if_exist();
 		$this->register_theme_support();
 		$this->manage_actions();
 		$this->manage_filters();
@@ -104,7 +105,6 @@ final class Setup extends \Timber\Site {
 		$this->register_sidebars();
 		$this->manage_rest_api();
 		$this->load_text_domain();
-		$this->load_tests_if_exist();
 	}
 
 	/**
