@@ -264,6 +264,7 @@ class Cpt {
 		];
 
 		// replace defaults with custom labels passed and return
+		$this->labels = ( ! empty( $this->labels )) ? $this->labels : [];
 		return array_replace_recursive( $labels, $this->labels );
 	}
 
