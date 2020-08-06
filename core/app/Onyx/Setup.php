@@ -99,11 +99,13 @@ final class Setup extends \Timber\Site {
 		$this->register_theme_support();
 		$this->manage_actions();
 		$this->manage_filters();
+		// $this->manage_post_types();
+		// $this->manage_taxonomies();
+		$this->manage_rest_api();
 		$this->register_image_sizes();
 		$this->register_post_types();
 		$this->register_taxonomies();
 		$this->register_sidebars();
-		$this->manage_rest_api();
 		$this->load_text_domain();
 	}
 
@@ -114,6 +116,38 @@ final class Setup extends \Timber\Site {
 	 */
 	private function load_text_domain() {
 		load_theme_textdomain( 'onyx-theme', $this->app->dir . '/core/lang' );
+	}
+
+	/**
+	 * Manage post types
+	 *
+	 * @see config/cpts.php
+	 * @return void
+	 */
+	private function manage_post_types() {
+		if ( ! empty( $this->cpts ) ) {
+			foreach ( $this->cpts as $cpt ) {
+				if ( class_exists( $cpt ) ) {
+					new $cpt();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Manage post types
+	 *
+	 * @see config/taxonomies.php
+	 * @return void
+	 */
+	private function manage_taxonomies() {
+		if ( ! empty( $this->taxs ) ) {
+			foreach ( $this->taxs as $tax ) {
+				if ( class_exists( $tax ) ) {
+					new $tax();
+				}
+			}
+		}
 	}
 
 	/**

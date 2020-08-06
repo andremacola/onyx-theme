@@ -60,7 +60,7 @@ function onyx_body_classes( $classes ) {
 }
 
 /**
- * Remove empty paragraphs
+ * Remove empty paragraphs.
  * Registered at filters->add->the_content at config/hooks.php
  *
  * @param array $content Content received from the_content filter.
@@ -113,7 +113,7 @@ function onyx_load_styles() {
 }
 
 /**
- * Action to add Onyx Theme Javascripts
+ * Action to add Onyx Theme Javascripts.
  * Registered at actions->add->wp_head config/hooks.php
  *
  * @return void
@@ -175,7 +175,7 @@ function onyx_remove_private_title( $title ) {
 
 
 /**
- * Show excerpt by default
+ * Show excerpt by default;
  * Not needed for Gutenberg.
  * Registered at filters->add->default_hidden_meta_boxes at config/hooks.php
  *
@@ -340,7 +340,7 @@ function onyx_admin_scripts() {
 }
 
 /**
- * Customize admin footer text label
+ * Customize admin footer text label.
  * Registered at filters->add->admin_footer_text at config/hooks.php
  *
  * @return string
@@ -350,7 +350,7 @@ function onyx_change_footer_text_admin() {
 }
 
 /**
- * Customize admin bar
+ * Customize admin bar.
  * Registered at action->add->wp_before_admin_bar_render at config/hooks.php
  *
  * @return void
@@ -361,7 +361,7 @@ function onyx_customize_admin_bar() {
 }
 
 /**
- * Customize admin dashboard widgets
+ * Customize admin dashboard widgets.
  * Registered at action->add->wp_dashboard_setup at config/hooks.php
  *
  * @return void
@@ -376,7 +376,7 @@ function onyx_dashboard_widgets() {
 }
 
 /**
- * Disable comments and trackbacks
+ * Disable comments and trackbacks.
  * Registered at actions->add->admin_menu at config/hooks.php
  *
  * @return void
@@ -460,7 +460,7 @@ function onyx_editor_page_break( $mce_buttons ) {
 */
 
 /**
- * Add editor style
+ * Add editor style.
  * Registered at actions->add->admin_init at config/hooks.php
  *
  * @return void
@@ -471,7 +471,7 @@ function onyx_gutenberg_style() {
 }
 
 /**
- * Add editor custom javascript
+ * Add editor custom javascript.
  * Registered at actions->add->enqueue_block_editor_assets at config/hooks.php
  *
  * @return void
@@ -494,7 +494,7 @@ function onyx_gutenberg_js() {
 */
 
 /**
- * Supress main query on front/home page for performance. Always use custom query
+ * Supress main query on front/home page for performance. Always use custom query.
  * Registered at filters->add->posts_request at config/hooks.php
  *
  * @param string    $request The complete SQL query
