@@ -212,7 +212,7 @@ function watch() {
 	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles.scss' ], stylesHome);
 	gulp.watch([ './src/js/**/*.js', '!./src/js/**/home.js' ], js);
 	gulp.watch('./src/js/**/home.js', jsHome);
-	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php' ]).on('change', function(file) {
+	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', function(file) {
 		livereload.reload(file);
 	});
 }
