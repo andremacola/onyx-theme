@@ -18,7 +18,14 @@ class Setup extends \Timber\Site {
 	 *
 	 * @var array|object
 	 */
-	protected $app;
+	protected $env;
+
+	/**
+	 * App features
+	 *
+	 * @var array|object
+	 */
+	protected $classes;
 
 	/**
 	 * Theme assets
@@ -40,6 +47,13 @@ class Setup extends \Timber\Site {
 	 * @var array|object
 	 */
 	protected $mail;
+
+	/**
+	 * Sidebars options
+	 *
+	 * @var array|object
+	 */
+	protected $sidebars;
 
 	/**
 	 * Theme support WordPress features
@@ -86,7 +100,7 @@ class Setup extends \Timber\Site {
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
-		class_alias( '\Onyx\Helpers', '\Onyx\O' ); // for old versions
+		class_alias( '\Onyx\Helpers', '\Onyx\O' ); // for legacy versions
 
 		parent::__construct();
 	}
@@ -314,52 +328,6 @@ class Setup extends \Timber\Site {
 	 */
 	protected function version() {
 		return (in_array( $this->env->user, $this->env->devs )) ? wp_rand( 0, 99999 ) : $this->env->version;
-	}
-
-	/**
-	 * Defines a constant if doesnt already exist.
-	 *
-	 * @param string $name The constant name.
-	 * @param mixed  $value The constant value.
-	 * @return void
-	 */
-	protected function define( $name, $value = true ) {
-		if ( ! defined( $name ) ) {
-			define( $name, $value );
-		}
-	}
-
-	/**
-	 * Show app params
-	 *
-	 * @param string $param Param name [required]
-	 * @return void
-	 */
-	public function show( $param ) {
-		echo $this->get( $param );
-	}
-
-	/**
-	 * Get app params
-	 *
-	 * @param string $param Param name [required]
-	 * @return mixed
-	 */
-	public function get( $param ) {
-		return $this->env->$param;
-	}
-
-	/**
-	 * Set app params
-	 *
-	 * @param string          $param Param name [required]
-	 * @param string|int|bool $value Params value [required]
-	 * @return void
-	 */
-	public function set( $param, $value ) {
-		if ( $param && $value ) {
-			$this->env->$param = $value;
-		}
 	}
 
 }
