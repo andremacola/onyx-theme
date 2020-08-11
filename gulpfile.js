@@ -208,7 +208,7 @@ function jsHome() {
 */
 
 function watch() {
-	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles-home.scss' ], styles);
+	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/home.scss' ], styles);
 	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles.scss' ], stylesHome);
 	gulp.watch([ './src/js/**/*.js', '!./src/js/**/home.js' ], js);
 	gulp.watch('./src/js/**/home.js', jsHome);
