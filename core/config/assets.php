@@ -9,7 +9,7 @@
  * @see https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * @param string the file path or url [required]
- * @param bool   Show only in home? Default false [required]
+ * @param bool   Show only in home? Default false [optional]
  * @param string async|defer for javascript [optional]
  */
 
