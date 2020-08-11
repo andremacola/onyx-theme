@@ -36,7 +36,7 @@ class Helpers {
 		$confs  = self::$conf;
 		$filter = [ 'pass', 'password', 'key', 'keys', 'dev', 'devs' ];
 
-		$confs['app'] = self::array_filter_keys( $confs['app'], $filter );
+		$confs['env'] = self::array_filter_keys( $confs['env'], $filter );
 		// $confs['mail'] = self::array_filter_keys( $confs['mail'], $filter );
 
 		$config = ( ! empty( $name ) ) ? $confs[$name] : $confs;
@@ -131,7 +131,7 @@ class Helpers {
 		if ( self::valid_url( $file ) ) {
 			$asset = $file;
 		} else {
-			$dir_uri = self::static_uri( self::$conf['app']['dir_uri'] );
+			$dir_uri = self::static_uri( self::$conf['env']['dir_uri'] );
 			$asset   = $dir_uri . '/' . ltrim( $file, '/' );
 		}
 
@@ -296,12 +296,12 @@ class Helpers {
 	/**
 	 * Print an app enviroment parameter
 	 *
-	 * @param string $key The parameter key of the $app object [required]
+	 * @param string $key The parameter key of the $env object [required]
 	 * @return void
 	 */
 	public static function print( $key ) {
-		$app = (object) self::$conf['app'];
-		echo $app->$key;
+		$env = (object) self::$conf['env'];
+		echo $env->$key;
 	}
 
 	/**
@@ -310,8 +310,8 @@ class Helpers {
 	 * @return bool
 	 */
 	public static function is_dev() {
-		$app = (object) self::$conf['app'];
-		return in_array( $app->user, $app->devs );
+		$env = (object) self::$conf['env'];
+		return in_array( $env->user, $env->devs );
 	}
 
 	/*

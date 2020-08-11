@@ -24,7 +24,7 @@ require_once $autoload;
 |--------------------------------------------------------------------------
 */
 
-require_once __DIR__ . '/core/includes/hook-functions.php';
+require_once __DIR__ . '/core/includes/hooks-functions.php';
 
 /*
 |--------------------------------------------------------------------------

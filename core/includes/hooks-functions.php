@@ -334,7 +334,7 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
  * @return void
  */
 function onyx_admin_scripts() {
-	$dir_uri = O::conf( 'app' )->dir_uri;
+	$dir_uri = O::conf( 'env' )->dir_uri;
 	echo "<link rel='shortcut icon' href='" . esc_attr( $dir_uri ) . "/assets/images/icons/favicon-32.png' />";
 	O::css( 'assets/css/styles.admin.css' );
 }
@@ -346,7 +346,7 @@ function onyx_admin_scripts() {
  * @return string
  */
 function onyx_change_footer_text_admin() {
-	return O::conf( 'app' )->name;
+	return O::conf( 'env' )->name;
 }
 
 /**
@@ -415,7 +415,7 @@ function onyx_disable_comments_trackbacks() {
  * @return array
  */
 function onyx_remove_mime_types( $existing_mimes = [] ) {
-	$uploads = O::conf( 'app' )->uploads;
+	$uploads = O::conf( 'env' )->uploads;
 
 	foreach ( $uploads['unset_types'] as $type ) {
 		unset( $existing_mimes[$type] );
@@ -431,7 +431,7 @@ function onyx_remove_mime_types( $existing_mimes = [] ) {
  * @return int
  */
 function onyx_upload_limit() {
-	$max_size = O::conf( 'app' )->uploads['max_file_size'];
+	$max_size = O::conf( 'env' )->uploads['max_file_size'];
 	return $max_size * 1024;
 }
 
@@ -451,6 +451,23 @@ function onyx_editor_page_break( $mce_buttons ) {
 		$mce_buttons = array_merge( $buttons, array_slice( $mce_buttons, $pos + 1 ) );
 	}
 	return $mce_buttons;
+}
+
+/*
+|--------------------------------------------------------------------------
+| WP REST API
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Change WP REST API Prefix (Default: wp-json)
+ * Registered at filters->add->rest_url_prefix at config/hooks.php
+ *
+ * @return string
+ */
+function onyx_rest_url_prefix() {
+	$prefix = O::conf( 'env' )->rest;
+	return $prefix;
 }
 
 /*
@@ -477,12 +494,12 @@ function onyx_gutenberg_style() {
  * @return void
  */
 function onyx_gutenberg_js() {
-	$app = O::conf( 'app' );
+	$env = O::conf( 'env' );
 	wp_enqueue_script(
 		'onyx-gutenberg',
-		$app->dir_uri . '/src/js/admin/gutenberg.js',
+		$env->dir_uri . '/src/js/admin/gutenberg.js',
 		array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
-		$app->version,
+		$env->version,
 		true
 	);
 }

@@ -11,76 +11,78 @@ namespace Onyx;
 
 use Onyx\Helpers as O;
 
-final class Setup extends \Timber\Site {
+class Setup extends \Timber\Site {
 
 	/**
 	 * App enviroment variables
 	 *
 	 * @var array|object
 	 */
-	private $app;
+	protected $app;
 
 	/**
 	 * Theme assets
 	 *
 	 * @var array|object
 	 */
-	private $assets;
+	protected $assets;
 
 	/**
 	 * Theme images sizes
 	 *
 	 * @var array|object
 	 */
-	private $images;
+	protected $images;
 
 	/**
 	 * Mail smtp configuration
 	 *
 	 * @var array|object
 	 */
-	private $mail;
+	protected $mail;
 
 	/**
 	 * Theme support WordPress features
 	 *
 	 * @var array|object
 	 */
-	private $support;
+	protected $support;
 
 	/**
 	 * Custom post types
 	 *
 	 * @var array|object
 	 */
-	private $cpts;
+	protected $cpts;
 
 	/**
 	 * Custom taxonomies
 	 *
 	 * @var array|object
 	 */
-	private $taxs;
+	protected $taxs;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->app      = O::load( 'app' );
+		$this->env      = O::load( 'env' );
+		$this->classes  = O::load( 'app' );
 		$this->assets   = O::load( 'assets' );
 		$this->hooks    = O::load( 'hooks' );
 		$this->images   = O::load( 'images' );
 		$this->mail     = O::load( 'mail' );
-		$this->rest     = O::load( 'rest' );
 		$this->sidebars = O::load( 'sidebars' );
 		$this->support  = O::load( 'support' );
-		$this->cpts     = O::load( 'cpts' );
-		$this->taxs     = O::load( 'taxonomies' );
+
+		// easy cpts and taxonomies
+		$this->cpts = O::load( 'cpts' );
+		$this->taxs = O::load( 'taxonomies' );
 
 		define( 'ONYX_THEME', true );
-		define( 'ONYX_THEME_VERSION', $this->app->version );
+		define( 'ONYX_THEME_VERSION', $this->env->version );
 		define( 'ONYX_STATIC_VERSION', $this->version() );
-		define( 'ONYX_STATIC', $this->app->static );
+		define( 'ONYX_STATIC', $this->env->static );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
@@ -97,81 +99,40 @@ final class Setup extends \Timber\Site {
 	public function setup() {
 		$this->load_tests_if_exist();
 		$this->register_theme_support();
-		$this->manage_actions();
-		$this->manage_filters();
-		// $this->manage_post_types();
-		// $this->manage_taxonomies();
-		$this->manage_rest_api();
 		$this->register_image_sizes();
+		$this->register_sidebars();
+		$this->register_app_features();
 		$this->register_post_types();
 		$this->register_taxonomies();
-		$this->register_sidebars();
+		$this->manage_actions();
+		$this->manage_filters();
 		$this->load_text_domain();
 	}
 
 	/**
-	 * Load language localization
+	 * Add theme support
 	 *
-	 * @return void
+	 * @see config/support.php
+	 * @return false|void
 	 */
-	private function load_text_domain() {
-		load_theme_textdomain( 'onyx-theme', $this->app->dir . '/core/lang' );
-	}
-
-	/**
-	 * Manage post types
-	 *
-	 * @see config/cpts.php
-	 * @return void
-	 */
-	private function manage_post_types() {
-		if ( ! empty( $this->cpts ) ) {
-			foreach ( $this->cpts as $cpt ) {
-				if ( class_exists( $cpt ) ) {
-					new $cpt();
-				}
+	protected function register_theme_support() {
+		if ( $this->support ) {
+			foreach ( $this->support as $feature ) {
+				add_theme_support( $feature );
 			}
 		}
 	}
 
 	/**
-	 * Manage post types
+	 * Register custom image sizes
 	 *
-	 * @see config/taxonomies.php
+	 * @see config/images.php
 	 * @return void
 	 */
-	private function manage_taxonomies() {
-		if ( ! empty( $this->taxs ) ) {
-			foreach ( $this->taxs as $tax ) {
-				if ( class_exists( $tax ) ) {
-					new $tax();
-				}
-			}
-		}
-	}
-
-	/**
-	 * Rest api base configurations
-	 *
-	 * @see config/app.php
-	 * @see config/rest.php
-	 * @return void
-	 */
-	private function manage_rest_api() {
-		// change default WordPress rest api prefix
-		add_filter(
-			'rest_url_prefix',
-			function() {
-				return $this->app->rest;
-			}
-		);
-
-		// register rest routes
-		if ( ! empty( $this->rest ) ) {
-			foreach ( $this->rest as $rest_controller ) {
-				if ( class_exists( $rest_controller ) ) {
-					new $rest_controller();
-				}
+	protected function register_image_sizes() {
+		if ( $this->images && ! empty( (array) $this->images ) ) {
+			foreach ( $this->images as $name => $param ) {
+				add_image_size( $name, $param[0], $param[1], $param[2] );
 			}
 		}
 	}
@@ -182,11 +143,27 @@ final class Setup extends \Timber\Site {
 	 * @see config/sidebars.php
 	 * @return void
 	 */
-	private function register_sidebars() {
-		if ( ! empty( $this->sidebars ) ) {
+	protected function register_sidebars() {
+		if ( $this->sidebars && ! empty( $this->sidebars ) ) {
 			foreach ( $this->sidebars as $sidebar ) {
 				$sidebar = new \Onyx\Sidebar( $sidebar['name'], $sidebar );
 				$sidebar->register();
+			}
+		}
+	}
+
+	/**
+	 * Register App Classes
+	 *
+	 * @see config/app.php
+	 * @return void
+	 */
+	protected function register_app_features() {
+		if ( $this->classes && ! empty( $this->classes ) ) {
+			foreach ( $this->classes as $class ) {
+				if ( class_exists( $class ) ) {
+					new $class();
+				}
 			}
 		}
 	}
@@ -197,8 +174,8 @@ final class Setup extends \Timber\Site {
 	 * @see config/cpts.php
 	 * @return void
 	 */
-	private function register_post_types() {
-		if ( ! empty( $this->cpts ) ) {
+	protected function register_post_types() {
+		if ( $this->cpts && ! empty( $this->cpts ) ) {
 			foreach ( $this->cpts as $cpt ) {
 
 				$names   = ( isset( $cpt['names'] ) ) ? $cpt['names'] : $cpt[0];
@@ -229,8 +206,8 @@ final class Setup extends \Timber\Site {
 	 * @see config/taxonomies.php
 	 * @return void
 	 */
-	private function register_taxonomies() {
-		if ( ! empty( $this->taxs ) ) {
+	protected function register_taxonomies() {
+		if ( $this->taxs && ! empty( $this->taxs ) ) {
 			foreach ( $this->taxs as $tax ) {
 				$names   = ( isset( $tax['names'] ) ) ? $tax['names'] : $tax[0];
 				$types   = ( ! empty( $tax['types'] )) ? $tax['types'] : null;
@@ -243,28 +220,16 @@ final class Setup extends \Timber\Site {
 	}
 
 	/**
-	 * Register custom image sizes
-	 *
-	 * @see config/images.php
-	 * @return void
-	 */
-	private function register_image_sizes() {
-		if ( ! empty( (array) $this->images ) ) {
-			foreach ( $this->images as $name => $param ) {
-				add_image_size( $name, $param[0], $param[1], $param[2] );
-			}
-		}
-	}
-
-	/**
 	 * Manage (remove/add) actions,
 	 *
 	 * @see config/hooks.php
 	 * @return void
 	 */
-	private function manage_actions() {
-		foreach ( $this->hooks->actions as $key => $hooks ) {
-			$this->register_hooks( "{$key}_action", $hooks );
+	protected function manage_actions() {
+		if ( $this->hooks ) {
+			foreach ( $this->hooks->actions as $key => $hooks ) {
+				$this->register_hooks( "{$key}_action", $hooks );
+			}
 		}
 	}
 
@@ -276,11 +241,22 @@ final class Setup extends \Timber\Site {
 	 * @see config/hooks.php
 	 * @return void
 	 */
-	private function manage_filters() {
-		foreach ( $this->hooks->filters as $key => $hooks ) {
-			$s = ( 'apply' === $key ) ? 's' : null; // oh hack day
-			$this->register_hooks( "{$key}_filter{$s}", $hooks );
+	protected function manage_filters() {
+		if ( $this->hooks ) {
+			foreach ( $this->hooks->filters as $key => $hooks ) {
+				$s = ( 'apply' === $key ) ? 's' : null; // oh hack day
+				$this->register_hooks( "{$key}_filter{$s}", $hooks );
+			}
 		}
+	}
+
+	/**
+	 * Load language localization
+	 *
+	 * @return void
+	 */
+	protected function load_text_domain() {
+		load_theme_textdomain( 'onyx-theme', $this->env->dir . '/core/lang' );
 	}
 
 	/**
@@ -292,7 +268,7 @@ final class Setup extends \Timber\Site {
 	 * @param array  $hooks Hooks array to register [required]
 	 * @return void;
 	 */
-	private function register_hooks( $key, $hooks ) {
+	protected function register_hooks( $key, $hooks ) {
 		foreach ( $hooks as $hook ) {
 			$hook = $this->get_hook_params( $hook );
 			$key( $hook->tag, $hook->function, $hook->priority, $hook->args );
@@ -306,7 +282,7 @@ final class Setup extends \Timber\Site {
 	 * @param array $arr ​​containing the tag, function and priority [required]
 	 * @return object
 	 */
-	private function get_hook_params( $arr ) {
+	protected function get_hook_params( $arr ) {
 		return (object) [
 			'tag'      => $arr[0],
 			'function' => $arr[1],
@@ -316,24 +292,12 @@ final class Setup extends \Timber\Site {
 	}
 
 	/**
-	 * Add theme support
-	 *
-	 * @see config/support.php
-	 * @return void
-	 */
-	private function register_theme_support() {
-		foreach ( $this->support as $feature ) {
-			add_theme_support( $feature );
-		}
-	}
-
-	/**
 	 * Require tests if exist
 	 * Documentation: needed
 	 *
 	 * @return void
 	 */
-	private function load_tests_if_exist() {
+	protected function load_tests_if_exist() {
 		if ( ONYX_TESTS ) {
 			$test = __DIR__ . '/../../../tests/functions.php';
 			if ( file_exists( $test ) ) {
@@ -348,8 +312,8 @@ final class Setup extends \Timber\Site {
 	 *
 	 * @return int
 	 */
-	private function version() {
-		return (in_array( $this->app->user, $this->app->devs )) ? wp_rand( 0, 99999 ) : $this->app->version;
+	protected function version() {
+		return (in_array( $this->env->user, $this->env->devs )) ? wp_rand( 0, 99999 ) : $this->env->version;
 	}
 
 	/**
@@ -359,7 +323,7 @@ final class Setup extends \Timber\Site {
 	 * @param mixed  $value The constant value.
 	 * @return void
 	 */
-	private function define( $name, $value = true ) {
+	protected function define( $name, $value = true ) {
 		if ( ! defined( $name ) ) {
 			define( $name, $value );
 		}
@@ -382,7 +346,7 @@ final class Setup extends \Timber\Site {
 	 * @return mixed
 	 */
 	public function get( $param ) {
-		return $this->app->$param;
+		return $this->env->$param;
 	}
 
 	/**
@@ -394,7 +358,7 @@ final class Setup extends \Timber\Site {
 	 */
 	public function set( $param, $value ) {
 		if ( $param && $value ) {
-			$this->app->$param = $value;
+			$this->env->$param = $value;
 		}
 	}
 
