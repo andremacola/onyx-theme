@@ -323,7 +323,7 @@ class Helpers {
 	/**
 	 * Return the current section title depending on route section type of WordPress
 	 *
-	 * This need another approach, maybe using self::section_type()
+	 * This need another approach, maybe using self::route_type()
 	 *
 	 * @param bool   $echo Whether to display or retrieve title. Default true [optional]
 	 * @param string $prefix What to display before the title [optional]
@@ -354,7 +354,7 @@ class Helpers {
 	 *
 	 * @return string
 	 */
-	public static function section_type() {
+	public static function route_type() {
 		global $wp_query;
 
 		$types = array_filter(
