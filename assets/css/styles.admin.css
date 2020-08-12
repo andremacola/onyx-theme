@@ -62,6 +62,11 @@ body .acf-input-prepend, body .acf-input-append {
 	border-color: #ddd !important;
 }
 
+/* hack wordpress 5.5: remover header quando estilo sem bordas */
+body .acf-postbox.seamless .postbox-header {
+	display: none;
+}
+
 /*
 |-------------------------------------
 | ADMIN COLUMNS PRO
