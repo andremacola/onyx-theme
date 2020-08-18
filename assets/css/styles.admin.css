@@ -62,7 +62,7 @@ body .acf-input-prepend, body .acf-input-append {
 	border-color: #ddd !important;
 }
 
-/* hack wordpress 5.5: remover header quando estilo sem bordas */
+/* wordpress 5.5: remove header when borderless style more effectively */
 body .acf-postbox.seamless .postbox-header {
 	display: none;
 }
