@@ -27,6 +27,12 @@ body.block-editor-page .edit-post-sidebar { background: #F9F9F9 !important; }
 /* alignment fix for pt-br add button */
 .tagsdiv .newtag { width: 170px !important; }
 
+/* show box handle-actionx on hover only */
+.postbox-header .handle-order-higher,
+.postbox-header .handle-order-lower { visibility: hidden; }
+.postbox-header:hover .handle-order-higher,
+.postbox-header:hover .handle-order-lower { visibility: visible; }
+
 /*
 |-------------------------------------
 | ADVANCED CUSTOM FIELDS
