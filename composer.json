@@ -25,6 +25,6 @@
 		}
 	},
 	"require": {
-		"timber/timber": "^1.17"
+		"timber/timber": "^1.18.0"
 	}
 }
