@@ -10,6 +10,21 @@ body,
 
 /*
 |-------------------------------------
+| DASHBOARD
+|-------------------------------------
+*/
+
+/* activity */
+#wpbody #future-posts ul span, #wpbody #published-posts ul span { min-width: 80px; }
+
+/* dashboard columns */
+#wpbody #wpbody-content #dashboard-widgets .postbox-container { width: 100%; }
+@media screen and ( min-width: 1200px ) {
+	#wpbody #wpbody-content #dashboard-widgets .postbox-container { width: 50%; }
+}
+
+/*
+|-------------------------------------
 | BLOCK EDITOR
 |-------------------------------------
 */
@@ -110,15 +125,6 @@ body .ac-table-actions { margin-top: 0; margin-bottom: 0; }
 #wpadminbar #wp-admin-bar-site-name > .ab-item:before {
 	content: url('../images/admin/favicon-20.png') !important;
 }
-
-/*
-|-------------------------------------
-| ADMIN DASHBOARD
-|-------------------------------------
-*/
-
-/* .postbox-container { min-width: 100% !important; } */
-/* .meta-box-sortables.ui-sortable.empty-container { display: none; } */
 
 /*
 |-------------------------------------
