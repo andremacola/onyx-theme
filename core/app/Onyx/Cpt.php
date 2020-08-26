@@ -134,7 +134,7 @@ class Cpt {
 		$this->slug = sanitize_title( $slug );
 
 		// set key.
-		$this->key = $this->slug;
+		$this->key = ( isset( $this->names['key'] ) ) ? $this->names['key'] : $this->slug;
 	}
 
 	/**
