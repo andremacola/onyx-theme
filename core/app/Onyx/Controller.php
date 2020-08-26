@@ -69,7 +69,7 @@ abstract class Controller {
 	 * @param mixed $context Received from `timber/context` filter
 	 */
 	public function set_global_context( $context ) {
-		$context['theme']->uri = O::conf( 'env' )->dir_uri;
+		$context['theme']->img = O::conf( 'env' )->dir_uri . '/assets/images';
 		return $context;
 	}
 
