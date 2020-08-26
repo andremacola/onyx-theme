@@ -283,7 +283,9 @@ class Cpt {
 		];
 
 		// replace defaults with the options passed.
-		$arguments = array_replace_recursive( $arguments, $this->arguments );
+		if ( $this->arguments ) {
+			$arguments = array_replace_recursive( $arguments, $this->arguments );
+		}
 
 		// set capability.
 		if ( ! isset( $arguments['capability_type'] ) && ! empty( $this->capability ) ) {
