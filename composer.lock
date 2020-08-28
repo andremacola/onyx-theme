@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bfa88654a397ccdbfd4ad127186644d",
+    "content-hash": "eae6e76f8721877b817a0c8b09eabc95",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -408,16 +408,16 @@
         },
         {
             "name": "timber/timber",
-            "version": "1.18.0",
+            "version": "1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/timber/timber.git",
-                "reference": "91675ac0da36750f91bc7f1ed0489096b3d939ba"
+                "reference": "c728380526273107ce29fcf816209776e47ae6c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/timber/timber/zipball/91675ac0da36750f91bc7f1ed0489096b3d939ba",
-                "reference": "91675ac0da36750f91bc7f1ed0489096b3d939ba",
+                "url": "https://api.github.com/repos/timber/timber/zipball/c728380526273107ce29fcf816209776e47ae6c1",
+                "reference": "c728380526273107ce29fcf816209776e47ae6c1",
                 "shasum": ""
             },
             "require": {
@@ -469,7 +469,7 @@
                 "timber",
                 "twig"
             ],
-            "time": "2020-08-16T23:49:25+00:00"
+            "time": "2020-08-26T00:20:46+00:00"
         },
         {
             "name": "twig/twig",
