@@ -21,7 +21,7 @@ This theme is inpired by [Sage](https://github.com/roots/sage/) and [Themosis](h
 
 ## [Documentation](https://andremacola.github.io/onyx-theme-doc/)
 
-The full documentation is [available here ](https://andremacola.github.io/onyx-theme-doc/). Unfortunately only PT-BR is available for now.github
+The full documentation is [available here ](https://andremacola.github.io/onyx-theme-doc/).
 
 ## How to Install
 
