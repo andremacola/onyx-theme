@@ -9,8 +9,6 @@
 return [
 	'version' => '1.0',
 	'static'  => false,
-	'home'    => false,
-	'single'  => false,
 	'theme'   => get_template(),
 	'dir_uri' => get_template_directory_uri(),
 	'dir'     => get_template_directory(),

@@ -292,8 +292,8 @@ class Cpt {
 			$arguments['capability_type'] = $this->capability;
 		}
 
-		// set capability.
-		if ( isset( $arguments['custom_caps'] ) ) {
+		// set custom capabilities.
+		if ( isset( $arguments['custom_caps'] ) && $arguments['custom_caps'] ) {
 			$this->capabilities( 'auto' );
 		}
 
