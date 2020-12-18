@@ -176,9 +176,9 @@ abstract class Controller {
 				"$folder/$prefix-$post->slug.twig",
 				"$folder/$prefix.twig",
 			];
+		} else {
+			$this->templates[] = "$folder/$prefix.twig";
 		}
-
-		$this->templates[] = "$folder/$prefix.twig";
 	}
 
 	/**
