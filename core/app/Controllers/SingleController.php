@@ -16,8 +16,8 @@ class SingleController extends Controller {
 	 * Initialize
 	 */
 	public function initialize() {
-		$this->set_page_templates( 'single' );
 		$this->set_context( 'post', $this->get_post() );
+		$this->set_page_templates( 'single' );
 	}
 
 }
