@@ -50,7 +50,7 @@ if (process.env.NODE_ENV === 'prod') {
 }
 
 const wpCSS = {
-	whitelist: [
+	safelist: [
 		'rtl',
 		'home',
 		'blog',
@@ -69,8 +69,6 @@ const wpCSS = {
 		'wp-caption-text',
 		'screen-reader-text',
 		'comment-list',
-	],
-	whitelistPatterns: [
 		/^wp-block(-.*)?$/,
 		/^active(-.*)?$/,
 		/^search(-.*)?$/,
@@ -139,8 +137,7 @@ function stylesPurge() {
 		.pipe(
 			purgecss({
 				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.twig', 'views/**/*.php', 'src/js/**/*.js' ],
-				whitelist: wpCSS.whitelist,
-				whitelistPatterns: wpCSS.whitelistPatterns,
+				safelist: wpCSS.safelist,
 			})
 		)
 		.pipe(gulp.dest(config.styleDest));
