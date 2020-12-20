@@ -50,7 +50,7 @@ if (process.env.NODE_ENV === 'prod') {
 }
 
 const wpCSS = {
-	safelist: [
+	whitelist: [
 		'rtl',
 		'home',
 		'blog',
@@ -137,7 +137,7 @@ function stylesPurge() {
 		.pipe(
 			purgecss({
 				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.twig', 'views/**/*.php', 'src/js/**/*.js' ],
-				safelist: wpCSS.safelist,
+				safelist: wpCSS.whitelist,
 			})
 		)
 		.pipe(gulp.dest(config.styleDest));
