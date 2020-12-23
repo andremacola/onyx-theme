@@ -216,7 +216,7 @@ class Helpers {
 	 *
 	 * @param string $js file|url [required]
 	 * @param bool   $home Display script only on Home [optional]
-	 * @param string $attr Is async|defer script [optional]
+	 * @param string $attr Tag attributes (data|async|defer) [optional]
 	 * @return void Script html tag
 	 */
 	public static function js( $js, $home = false, $attr = '' ) {
@@ -278,7 +278,7 @@ class Helpers {
 	 *
 	 * @param string $uax Google UAX ID [required]
 	 * @param bool   $script Load analytics.js script from google [optional]
-	 * @return void Google Analytics html and (or) tag
+	 * @return void  Google Analytics html and (or) tag
 	 */
 	public static function analytics( $uax, $script = false ) {
 		$ganalytics = "

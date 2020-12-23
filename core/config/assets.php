@@ -10,7 +10,7 @@
  *
  * @param string the file path or url [required]
  * @param bool   Show only in home? Default false [optional]
- * @param string async|defer for javascript [optional]
+ * @param string attrs (data|async|defer...etc) for javascript [optional]
  */
 
 return [
