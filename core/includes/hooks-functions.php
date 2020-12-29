@@ -484,7 +484,7 @@ function onyx_rest_url_prefix() {
  */
 function onyx_gutenberg_style() {
 	add_theme_support( 'editor-styles' );
-	add_editor_style( '../assets/css/styles.editor.css' );
+	add_editor_style( O::conf( 'env' )->dir_uri . '/assets/css/styles.editor.css' );
 }
 
 /**
