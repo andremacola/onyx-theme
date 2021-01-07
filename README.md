@@ -10,7 +10,7 @@
 
 # Wiki
 
-> **THE PUBLIC RELEASE IS IN ALPHA VERSION.**  
+> **THE PUBLIC RELEASE IS IN BETA VERSION.**  
 > **WE ALREADY USE THIS VERSION IN PRODUCTION BUT USE WITH CAUTION.**
 
 Onyx Theme is a starter kit for for assistance in developing themes in Wordpress. It can be considered a kind of framework.
