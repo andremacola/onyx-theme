@@ -271,7 +271,7 @@ function onyx_acf_show_admin() {
  * @return mixed
  */
 function onyx_acf_rename() {
-	if ( class_exists( 'acf' ) ) {
+	if ( class_exists( 'acf' ) && is_admin() ) {
 		add_filter(
 			'gettext',
 			function( $menu ) {
