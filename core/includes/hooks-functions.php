@@ -275,7 +275,7 @@ function onyx_acf_rename() {
 		add_filter(
 			'gettext',
 			function( $menu ) {
-				$menu = str_ireplace( 'Campos Personalizados', 'ACF', $menu );
+				$menu = str_replace( 'Campos Personalizados', 'ACF', $menu );
 				return $menu;
 			}
 		);
