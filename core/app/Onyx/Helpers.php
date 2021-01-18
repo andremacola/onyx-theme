@@ -2,7 +2,7 @@
 /**
  * Helper Class with some WordPress custom methods
  *
- * @phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.PHP.NoSilencedErrors.Discouraged
+ * @phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
  *
  * @package Onyx Theme
  */
@@ -234,23 +234,6 @@ class Helpers {
 	}
 
 	/**
-	 * Method to call gulp-livereload script (see gulpfile.js)
-	 *
-	 * @param int $port Port number for livereload to listen
-	 * @return void|false
-	 */
-	public static function livereload( $port = 3010 ) {
-		if ( 'local' === pathinfo( $_SERVER['SERVER_NAME'] )['extension'] ) {
-			$url     = 'http://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js?snipver=1";
-			$headers = @get_headers( $url );
-			if ( $headers ) {
-				return self::js( $url );
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * Add google analytics script html (main method)
 	 *
 	 * @param string $uax Google UAX ID required [required]
@@ -291,17 +274,6 @@ class Helpers {
 		if ( true === $script ) {
 			echo "<script async src='https://www.google-analytics.com/analytics.js'></script>\n";
 		}
-	}
-
-	/**
-	 * Print an app enviroment parameter
-	 *
-	 * @param string $key The parameter key of the $env object [required]
-	 * @return void
-	 */
-	public static function print( $key ) {
-		$env = (object) self::$conf['env'];
-		echo $env->$key;
 	}
 
 	/**

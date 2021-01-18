@@ -1,6 +1,6 @@
 {
 	"name": "onyx",
-	"version": "0.3.2",
+	"version": "0.3.4",
 	"description": "Onyx Wordpress Starter Theme",
 	"scripts": {
 		"serve": "yarn gulp live",

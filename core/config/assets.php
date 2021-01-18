@@ -6,11 +6,18 @@
  *
  * @package Onyx Theme
  * @see https://developer.wordpress.org/reference/functions/wp_enqueue_style/
+ * @see https://developer.wordpress.org/reference/functions/wp_enqueue_script/
  * @see https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
- * @param string the file path or url [required]
- * @param bool   Show only in home? Default false [optional]
- * @param string attrs (data|async|defer...etc) for javascript [optional]
+ * @param array handler $args {
+ *      style or scripts params
+ *
+ *      @type string src [required]
+ *      @type boolean $home only in home? [optional]
+ *      @type array $deps [optional]
+ *      @type string|bool|null $ver [optional]
+ *      @type string|bool $media|$in_footer [optional]
+ * }
  */
 
 return [
@@ -21,8 +28,8 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'css' => [
-		[ 'assets/css/main.css' ],
-		[ 'assets/css/home.css', true ],
+		'main-style' => [ 'assets/css/main.css' ],
+		'home-style' => [ 'assets/css/home.css', true ],
 	],
 
 	/*
@@ -31,8 +38,8 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'js'  => [
-		[ 'assets/js/app.min.js' ],
-		[ 'assets/js/home.min.js', true ],
+		'app-script'  => [ 'assets/js/app.min.js', false ],
+		'home-script' => [ 'assets/js/home.min.js', true ],
 	],
 
 ];

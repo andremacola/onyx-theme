@@ -32,7 +32,6 @@ function onyx_remove_wp_jquery() {
  * @return void
  */
 function onyx_header_footer_scripts() {
-	// relocate javascripts to footer.
 	remove_action( 'wp_head', 'wp_print_scripts' );
 	remove_action( 'wp_head', 'wp_print_head_scripts', 9 );
 	remove_action( 'wp_head', 'wp_enqueue_scripts', 1 );
@@ -79,6 +78,7 @@ function onyx_remove_empty_p( $content ) {
  * single-catslug.php
  * Registered at filters->add->single_template at config/hooks.php
  *
+ * @deprecated since Timber
  * @param string $t Template name received from single_template filter.
  * @return string
  */
@@ -100,15 +100,26 @@ function onyx_single_cat_template( $t ) {
 
 /**
  * Action to add Onyx Theme Styles.
- * Registered at actions->add->wp_head config/hooks.php
+ * Registered at actions->add->wp_enqueue_scripts config/hooks.php
  *
  * @return void
  */
 function onyx_load_styles() {
 	$assets = O::conf( 'assets' )->css;
-	foreach ( $assets as $css ) {
-		$css[1] = ( isset( $css[1] ) ) ? $css[1] : false;
-		O::css( $css[0], $css[1] );
+	foreach ( $assets as $handler => $css ) {
+		$src   = O::static_path( $css[0] );
+		$home  = ( isset( $css[1] ) ) ? $css[1] : false;
+		$deps  = ( isset( $css[2] ) ) ? $css[2] : [];
+		$ver   = ( isset( $css[3] ) ) ? $css[3] : ONYX_STATIC_VERSION;
+		$media = ( isset( $css[4] ) ) ? $css[4] : false;
+
+		if ( ! $home ) :
+			wp_enqueue_style( $handler, $src, $deps, $ver, $media );
+		else :
+			if ( is_home() ) {
+				wp_enqueue_style( $handler, $src, $deps, $ver, $media );
+			}
+		endif;
 	}
 }
 
@@ -120,22 +131,35 @@ function onyx_load_styles() {
  */
 function onyx_load_javascripts() {
 	$assets = O::conf( 'assets' )->js;
-	foreach ( $assets as $js ) {
-		$js[1] = ( isset( $js[1] ) ) ? $js[1] : false;
-		$js[2] = ( isset( $js[2] ) ) ? $js[2] : '';
-		O::js( $js[0], $js[1], $js[2] );
+	foreach ( $assets as $handler => $js ) {
+		$src       = O::static_path( $js[0] );
+		$home      = ( isset( $js[1] ) ) ? $js[1] : false;
+		$deps      = ( isset( $js[2] ) ) ? $js[2] : [];
+		$ver       = ( isset( $js[3] ) ) ? $js[3] : ONYX_STATIC_VERSION;
+		$in_footer = ( isset( $js[4] ) ) ? $js[4] : false;
+
+		if ( ! $home ) :
+			wp_enqueue_script( $handler, $src, $deps, $ver, $in_footer );
+		else :
+			if ( is_home() ) {
+				wp_enqueue_script( $handler, $src, $deps, $ver, $in_footer );
+			}
+		endif;
 	}
 }
 
 /**
- * Action to inject gulp-livereload server for development,
- * only works with `.local` domains.
- * Registered at actions->add->wp_head config/hooks.php
+ * Enqueue all styles and scripts
+ * Registered at actions->add->wp_enqueue_scripts config/hooks.php.
  *
+ * @see config/assets.php
  * @return void
  */
-function onyx_load_livereload() {
-	O::livereload();
+function onyx_enqueue_assets() {
+	onyx_remove_wp_jquery();
+	onyx_header_footer_scripts();
+	onyx_load_styles();
+	onyx_load_javascripts();
 }
 
 /**
@@ -334,9 +358,9 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
  * @return void
  */
 function onyx_admin_scripts() {
-	$dir_uri = O::conf( 'env' )->dir_uri;
-	echo "<link rel='shortcut icon' href='" . esc_attr( $dir_uri ) . "/assets/images/icons/favicon-32.png' />";
-	O::css( 'assets/css/styles.admin.css' );
+	$env = O::conf( 'env' );
+	echo "<link rel='shortcut icon' href='" . esc_attr( $env->dir_uri ) . "/assets/images/icons/favicon-32.png' />";
+	wp_enqueue_style( 'onyx-admin-style', $env->dir_uri . '/assets/css/styles.admin.css', [], $env->version );
 }
 
 /**
@@ -523,4 +547,31 @@ function onyx_supress_main_query( $request, $query ) {
 	} else {
 		return $request;
 	}
+}
+
+/*
+|--------------------------------------------------------------------------
+| DEVELOPMENT
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Action to inject gulp-livereload server for development,
+ * only works with `.local` domains.
+ * Registered at actions->add->wp_head config/hooks.php
+ *
+ * @return void|boolean
+ */
+function onyx_load_livereload() {
+	$port = 3010;
+	if ( 'local' === pathinfo( $_SERVER['SERVER_NAME'] )['extension'] ) {
+		$url = 'http://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
+		// phpcs:disable
+		$headers = @get_headers( $url );
+		// phpcs:enable
+		if ( $headers ) {
+			wp_enqueue_script( 'livereload', $url, [], 1, true );
+		}
+	}
+	return false;
 }

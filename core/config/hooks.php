@@ -43,7 +43,7 @@ return [
 			[ 'use_default_gallery_style', '__return_false', 10 ], // disable classic gallery style
 			[ 'the_generator', '__return_false', 10 ], // remove meta tag from wp feed.
 			[ 'the_content', 'onyx_remove_empty_p', 20, 1 ],
-			[ 'single_template', 'onyx_single_cat_template' ],
+			// [ 'single_template', 'onyx_single_cat_template' ],
 			[ 'protected_title_format', 'onyx_remove_private_title' ],
 			[ 'private_title_format', 'onyx_remove_private_title' ],
 			[ 'img_caption_shortcode', 'onyx_better_img_caption', 10, 3 ],
@@ -109,12 +109,13 @@ return [
 			[ 'template_redirect', 'rest_output_link_header', 11 ], // json api link from http header
 		],
 		'add'    => [
-			[ 'wp_head', 'onyx_load_styles' ],
-			[ 'wp_footer', 'onyx_load_livereload' ],
-			[ 'wp_footer', 'onyx_load_javascripts' ],
-			[ 'wp_enqueue_scripts', 'onyx_remove_wp_jquery' ],
-			[ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
+			[ 'wp_enqueue_scripts', 'onyx_enqueue_assets' ],
 			// [ 'phpmailer_init', 'onyx_smtp_config' ],
+			// [ 'wp_enqueue_scripts', 'onyx_remove_wp_jquery' ],
+			// [ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
+			// [ 'wp_enqueue_scripts', 'onyx_load_styles' ],
+			// [ 'wp_enqueue_scripts', 'onyx_load_javascripts' ],
+			// [ 'wp_footer', 'onyx_load_livereload' ],
 
 			// ----------------------------------------------------------
 			// ADMIN (add:actions)
