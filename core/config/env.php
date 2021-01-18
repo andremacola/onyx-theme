@@ -18,6 +18,9 @@ return [
 	'rest'    => 'api',
 	'user'    => wp_get_current_user()->user_email,
 	'devs'    => [ 'dev@domain.tld' ],
+	'timber'  => [
+		'cache_dir' => WP_CONTENT_DIR . '/cache/timber',
+	],
 	'uploads' => [
 		'max_file_size' => 5000,
 		'unset_types'   => [

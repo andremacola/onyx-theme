@@ -50,6 +50,11 @@ return [
 			[ 'body_class', 'onyx_body_classes' ],
 
 			// ----------------------------------------------------------
+			// TIMBER(add:filters)
+			// ----------------------------------------------------------
+			[ 'timber/cache/location', 'onyx_timber_cache_folder' ],
+
+			// ----------------------------------------------------------
 			// REST API (add:filters)
 			// ----------------------------------------------------------
 			[ 'rest_url_prefix', 'onyx_rest_url_prefix' ],

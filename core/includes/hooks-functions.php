@@ -14,6 +14,8 @@ use \Onyx\Helpers as O;
 /**
  * Remove WordPress frontend jquery.
  *
+ * Registered at actions->add->wp_enqueue_scripts at config/hooks.php
+ *
  * @return void
  */
 function onyx_remove_wp_jquery() {
@@ -271,6 +273,23 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 	return $output;
 }
 
+/*
+|--------------------------------------------------------------------------
+| TIMBER
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Set Timber cache Folder
+ *
+ * Registered at filters->add->timber/cache/location at config/hooks.php
+ *
+ * @return string
+ */
+function onyx_timber_cache_folder() {
+	return O::conf( 'env' )->timber['cache_dir'];
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -490,8 +509,7 @@ function onyx_editor_page_break( $mce_buttons ) {
  * @return string
  */
 function onyx_rest_url_prefix() {
-	$prefix = O::conf( 'env' )->rest;
-	return $prefix;
+	return O::conf( 'env' )->rest;
 }
 
 /*

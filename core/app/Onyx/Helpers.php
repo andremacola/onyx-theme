@@ -286,6 +286,17 @@ class Helpers {
 		return in_array( $env->user, $env->devs );
 	}
 
+	/**
+	 * Clear Timber Cache
+	 *
+	 * @return void
+	 */
+	public static function clear_cache_timber() {
+		$loader = new \Timber\Loader();
+		$loader->clear_cache_timber();
+		$loader->clear_cache_twig();
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| ONLY HELPERS FOR WordPress NATIVE FUNCTIONS FROM HERE
