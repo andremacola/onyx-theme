@@ -29,7 +29,7 @@ class Helpers {
 	 * Return enviroment settings.
 	 * Use with caution
 	 *
-	 * @param string $name Config name variable app|assets|hooks|images|mail|support [optional].
+	 * @param string $name Config name variable (see config/ folder) [optional].
 	 * @return object|false
 	 */
 	public static function conf( $name = false ) {
