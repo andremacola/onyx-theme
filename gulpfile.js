@@ -19,6 +19,8 @@ const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
 
+const read = require('fs').readFileSync;
+
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION VARIABLES
@@ -26,9 +28,9 @@ const { terser } = require('rollup-plugin-terser');
 */
 
 const config = {
-	url: process.env.URL,
 	port: parseInt(process.env.PORT, 10),
-	uiport: parseInt(process.env.UIPORT, 10),
+	key: process.env.KEY,
+	crt: process.env.CRT,
 
 	cssout: 'compact',
 	prefixer: false,
@@ -215,7 +217,11 @@ function watch() {
 }
 
 function live() {
-	livereload.listen(config.port);
+	livereload.listen({
+		key: config.key ? read(config.key) : false,
+		cert: config.key ? read(config.crt) : false,
+		port: config.port,
+	});
 	watch();
 }
 

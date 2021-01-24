@@ -583,9 +583,16 @@ function onyx_supress_main_query( $request, $query ) {
 function onyx_load_livereload() {
 	$port = 3010;
 	if ( 'local' === pathinfo( $_SERVER['SERVER_NAME'] )['extension'] ) {
-		$url = 'http://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
+		$context  = stream_context_create( [
+			'ssl' => [
+				'verify_peer'      => false,
+				'verify_peer_name' => false,
+			],
+		]);
 		// phpcs:disable
-		$headers = @get_headers( $url );
+		$headers = @get_headers( $url, 0, $context );
 		// phpcs:enable
 		if ( $headers ) {
 			wp_enqueue_script( 'livereload', $url, [], 1, true );
