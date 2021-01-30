@@ -4,9 +4,6 @@
 |--------------------------------------------------------------------------
 */
 
-import jquery from 'jquery';
-window.$ = window.jQuery = jquery;
-// import '@fancyapps/fancybox';
 // import { tns } from 'tiny-slider';
 
 /*
@@ -15,8 +12,6 @@ window.$ = window.jQuery = jquery;
 |--------------------------------------------------------------------------
 */
 
-(function() {
-	$(function() {
-		// start here
-	});
-}());
+// (function($) {
+//
+// }(jQuery));

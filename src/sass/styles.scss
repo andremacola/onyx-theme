@@ -4,18 +4,17 @@
 |--------------------------------------------------------------------------
 */
 
-// Library
-	@import "_libs/fonts";
-	@import "_libs/vars";
-	@import "_libs/mixins";
-	@import "_libs/extends";
-	@import "_libs/reset";
-	@import "_libs/helpers";
+// base styles
+	@import "base/fonts";
+	@import "base/vars";
+	@import "base/mixins";
+	@import "base/reset";
+	@import "base/helpers";
 
 // layout
 	@import "layout/theme";
 	@import "layout/header";
-	@import "layout/content";
+	@import "layout/post";
 	@import "layout/footer";
 
 /*
@@ -24,8 +23,6 @@
 |--------------------------------------------------------------------------
 */
 
-	// @import 'components/post-content';
-	// @import 'components/forms';
 	// @import 'components/pagenavi';
-	// @import 'components/wp/wp-blocks';
+	// @import 'components/wp-blocks';
 	// @import 'components/google-search';

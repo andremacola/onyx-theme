@@ -22,13 +22,24 @@ function onyx_remove_wp_jquery() {
 	if ( ! is_admin() ) {
 		wp_deregister_script( 'jquery' );
 		wp_enqueue_script( 'jquery' );
+	}
+}
+
+/**
+ * Remove WordPress frontend wp-embed javascript
+ *
+ * Registered at actions->add->wp_enqueue_scripts at config/hooks.php
+ *
+ * @return void
+ */
+function onyx_remove_wp_embed() {
+	if ( ! is_admin() ) {
 		wp_deregister_script( 'wp-embed' );
 	}
 }
 
 /**
- * Remove WordPress frontend jquery
- * and reallocate js from header to footer.
+ * Reallocate js from header to footer.
  * Registered at actions->add->wp_enqueue_scripts at config/hooks.php
  *
  * @return void
@@ -158,7 +169,6 @@ function onyx_load_javascripts() {
  * @return void
  */
 function onyx_enqueue_assets() {
-	onyx_remove_wp_jquery();
 	onyx_header_footer_scripts();
 	onyx_load_styles();
 	onyx_load_javascripts();
@@ -565,38 +575,4 @@ function onyx_supress_main_query( $request, $query ) {
 	} else {
 		return $request;
 	}
-}
-
-/*
-|--------------------------------------------------------------------------
-| DEVELOPMENT
-|--------------------------------------------------------------------------
-*/
-
-/**
- * Action to inject gulp-livereload server for development,
- * only works with `.local` domains.
- * Registered at actions->add->wp_head config/hooks.php
- *
- * @return void|boolean
- */
-function onyx_load_livereload() {
-	$port = 3010;
-	if ( 'local' === pathinfo( $_SERVER['SERVER_NAME'] )['extension'] ) {
-		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
-		$url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
-		$context  = stream_context_create( [
-			'ssl' => [
-				'verify_peer'      => false,
-				'verify_peer_name' => false,
-			],
-		]);
-		// phpcs:disable
-		$headers = @get_headers( $url, 0, $context );
-		// phpcs:enable
-		if ( $headers ) {
-			wp_enqueue_script( 'livereload', $url, [], 1, true );
-		}
-	}
-	return false;
 }

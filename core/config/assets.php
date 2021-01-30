@@ -29,7 +29,6 @@ return [
 	*/
 	'css' => [
 		'main-style' => [ 'assets/css/main.css' ],
-		'home-style' => [ 'assets/css/home.css', true ],
 	],
 
 	/*
@@ -38,8 +37,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'js'  => [
-		'app-script'  => [ 'assets/js/app.min.js', false ],
-		'home-script' => [ 'assets/js/home.min.js', true ],
+		'app-script' => [ 'assets/js/app.min.js' ],
 	],
 
 ];

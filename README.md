@@ -77,16 +77,18 @@ Please, use ES6 Modules or CommonJS to import your dependencies (see app.js)
 
 ## Some JS libraries
 
-|Dependency        | Install                      | Repository                                        |
-|------------------|------------------------------|---------------------------------------------------|
-jquery             | yarn add jquery              | https://github.com/jquery/jquery                  |
-jquery-mask-plugin | yarn add jquery-mask-plugin  | https://github.com/igorescobar/jQuery-Mask-Plugin |
-jquery fancybox    | yarn add @fancyapps/fancybox | https://github.com/fancyapps/fancybox             |
-imask              | yarn add imask               | https://github.com/uNmAnNeR/imaskjs               |
-tiny-slider        | yarn add tiny-slider         | https://github.com/ganlanyuan/tiny-slider         |
-vanilla-lazyload   | yarn add vanilla-lazyload    | https://github.com/verlok/vanilla-lazyload        |
-body-scroll-lock   | yarn add body-scroll-lock    | https://github.com/willmcpo/body-scroll-lock      |
-object-fit-images  | yarn add object-fit-images   | https://github.com/fregante/object-fit-images     |
+|Dependency        | Install                      | Repository/Site                                                  |
+|------------------|------------------------------|------------------------------------------------------------------|
+jquery             | yarn add jquery              | https://github.com/jquery/jquery                                 |
+jquery-mask-plugin | yarn add jquery-mask-plugin  | https://github.com/igorescobar/jQuery-Mask-Plugin                |
+jquery fancybox    | yarn add @fancyapps/fancybox | https://github.com/fancyapps/fancybox                            |
+imask              | yarn add imask               | https://github.com/uNmAnNeR/imaskjs                              |
+tiny-slider        | yarn add tiny-slider         | https://github.com/ganlanyuan/tiny-slider                        |
+lightgallery.js    | yarn add lightgallery.js     | https://sachinchoolur.github.io/lightgallery.js/                 |
+lg-thumbnail.js    | yarn add lg-thumbnail.js     | https://sachinchoolur.github.io/lightgallery.js/demos/index.html |
+vanilla-lazyload   | yarn add vanilla-lazyload    | https://github.com/verlok/vanilla-lazyload                       |
+body-scroll-lock   | yarn add body-scroll-lock    | https://github.com/willmcpo/body-scroll-lock                     |
+object-fit-images  | yarn add object-fit-images   | https://github.com/fregante/object-fit-images                    |
 
 ## Some projects using Onyx
 

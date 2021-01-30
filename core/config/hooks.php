@@ -115,9 +115,9 @@ return [
 		],
 		'add'    => [
 			[ 'wp_enqueue_scripts', 'onyx_enqueue_assets' ],
-			[ 'wp_footer', 'onyx_load_livereload' ],
 			// [ 'phpmailer_init', 'onyx_smtp_config' ],
 			// [ 'wp_enqueue_scripts', 'onyx_remove_wp_jquery' ],
+			// [ 'wp_enqueue_scripts', 'onyx_remove_wp_embed' ],
 			// [ 'wp_enqueue_scripts', 'onyx_header_footer_scripts' ],
 			// [ 'wp_enqueue_scripts', 'onyx_load_styles' ],
 			// [ 'wp_enqueue_scripts', 'onyx_load_javascripts' ],

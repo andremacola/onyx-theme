@@ -7,7 +7,7 @@ const gulpif = require('gulp-if');
 const rename = require('gulp-rename');
 const source = require('vinyl-source-stream');
 
-const livereload = require('gulp-livereload');
+const browserSync = require('browser-sync').create();
 
 const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
@@ -19,8 +19,6 @@ const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
 
-const read = require('fs').readFileSync;
-
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION VARIABLES
@@ -28,22 +26,27 @@ const read = require('fs').readFileSync;
 */
 
 const config = {
+	url: process.env.URL,
 	port: parseInt(process.env.PORT, 10),
-	key: process.env.KEY,
-	crt: process.env.CRT,
-
-	cssout: 'compact',
+	ui_port: parseInt(process.env.UI_PORT, 10),
+	https: false,
+	cssout: 'expanded',
 	prefixer: false,
 	terser: false,
 
 	style: './src/sass/styles.scss',
-	styleHome: './src/sass/home.scss',
 	styleDest: './assets/css',
 
 	js: './src/js/app.js',
-	jsHome: './src/js/home.js',
 	jsDest: './assets/js',
 };
+
+if (process.env.KEY) {
+	config.https = {
+		key: process.env.KEY,
+		cert: process.env.CRT,
+	};
+}
 
 if (process.env.NODE_ENV === 'prod') {
 	config.cssout = 'compressed';
@@ -104,6 +107,7 @@ function styles() {
 			includePaths: [ './node_modules/' ],
 		}).on('error', sass.logError))
 		.pipe(rename('main.css'))
+		.pipe(browserSync.stream())
 		.pipe(
 			gulpif(
 				config.prefixer,
@@ -112,25 +116,7 @@ function styles() {
 				})
 			)
 		)
-		.pipe(gulp.dest(config.styleDest))
-		.pipe(livereload());
-}
-
-function stylesHome() {
-	return gulp
-		.src(config.styleHome)
-		.pipe(sass({ outputStyle: config.cssout }).on('error', sass.logError))
-		.pipe(rename('home.css'))
-		.pipe(
-			gulpif(
-				config.prefixer,
-				autoprefixer({
-					cascade: false,
-				})
-			)
-		)
-		.pipe(gulp.dest(config.styleDest))
-		.pipe(livereload());
+		.pipe(gulp.dest(config.styleDest));
 }
 
 function stylesPurge() {
@@ -173,31 +159,7 @@ function js() {
 		.pipe(source('app.min.js'))
 		// .pipe(buffer())
 		.pipe(gulp.dest(config.jsDest))
-		.pipe(livereload());
-}
-
-function jsHome() {
-	const options = {
-		input: config.jsHome,
-		output: {
-			dir: config.jsDest,
-			format: 'cjs',
-		},
-		plugins: [
-			commonjs(),
-			nodeResolve(),
-			config.terser && terser({ output: { comments: false } }),
-		],
-		cache,
-	};
-	return rollup(options)
-		.on('bundle', (bundle) => {
-			cache = bundle;
-		})
-		.pipe(source('home.min.js'))
-		// .pipe(buffer())
-		.pipe(gulp.dest(config.jsDest))
-		.pipe(livereload());
+		.pipe(browserSync.stream());
 }
 
 /*
@@ -207,22 +169,31 @@ function jsHome() {
 */
 
 function watch() {
-	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/home.scss' ], styles);
-	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/styles.scss' ], stylesHome);
-	gulp.watch([ './src/js/**/*.js', '!./src/js/**/home.js' ], js);
-	gulp.watch('./src/js/**/home.js', jsHome);
-	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', function(file) {
-		livereload.reload(file);
-	});
-}
-
-function live() {
-	livereload.listen({
-		key: config.key ? read(config.key) : false,
-		cert: config.key ? read(config.crt) : false,
+	browserSync.init({
+		proxy: {
+			target: config.url,
+		},
 		port: config.port,
+		https: config.https,
+		ui: {
+			port: config.ui_port,
+		},
+		open: false,
+		notify: false,
+		injectChanges: true,
+		logConnections: false,
+		logFileChanges: false,
+		logSnippet: false,
+		ghostMode: {
+			clicks: false,
+			forms: false,
+			scroll: false,
+		},
 	});
-	watch();
+
+	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/home.scss' ], styles);
+	gulp.watch([ './src/js/**/*.js', '!./src/js/**/home.js' ], js);
+	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', browserSync.reload);
 }
 
 /*
@@ -232,10 +203,7 @@ function live() {
 */
 
 exports.styles = styles;
-exports.stylesHome = stylesHome;
 exports.stylesPurge = stylesPurge;
 exports.js = js;
-exports.jsHome = jsHome;
 exports.watch = watch;
-exports.live = live;
-exports.default = gulp.series(styles, stylesHome, stylesPurge, js, jsHome);
+exports.default = gulp.series(styles, stylesPurge, js);

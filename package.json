@@ -3,8 +3,8 @@
 	"version": "0.3.4",
 	"description": "Onyx Wordpress Starter Theme",
 	"scripts": {
-		"serve": "yarn gulp live",
-		"serve:prod": "env NODE_ENV=prod yarn gulp live",
+		"serve": "yarn gulp watch",
+		"serve:prod": "env NODE_ENV=prod yarn gulp watch",
 		"build": "env NODE_ENV=prod yarn gulp"
 	},
 	"author": "Andre Machado",
@@ -13,20 +13,18 @@
 		"type": "git",
 		"url": "git@github.com:andremacola/onyx-theme.git"
 	},
-	"dependencies": {
-		"jquery": "^3.5.1"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^15.1.0",
 		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@rollup/stream": "^1.1.0",
 		"@wordpress/eslint-plugin": "^7.2.1",
+		"browser-sync": "^2.26.14",
 		"dotenv": "^8.2.0",
 		"eslint": "^6.8.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^7.0.1",
 		"gulp-if": "^3.0.0",
-		"gulp-livereload": "^4.0.2",
 		"gulp-purgecss": "^3.0.0",
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^4.1.0",
