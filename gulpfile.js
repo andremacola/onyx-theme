@@ -121,7 +121,7 @@ function styles() {
 
 function stylesPurge() {
 	return gulp
-		.src([ 'assets/css/main.css', 'assets/css/home.css' ])
+		.src([ 'assets/css/main.css' ])
 		.pipe(
 			purgecss({
 				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.twig', 'views/**/*.php', 'src/js/**/*.js' ],
