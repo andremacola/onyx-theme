@@ -191,8 +191,8 @@ function watch() {
 		},
 	});
 
-	gulp.watch([ './src/sass/**/*.scss', '!./src/sass/**/home.scss' ], styles);
-	gulp.watch([ './src/js/**/*.js', '!./src/js/**/home.js' ], js);
+	gulp.watch([ './src/sass/**/*.scss' ], styles);
+	gulp.watch([ './src/js/**/*.js' ], js);
 	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', browserSync.reload);
 }
 
