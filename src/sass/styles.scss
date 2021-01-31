@@ -4,18 +4,18 @@
 |--------------------------------------------------------------------------
 */
 
-// base styles
-	@import "base/fonts";
-	@import "base/vars";
-	@import "base/mixins";
-	@import "base/reset";
-	@import "base/helpers";
+// utils
+	@import "utils/fonts";
+	@import "utils/vars";
+	@import "utils/mixins";
+	@import "utils/reset";
+	@import "utils/helpers";
 
 // layout
-	@import "layout/theme";
-	@import "layout/header";
-	@import "layout/post";
-	@import "layout/footer";
+	@import "layouts/theme";
+	@import "layouts/header";
+	@import "layouts/post";
+	@import "layouts/footer";
 
 /*
 |--------------------------------------------------------------------------

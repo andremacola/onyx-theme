@@ -99,88 +99,7 @@ img {
 
 /*
 |--------------------------------------------------------------------------
-| DEFAULT STYLES
-|--------------------------------------------------------------------------
-*/
-:root {
-  --color1: #333;
-  --color2: #333;
-  --color3: #333;
-  --color4: #333;
-  --color5: #333;
-  --color6: #333;
-  --color-bg: #FFF;
-  --color-footer-bg: #F0F0F0;
-  --color-link: #333;
-  --color-link-hover: #333;
-  --color-post-title: #333;
-  --color-post-link: #333;
-  --color-post-link-hover: #333;
-  --color-post-border: #333;
-}
-
-body {
-  background: #FFF;
-}
-
-body.no-scroll {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-footer, #footer {
-  background: #F0F0F0;
-}
-
-/*
-|--------------------------------------------------------------------------
-| GENERIC LINKS AND BUTTONS
-|--------------------------------------------------------------------------
-*/
-a {
-  text-decoration: none;
-  color: #333;
-  transition: color 200ms, text-indent 200ms, background 200ms;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #333;
-}
-
-/*
-|--------------------------------------------------------------------------
-| TITLES
-|--------------------------------------------------------------------------
-*/
-h1 {
-  font-size: 36px;
-}
-
-h2 {
-  font-size: 30px;
-}
-
-h3 {
-  font-size: 25px;
-}
-
-h4 {
-  font-size: 20px;
-}
-
-h5 {
-  font-size: 15px;
-}
-
-h6 {
-  font-size: 12px;
-}
-
-/*
-|--------------------------------------------------------------------------
-| CLASSES
+| HELPER CLASSES
 |--------------------------------------------------------------------------
 */
 .left {
@@ -343,6 +262,80 @@ h6 {
 | THEME STYLES
 |--------------------------------------------------------------------------
 */
+:root {
+  --site-with: 1140px;
+  --color1: #333;
+  --color2: #333;
+  --color3: #333;
+  --color-bg: #FFF;
+  --color-footer-bg: #F0F0F0;
+  --color-link: #333;
+  --color-link-hover: #333;
+  --color-post-title: #333;
+  --color-post-link: #333;
+  --color-post-link-hover: #333;
+  --color-post-border: #333;
+}
+
+body {
+  background: #FFF;
+}
+
+body.no-scroll {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+footer, #footer {
+  background: #F0F0F0;
+}
+
+/*
+|--------------------------------------------------------------------------
+| GENERIC LINKS AND BUTTONS
+|--------------------------------------------------------------------------
+*/
+a {
+  text-decoration: none;
+  color: #333;
+  transition: color 200ms, text-indent 200ms, background 200ms;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+/*
+|--------------------------------------------------------------------------
+| HEADINGS
+|--------------------------------------------------------------------------
+*/
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 15px;
+}
+
+h6 {
+  font-size: 12px;
+}
+
 /*
 |--------------------------------------------------------------------------
 | GRID
