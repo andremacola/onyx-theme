@@ -7,6 +7,7 @@ const gulpif = require('gulp-if');
 const rename = require('gulp-rename');
 const source = require('vinyl-source-stream');
 
+const liveReload = require('gulp-livereload');
 const browserSync = require('browser-sync').create();
 
 const autoprefixer = require('gulp-autoprefixer');
@@ -19,40 +20,39 @@ const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
 
+const read = require('fs').readFileSync;
+
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION VARIABLES
 |--------------------------------------------------------------------------
 */
 
+const isProd = (process.env.NODE_ENV === 'prod');
+
 const config = {
+	liveReload: (process.env.LIVERELOAD == 'true'),
 	url: process.env.URL,
 	port: parseInt(process.env.PORT, 10),
 	ui_port: parseInt(process.env.UI_PORT, 10),
-	https: false,
-	cssout: 'expanded',
-	prefixer: false,
-	terser: false,
+
+	key: (process.env.KEY) ? process.env.KEY : false,
+	cert: (process.env.CRT) ? process.env.CRT : false,
+	https() {
+		return (this.key) ? { key: this.key, cert: this.cert	} : false;
+	},
+
+	cssout: isProd ? 'compressed' : 'expanded',
+	prefixer: isProd,
+	terser: isProd,
 
 	style: './src/sass/styles.scss',
 	styleDest: './assets/css',
+	jmq: isProd,
 
 	js: './src/js/app.js',
 	jsDest: './assets/js',
 };
-
-if (process.env.KEY) {
-	config.https = {
-		key: process.env.KEY,
-		cert: process.env.CRT,
-	};
-}
-
-if (process.env.NODE_ENV === 'prod') {
-	config.cssout = 'compressed';
-	config.prefixer = true;
-	config.terser = true;
-}
 
 const wpCSS = {
 	whitelist: [
@@ -74,6 +74,10 @@ const wpCSS = {
 		'wp-caption-text',
 		'screen-reader-text',
 		'comment-list',
+		/^hide-(.*)?$/,
+		/^gm-(.*)?$/,
+		/^lg-(.*)?$/,
+		/^tns-(.*)?$/,
 		/^wp-block(-.*)?$/,
 		/^active(-.*)?$/,
 		/^search(-.*)?$/,
@@ -93,6 +97,21 @@ const wpCSS = {
 	],
 };
 
+const onyx = {
+	watch() {
+		return (config.liveReload) ? startLiveReload() : startBrowserSync();
+	},
+	stream() {
+		return (config.liveReload) ? liveReload() : browserSync.stream();
+	},
+	reload() {
+		return (config.liveReload) ? liveReload.reload() : browserSync.reload;
+	},
+	prefixer() {
+		return autoprefixer({ cascade: false });
+	},
+};
+
 /*
 |--------------------------------------------------------------------------
 | STYLES
@@ -107,15 +126,8 @@ function styles() {
 			includePaths: [ './node_modules/' ],
 		}).on('error', sass.logError))
 		.pipe(rename('main.css'))
-		.pipe(browserSync.stream())
-		.pipe(
-			gulpif(
-				config.prefixer,
-				autoprefixer({
-					cascade: false,
-				})
-			)
-		)
+		.pipe(onyx.stream())
+		.pipe(gulpif(config.prefixer, onyx.prefixer()))
 		.pipe(gulp.dest(config.styleDest));
 }
 
@@ -157,25 +169,25 @@ function js() {
 			cache = bundle;
 		})
 		.pipe(source('app.min.js'))
-		// .pipe(buffer())
 		.pipe(gulp.dest(config.jsDest))
-		.pipe(browserSync.stream());
+		.pipe(onyx.stream());
 }
 
 /*
 |--------------------------------------------------------------------------
-| WATCH FUNCTIONS
+| BROWSERSYNC
 |--------------------------------------------------------------------------
 */
 
-function watch() {
+// eslint-disable-next-line no-unused-vars
+function startBrowserSync() {
 	browserSync.init({
 		proxy: {
 			target: config.url,
 		},
 		host: config.url.split('//')[1],
 		port: config.port,
-		https: config.https,
+		https: config.https(),
 		ui: {
 			port: config.ui_port,
 		},
@@ -191,10 +203,34 @@ function watch() {
 			scroll: false,
 		},
 	});
+}
 
+/*
+|--------------------------------------------------------------------------
+| LIVE RELOAD
+|--------------------------------------------------------------------------
+*/
+
+// eslint-disable-next-line no-unused-vars
+function startLiveReload() {
+	liveReload.listen({
+		port: config.port,
+		key: read(config.key),
+		cert: read(config.cert),
+	});
+}
+
+/*
+|--------------------------------------------------------------------------
+| WATCH FUNCTIONS
+|--------------------------------------------------------------------------
+*/
+
+function serve() {
+	onyx.watch();
 	gulp.watch([ './src/sass/**/*.scss' ], styles);
 	gulp.watch([ './src/js/**/*.js' ], js);
-	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', browserSync.reload);
+	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', () => onyx.reload());
 }
 
 /*
@@ -206,5 +242,5 @@ function watch() {
 exports.styles = styles;
 exports.stylesPurge = stylesPurge;
 exports.js = js;
-exports.watch = watch;
+exports.serve = serve;
 exports.default = gulp.series(styles, stylesPurge, js);

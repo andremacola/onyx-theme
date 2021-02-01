@@ -576,3 +576,26 @@ function onyx_supress_main_query( $request, $query ) {
 		return $request;
 	}
 }
+
+/*
+|--------------------------------------------------------------------------
+| DEVELOPMENT
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Action to inject gulp-livereload server for development,
+ * only works with `.local` domains.
+ * Registered at actions->add->wp_head config/hooks.php
+ *
+ * @return void|boolean
+ */
+function onyx_enqueue_livereload() {
+	if ( ONYX_LIVERELOAD ) {
+		$port     = 3010;
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
+		wp_enqueue_script( 'live-reload', $url, [], 1, true );
+	}
+	return false;
+}

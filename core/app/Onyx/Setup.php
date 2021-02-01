@@ -100,7 +100,9 @@ class Setup extends \Timber\Site {
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
-		class_alias( '\Onyx\Helpers', '\Onyx\O' ); // for legacy versions
+		if ( ONYX_LIVERELOAD ) {
+			add_action( 'wp_enqueue_scripts', 'onyx_enqueue_livereload' );
+		}
 
 		parent::__construct();
 	}
