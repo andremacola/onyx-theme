@@ -100,7 +100,7 @@ class Setup extends \Timber\Site {
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
-		if ( ONYX_LIVERELOAD ) {
+		if ( defined( 'ONYX_LIVERELOAD' ) && ONYX_LIVERELOAD ) {
 			add_action( 'wp_enqueue_scripts', 'onyx_enqueue_livereload' );
 		}
 

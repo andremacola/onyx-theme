@@ -591,7 +591,7 @@ function onyx_supress_main_query( $request, $query ) {
  * @return void|boolean
  */
 function onyx_enqueue_livereload() {
-	if ( ONYX_LIVERELOAD ) {
+	if ( defined( 'ONYX_LIVERELOAD' ) && ONYX_LIVERELOAD ) {
 		$port     = 3010;
 		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
 		$url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
