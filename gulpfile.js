@@ -173,6 +173,7 @@ function watch() {
 		proxy: {
 			target: config.url,
 		},
+		host: config.url.split('//')[1],
 		port: config.port,
 		https: config.https,
 		ui: {
