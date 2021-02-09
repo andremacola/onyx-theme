@@ -104,8 +104,8 @@ const onyx = {
 	stream() {
 		return (config.liveReload) ? liveReload() : browserSync.stream();
 	},
-	reload() {
-		return (config.liveReload) ? liveReload.reload() : browserSync.reload;
+	reload(file) {
+		return (config.liveReload) ? liveReload.reload(file) : browserSync.reload;
 	},
 	prefixer() {
 		return autoprefixer({ cascade: false });
@@ -230,7 +230,7 @@ function serve() {
 	onyx.watch();
 	gulp.watch([ './src/sass/**/*.scss' ], styles);
 	gulp.watch([ './src/js/**/*.js' ], js);
-	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', () => onyx.reload());
+	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', (file) => onyx.reload(file));
 }
 
 /*
