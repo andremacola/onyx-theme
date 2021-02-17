@@ -136,7 +136,7 @@ function stylesPurge() {
 		.src([ 'assets/css/main.css' ])
 		.pipe(
 			purgecss({
-				content: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.twig', 'views/**/*.php', 'src/js/**/*.js' ],
+				content: [ './comments.php', 'core/**/*.php', 'templates/**/*.php', 'views/**/*.twig', 'views/**/*.php', 'src/js/**/*.js' ],
 				safelist: wpCSS.whitelist,
 			})
 		)
