@@ -107,7 +107,7 @@ class Helpers {
 	 * @return bool
 	 */
 	public static function is_amp() {
-		return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
+		return function_exists( 'amp_is_request' ) && amp_is_request();
 	}
 
 	/**
