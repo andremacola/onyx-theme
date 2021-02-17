@@ -94,6 +94,8 @@ const wpCSS = {
 		/^tax-(.*)?$/,
 		/^term-(.*)?$/,
 		/^(.*)?-?paged(-.*)?$/,
+		/^comments-(.*)?$/,
+		/^comment-(.*)?$/,
 	],
 };
 
