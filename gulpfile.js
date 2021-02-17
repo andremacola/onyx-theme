@@ -73,7 +73,6 @@ const wpCSS = {
 		'wp-caption',
 		'wp-caption-text',
 		'screen-reader-text',
-		'comment-list',
 		/^hide-(.*)?$/,
 		/^gm-(.*)?$/,
 		/^lg-(.*)?$/,
