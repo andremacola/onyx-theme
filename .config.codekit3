@@ -735,10 +735,10 @@
       "ft" : 4,
       "ma" : 0,
       "oA" : 0,
-      "oAP" : "\/assets\/css\/style.min.css",
+      "oAP" : "\/assets\/css\/style.css",
       "oF" : 2,
       "oS" : 3,
-      "pg" : 1,
+      "pg" : 0,
       "sct" : 0
     },
     "\/src\/sass\/utils\/_fonts.scss" : {

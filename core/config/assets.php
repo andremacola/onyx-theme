@@ -28,7 +28,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'css' => [
-		'style' => [ 'assets/css/style.min.css' ],
+		'style' => [ 'assets/css/style.css' ],
 	],
 
 	/*

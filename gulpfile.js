@@ -54,7 +54,7 @@ const config = {
 
 	styles: {
 		source: './src/sass/style.scss',
-		output: 'style.min.css',
+		output: 'style.css',
 		dest: './assets/css',
 	},
 
