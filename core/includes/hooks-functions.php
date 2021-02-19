@@ -389,7 +389,7 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
 function onyx_admin_scripts() {
 	$env = O::conf( 'env' );
 	echo "<link rel='shortcut icon' href='" . esc_attr( $env->dir_uri ) . "/assets/images/icons/favicon-32.png' />";
-	wp_enqueue_style( 'onyx-admin-style', $env->dir_uri . '/assets/css/styles.admin.css', [], $env->version );
+	wp_enqueue_style( 'onyx-admin-style', $env->dir_uri . '/assets/css/style.admin.css', [], $env->version );
 }
 
 /**
@@ -535,7 +535,7 @@ function onyx_rest_url_prefix() {
  * @return void
  */
 function onyx_gutenberg_style() {
-	add_editor_style( 'assets/css/styles.editor.css' );
+	add_editor_style( 'assets/css/style.editor.css' );
 }
 
 /**
