@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@babel/code-frame@7.12.11":
+  version "7.12.11"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
+  integrity sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==
+  dependencies:
+    "@babel/highlight" "^7.10.4"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -165,10 +172,10 @@
     magic-string "^0.25.7"
     resolve "^1.17.0"
 
-"@rollup/plugin-node-resolve@^11.1.1":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-11.1.1.tgz#47bc34252914794a1b06fb50371d7520a03f91f3"
-  integrity sha512-zlBXR4eRS+2m79TsUZWhsd0slrHUYdRx4JF+aVQm+MI0wsKdlpC2vlDVjmlGvtZY1vsefOT9w3JxvmWSBei+Lg==
+"@rollup/plugin-node-resolve@^11.2.0":
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-11.2.0.tgz#a5ab88c35bb7622d115f44984dee305112b6f714"
+  integrity sha512-qHjNIKYt5pCcn+5RUBQxK8krhRvf1HnyVgUCcFFcweDS7fhkOLZeYh0mhHK6Ery8/bb9tvN/ubPzmfF0qjDCTA==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     "@types/resolve" "1.17.1"
@@ -280,12 +287,12 @@
     "@typescript-eslint/types" "4.14.1"
     eslint-visitor-keys "^2.0.0"
 
-"@wordpress/eslint-plugin@^8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@wordpress/eslint-plugin/-/eslint-plugin-8.0.1.tgz#e5f01bf5f3359d8561ffadecfa843df179c0575f"
-  integrity sha512-OACItHPjusd+Q0P9rKeqe3N6ATppwlQYwnqRv4YnrPh9+cElf5HpCtfQlW4rxJ7sQ5B0MsZeSCnaqY3TVGULUg==
+"@wordpress/eslint-plugin@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@wordpress/eslint-plugin/-/eslint-plugin-8.0.2.tgz#408cc5b0d01bd7ce48b04d9737535845f551c8ae"
+  integrity sha512-sXNuk3bjEAAroazRXlEsYcYN5tgimyeT1XOh90Is41BGkp2Z3omaJ/W0cU8bjKv08MC/OKF7FTYNCg5uzy8JaA==
   dependencies:
-    "@wordpress/prettier-config" "^1.0.0"
+    "@wordpress/prettier-config" "^1.0.1"
     babel-eslint "^10.1.0"
     cosmiconfig "^7.0.0"
     eslint-config-prettier "^7.1.0"
@@ -300,10 +307,10 @@
     prettier "npm:wp-prettier@2.2.1-beta-1"
     requireindex "^1.2.0"
 
-"@wordpress/prettier-config@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@wordpress/prettier-config/-/prettier-config-1.0.0.tgz#b6a7091e75ab3403e658c44d4f7634895871ef05"
-  integrity sha512-s8EXokSxce1rnOY2gaL0tZgp7epg9qmmkg+z7nu3UWM61tPAXO9VWpzIUUVk5oF0lf1TARyrOMf3ZgdE3jl4Nw==
+"@wordpress/prettier-config@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@wordpress/prettier-config/-/prettier-config-1.0.1.tgz#1ca9b2089b94ca3d95e60c0594d1e5409f504ce4"
+  integrity sha512-LgnivcSTWqUgy5JE24+AKygtQsVvcdvNUGEyeM4K4urWgnyvmkeyZDfbN1nuK2b7E1oRMSSCCwxqQJDoxlFgUg==
 
 abbrev@1:
   version "1.1.1"
@@ -1982,12 +1989,12 @@ eslint-visitor-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
 
-eslint@^7.19.0:
-  version "7.19.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.19.0.tgz#6719621b196b5fad72e43387981314e5d0dc3f41"
-  integrity sha512-CGlMgJY56JZ9ZSYhJuhow61lMPPjUzWmChFya71Z/jilVos7mR/jPgaEfVGgMBY5DshbKdG8Ezb8FDCHcoMEMg==
+eslint@^7.20.0:
+  version "7.20.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.20.0.tgz#db07c4ca4eda2e2316e7aa57ac7fc91ec550bdc7"
+  integrity sha512-qGi0CTcOGP2OtCQBgWZlQjcTuP0XkIpYFj25XtRTQSHC+umNnp7UMshr2G8SLsRFYDdAPFeHOsiteadmMH02Yw==
   dependencies:
-    "@babel/code-frame" "^7.0.0"
+    "@babel/code-frame" "7.12.11"
     "@eslint/eslintrc" "^0.3.0"
     ajv "^6.10.0"
     chalk "^4.0.0"
@@ -1999,7 +2006,7 @@ eslint@^7.19.0:
     eslint-utils "^2.1.0"
     eslint-visitor-keys "^2.0.0"
     espree "^7.3.1"
-    esquery "^1.2.0"
+    esquery "^1.4.0"
     esutils "^2.0.2"
     file-entry-cache "^6.0.0"
     functional-red-black-tree "^1.0.1"
@@ -2039,10 +2046,10 @@ esprima@^4.0.0:
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
   integrity sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
 
-esquery@^1.2.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.3.1.tgz#b78b5828aa8e214e29fb74c4d5b752e1c033da57"
-  integrity sha512-olpvt9QG0vniUBZspVRN6lwB7hOZoTRtT+jzR+tS4ffYx2mzbw+z0XCOk44aaLYKApNX5nMm+E+P6o25ip/DHQ==
+esquery@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.4.0.tgz#2148ffc38b82e8c7057dfed48425b3e61f0f24a5"
+  integrity sha512-cCDispWt5vHHtwMY2YrAQ4ibFkAL8RbH5YGBnZBc90MolvvfkkQcJro/aZiAQUlQ3qgrYS6D6v8Gc5G5CQsc9w==
   dependencies:
     estraverse "^5.1.0"
 
@@ -2426,11 +2433,6 @@ fsevents@^1.2.7:
   dependencies:
     bindings "^1.5.0"
     nan "^2.12.1"
-
-fsevents@~2.1.2:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.1.3.tgz#fb738703ae8d2f9fe900c33836ddebee8b97f23e"
-  integrity sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==
 
 fsevents@~2.3.1:
   version "2.3.1"
@@ -4823,12 +4825,12 @@ rollup-plugin-terser@^7.0.2:
     serialize-javascript "^4.0.0"
     terser "^5.0.0"
 
-rollup@^2.38.1:
-  version "2.38.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.38.1.tgz#ecea0f7ce6ef2c1f023fdb79524eb7aeb670ea79"
-  integrity sha512-q07T6vU/V1kqM8rGRRyCgEvIQcIAXoKIE5CpkYAlHhfiWM1Iuh4dIPWpIbqFngCK6lwAB2aYHiUVhIbSWHQWhw==
+rollup@^2.39.0:
+  version "2.39.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.39.0.tgz#be4f98c9e421793a8fec82c854fb567c35e22ab6"
+  integrity sha512-+WR3bttcq7zE+BntH09UxaW3bQo3vItuYeLsyk4dL2tuwbeSKJuvwiawyhEnvRdRgrII0Uzk00FpctHO/zB1kw==
   optionalDependencies:
-    fsevents "~2.1.2"
+    fsevents "~2.3.1"
 
 run-parallel@^1.1.9:
   version "1.1.10"
