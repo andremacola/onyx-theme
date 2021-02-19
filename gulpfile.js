@@ -31,10 +31,10 @@ const read = require('fs').readFileSync;
 const isProd = (process.env.NODE_ENV === 'prod');
 
 const config = {
-	liveReload: (process.env.LIVERELOAD == 'true'),
+	livereload: (process.env.LIVERELOAD == 'true'),
 	url: process.env.URL,
 	port: parseInt(process.env.PORT, 10),
-	ui_port: parseInt(process.env.UI_PORT, 10),
+	portui: parseInt(process.env.PORT_UI, 10),
 
 	key: (process.env.KEY) ? process.env.KEY : false,
 	cert: (process.env.CRT) ? process.env.CRT : false,
@@ -46,67 +46,86 @@ const config = {
 	prefixer: isProd,
 	terser: isProd,
 
-	style: './src/sass/styles.scss',
-	styleDest: './assets/css',
-	jmq: isProd,
+	js: {
+		source: './src/js/app.js',
+		output: 'app.min.js',
+		dest: './assets/js',
+	},
 
-	js: './src/js/app.js',
-	jsDest: './assets/js',
-};
+	styles: {
+		source: './src/sass/style.scss',
+		output: 'style.min.css',
+		dest: './assets/css',
+	},
 
-const wpCSS = {
-	whitelist: [
-		'rtl',
-		'home',
-		'blog',
-		'archive',
-		'date',
-		'error404',
-		'logged-in',
-		'admin-bar',
-		'no-customize-support',
-		'custom-background',
-		'wp-custom-logo',
-		'alignnone',
-		'alignright',
-		'alignleft',
-		'wp-caption',
-		'wp-caption-text',
-		'screen-reader-text',
-		/^hide-(.*)?$/,
-		/^gm-(.*)?$/,
-		/^lg-(.*)?$/,
-		/^tns-(.*)?$/,
-		/^wp-block(-.*)?$/,
-		/^active(-.*)?$/,
-		/^search(-.*)?$/,
-		/^(.*)-template(-.*)?$/,
-		/^(.*)?-?single(-.*)?$/,
-		/^postid-(.*)?$/,
-		/^attachmentid-(.*)?$/,
-		/^attachment(-.*)?$/,
-		/^page(-.*)?$/,
-		/^(post-type-)?archive(-.*)?$/,
-		/^author(-.*)?$/,
-		/^category(-.*)?$/,
-		/^tag(-.*)?$/,
-		/^tax-(.*)?$/,
-		/^term-(.*)?$/,
-		/^(.*)?-?paged(-.*)?$/,
-		/^comments-(.*)?$/,
-		/^comment-(.*)?$/,
-	],
+	purgecss: {
+		content: [
+			'./comments.php',
+			'core/**/*.php',
+			'templates/**/*.php',
+			'views/**/*.twig',
+			'views/**/*.php',
+			'src/js/**/*.js',
+		],
+		whitelist: [
+			'rtl',
+			'home',
+			'blog',
+			'archive',
+			'date',
+			'error404',
+			'logged-in',
+			'admin-bar',
+			'no-customize-support',
+			'custom-background',
+			'wp-custom-logo',
+			'alignnone',
+			'alignright',
+			'alignleft',
+			'wp-caption',
+			'wp-caption-text',
+			'screen-reader-text',
+			/^hide-(.*)?$/,
+			/^gm-(.*)?$/,
+			/^lg-(.*)?$/,
+			/^tns-(.*)?$/,
+			/^wp-block(-.*)?$/,
+			/^active(-.*)?$/,
+			/^search(-.*)?$/,
+			/^(.*)-template(-.*)?$/,
+			/^(.*)?-?single(-.*)?$/,
+			/^postid-(.*)?$/,
+			/^attachmentid-(.*)?$/,
+			/^attachment(-.*)?$/,
+			/^page(-.*)?$/,
+			/^(post-type-)?archive(-.*)?$/,
+			/^author(-.*)?$/,
+			/^category(-.*)?$/,
+			/^tag(-.*)?$/,
+			/^tax-(.*)?$/,
+			/^term-(.*)?$/,
+			/^(.*)?-?paged(-.*)?$/,
+			/^comments-(.*)?$/,
+			/^comment-(.*)?$/,
+		],
+	},
+
+	watch: {
+		js: [ './src/js/**/*.js' ],
+		styles: [ './src/sass/**/*.scss' ],
+		views: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ],
+	},
 };
 
 const onyx = {
 	watch() {
-		return (config.liveReload) ? startLiveReload() : startBrowserSync();
+		return (config.livereload) ? startLiveReload() : startBrowserSync();
 	},
 	stream() {
-		return (config.liveReload) ? liveReload() : browserSync.stream();
+		return (config.livereload) ? liveReload() : browserSync.stream();
 	},
 	reload(file) {
-		return (config.liveReload) ? liveReload.reload(file) : browserSync.reload;
+		return (config.livereload) ? liveReload.reload(file) : browserSync.reload;
 	},
 	prefixer() {
 		return autoprefixer({ cascade: false });
@@ -121,27 +140,27 @@ const onyx = {
 
 function styles() {
 	return gulp
-		.src(config.style)
+		.src(config.styles.source)
 		.pipe(sass({
 			outputStyle: config.cssout,
 			includePaths: [ './node_modules/' ],
 		}).on('error', sass.logError))
-		.pipe(rename('main.css'))
+		.pipe(rename(config.styles.output))
 		.pipe(onyx.stream())
 		.pipe(gulpif(config.prefixer, onyx.prefixer()))
-		.pipe(gulp.dest(config.styleDest));
+		.pipe(gulp.dest(config.styles.dest));
 }
 
 function stylesPurge() {
 	return gulp
-		.src([ 'assets/css/main.css' ])
+		.src([ config.styles.dest + '/' + config.styles.output ])
 		.pipe(
 			purgecss({
-				content: [ './comments.php', 'core/**/*.php', 'templates/**/*.php', 'views/**/*.twig', 'views/**/*.php', 'src/js/**/*.js' ],
-				safelist: wpCSS.whitelist,
+				content: config.purgecss.content,
+				safelist: config.purgecss.whitelist,
 			})
 		)
-		.pipe(gulp.dest(config.styleDest));
+		.pipe(gulp.dest(config.styles.dest));
 }
 
 /*
@@ -153,9 +172,8 @@ function stylesPurge() {
 let cache;
 function js() {
 	const options = {
-		input: config.js,
+		input: config.js.source,
 		output: {
-			file: config.jsDest,
 			format: 'cjs',
 		},
 		plugins: [
@@ -169,8 +187,8 @@ function js() {
 		.on('bundle', (bundle) => {
 			cache = bundle;
 		})
-		.pipe(source('app.min.js'))
-		.pipe(gulp.dest(config.jsDest))
+		.pipe(source(config.js.output))
+		.pipe(gulp.dest(config.js.dest))
 		.pipe(onyx.stream());
 }
 
@@ -180,7 +198,6 @@ function js() {
 |--------------------------------------------------------------------------
 */
 
-// eslint-disable-next-line no-unused-vars
 function startBrowserSync() {
 	browserSync.init({
 		proxy: {
@@ -190,7 +207,7 @@ function startBrowserSync() {
 		port: config.port,
 		https: config.https(),
 		ui: {
-			port: config.ui_port,
+			port: config.portui,
 		},
 		open: false,
 		notify: false,
@@ -212,7 +229,6 @@ function startBrowserSync() {
 |--------------------------------------------------------------------------
 */
 
-// eslint-disable-next-line no-unused-vars
 function startLiveReload() {
 	liveReload.listen({
 		port: config.port,
@@ -229,9 +245,9 @@ function startLiveReload() {
 
 function serve() {
 	onyx.watch();
-	gulp.watch([ './src/sass/**/*.scss' ], styles);
-	gulp.watch([ './src/js/**/*.js' ], js);
-	gulp.watch([ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ]).on('change', (file) => onyx.reload(file));
+	gulp.watch(config.watch.js, js);
+	gulp.watch(config.watch.styles, styles);
+	gulp.watch(config.watch.views).on('change', (file) => onyx.reload(file));
 }
 
 /*
