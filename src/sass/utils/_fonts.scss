@@ -5,11 +5,20 @@
 */
 
 // @font-face {
-// 	font-family: 'FontName';
-// 	font-weight: normal;
-// 	src: url('../fonts/FontFile.eot');
-// 	src: url('../fonts/FontFile.eot?#iefix') format('embedded-opentype'),
-// 		url('../fonts/FontFile.woff') format('woff'),
-// 		url('../fonts/FontFile.otf') format('OpenType'),
-// 		url('../fonts/FontFile.svg#Bree') format('svg');
+// 	font-family: "FontName";
+// 	src: url("../fonts/fontFile.woff2") format("woff2"),
+// 		  url("../fonts/fontFile.woff")  format("woff");
+// 	font-style: normal;
+// 	font-weight: 400;
+// 	font-display: swap;
 // }
+
+/* 100 THIN */
+/* 200 EXTRA LIGHT */
+/* 300 LIGHT */
+/* 400 NORMAL */
+/* 500 MEDIUM */
+/* 600 SEMI BOLD */
+/* 700 BOLD */
+/* 800 EXTRA BOLD */
+/* 900 ULTRA BOLD */
