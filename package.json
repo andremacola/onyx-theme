@@ -13,7 +13,9 @@
 		"type": "git",
 		"url": "git@github.com:andremacola/onyx-theme.git"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@selfisekai/gulp-sass": "^4.2.0"
+	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^17.1.0",
 		"@rollup/plugin-node-resolve": "^11.2.0",
@@ -28,7 +30,7 @@
 		"gulp-livereload": "https://github.com/andremacola/gulp-livereload.git",
 		"gulp-purgecss": "^4.0.0",
 		"gulp-rename": "^2.0.0",
-		"gulp-sass": "^4.1.0",
+		"node-sass": "^5.0.0",
 		"rollup": "^2.39.0",
 		"rollup-plugin-terser": "^7.0.2",
 		"vinyl-source-stream": "^2.0.0"
