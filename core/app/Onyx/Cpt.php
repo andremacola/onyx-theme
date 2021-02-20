@@ -134,7 +134,7 @@ class Cpt {
 		$this->slug = sanitize_title( $slug );
 
 		// set key.
-		$this->key = ( isset( $this->names['key'] ) ) ? $this->names['key'] : $this->slug;
+		$this->key = ( isset( $this->names['key'] ) ) ? $this->names['key'] : sanitize_title( $this->name );
 	}
 
 	/**
@@ -217,7 +217,8 @@ class Cpt {
 	 * @return string
 	 */
 	private function get_name() {
-		$value = str_replace( [ '-', '_' ], ' ', $this->names['name'] );
+		$name  = (isset( $this->names['name'] )) ? $this->names['name'] : $this->names['key'];
+		$value = str_replace( [ '-', '_' ], ' ', $name );
 		$value = strtolower( $value );
 		return ucwords( $value );
 	}
