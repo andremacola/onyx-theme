@@ -232,8 +232,8 @@ function startBrowserSync() {
 function startLiveReload() {
 	liveReload.listen({
 		port: config.port,
-		key: read(config.key),
-		cert: read(config.cert),
+		key: (config.key) ? read(config.key) : false,
+		cert: (config.cert) ? read(config.cert) : false,
 	});
 }
 
