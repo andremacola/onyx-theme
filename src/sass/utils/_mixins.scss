@@ -4,14 +4,13 @@
 |--------------------------------------------------------------------------
 */
 
-/* transição de hover/active sem prejudicar o mobile */
-@mixin hover( $property, $value ) {
+@mixin hover {
 	&:active {
-		#{$property}: $value !important;
+		@content;
 	}
 	@media(hover: hover) and (pointer: fine) {
 		&:hover {
-			#{$property}: $value !important;
+			@content;
 		}
 	}
 }
