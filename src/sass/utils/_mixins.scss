@@ -4,6 +4,18 @@
 |--------------------------------------------------------------------------
 */
 
+/* transição de hover/active sem prejudicar o mobile */
+@mixin hover( $property, $value ) {
+	&:active {
+		#{$property}: $value !important;
+	}
+	@media(hover: hover) and (pointer: fine) {
+		&:hover {
+			#{$property}: $value !important;
+		}
+	}
+}
+
 @mixin word-wrap() {
 	overflow-wrap: break-word;
 	word-wrap: break-word;
