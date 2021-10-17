@@ -14,14 +14,13 @@
 		"type": "git",
 		"url": "git@github.com:andremacola/onyx-theme.git"
 	},
-	"dependencies": {
-		"@selfisekai/gulp-sass": "^4.2.0"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^21.0.0",
 		"@rollup/plugin-node-resolve": "^13.0.5",
 		"@rollup/stream": "^2.0.0",
 		"@wordpress/eslint-plugin": "^9.2.0",
+		"@selfisekai/gulp-sass": "^4.2.0",
 		"browser-sync": "^2.27.5",
 		"dotenv": "^10.0.0",
 		"eslint": "^8.0.1",
