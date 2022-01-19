@@ -314,7 +314,7 @@ class Setup extends \Timber\Site {
 	 * @return void
 	 */
 	protected function load_tests_if_exist() {
-		if ( ONYX_TESTS ) {
+		if ( defined( 'ONYX_TESTS' ) && ONYX_TESTS ) {
 			$test = __DIR__ . '/../../../tests/functions.php';
 			if ( file_exists( $test ) ) {
 				require $test;
