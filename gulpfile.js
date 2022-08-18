@@ -12,8 +12,7 @@ const browserSync = require('browser-sync').create();
 
 const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
-const sass = require('@selfisekai/gulp-sass');
-sass.compiler = require('node-sass');
+const sass = require('gulp-sass')(require('node-sass'));
 
 const rollup = require('@rollup/stream');
 const commonjs = require('@rollup/plugin-commonjs');
