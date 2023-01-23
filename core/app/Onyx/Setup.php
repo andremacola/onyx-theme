@@ -35,6 +35,13 @@ class Setup extends \Timber\Site {
 	protected $assets;
 
 	/**
+	 * Theme hooks
+	 *
+	 * @var array|object
+	 */
+	protected $hooks;
+
+	/**
 	 * Theme images sizes
 	 *
 	 * @var array|object
