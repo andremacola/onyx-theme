@@ -11,6 +11,9 @@ define( 'ONYX_TESTS', '' );
 /* Define onyx livereload */
 define( 'ONYX_LIVERELOAD', '' );
 
+/* Onyx developers emails */
+define( 'ONYX_DEVELOPERS', [] );
+
 /**
  * Check if is amp plugin endpoint.
  * */
