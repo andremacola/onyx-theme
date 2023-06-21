@@ -592,9 +592,11 @@ function onyx_supress_main_query( $request, $query ) {
  */
 function onyx_enqueue_livereload() {
 	if ( defined( 'ONYX_LIVERELOAD' ) && ONYX_LIVERELOAD ) {
-		$port     = 3010;
-		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https' : 'http';
-		$url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
+		$port = 3010;
+		$url  = 'http://localhost' . ":$port/livereload.js";
+		// $protocol = isset( $_SERVER['HTTPS'] ) ? 'https' : 'http';
+		// $url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
+
 		wp_enqueue_script( 'live-reload', $url, [], 1, true );
 	}
 	return false;

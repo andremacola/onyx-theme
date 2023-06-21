@@ -8,7 +8,6 @@ const rename = require('gulp-rename');
 const source = require('vinyl-source-stream');
 
 const liveReload = require('gulp-livereload');
-const browserSync = require('browser-sync').create();
 
 const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
@@ -19,8 +18,6 @@ const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const terser = require('@rollup/plugin-terser');
 
-const read = require('fs').readFileSync;
-
 /* -------------------------------------------------------------------------
 | CONFIGURATION VARIABLES
 ------------------------------------------------------------------------- */
@@ -29,15 +26,7 @@ const isProd = (process.env.NODE_ENV === 'prod');
 
 const config = {
 	livereload: (process.env.LIVERELOAD == 'true'),
-	url: process.env.URL,
 	port: parseInt(process.env.PORT, 10),
-	portui: parseInt(process.env.PORT_UI, 10),
-
-	key: (process.env.KEY) ? process.env.KEY : false,
-	cert: (process.env.CRT) ? process.env.CRT : false,
-	https() {
-		return (this.key) ? { key: this.key, cert: this.cert	} : false;
-	},
 
 	cssout: isProd ? 'compressed' : 'expanded',
 	prefixer: isProd,
@@ -116,13 +105,13 @@ const config = {
 
 const onyx = {
 	watch() {
-		return (config.livereload) ? startLiveReload() : startBrowserSync();
+		return (config.livereload) ? startLiveReload() : null;
 	},
 	stream() {
-		return (config.livereload) ? liveReload() : browserSync.stream();
+		return (config.livereload) ? liveReload() : null;
 	},
 	reload(file) {
-		return (config.livereload) ? liveReload.reload(file) : browserSync.reload;
+		return (config.livereload) ? liveReload.reload(file) : null;
 	},
 	prefixer() {
 		return autoprefixer({ cascade: false });
@@ -186,43 +175,12 @@ function js() {
 }
 
 /* -------------------------------------------------------------------------
-| BROWSERSYNC
-------------------------------------------------------------------------- */
-
-function startBrowserSync() {
-	browserSync.init({
-		proxy: {
-			target: config.url,
-		},
-		host: config.url.split('//')[1],
-		port: config.port,
-		https: config.https(),
-		ui: {
-			port: config.portui,
-		},
-		open: false,
-		notify: false,
-		injectChanges: true,
-		logConnections: false,
-		logFileChanges: false,
-		logSnippet: false,
-		ghostMode: {
-			clicks: false,
-			forms: false,
-			scroll: false,
-		},
-	});
-}
-
-/* -------------------------------------------------------------------------
 | LIVE RELOAD
 ------------------------------------------------------------------------- */
 
 function startLiveReload() {
 	liveReload.listen({
 		port: config.port,
-		key: (config.key) ? read(config.key) : false,
-		cert: (config.cert) ? read(config.cert) : false,
 	});
 }
 
