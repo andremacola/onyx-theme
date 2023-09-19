@@ -44,6 +44,7 @@
 		<!-- <exclude name="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket" /> -->
 
 		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.namespaceFound"/>
 		
 	</rule>
 
