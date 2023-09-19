@@ -160,5 +160,4 @@ class Boot {
 		$controller = $namespace . $controller;
 		return ( '\Onyx\Controllers\404' === $controller ) ? "{$namespace}Error404{$suffix}" : "$controller$suffix";
 	}
-
 }

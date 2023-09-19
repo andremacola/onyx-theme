@@ -18,7 +18,8 @@
 	"config": {
 		"vendor-dir": "core/vendor",
 		"allow-plugins": {
-			"composer/installers": true
+			"composer/installers": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	},
 	"autoload": {
@@ -28,6 +29,10 @@
 		}
 	},
 	"require": {
-		"timber/timber": "^1.20"
+		"timber/timber": "^1.22"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"wp-coding-standards/wpcs": "^3.0"
 	}
 }

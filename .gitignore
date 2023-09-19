@@ -6,6 +6,10 @@
 ._*
 desktop.ini
 
+# editors
+######################
+*.sublime-workspace
+
 # development
 ######################
 .codekit-cache

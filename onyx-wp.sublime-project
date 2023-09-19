@@ -1,0 +1,24 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+		}
+	],
+	"settings":
+	{
+		"lsp_code_actions_on_save":
+		{
+		   "source.fixAll.eslint": true,
+		},
+		"PHP_CBF":
+		{
+			"fix_on_save": true,
+			"phpcbf_path": "${folder}/core/vendor/bin/phpcbf",
+			"phpcs_standard": "${folder}/.phpcs.xml",
+		},
+		"SublimeLinter.linters.phpcs.args": "-s --standard='${folder}/.phpcs.xml'",
+		"SublimeLinter.linters.phpcs.executable": "${folder}/core/vendor/bin/phpcs",
+		"SublimeLinter.linters.phpcs.disable": false,
+	},
+}
