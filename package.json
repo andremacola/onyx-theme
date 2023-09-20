@@ -4,6 +4,7 @@
 	"description": "Onyx Wordpress Starter Theme",
 	"scripts": {
 		"serve": "yarn gulp serve",
+		"dev": "yarn gulp serve",
 		"serve:prod": "env NODE_ENV=prod yarn gulp serve",
 		"build": "env NODE_ENV=prod yarn gulp",
 		"svg-spreact": "svg-spreact -t false -o true ./assets/images/svgs > ./assets/images/sprites.svg"
