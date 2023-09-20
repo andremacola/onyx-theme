@@ -38,6 +38,7 @@
 		<exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen"/>
 		<exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceBeforeClose"/>
 
+		<exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody" />
 		<exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
 		<exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
 		<!-- <exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket" /> -->
