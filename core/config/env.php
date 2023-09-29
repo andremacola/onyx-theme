@@ -9,6 +9,7 @@
 return [
 	'version'    => '1.0',
 	'static'     => false,
+	'livereload' => true,
 	'theme'      => get_template(),
 	'dir_uri'    => get_template_directory_uri(),
 	'dir'        => get_template_directory(),
@@ -16,7 +17,6 @@ return [
 	'name'       => get_bloginfo( 'name' ),
 	'url'        => get_home_url(),
 	'user'       => wp_get_current_user()->user_email,
-	'livereload' => true,
 	'devs'       => defined( 'ONYX_DEVELOPERS' ) ? ONYX_DEVELOPERS : [ 'dev@domain.tld' ],
 	'timber'     => [
 		'cache_dir' => WP_CONTENT_DIR . '/cache/timber',
