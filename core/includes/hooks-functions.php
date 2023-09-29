@@ -9,7 +9,7 @@
  * @see https://codex.wordpress.org/Plugin_API/Action_Reference
  */
 
-use \Onyx\Helpers as O;
+use Onyx\Helpers as O;
 
 /**
  * Remove WordPress frontend jquery.
@@ -128,10 +128,8 @@ function onyx_load_styles() {
 
 		if ( ! $home ) :
 			wp_enqueue_style( $handler, $src, $deps, $ver, $media );
-		else :
-			if ( is_home() ) {
+		elseif ( is_home() ) :
 				wp_enqueue_style( $handler, $src, $deps, $ver, $media );
-			}
 		endif;
 	}
 }
@@ -153,10 +151,8 @@ function onyx_load_javascripts() {
 
 		if ( ! $home ) :
 			wp_enqueue_script( $handler, $src, $deps, $ver, $in_footer );
-		else :
-			if ( is_home() ) {
+		elseif ( is_home() ) :
 				wp_enqueue_script( $handler, $src, $deps, $ver, $in_footer );
-			}
 		endif;
 	}
 }
@@ -508,22 +504,6 @@ function onyx_editor_page_break( $mce_buttons ) {
 
 /*
 |--------------------------------------------------------------------------
-| WP REST API
-|--------------------------------------------------------------------------
-*/
-
-/**
- * Change WP REST API Prefix (Default: wp-json)
- * Registered at filters->add->rest_url_prefix at config/hooks.php
- *
- * @return string
- */
-function onyx_rest_url_prefix() {
-	return O::conf( 'env' )->rest;
-}
-
-/*
-|--------------------------------------------------------------------------
 | GUTENBERG
 |--------------------------------------------------------------------------
 */
@@ -591,13 +571,13 @@ function onyx_supress_main_query( $request, $query ) {
  * @return void|boolean
  */
 function onyx_enqueue_livereload() {
-	if ( defined( 'ONYX_LIVERELOAD' ) && ONYX_LIVERELOAD ) {
-		$port = 3010;
-		$url  = 'http://localhost' . ":$port/livereload.js";
-		// $protocol = isset( $_SERVER['HTTPS'] ) ? 'https' : 'http';
-		// $url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
-
-		wp_enqueue_script( 'live-reload', $url, [], 1, true );
+	if ( strpos( $_SERVER['HTTP_HOST'], 'localhost' ) || strpos( $_SERVER['HTTP_HOST'], '.local' ) ) {
+			$port = 3010;
+			$url  = 'http://localhost' . ":$port/livereload.js";
+			// $protocol = isset( $_SERVER['HTTPS'] ) ? 'https' : 'http';
+			// $url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
+			wp_enqueue_script( 'live-reload', $url, [], 1, true );
 	}
+
 	return false;
 }

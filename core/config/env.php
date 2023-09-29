@@ -7,21 +7,21 @@
  */
 
 return [
-	'version' => '1.0',
-	'static'  => false,
-	'theme'   => get_template(),
-	'dir_uri' => get_template_directory_uri(),
-	'dir'     => get_template_directory(),
-	'desc'    => get_bloginfo( 'description' ),
-	'name'    => get_bloginfo( 'name' ),
-	'url'     => get_home_url(),
-	'rest'    => 'api',
-	'user'    => wp_get_current_user()->user_email,
-	'devs'    => defined( 'ONYX_DEVELOPERS' ) ? ONYX_DEVELOPERS : [ 'dev@domain.tld' ],
-	'timber'  => [
+	'version'    => '1.0',
+	'static'     => false,
+	'theme'      => get_template(),
+	'dir_uri'    => get_template_directory_uri(),
+	'dir'        => get_template_directory(),
+	'desc'       => get_bloginfo( 'description' ),
+	'name'       => get_bloginfo( 'name' ),
+	'url'        => get_home_url(),
+	'user'       => wp_get_current_user()->user_email,
+	'livereload' => true,
+	'devs'       => defined( 'ONYX_DEVELOPERS' ) ? ONYX_DEVELOPERS : [ 'dev@domain.tld' ],
+	'timber'     => [
 		'cache_dir' => WP_CONTENT_DIR . '/cache/timber',
 	],
-	'uploads' => [
+	'uploads'    => [
 		'max_file_size' => 5000,
 		'unset_types'   => [
 			'mp4|m4v',

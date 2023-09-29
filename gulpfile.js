@@ -18,6 +18,8 @@ const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const terser = require('@rollup/plugin-terser');
 
+const read = require('fs').readFileSync;
+
 /* -------------------------------------------------------------------------
 | CONFIGURATION VARIABLES
 ------------------------------------------------------------------------- */
@@ -26,7 +28,9 @@ const isProd = (process.env.NODE_ENV === 'prod');
 
 const config = {
 	livereload: (process.env.LIVERELOAD == 'true'),
-	port: parseInt(process.env.PORT, 10),
+	port: parseInt(process.env.LIVERELOAD_PORT, 10),
+	key: (process.env.KEY) ? process.env.KEY : false,
+	cert: (process.env.CRT) ? process.env.CRT : false,
 
 	cssout: isProd ? 'compressed' : 'expanded',
 	prefixer: isProd,
@@ -181,6 +185,8 @@ function js() {
 function startLiveReload() {
 	liveReload.listen({
 		port: config.port,
+		key: (config.key) ? read(config.key) : false,
+		cert: (config.cert) ? read(config.cert) : false,
 	});
 }
 

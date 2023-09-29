@@ -204,10 +204,8 @@ class Helpers {
 
 		if ( ! $home ) :
 			echo $css;
-		else :
-			if ( is_home() ) {
+		elseif ( is_home() ) :
 				echo $css;
-			}
 		endif;
 	}
 
@@ -226,10 +224,8 @@ class Helpers {
 
 		if ( ! $home ) :
 			echo $script;
-		else :
-			if ( is_home() ) {
+		elseif ( is_home() ) :
 				echo $script;
-			}
 		endif;
 	}
 
@@ -308,11 +304,11 @@ class Helpers {
 	 *
 	 * This need another approach, maybe using self::route_type()
 	 *
-	 * @param bool   $echo Whether to display or retrieve title. Default true [optional]
+	 * @param bool   $show Whether to display or retrieve title. Default true [optional]
 	 * @param string $prefix What to display before the title [optional]
 	 * @return void|string
 	 */
-	public static function section_title( $echo = true, $prefix = '' ) {
+	public static function section_title( $show = true, $prefix = '' ) {
 		if ( is_post_type_archive() ) {
 			$title = post_type_archive_title( $prefix, false );
 		} elseif ( is_category() ) {
@@ -325,7 +321,7 @@ class Helpers {
 			$title = single_term_title( $prefix, false );
 		}
 
-		if ( $echo ) {
+		if ( $show ) {
 			echo $title;
 		} else {
 			return $title;
@@ -417,7 +413,7 @@ class Helpers {
 					$current = false;
 					if ( strpos( $page, 'current' ) !== false ) {
 						$current = ' class="current"';
-					};
+					}
 					echo "<li$current>$page</li>";
 				}
 				echo '</ul></div>';

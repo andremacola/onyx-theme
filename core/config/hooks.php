@@ -55,11 +55,6 @@ return [
 			[ 'timber/cache/location', 'onyx_timber_cache_folder' ],
 
 			// ----------------------------------------------------------
-			// REST API (add:filters)
-			// ----------------------------------------------------------
-			[ 'rest_url_prefix', 'onyx_rest_url_prefix' ],
-
-			// ----------------------------------------------------------
 			// PLUGINS (add:filters)
 			// ----------------------------------------------------------
 			[ 'acf/settings/show_admin', 'onyx_acf_show_admin' ],
