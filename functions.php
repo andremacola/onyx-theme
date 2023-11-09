@@ -32,10 +32,8 @@ require_once __DIR__ . '/core/includes/hooks-functions.php';
 |--------------------------------------------------------------------------
 */
 
-$timber              = new \Timber\Timber();
-$timber::$dirname    = array( 'views' );
-$timber::$autoescape = false;
-$timber::$cache      = false;
+Timber\Timber::init();
+Timber\Timber::$dirname = 'views';
 
 /*
 |--------------------------------------------------------------------------

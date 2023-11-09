@@ -107,7 +107,7 @@ abstract class Controller {
 	 * @return object
 	 */
 	protected function get_post( $pid = false ) {
-		return new Post( $pid );
+		return Timber::get_post( $pid );
 	}
 
 	/**
@@ -117,7 +117,7 @@ abstract class Controller {
 	 * @return object
 	 */
 	protected function get_posts( $args = false ) {
-		return new PostQuery( $args );
+		return new PostQuery( new \WP_Query( $args ) );
 	}
 
 	/**

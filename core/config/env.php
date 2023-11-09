@@ -19,7 +19,10 @@ return [
 	'user'       => wp_get_current_user()->user_email,
 	'devs'       => defined( 'ONYX_DEVELOPERS' ) ? ONYX_DEVELOPERS : [ 'dev@domain.tld' ],
 	'timber'     => [
-		'cache_dir' => WP_CONTENT_DIR . '/cache/timber',
+		'cache'       => WP_CONTENT_DIR . '/cache/timber',
+		'auto_reload' => false,
+		'autoscape'   => false,
+		'debug'       => false,
 	],
 	'uploads'    => [
 		'max_file_size' => 5000,

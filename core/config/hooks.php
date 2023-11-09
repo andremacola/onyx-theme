@@ -52,7 +52,7 @@ return [
 			// ----------------------------------------------------------
 			// TIMBER(add:filters)
 			// ----------------------------------------------------------
-			[ 'timber/cache/location', 'onyx_timber_cache_folder' ],
+			[ 'timber/twig/environment/options', 'onyx_timber_environment_options' ],
 
 			// ----------------------------------------------------------
 			// PLUGINS (add:filters)

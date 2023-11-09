@@ -27,10 +27,11 @@ class HomeController extends Controller {
 	 * @return object
 	 */
 	protected function get_home_posts() {
-		return new PostQuery([
+		$query = new \WP_Query( [
 			'post_type'      => 'post',
 			'posts_per_page' => 10,
-		]);
+		] );
+		return new PostQuery( $query );
 	}
 
 }

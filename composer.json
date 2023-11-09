@@ -29,7 +29,7 @@
 		}
 	},
 	"require": {
-		"timber/timber": "^1.22"
+		"timber/timber": "^2.0"
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",

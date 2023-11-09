@@ -288,12 +288,20 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 /**
  * Set Timber cache Folder
  *
- * Registered at filters->add->timber/cache/location at config/hooks.php
+ * Registered at filters->add->timber/twig/environment/options at config/hooks.php
  *
- * @return string
+ * @see https://timber.github.io/docs/v2/guides/performance/
+ *
+ * @param array $options Timber Environment Options
+ * @return $options
  */
-function onyx_timber_cache_folder() {
-	return O::conf( 'env' )->timber['cache_dir'];
+function onyx_timber_environment_options( $options ) {
+	$options['cache']       = O::conf( 'env' )->timber['cache'];
+	$options['auto_reload'] = O::conf( 'env' )->timber['auto_reload'];
+	$options['autoscape']   = O::conf( 'env' )->timber['autoscape'];
+	$options['debug']       = O::conf( 'env' )->timber['debug'];
+
+	return $options;
 }
 
 
