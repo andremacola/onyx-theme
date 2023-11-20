@@ -22,7 +22,6 @@
 		"@rollup/plugin-terser": "^0.4.3",
 		"@rollup/stream": "^3.0.0",
 		"@wordpress/eslint-plugin": "^14.8.0",
-		"browser-sync": "^2.29.3",
 		"dotenv": "^16.3.1",
 		"eslint": "^8.43.0",
 		"gulp": "^4.0.2",
