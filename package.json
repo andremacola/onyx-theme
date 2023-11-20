@@ -17,13 +17,13 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^25.0.2",
-		"@rollup/plugin-node-resolve": "^15.1.0",
-		"@rollup/plugin-terser": "^0.4.3",
-		"@rollup/stream": "^3.0.0",
-		"@wordpress/eslint-plugin": "^14.8.0",
+		"@rollup/plugin-commonjs": "^25.0.7",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"@rollup/plugin-terser": "^0.4.4",
+		"@rollup/stream": "^3.0.1",
+		"@wordpress/eslint-plugin": "^17.3.0",
 		"dotenv": "^16.3.1",
-		"eslint": "^8.43.0",
+		"eslint": "^8.54.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-if": "^3.0.0",
@@ -32,7 +32,7 @@
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^5.1.0",
 		"node-sass": "^9.0.0",
-		"rollup": "^3.25.1",
+		"rollup": "^4.5.0",
 		"vinyl-source-stream": "^2.0.0"
 	},
 	"browserslist": [
