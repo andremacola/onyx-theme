@@ -14,8 +14,6 @@ use Onyx\Helpers as O;
 /**
  * Remove WordPress frontend jquery.
  *
- * Registered at actions->add->wp_enqueue_scripts at config/hooks.php
- *
  * @return void
  */
 function onyx_remove_wp_jquery() {
@@ -24,11 +22,10 @@ function onyx_remove_wp_jquery() {
 		wp_enqueue_script( 'jquery' );
 	}
 }
+// add_action( 'wp_enqueue_scripts', 'onyx_remove_wp_jquery' );
 
 /**
  * Remove WordPress frontend wp-embed javascript
- *
- * Registered at actions->add->wp_enqueue_scripts at config/hooks.php
  *
  * @return void
  */
@@ -37,10 +34,10 @@ function onyx_remove_wp_embed() {
 		wp_deregister_script( 'wp-embed' );
 	}
 }
+// add_action( 'wp_enqueue_scripts', 'onyx_remove_wp_embed' );
 
 /**
  * Reallocate js from header to footer.
- * Registered at actions->add->wp_enqueue_scripts at config/hooks.php
  *
  * @return void
  */
@@ -52,10 +49,10 @@ function onyx_header_footer_scripts() {
 	add_action( 'wp_footer', 'wp_enqueue_scripts', 5 );
 	add_action( 'wp_footer', 'wp_print_head_scripts', 5 );
 }
+// add_action( 'wp_enqueue_scripts', 'onyx_header_footer_scripts' );
 
 /**
  * Add custom internal and slug classes to body_class.
- * Registered at filters->add->body_class at config/hooks.php
  *
  * @param array $classes Classes received from body_class filter.
  * @return array
@@ -70,10 +67,10 @@ function onyx_body_classes( $classes ) {
 	}
 	return $classes;
 }
+add_filter( 'body_class', 'onyx_body_classes' );
 
 /**
  * Remove empty paragraphs.
- * Registered at filters->add->the_content at config/hooks.php
  *
  * @param array $content Content received from the_content filter.
  * @return mixed
@@ -85,11 +82,11 @@ function onyx_remove_empty_p( $content ) {
 	}
 	return $content;
 }
+add_filter( 'the_content', 'onyx_remove_empty_p' );
 
 /**
  * Add single templates by categories.
  * single-catslug.php
- * Registered at filters->add->single_template at config/hooks.php
  *
  * @deprecated since Timber
  * @param string $t Template name received from single_template filter.
@@ -110,10 +107,10 @@ function onyx_single_cat_template( $t ) {
 	endforeach;
 	return $t;
 }
+// add_filter( 'single_template', 'onyx_single_cat_template' );
 
 /**
  * Action to add Onyx Theme Styles.
- * Registered at actions->add->wp_enqueue_scripts config/hooks.php
  *
  * @return void
  */
@@ -133,10 +130,10 @@ function onyx_load_styles() {
 		endif;
 	}
 }
+// add_action( 'wp_enqueue_scripts', 'onyx_load_styles' );
 
 /**
  * Action to add Onyx Theme Javascripts.
- * Registered at actions->add->wp_head config/hooks.php
  *
  * @return void
  */
@@ -156,10 +153,10 @@ function onyx_load_javascripts() {
 		endif;
 	}
 }
+// add_action( 'wp_enqueue_scripts', 'onyx_load_javascripts' );
 
 /**
  * Enqueue all styles and scripts
- * Registered at actions->add->wp_enqueue_scripts config/hooks.php.
  *
  * @see config/assets.php
  * @return void
@@ -169,10 +166,10 @@ function onyx_enqueue_assets() {
 	onyx_load_styles();
 	onyx_load_javascripts();
 }
+add_action( 'wp_enqueue_scripts', 'onyx_enqueue_assets' );
 
 /**
  * Action to configure WordPress send an email via SMTP.
- * Registered at actions->add->phpmailer_init config/hooks.php.
  *
  * @see config/mail.php
  * @param object $phpmailer PHPMailer Object received from phpmailer_init action.
@@ -192,10 +189,10 @@ function onyx_smtp_config( $phpmailer ) {
 	$phpmailer->Password   = $mail->pass;
 	// phpcs:enable
 }
+// add_action( 'phpmailer_init', 'onyx_smtp_config' );
 
 /**
  * Remove Private or Protected prefix from title.
- * Registered at filters->add->private_title_format|protected_title_format at config/hooks.php
  *
  * @deprecated
  * @param string $title Received from hooks.
@@ -204,12 +201,13 @@ function onyx_smtp_config( $phpmailer ) {
 function onyx_remove_private_title( $title ) {
 	return '%s';
 }
+add_filter( 'private_title_format', 'onyx_remove_private_title' );
+add_filter( 'protected_title_format', 'onyx_remove_private_title' );
 
 
 /**
  * Show excerpt by default;
  * Not needed for Gutenberg.
- * Registered at filters->add->default_hidden_meta_boxes at config/hooks.php
  *
  * @deprecated
  * @param string[] $hidden An array of IDs of meta boxes hidden by default.
@@ -227,11 +225,11 @@ function onyx_show_hidden_excerpt( $hidden, $screen ) {
 	}
 	return $hidden;
 }
+apply_filters( 'default_hidden_meta_boxes', 'onyx_show_hidden_excerpt', 10, 2 );
 
 /**
  * Adjust a better wp-caption without <p>
  * and removing the additional 10px.
- * Registered at filters->add->img_caption_shortcode at config/hooks.php
  *
  * @deprecated
  * @param string $output The caption output. Default empty.
@@ -278,6 +276,7 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 	// return caption formatted correctly.
 	return $output;
 }
+add_filter( 'img_caption_shortcode', 'onyx_better_img_caption', 10, 3 );
 
 /*
 |--------------------------------------------------------------------------
@@ -287,8 +286,6 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 
 /**
  * Set Timber cache Folder
- *
- * Registered at filters->add->timber/twig/environment/options at config/hooks.php
  *
  * @see https://timber.github.io/docs/v2/guides/performance/
  *
@@ -303,6 +300,7 @@ function onyx_timber_environment_options( $options ) {
 
 	return $options;
 }
+add_filter( 'timber/twig/environment/options', 'onyx_timber_environment_options' );
 
 
 /*
@@ -313,17 +311,16 @@ function onyx_timber_environment_options( $options ) {
 
 /**
  * Show ACF in admin menu only for developers.
- * Registered at filters->add->acf/settings/show_admin at config/hooks.php
  *
  * @return bool
  */
 function onyx_acf_show_admin() {
 	return ( O::is_dev() ) ? true : false;
 }
+add_filter( 'acf/settings/show_admin', 'onyx_acf_show_admin' );
 
 /**
  * Rename ACF in portuguese language for better UI.
- * Registered at filters->add->acf/init at config/hooks.php
  *
  * @return mixed
  */
@@ -338,10 +335,10 @@ function onyx_acf_rename() {
 		);
 	}
 }
+add_filter( 'acf/init', 'onyx_acf_rename' );
 
 /**
  * Customize html return in the post object field of the blocks.
- * Registered at filters->add->acf/fields/post_object/result at config/hooks.php
  *
  * @param string $title object field title
  * @param object $post WP_Post object
@@ -353,10 +350,10 @@ function onyx_acf_object_result( $title, $post, $field, $post_id ) {
 	$title = "<span class='id ref'>[$post->ID]</span> / <span class='title'>$title</span>";
 	return $title;
 }
+// add_filter( 'acf/fields/post_object/result', 'onyx_acf_object_result', 10, 4 );
 
 /**
  * Customize post query from object field.
- * Registered at filters->add->acf/fields/post_object/query at config/hooks.php
  *
  * @param array      $args The query args. See WP_Query for available args.
  * @param array      $field The field array containing all settings.
@@ -376,6 +373,7 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
 
 	return $args;
 }
+// add_filter( 'acf/fields/post_object/query', 'onyx_acf_post_object_query', 10, 3 );
 
 /*
 |--------------------------------------------------------------------------
@@ -386,7 +384,6 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
 /**
  * Customize styles and scripts from admin;
  * Add custom favicon.
- * Registered at actions->add->login_enqueue_scripts|admin_enqueue_scripts at config/hooks.php
  *
  * @return void
  */
@@ -395,20 +392,20 @@ function onyx_admin_scripts() {
 	echo "<link rel='shortcut icon' href='" . esc_attr( $env->dir_uri ) . "/assets/images/icons/favicon-32.png' />";
 	wp_enqueue_style( 'onyx-admin-style', $env->dir_uri . '/assets/css/style.admin.css', [], $env->version );
 }
+add_action( 'admin_enqueue_scripts', 'onyx_admin_scripts' );
 
 /**
  * Customize admin footer text label.
- * Registered at filters->add->admin_footer_text at config/hooks.php
  *
  * @return string
  */
 function onyx_change_footer_text_admin() {
 	return O::conf( 'env' )->name;
 }
+add_filter( 'admin_footer_text', 'onyx_change_footer_text_admin' );
 
 /**
  * Customize admin bar.
- * Registered at action->add->wp_before_admin_bar_render at config/hooks.php
  *
  * @return void
  */
@@ -416,10 +413,10 @@ function onyx_customize_admin_bar() {
 	global $wp_admin_bar;
 	$wp_admin_bar->remove_menu( 'wp-logo' );
 }
+add_action( 'wp_before_admin_bar_render', 'onyx_customize_admin_bar' );
 
 /**
  * Customize admin dashboard widgets.
- * Registered at action->add->wp_dashboard_setup at config/hooks.php
  *
  * @return void
  */
@@ -431,10 +428,10 @@ function onyx_dashboard_widgets() {
 	unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'] );       // wordpress.com
 	unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary'] );     // WordPress news
 }
+add_action( 'wp_dashboard_setup', 'onyx_dashboard_widgets' );
 
 /**
  * Disable comments and trackbacks.
- * Registered at actions->add->admin_menu at config/hooks.php
  *
  * @return void
  */
@@ -463,10 +460,10 @@ function onyx_disable_comments_trackbacks() {
 		}
 	}
 }
+// add_action( 'admin_menu', 'onyx_disable_comments_trackbacks' );
 
 /**
  * Filter allowed mime types to upload.
- * Registered at filters->add->upload_mimes at config/hooks.php
  *
  * @param array $existing_mimes Mime types array to return
  * @return array
@@ -480,10 +477,10 @@ function onyx_remove_mime_types( $existing_mimes = [] ) {
 
 	return $existing_mimes;
 }
+add_filter( 'upload_mimes', 'onyx_remove_mime_types' );
 
 /**
  * Limit upload file size inside admin.
- * Registered at filters->add->upload_size_limit at config/hooks.php
  *
  * @return int
  */
@@ -491,10 +488,10 @@ function onyx_upload_limit() {
 	$max_size = O::conf( 'env' )->uploads['max_file_size'];
 	return $max_size * 1024;
 }
+add_filter( 'upload_size_limit', 'onyx_upload_limit' );
 
 /**
  * Add nextpage/pagebreak button to mce editor.
- * Registered at filters->add->mce_buttons at config/hooks.php
  *
  * @deprecated
  * @param array $mce_buttons Tinymce buttons to filter
@@ -509,6 +506,7 @@ function onyx_editor_page_break( $mce_buttons ) {
 	}
 	return $mce_buttons;
 }
+add_filter( 'mce_buttons', 'onyx_editor_page_break' );
 
 /*
 |--------------------------------------------------------------------------
@@ -518,17 +516,16 @@ function onyx_editor_page_break( $mce_buttons ) {
 
 /**
  * Add editor style.
- * Registered at actions->add->admin_init at config/hooks.php
  *
  * @return void
  */
 function onyx_gutenberg_style() {
 	add_editor_style( 'assets/css/style.editor.css' );
 }
+add_action( 'admin_init', 'onyx_gutenberg_style' );
 
 /**
  * Add editor custom javascript.
- * Registered at actions->add->enqueue_block_editor_assets at config/hooks.php
  *
  * @return void
  */
@@ -542,6 +539,7 @@ function onyx_gutenberg_js() {
 		true
 	);
 }
+add_action( 'enqueue_block_editor_assets', 'onyx_gutenberg_js' );
 
 /*
 |--------------------------------------------------------------------------
@@ -551,7 +549,6 @@ function onyx_gutenberg_js() {
 
 /**
  * Supress main query on front/home page for performance. Always use custom query.
- * Registered at filters->add->posts_request at config/hooks.php
  *
  * @param string    $request The complete SQL query
  * @param \WP_Query $query The WP_Query instance (passed by reference)
@@ -564,6 +561,7 @@ function onyx_supress_main_query( $request, $query ) {
 		return $request;
 	}
 }
+add_filter( 'posts_request', 'onyx_supress_main_query', 10, 2 );
 
 /*
 |--------------------------------------------------------------------------
@@ -574,7 +572,6 @@ function onyx_supress_main_query( $request, $query ) {
 /**
  * Action to inject gulp-livereload server for development,
  * only works with `.local` domains.
- * Registered at actions->add->wp_head config/hooks.php
  *
  * @return void|boolean
  */

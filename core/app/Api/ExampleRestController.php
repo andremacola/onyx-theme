@@ -9,7 +9,7 @@
 
 namespace Onyx\Controllers;
 
-use \Onyx\RestController;
+use Onyx\RestController;
 
 class ExampleRestController extends RestController {
 
