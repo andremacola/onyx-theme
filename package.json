@@ -3,10 +3,10 @@
 	"version": "0.3.5",
 	"description": "Onyx Wordpress Starter Theme",
 	"scripts": {
-		"serve": "yarn gulp serve",
-		"dev": "yarn gulp serve",
-		"serve:prod": "env NODE_ENV=prod yarn gulp serve",
-		"build": "env NODE_ENV=prod yarn gulp",
+		"serve": "gulp serve",
+		"dev": "gulp serve",
+		"serve:prod": "env NODE_ENV=prod gulp serve",
+		"build": "env NODE_ENV=prod gulp",
 		"svg-spreact": "svg-spreact -t false -o true ./assets/images/svgs > ./assets/images/sprites.svg"
 	},
 	"author": "Andre Machado",
@@ -22,7 +22,7 @@
 		"@rollup/plugin-terser": "^0.4.4",
 		"@rollup/stream": "^3.0.1",
 		"@wordpress/eslint-plugin": "^17.3.0",
-		"dotenv": "^16.3.1",
+		"dotenv": "^16.4.5",
 		"eslint": "^8.54.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",

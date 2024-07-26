@@ -27,7 +27,7 @@ The full documentation is [available here ](https://andremacola.github.io/onyx-t
 
 Download latest version from [releases](https://github.com/andremacola/onyx-theme/releases) extract in the themes folder, then:
 
-- ***1*** / Run `yarn|npm install`
+- ***1*** / Run `npm install`
 - ***2*** / Run `composer install`
 - ***3*** / Rename `.env.example` file inside the onyx theme folder to `.env` and configure it
 - ***4*** / Activate the theme inside WordPress
