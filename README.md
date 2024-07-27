@@ -6,6 +6,8 @@
 	<a href="https://andremacola.github.io/onyx-theme-doc/"><u>Documentation (PT-BR)</u></a>
 </p>
 
+*Note:* The documentation **needs to be updated**. Some features have been removed to make the theme lighter.
+
 # Wiki
 
 > **THE PUBLIC RELEASE IS IN BETA VERSION.**  
