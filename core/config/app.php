@@ -1,6 +1,6 @@
 <?php
 /**
- * Edit this file to register your classes as custom post types or taxonomies
+ * Edit this file to register your classes/extensions
  *
  * @package Onyx
  */
@@ -10,7 +10,6 @@ return [
 	/*
 	|--------------------------------------------------------------------------
 	| Register Custom Post Type Classes
-	| https://andremacola.github.io/onyx-theme-doc/docs/cpts
 	|--------------------------------------------------------------------------
 	*/
 
@@ -19,7 +18,6 @@ return [
 	/*
 	|--------------------------------------------------------------------------
 	| Register Custom Taxonomies
-	| https://andremacola.github.io/onyx-theme-doc/docs/taxonomies
 	|--------------------------------------------------------------------------
 	*/
 

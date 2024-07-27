@@ -70,20 +70,6 @@ class Setup extends \Timber\Site {
 	protected $support;
 
 	/**
-	 * Custom post types
-	 *
-	 * @var array|object
-	 */
-	protected $cpts;
-
-	/**
-	 * Custom taxonomies
-	 *
-	 * @var array|object
-	 */
-	protected $taxs;
-
-	/**
 	 * Constructor
 	 */
 	public function __construct() {
@@ -95,10 +81,6 @@ class Setup extends \Timber\Site {
 		$this->mail     = O::load( 'mail' );
 		$this->sidebars = O::load( 'sidebars' );
 		$this->support  = O::load( 'support' );
-
-		// easy cpts and taxonomies
-		$this->cpts = O::load( 'cpts' );
-		$this->taxs = O::load( 'taxonomies' );
 
 		define( 'ONYX_THEME', true );
 		define( 'ONYX_THEME_VERSION', $this->env->version );
@@ -125,11 +107,8 @@ class Setup extends \Timber\Site {
 		$this->register_image_sizes();
 		$this->register_sidebars();
 		$this->register_app_features();
-		$this->register_post_types();
-		$this->register_taxonomies();
 		$this->manage_actions();
 		$this->manage_filters();
-		$this->load_text_domain();
 	}
 
 	/**
@@ -192,57 +171,6 @@ class Setup extends \Timber\Site {
 	}
 
 	/**
-	 * Register custom post types
-	 *
-	 * @see config/cpts.php
-	 * @return void
-	 */
-	protected function register_post_types() {
-		if ( $this->cpts && ! empty( $this->cpts ) ) {
-			foreach ( $this->cpts as $cpt ) {
-
-				$names   = ( isset( $cpt['names'] ) ) ? $cpt['names'] : $cpt[0];
-				$options = ( ! empty( $cpt['options'] )) ? $cpt['options'] : [];
-				$labels  = ( ! empty( $cpt['labels'] )) ? $cpt['labels'] : [];
-				$pt      = new Cpt( $names, $options, $labels );
-
-				if ( ! empty( $cpt['icon'] ) ) {
-					$pt->icon( $cpt['icon'] );
-				}
-
-				if ( ! empty( $cpt['filters'] ) ) {
-					$pt->filters( $cpt['filters'] );
-				}
-
-				if ( ! empty( $cpt['columns']['hide'] ) || ! empty( $cpt['columns']['add'] ) ) {
-					$pt->register_columns( $cpt['columns'] );
-				}
-
-				$pt->register();
-			}
-		}
-	}
-
-	/**
-	 * Register custom taxonomies
-	 *
-	 * @see config/taxonomies.php
-	 * @return void
-	 */
-	protected function register_taxonomies() {
-		if ( $this->taxs && ! empty( $this->taxs ) ) {
-			foreach ( $this->taxs as $tax ) {
-				$names   = ( isset( $tax['names'] ) ) ? $tax['names'] : $tax[0];
-				$types   = ( ! empty( $tax['types'] )) ? $tax['types'] : null;
-				$options = ( ! empty( $tax['options'] )) ? $tax['options'] : [];
-				$labels  = ( ! empty( $tax['labels'] )) ? $tax['labels'] : [];
-				$tax     = new Taxonomy( $names, $types, $options, $labels );
-				$tax->register();
-			}
-		}
-	}
-
-	/**
 	 * Manage (remove/add) actions,
 	 *
 	 * @see config/hooks.php
@@ -271,15 +199,6 @@ class Setup extends \Timber\Site {
 				$this->register_hooks( "{$key}_filter{$s}", $hooks );
 			}
 		}
-	}
-
-	/**
-	 * Load language localization
-	 *
-	 * @return void
-	 */
-	protected function load_text_domain() {
-		load_theme_textdomain( 'onyx-theme', $this->env->dir . '/core/lang' );
 	}
 
 	/**
