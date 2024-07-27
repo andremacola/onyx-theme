@@ -6,8 +6,6 @@
 	<a href="https://andremacola.github.io/onyx-theme-doc/"><u>Documentation (PT-BR)</u></a>
 </p>
 
-
-
 # Wiki
 
 > **THE PUBLIC RELEASE IS IN BETA VERSION.**  
@@ -31,7 +29,7 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
 - ***2*** / Run `composer install`
 - ***3*** / Rename `.env.example` file inside the onyx theme folder to `.env` and configure it
 - ***4*** / Activate the theme inside WordPress
-- ***5*** / Run `yarn serve` or `npm run serve` (live reload will only work if you develop with a `.local` domain)
+- ***5*** / Run `npm run serve` or `npm run dev` (live reload will only work if you develop with a `.local` domain)
 
 ## Folder structure
 
@@ -41,8 +39,7 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
     - `./Controllers` - Main Controllers
     - `./Onyx` - Onyx Classes
   - `./config` - Resides all the main configurations of your project.
-  - `./includes` - Its own functions and classes.
-  - `./lang` - Translations
+  - `./includes` - Its own hooks, functions and classes.
 
 - **`src/`** - Source files for styles and javascripts.
   - `./sass`
@@ -60,16 +57,16 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
 Gulp is used for processing javascripts, scss and livereload. To be used in conjunction with a WEB server such as LocalbyFlywheel or MAMP.
 
   - Configure the environment through the file **.env** inside the theme folder.
-  - Execute `yarn|npm install` inside theme folder.
+  - Execute `npm install` inside theme folder.
 
-|Commands          | Functionality                              |
-|------------------|--------------------------------------------|
-| yarn serve       | Listen and process files when saving. Need a `.local` domain to work
-| yarn serve:prod  | Same as `serve` but using production environment
-| yarn build       | Build assets (css/js)
+|Commands             | Functionality                              |
+|---------------------|--------------------------------------------|
+| npm run serve       | Listen and process files when saving. Need a `.local` domain to work
+| npm run serve:prod  | Same as `serve` but using production environment
+| npm run build       | Build assets (css/js)
 
 **Other gulp commands**
-`yarn gulp styles`, `yarn gulp stylesHome`, `yarn gulp stylesPurge`, `yarn gulp js`, `yarn gulp jsHome`, `yarn gulp watch`
+`npx gulp styles`, `npx gulp stylesHome`, `npx gulp stylesPurge`, `npx gulp js`, `npx gulp jsHome`, `npx gulp watch`
 
 ## Requiring dependencies in javascript
 
@@ -77,28 +74,12 @@ Please, use ES6 Modules or CommonJS to import your dependencies (see app.js)
 
 ## Some JS libraries
 
-|Dependency        | Install                      | Repository/Site                                                  |
-|------------------|------------------------------|------------------------------------------------------------------|
-jquery             | yarn add jquery              | https://github.com/jquery/jquery                                 |
-jquery-mask-plugin | yarn add jquery-mask-plugin  | https://github.com/igorescobar/jQuery-Mask-Plugin                |
-jquery fancybox    | yarn add @fancyapps/fancybox | https://github.com/fancyapps/fancybox                            |
-imask              | yarn add imask               | https://github.com/uNmAnNeR/imaskjs                              |
-tiny-slider        | yarn add tiny-slider         | https://github.com/ganlanyuan/tiny-slider                        |
-lightgallery.js    | yarn add lightgallery.js     | https://sachinchoolur.github.io/lightgallery.js/                 |
-lg-thumbnail.js    | yarn add lg-thumbnail.js     | https://sachinchoolur.github.io/lightgallery.js/demos/index.html |
-vanilla-lazyload   | yarn add vanilla-lazyload    | https://github.com/verlok/vanilla-lazyload                       |
-body-scroll-lock   | yarn add body-scroll-lock    | https://github.com/willmcpo/body-scroll-lock                     |
-object-fit-images  | yarn add object-fit-images   | https://github.com/fregante/object-fit-images                    |
-
-## Some projects using Onyx
-
-- [O Imparcial](https://oimparcial.com.br/)
-- [Rofe Distribuidora](https://www.rofedistribuidora.com.br/)
-- [Linhares Jr](https://linharesjr.com)
-- [Grupo Dimensão](http://grupodimensao.com/) (legacy version)
-- [Jornal Pequeno](https://jornalpequeno.com.br/) (legacy version)
-
-...and many others
+|Dependency       | Install                     | Repository/Site                             |
+|-----------------|-----------------------------|---------------------------------------------|
+tiny-slider       | npm install tiny-slider     | https://github.com/ganlanyuan/tiny-slider   |
+imask             | npm install imask           | https://github.com/uNmAnNeR/imaskjs         |
+fancybox          | npm install @fancyapps/ui   | https://fancyapps.com                       |
+lightgallery.js   | npm install lightgallery    | https://www.lightgalleryjs.com/             |
 
 ## License
 
