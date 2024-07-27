@@ -11,7 +11,7 @@ const liveReload = require('gulp-livereload');
 
 const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
-const sass = require('gulp-sass')(require('node-sass'));
+const sass = require('gulp-sass')(require('sass'));
 
 const rollup = require('@rollup/stream');
 const commonjs = require('@rollup/plugin-commonjs');

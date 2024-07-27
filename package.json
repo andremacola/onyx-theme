@@ -15,7 +15,6 @@
 		"type": "git",
 		"url": "git@github.com:andremacola/onyx-theme.git"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^26.0.1",
 		"@rollup/plugin-node-resolve": "^15.2.3",
@@ -31,8 +30,8 @@
 		"gulp-purgecss": "^6.0.0",
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^5.1.0",
-		"node-sass": "^9.0.0",
 		"rollup": "^4.19.0",
+		"sass": "^1.77.8",
 		"vinyl-source-stream": "^2.0.0"
 	},
 	"browserslist": [
