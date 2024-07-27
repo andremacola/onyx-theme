@@ -60,7 +60,7 @@ abstract class Controller {
 	 */
 	protected function get_timber_context() {
 		add_filter( 'timber/context', [ $this, 'set_global_context' ] );
-		$this->context = Timber::get_context();
+		$this->context = Timber::context();
 	}
 
 	/**
