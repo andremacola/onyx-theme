@@ -576,6 +576,10 @@ add_filter( 'posts_request', 'onyx_supress_main_query', 10, 2 );
  * @return void|boolean
  */
 function onyx_enqueue_livereload() {
+	if ( is_admin() ) {
+		return false;
+	}
+
 	if ( strpos( $_SERVER['HTTP_HOST'], 'localhost' ) || strpos( $_SERVER['HTTP_HOST'], '.local' ) ) {
 			$port = 3010;
 			$url  = 'http://localhost' . ":$port/livereload.js";
