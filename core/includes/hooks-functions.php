@@ -320,24 +320,6 @@ function onyx_acf_show_admin() {
 add_filter( 'acf/settings/show_admin', 'onyx_acf_show_admin' );
 
 /**
- * Rename ACF in portuguese language for better UI.
- *
- * @return mixed
- */
-function onyx_acf_rename() {
-	if ( class_exists( 'acf' ) && is_admin() ) {
-		add_filter(
-			'gettext',
-			function( $menu ) {
-				$menu = str_replace( 'Campos Personalizados', 'ACF', $menu );
-				return $menu;
-			}
-		);
-	}
-}
-add_filter( 'acf/init', 'onyx_acf_rename' );
-
-/**
  * Customize html return in the post object field of the blocks.
  *
  * @param string $title object field title
