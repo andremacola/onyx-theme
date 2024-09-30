@@ -80,68 +80,6 @@ abstract class Controller {
 	}
 
 	/**
-	 * Render Timber/Twig templates
-	 *
-	 * @return bool|string — The echoed output.
-	 * @throws \Exception If no templates passed.
-	 */
-	protected function render_view() {
-		if ( empty( $this->templates ) ) {
-			throw new \Exception( 'No templates found', 1 );
-		}
-
-		if ( $this->render ) {
-			return Timber::render( $this->templates, $this->context );
-		}
-
-		return false;
-	}
-
-	/**
-	 * Disable Timber::render
-	 *
-	 * @return void
-	 */
-	protected function no_render() {
-		$this->render = false;
-	}
-
-	/**
-	 * Get post
-	 *
-	 * @param int $pid Post ID [optional]
-	 * @return object
-	 */
-	protected function get_post( $pid = false ) {
-		return Timber::get_post( $pid );
-	}
-
-	/**
-	 * Get posts from default/main loop
-	 *
-	 * @param array $args `WP_Query` array [optional]
-	 * @return object
-	 */
-	protected function get_posts( $args = false ) {
-		return new PostQuery( new \WP_Query( $args ) );
-	}
-
-	/**
-	 * Set posts to ignore in WP_Query|Timber\PostQuery
-	 *
-	 * @param int|object $posts \PostQuery object or $post->ID int
-	 */
-	protected function set_ignore_posts( $posts ) {
-		if ( is_int( $posts ) ) {
-			$this->ignore_posts[] = $posts;
-		} else {
-			foreach ( $posts as $post ) {
-				$this->ignore_posts[] = $post->ID;
-			}
-		}
-	}
-
-	/**
 	 * Set context parameter
 	 *
 	 * @param string|array $data Twig templates [required];
@@ -168,6 +106,33 @@ abstract class Controller {
 		}
 
 		return (isset( $this->context )) ? $this->context : false;
+	}
+
+	/**
+	 * Render Timber/Twig templates
+	 *
+	 * @return bool|string — The echoed output.
+	 * @throws \Exception If no templates passed.
+	 */
+	protected function render_view() {
+		if ( empty( $this->templates ) ) {
+			throw new \Exception( 'No templates found', 1 );
+		}
+
+		if ( $this->render ) {
+			return Timber::render( $this->templates, $this->context );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Disable Timber::render
+	 *
+	 * @return void
+	 */
+	protected function no_render() {
+		$this->render = false;
 	}
 
 	/**
@@ -266,6 +231,41 @@ abstract class Controller {
 			"$folder/$term->taxonomy.twig",
 			"$folder/$prefix.twig",
 		];
+	}
+
+	/**
+	 * Get post
+	 *
+	 * @param int $pid Post ID [optional]
+	 * @return object
+	 */
+	protected function get_post( $pid = false ) {
+		return Timber::get_post( $pid );
+	}
+
+	/**
+	 * Get posts from default/main loop
+	 *
+	 * @param array $args `WP_Query` array [optional]
+	 * @return object
+	 */
+	protected function get_posts( $args = false ) {
+		return new PostQuery( new \WP_Query( $args ) );
+	}
+
+	/**
+	 * Set posts to ignore in WP_Query|Timber\PostQuery
+	 *
+	 * @param int|object $posts \PostQuery object or $post->ID int
+	 */
+	protected function set_ignore_posts( $posts ) {
+		if ( is_int( $posts ) ) {
+			$this->ignore_posts[] = $posts;
+		} else {
+			foreach ( $posts as $post ) {
+				$this->ignore_posts[] = $post->ID;
+			}
+		}
 	}
 
 }
