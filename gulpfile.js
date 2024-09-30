@@ -12,6 +12,7 @@ const liveReload = require('gulp-livereload');
 const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
 const sass = require('gulp-sass')(require('sass'));
+const px2rem = require('gulp-px2rem');
 
 const rollup = require('@rollup/stream');
 const commonjs = require('@rollup/plugin-commonjs');
@@ -148,6 +149,9 @@ function stylesPurge() {
 				safelist: config.purgecss.whitelist,
 			})
 		)
+		.pipe(px2rem({
+			replace: true,
+		}))
 		.pipe(gulp.dest(config.styles.dest));
 }
 
