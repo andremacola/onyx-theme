@@ -11,7 +11,6 @@ namespace Onyx;
 use Onyx\Helpers as O;
 use Timber\Timber;
 use Timber\PostQuery;
-use Timber\Post;
 
 abstract class Controller {
 
@@ -21,6 +20,13 @@ abstract class Controller {
 	 * @var string|array
 	 */
 	protected $templates;
+
+	/**
+	 * Posts to ignore in queries
+	 *
+	 * @var array
+	 */
+	protected $ignore_posts;
 
 	/**
 	 * Context for Timber
@@ -118,6 +124,21 @@ abstract class Controller {
 	 */
 	protected function get_posts( $args = false ) {
 		return new PostQuery( new \WP_Query( $args ) );
+	}
+
+	/**
+	 * Set posts to ignore in WP_Query|Timber\PostQuery
+	 *
+	 * @param int|object $posts \PostQuery object or $post->ID int
+	 */
+	protected function set_ignore_posts( $posts ) {
+		if ( is_int( $posts ) ) {
+			$this->ignore_posts[] = $posts;
+		} else {
+			foreach ( $posts as $post ) {
+				$this->ignore_posts[] = $post->ID;
+			}
+		}
 	}
 
 	/**
