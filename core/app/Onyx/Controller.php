@@ -8,7 +8,6 @@
 
 namespace Onyx;
 
-use Onyx\Helpers as O;
 use Timber\Timber;
 use Timber\PostQuery;
 
@@ -60,23 +59,12 @@ abstract class Controller {
 	abstract public function initialize();
 
 	/**
-	 * Add and get Timber Context Filter
+	 * Add and get Timber Context to Controller instance
 	 *
 	 * @return void
 	 */
 	protected function get_timber_context() {
-		add_filter( 'timber/context', [ $this, 'set_global_context' ] );
 		$this->context = Timber::context();
-	}
-
-	/**
-	 * Set Timber Global Context
-	 *
-	 * @param mixed $context Received from `timber/context` filter
-	 */
-	public function set_global_context( $context ) {
-		$context['theme']->img = O::conf( 'env' )->dir_uri . '/assets/images';
-		return $context;
 	}
 
 	/**

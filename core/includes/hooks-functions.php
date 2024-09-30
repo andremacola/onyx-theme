@@ -285,6 +285,18 @@ add_filter( 'img_caption_shortcode', 'onyx_better_img_caption', 10, 3 );
 */
 
 /**
+ * Set Timber Global Context
+ *
+ * @param mixed $context Received from `timber/context` filter
+ */
+function onyx_set_timber_global_context( $context ) {
+		$add_context = O::load( 'contexts', false );
+		$context     = array_merge( $context, $add_context );
+		return $context;
+}
+add_filter( 'timber/context', 'onyx_set_timber_global_context' );
+
+/**
  * Set Timber cache Folder
  *
  * @see https://timber.github.io/docs/v2/guides/performance/
