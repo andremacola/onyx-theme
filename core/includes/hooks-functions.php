@@ -383,7 +383,6 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
  */
 function onyx_admin_scripts() {
 	$env = O::conf( 'env' );
-	echo "<link rel='shortcut icon' href='" . esc_attr( $env->dir_uri ) . "/assets/images/icons/favicon-32.png' />";
 	wp_enqueue_style( 'onyx-admin-style', $env->dir_uri . '/assets/css/style.admin.css', [], $env->version );
 }
 add_action( 'admin_enqueue_scripts', 'onyx_admin_scripts' );
