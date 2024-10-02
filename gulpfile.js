@@ -81,6 +81,7 @@ const config = {
 			/^lg-(.*)?$/,
 			/^tns-(.*)?$/,
 			/^wp-block(-.*)?$/,
+			/^wp-preset(-.*)?$/,
 			/^active(-.*)?$/,
 			/^search(-.*)?$/,
 			/^(.*)-template(-.*)?$/,
