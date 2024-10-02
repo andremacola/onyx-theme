@@ -1,16 +1,19 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"$schema": "https://schemas.wp.org/wp/6.5/theme.json",
 	"version": 2,
+	"patterns": [],
 	"settings": {
 		"appearanceTools": true,
+		"useRootPaddingAwareAlignments": true,
 		"color": {
-			"custom": false,
-			"duotone": [],
+			"custom": true,
 			"customDuotone": false,
 			"customGradient": false,
 			"defaultDuotone": false,
 			"defaultGradients": false,
 			"defaultPalette": false,
+			"duotone": [],
+			"gradients": [],
 			"palette": []
 		},
 		"layout": {
@@ -26,34 +29,39 @@
 			},
 			"spacingSizes": [
 				{
-					"size": "5px",
+					"size": "0.625rem",
+					"slug": "10",
+					"name": "10"
+				},
+				{
+					"size": "0.938rem",
+					"slug": "15",
+					"name": "15"
+				},
+				{
+					"size": "1.25rem",
+					"slug": "20",
+					"name": "20"
+				},
+				{
+					"size": "1.563rem",
+					"slug": "25",
+					"name": "25"
+				},
+				{
+					"size": "1.875rem",
 					"slug": "30",
-					"name": "1"
+					"name": "30"
 				},
 				{
-					"size": "10px",
+					"size": "2.188rem",
+					"slug": "35",
+					"name": "35"
+				},
+				{
+					"size": "2.5rem",
 					"slug": "40",
-					"name": "2"
-				},
-				{
-					"size": "25px",
-					"slug": "50",
-					"name": "3"
-				},
-				{
-					"size": "30px",
-					"slug": "60",
-					"name": "4"
-				},
-				{
-					"size": "35px",
-					"slug": "70",
-					"name": "5"
-				},
-				{
-					"size": "40px",
-					"slug": "80",
-					"name": "6"
+					"name": "40"
 				}
 			],
 			"units": [
@@ -64,18 +72,42 @@
 				"vh",
 				"vw"
 			]
-		}
+		},
+    "custom": {
+      "onyx": {
+        "block-gap": "1.5rem"
+      }
+    },
+		"blocks": {
+
+		},
+		"typography": {}
 	},
 	"styles": {
 		"blocks": {
+			"core/button": {
+				"border": {
+					"radius": "0px"
+				}
+			},
+			"core/quote": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontStyle": "italic"
+				}
+			}
 		},
 		"color": {},
 		"elements": {},
-		"spacing": {},
+		"spacing": {
+			"blockGap": "var(--wp--custom--onyx--block-gap)"
+		},
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--system-font)",
 			"fontSize": "var(--wp--preset--font-size--normal)",
-			"lineHeight": "1.6"
+			"fontStyle": "normal",
+			"fontWeight": "400",
+			"lineHeight": "1.5"
 		}
 	}
 }

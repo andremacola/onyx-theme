@@ -2,6 +2,34 @@
 | VARIABLES
 --------------------------------------------------------------- */
 
+:root {
+	--site-with: 1280px;
+	
+	--color1: #333;
+	--color2: #333;
+	--color3: #333;
+	--color-bg: #FFF;
+	--color-footer-bg: #F0F0F0;
+	--color-link: #333;
+	--color-link-hover: #333;
+	--color-post-title: #333;
+	--color-post-link: #333;
+	--color-post-link-hover: #333;
+	--color-post-border: #333;
+	
+	--font-size: 100%;
+	--font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	
+	--border-radius: 15px;
+	
+	--gap-section: 30px;
+	--gap-grid: 20px;
+
+	// Gutenberg integrated styles
+	--wp-block-gap: var(--wp--custom--onyx--block-gap);
+}
+
+
 // Media Queries
 $to-smb: "only screen and (max-width: 320px)";
 $to-mb: "only screen and (max-width: 767px)";
@@ -9,24 +37,3 @@ $from-lmb: "only screen and (min-width: 540px)";
 $from-ptb: "only screen and (min-width: 767px)";
 $from-ltb: "only screen and (min-width: 1023px)";
 $to-desk: "only screen and (min-width: 1200px)";
-
-// Width, Heights
-$site-width: 1140px;
-
-// Colors
-$color1: #333;
-$color2: #333;
-$color3: #333;
-$color-bg: #FFF;
-$color-footer-bg: #F0F0F0;
-$color-link: #333;
-$color-link-hover: #333;
-$color-post-title: #333;
-$color-post-link: #333;
-$color-post-link-hover: #333;
-$color-post-border: #333;
-$color-post-elements: #333;
-
-// Fonts
-$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$font-size: 100%;

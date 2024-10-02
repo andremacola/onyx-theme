@@ -2,23 +2,8 @@
 | THEME STYLES
 --------------------------------------------------------------- */
 
-:root {
-	--site-with: #{$site-width};
-	--color1: #{$color1};
-	--color2: #{$color2};
-	--color3: #{$color3};
-	--color-bg: #{$color-bg};
-	--color-footer-bg: #{$color-footer-bg};
-	--color-link: #{$color-link};
-	--color-link-hover: #{$color-link-hover};
-	--color-post-title: #{$color-post-title};
-	--color-post-link: #{$color-post-link};
-	--color-post-link-hover: #{$color-post-link-hover};
-	--color-post-border: #{$color-post-border};
-}
-
 body {
-	background: $color-bg;
+	background: var(--color-bg);
 	&.no-scroll {
 		width: 100vw;
 		height: 100vh;
@@ -32,11 +17,14 @@ body {
 
 a {
 	text-decoration: none;
-	color: $color-link;
+	color: var(--color-link);
 	transition: color 200ms, text-indent 200ms, background 200ms;
-	&:hover {
-		text-decoration: none;
-		color: $color-link-hover;
+	
+	&:not(.wp-block-button a) {
+		@include hover {
+			text-decoration: var(--color-link-hover);
+			color: var(--color-link-hover);
+		}
 	}
 }
 
@@ -44,38 +32,24 @@ a {
 | HEADINGS
 --------------------------------------------------------------- */
 
-h1 { font-size: 36px; }
-h2 { font-size: 30px; }
-h3 { font-size: 25px; }
-h4 { font-size: 20px; }
-h5 { font-size: 15px; }
-h6 { font-size: 12px; }
+h1 { font-size: 36px; line-height: 1.2; }
+h2 { font-size: 30px; line-height: 1.2; }
+h3 { font-size: 25px; line-height: 1.2; }
+h4 { font-size: 20px; line-height: 1.2; }
+h5 { font-size: 15px; line-height: 1.2; }
+h6 { font-size: 12px; line-height: 1.2; }
 
 /* ---------------------------------------------------------------
 | GRID
 --------------------------------------------------------------- */
 
-.container {
-	max-width: $site-width;
+.grid-container {
+	max-width: var(--site-with);
 	position: relative;
 	margin: auto;
-	@media #{$from-ptb} {
-		margin: 0 20px 0 20px;
-	}
+	padding: 0 20px;
 }
-.container-limit {
-	margin: 0 15px 0 15px;
-	@media #{$to-desk} {
-		margin: 0;
-	}
-}
-.container.container-limit {
-	margin: auto;
-	padding: 0 15px 0 15px;
-	@media #{$from-ptb} {
-		padding: 0 20px 0 20px;
-	}
-	@media #{$to-desk} {
-		padding: 0;
-	}
+
+.section {
+	margin-bottom: var(--gap-section);
 }

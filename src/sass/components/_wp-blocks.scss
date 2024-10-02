@@ -2,6 +2,81 @@
 | CUSTOMIZE GUTENBERG BLOCKS (ON FRONT-END)
 --------------------------------------------------------------- */
 
-.entry-content > [class*="wp-block-"] {
-	margin: 25px 0;
+.entry-content {
+	> [class*="wp-block-"] {
+		margin: var(--wp-block-gap) 0;
+	}
+
+	/* ---------------------------------------------------------------
+	| IMAGES
+	--------------------------------------------------------------- */
+	.wp-block-image,
+	.wp-block-gallery,
+	.wp-block-video,
+	.wp-block-embed.is-type-video {
+		margin: auto auto var(--wp-block-gap) auto;
+
+		&.alignleft {
+			float: left;
+			margin: 0 var(--wp-block-gap) var(--wp-block-gap) 0;
+		}
+		&.alignright {
+			float: right;
+			margin: 0 0 var(--wp-block-gap) var(--wp-block-gap);
+		}
+		&.alignwide {
+    	width: 100vw;
+    	position: relative;
+    	left: 50%;
+    	right: 50%;
+    	margin-left: -50vw;
+    	margin-right: -50vw;
+		}
+		:where(figcaption) {
+			margin-bottom: 0;
+		}
+	}
+
+	/* ---------------------------------------------------------------
+	| QUOTES
+	--------------------------------------------------------------- */
+	.wp-block-quote {
+		margin: calc(var(--wp-block-gap) * 1.5);
+		border-color: var(--color1);
+		font-style: italic;
+		text-wrap: balance;
+	}
+
+	/* ---------------------------------------------------------------
+	| LISTS
+	--------------------------------------------------------------- */
+	.wp-block-list,
+	.wp-block-archives-list {
+		padding-left: var(--wp-block-gap);
+		li {
+			list-style: disc;
+		}
+	}
+
+	/* ---------------------------------------------------------------
+	| BUTTONS
+	--------------------------------------------------------------- */
+	.wp-block-button {
+		.wp-block-button__link {
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+		&.is-style-outline {
+			.wp-block-button__link {
+				color: var(--color1);
+				border-color: currentColor;
+			}
+		}
+		&:not(.is-style-outline) {
+			.wp-block-button__link {
+				background-color: var(--color1);
+			}
+		}
+	}
 }

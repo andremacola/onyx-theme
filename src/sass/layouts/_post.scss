@@ -2,32 +2,11 @@
 | STYLES FOR POST CONTENT AREA
 --------------------------------------------------------------- */
 
-/* TO SMALL MOBILE <=320px */
-@media #{$to-smb} {
-
-}
-
-/* TO MOBILE <=767px */
-@media #{$to-mb} {
-
-}
-
-/* FROM MOBILE L >=540px */
-@media #{$from-lmb} {
-
-}
-
-/* FROM TABLET P >=768px */
-@media #{$from-ptb} {
-	
-}
-
-/* FROM TABLET L >=1024px */
-@media #{$from-ltb} {
-	
-}
-
-/* TO DESK >=1200px */
-@media #{$to-desk} {
-	
+.entry-content {
+	> * {
+		margin-bottom: var(--wp-block-gap);
+	}
+	> *:last-child {
+		margin-bottom: 0;
+	}
 }

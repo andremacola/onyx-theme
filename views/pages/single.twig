@@ -1,11 +1,17 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-	<div class="entry-content {{ post.class }}">
+
+	<div class="post-header">
 		<h1><strong>Post:</strong> {{ post.title }}</h1>
 		<hr>
-		<p>{{ post.content }}</p>
-		{{ function('comments_template') }}
+	</div>
+	<div class="entry-content {{ post.class }}">
+		{{ post.content }}
 		<hr>
+	</div>
+	
+	<div class="post-comments">
+		{{ function('comments_template') }}
 	</div>
 {% endblock %}
