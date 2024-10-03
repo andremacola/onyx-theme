@@ -2,7 +2,7 @@
 | CUSTOMIZE GUTENBERG BLOCKS (ON FRONT-END)
 --------------------------------------------------------------- */
 
-.entry-content {
+.post-content {
 	> [class*="wp-block-"] {
 		margin: var(--wp-block-gap) 0;
 	}
