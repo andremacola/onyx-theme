@@ -17,9 +17,10 @@ return [
 	'name'       => get_bloginfo( 'name' ),
 	'url'        => get_home_url(),
 	'user'       => wp_get_current_user()->user_email,
+	'token'      => defined( 'ONYX_TOKEN' ) ? ONYX_TOKEN : '',
 	'devs'       => defined( 'ONYX_DEVELOPERS' ) ? ONYX_DEVELOPERS : [ 'dev@domain.tld' ],
 	'timber'     => [
-		'cache'       => WP_CONTENT_DIR . '/cache/timber',
+		'cache'       => defined( 'ONYX_TIMBER_CACHE' ) ? ONYX_TIMBER_CACHE : WP_CONTENT_DIR . '/cache/timber',
 		'auto_reload' => false,
 		'autoscape'   => false,
 		'debug'       => false,

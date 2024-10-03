@@ -43,3 +43,5 @@ Timber\Timber::$dirname = 'views';
 
 new \Onyx\Setup(); // setup theme configuration `after_setup_theme`
 new \Onyx\Boot();  // boot controllers routes functionality
+
+// \Onyx\Helpers::clear_cache_timber();
