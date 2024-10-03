@@ -30,8 +30,6 @@ const isProd = (process.env.NODE_ENV === 'prod');
 const config = {
 	livereload: process.env.LIVERELOAD ? (process.env.LIVERELOAD == 'true') : true,
 	port: process.env.LIVERELOAD_PORT ? parseInt(process.env.LIVERELOAD_PORT, 10) : 3010,
-	key: (process.env.KEY) ? process.env.KEY : false,
-	cert: (process.env.CRT) ? process.env.CRT : false,
 
 	cssout: isProd ? 'compressed' : 'expanded',
 	prefixer: isProd,

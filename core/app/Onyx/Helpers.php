@@ -34,7 +34,7 @@ class Helpers {
 	 */
 	public static function conf( $name = false ) {
 		$confs  = self::$conf;
-		$filter = [ 'pass', 'password', 'key', 'keys', 'dev', 'devs' ];
+		$filter = [ 'pass', 'password', 'key', 'keys', 'devs' ];
 
 		$confs['env'] = self::array_filter_keys( $confs['env'], $filter );
 		// $confs['mail'] = self::array_filter_keys( $confs['mail'], $filter );
@@ -131,28 +131,11 @@ class Helpers {
 		if ( self::valid_url( $file ) ) {
 			$asset = $file;
 		} else {
-			$dir_uri = self::static_uri( self::$conf['env']['dir_uri'] );
+			$dir_uri = self::$conf['env']['dir_uri'];
 			$asset   = $dir_uri . '/' . ltrim( $file, '/' );
 		}
 
 		return $asset;
-	}
-
-	/**
-	 * Return assets directory based on ambient variable|constant
-	 * If ONYX_STATIC is defined, it will use a static subdomain to serve the files.
-	 * The domain pattern is configured in `static` parameter at: `./core/config/app.php`
-	 *
-	 * @param string $uri [required]
-	 * @return string Path of the file
-	 */
-	public static function static_uri( $uri ) {
-		if ( ! ONYX_STATIC ) {
-			return $uri;
-		} else {
-			$static_uri = '//' . ONYX_STATIC;
-			return $static_uri;
-		}
 	}
 
 	/**
@@ -199,7 +182,7 @@ class Helpers {
 	 */
 	public static function css( $css, $home = false ) {
 		$src = self::static_path( $css );
-		$v   = ONYX_STATIC_VERSION;
+		$v   = ONYX_THEME_VERSION;
 		$css = "<link rel='stylesheet' href='$src?ver=$v'>\n";
 
 		if ( ! $home ) :
@@ -219,7 +202,7 @@ class Helpers {
 	 */
 	public static function js( $js, $home = false, $attr = '' ) {
 		$src    = self::static_path( $js );
-		$v      = ONYX_STATIC_VERSION;
+		$v      = ONYX_THEME_VERSION;
 		$script = "<script $attr src='$src?ver=$v'></script>\n";
 
 		if ( ! $home ) :
@@ -279,7 +262,7 @@ class Helpers {
 	 */
 	public static function is_dev() {
 		$env = (object) self::$conf['env'];
-		return in_array( $env->user, $env->devs );
+		return in_array( $env->user, $env->devs ) || $env->local;
 	}
 
 	/**

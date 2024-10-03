@@ -120,7 +120,7 @@ function onyx_load_styles() {
 		$src   = O::static_path( $css[0] );
 		$home  = ( isset( $css[1] ) ) ? $css[1] : false;
 		$deps  = ( isset( $css[2] ) ) ? $css[2] : [];
-		$ver   = ( isset( $css[3] ) ) ? $css[3] : ONYX_STATIC_VERSION;
+		$ver   = ( isset( $css[3] ) ) ? $css[3] : ONYX_THEME_VERSION;
 		$media = ( isset( $css[4] ) ) ? $css[4] : false;
 
 		if ( ! $home ) :
@@ -143,7 +143,7 @@ function onyx_load_javascripts() {
 		$src       = O::static_path( $js[0] );
 		$home      = ( isset( $js[1] ) ) ? $js[1] : false;
 		$deps      = ( isset( $js[2] ) ) ? $js[2] : [];
-		$ver       = ( isset( $js[3] ) ) ? $js[3] : ONYX_STATIC_VERSION;
+		$ver       = ( isset( $js[3] ) ) ? $js[3] : ONYX_THEME_VERSION;
 		$in_footer = ( isset( $js[4] ) ) ? $js[4] : false;
 
 		if ( ! $home ) :
@@ -278,11 +278,9 @@ function onyx_better_img_caption( $output, $attr, $content ) {
 }
 add_filter( 'img_caption_shortcode', 'onyx_better_img_caption', 10, 3 );
 
-/*
-|--------------------------------------------------------------------------
+/* ---------------------------------------------------------------
 | TIMBER
-|--------------------------------------------------------------------------
-*/
+--------------------------------------------------------------- */
 
 /**
  * Set Timber Global Context
@@ -308,18 +306,15 @@ function onyx_timber_environment_options( $options ) {
 	$options['cache']       = O::conf( 'env' )->timber['cache'];
 	$options['auto_reload'] = O::conf( 'env' )->timber['auto_reload'];
 	$options['autoscape']   = O::conf( 'env' )->timber['autoscape'];
-	$options['debug']       = O::conf( 'env' )->timber['debug'];
 
 	return $options;
 }
 add_filter( 'timber/twig/environment/options', 'onyx_timber_environment_options' );
 
 
-/*
-|--------------------------------------------------------------------------
+/* ---------------------------------------------------------------
 | ACF CUSTOM FILTERS
-|--------------------------------------------------------------------------
-*/
+--------------------------------------------------------------- */
 
 /**
  * Show ACF in admin menu only for developers.
@@ -501,11 +496,9 @@ function onyx_editor_page_break( $mce_buttons ) {
 }
 add_filter( 'mce_buttons', 'onyx_editor_page_break' );
 
-/*
-|--------------------------------------------------------------------------
+/* ---------------------------------------------------------------
 | GUTENBERG
-|--------------------------------------------------------------------------
-*/
+--------------------------------------------------------------- */
 
 /**
  * Add editor style.
@@ -534,11 +527,9 @@ function onyx_gutenberg_js() {
 }
 add_action( 'enqueue_block_editor_assets', 'onyx_gutenberg_js' );
 
-/*
-|--------------------------------------------------------------------------
+/* ---------------------------------------------------------------
 | QUERIES
-|--------------------------------------------------------------------------
-*/
+--------------------------------------------------------------- */
 
 /**
  * Supress main query on front/home page for performance. Always use custom query.
@@ -556,11 +547,9 @@ function onyx_supress_main_query( $request, $query ) {
 }
 add_filter( 'posts_request', 'onyx_supress_main_query', 10, 2 );
 
-/*
-|--------------------------------------------------------------------------
+/* ---------------------------------------------------------------
 | DEVELOPMENT
-|--------------------------------------------------------------------------
-*/
+--------------------------------------------------------------- */
 
 /**
  * Action to inject gulp-livereload server for development,
@@ -576,8 +565,6 @@ function onyx_enqueue_livereload() {
 	if ( strpos( $_SERVER['HTTP_HOST'], 'localhost' ) || strpos( $_SERVER['HTTP_HOST'], '.local' ) ) {
 			$port = 3010;
 			$url  = 'http://localhost' . ":$port/livereload.js";
-			// $protocol = isset( $_SERVER['HTTPS'] ) ? 'https' : 'http';
-			// $url      = $protocol . '://' . $_SERVER['HTTP_HOST'] . ":$port/livereload.js";
 			wp_enqueue_script( 'live-reload', $url, [], 1, true );
 	}
 

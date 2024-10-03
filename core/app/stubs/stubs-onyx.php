@@ -5,14 +5,8 @@
  * @package Onyx Theme
  */
 
-/* Load onyx tests. */
-define( 'ONYX_TESTS', '' );
-
-/* Onyx developers emails */
-define( 'ONYX_DEVELOPERS', [] );
-
-/* Timer Cache folder */
-define('ONYX_TIMBER_CACHE', false);
-
-/* Onyx token */
-define( 'ONYX_TOKEN', '' );
+define( 'ONYX_TESTS', null );
+define( 'ONYX_DEVELOPERS', null );
+define( 'ONYX_MAX_FILE_SIZE', null );
+define( 'ONYX_UNSET_TYPES', null );
+define( 'ONYX_TOKEN', null );
