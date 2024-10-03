@@ -46,7 +46,7 @@ return [
 			// ----------------------------------------------------------
 			// EDITOR CLASSIC (add:filters)
 			// ----------------------------------------------------------
-			// [ 'use_widgets_block_editor', '__return_false' ],
+			[ 'use_widgets_block_editor', '__return_false' ],
 
 			// ----------------------------------------------------------
 			// WP QUERIES
