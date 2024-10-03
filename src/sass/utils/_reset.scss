@@ -44,6 +44,15 @@ small { font-size: 80%; }
 // disable default outline that appears when focusing
 :focus { outline: 0; }
 
+// remove background autofill on chrome
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    box-shadow: inset 0 0 0 0 transparent;
+}
+
 // remove the inner border and padding in Firefox (normalize 8.0.0)
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
