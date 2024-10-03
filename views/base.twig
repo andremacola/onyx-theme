@@ -10,17 +10,20 @@
 		{% block head %}{% endblock %}
 	</head>
 
-		<body class="{{ body_class }}">
-			<div style="max-width: 900px; margin: 30px auto;">
+		<body class="{{ body_class }}" style="margin: 30px;">
+			{% include 'partials/header.twig' %}
+
+			<div id="main-container" class="main-container grid-container">
 				<p><a href="/"><u>Home</u></a></p>
 				<hr>
+
 				{% block content %}{% endblock %}
 
-				{% include 'sidebar.twig' %}
+				{% include 'partials/sidebar.twig' %}
 				{% block sidebar %}{% endblock %}
-
-				{% block footer %}{% endblock %}
-				{% include 'footer.twig' %}
 			</div>
+
+			{% block footer %}{% endblock %}
+			{% include 'partials/footer.twig' %}
 		</body>
 </html>
