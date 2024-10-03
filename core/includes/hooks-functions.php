@@ -519,7 +519,7 @@ function onyx_gutenberg_js() {
 	$env = O::conf( 'env' );
 	wp_enqueue_script(
 		'onyx-gutenberg',
-		$env->dir_uri . '/src/js/admin/gutenberg.js',
+		$env->dir_uri . '/assets/js/admin/onyx.min.js',
 		array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
 		$env->version,
 		true

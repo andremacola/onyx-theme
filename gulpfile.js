@@ -30,15 +30,23 @@ const isProd = (process.env.NODE_ENV === 'prod');
 const config = {
 	livereload: process.env.LIVERELOAD ? (process.env.LIVERELOAD == 'true') : true,
 	port: process.env.LIVERELOAD_PORT ? parseInt(process.env.LIVERELOAD_PORT, 10) : 3010,
+	key: (process.env.KEY) ? process.env.KEY : false,
+	cert: (process.env.CRT) ? process.env.CRT : false,
 
 	cssout: isProd ? 'compressed' : 'expanded',
 	prefixer: isProd,
 	terser: isProd,
 
-	js: {
-		source: './src/js/app.js',
+	jsApp: {
+		source: './src/js/app/app.js',
 		output: 'app.min.js',
 		dest: './assets/js',
+	},
+
+	jsAdmin: {
+		source: './src/js/admin/admin.js',
+		output: 'onyx.min.js',
+		dest: './assets/js/admin',
 	},
 
 	styles: {
@@ -101,7 +109,8 @@ const config = {
 	},
 
 	watch: {
-		js: [ './src/js/**/*.js' ],
+		jsApp: [ './src/js/app/**/*.js' ],
+		jsAdmin: [ './src/js/admin/**/*.js' ],
 		styles: [ './src/sass/**/*.scss' ],
 		views: [ 'core/**/*.php', 'templates/**/*.php', 'views/**/*.php', 'views/**/*.twig' ],
 	},
@@ -158,10 +167,10 @@ function stylesPurge() {
 | JAVASCRIPTS
 ------------------------------------------------------------------------- */
 
-let cache;
-function js() {
+function js(jsconfig) {
+	let cache;
 	const options = {
-		input: config.js.source,
+		input: jsconfig.source,
 		output: {
 			format: 'cjs',
 		},
@@ -173,13 +182,14 @@ function js() {
 		cache,
 	};
 	return rollup(options)
-		.on('bundle', (bundle) => {
-			cache = bundle;
-		})
-		.pipe(source(config.js.output))
-		.pipe(gulp.dest(config.js.dest))
+		.on('bundle', (bundle) => (cache = bundle))
+		.pipe(source(jsconfig.output))
+		.pipe(gulp.dest(jsconfig.dest))
 		.pipe(onyx.stream());
 }
+
+const jsApp = () => js(config.jsApp);
+const jsAdmin = () => js(config.jsAdmin);
 
 /* -------------------------------------------------------------------------
 | LIVE RELOAD
@@ -199,7 +209,8 @@ function startLiveReload() {
 
 function serve() {
 	onyx.watch();
-	gulp.watch(config.watch.js, js);
+	gulp.watch(config.watch.jsApp, jsApp);
+	gulp.watch(config.watch.jsAdmin, jsAdmin);
 	gulp.watch(config.watch.styles, styles);
 	gulp.watch(config.watch.views).on('change', (file) => onyx.reload(file));
 }
@@ -210,6 +221,7 @@ function serve() {
 
 exports.styles = styles;
 exports.stylesPurge = stylesPurge;
-exports.js = js;
+exports.jsApp = jsApp;
+exports.jsAdmin = jsAdmin;
 exports.serve = serve;
-exports.default = gulp.series(styles, stylesPurge, js);
+exports.default = gulp.series(styles, stylesPurge, jsApp, jsAdmin);
