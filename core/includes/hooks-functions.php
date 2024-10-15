@@ -448,7 +448,7 @@ function onyx_disable_comments_trackbacks() {
 		}
 	}
 }
-// add_action( 'admin_menu', 'onyx_disable_comments_trackbacks' );
+// add_action( 'admin_bar_init', 'onyx_disable_comments_trackbacks' );
 
 /**
  * Filter allowed mime types to upload.
