@@ -2,9 +2,10 @@
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="WordPress" namespace="WordPressCS\WordPress" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
 
 	<description>WordPress Coding Standards</description>
-	<exclude-pattern>*/tests/*</exclude-pattern>
 	<exclude-pattern>*/.vscode/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
 	<exclude-pattern>*/stubs/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
 
 	<!--
 	Included via WordPress-Extra.
