@@ -327,7 +327,8 @@ class Helpers {
 			ARRAY_FILTER_USE_KEY
 		);
 
-		$type = key( array_filter( $types ) );
+		$types = array_reverse( $types, true );
+		$type  = key( array_filter( $types ) );
 
 		return $type;
 	}

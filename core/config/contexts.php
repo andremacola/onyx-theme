@@ -9,7 +9,8 @@ use Onyx\Helpers as O;
 use Timber\Timber;
 
 return [
-	'theme' => [
+	'route_type' => O::route_type(),
+	'theme'      => [
 		'img' => O::conf( 'env' )->dir_uri . '/assets/images',
 		// 'logo' => wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' ),
 	],
