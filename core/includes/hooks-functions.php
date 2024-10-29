@@ -166,7 +166,7 @@ function onyx_enqueue_assets() {
 	onyx_load_styles();
 	onyx_load_javascripts();
 }
-add_action( 'wp_enqueue_scripts', 'onyx_enqueue_assets' );
+add_action( 'wp_enqueue_scripts', 'onyx_enqueue_assets', 99 );
 
 /**
  * Action to configure WordPress send an email via SMTP.
