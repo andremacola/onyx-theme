@@ -29,14 +29,14 @@
 		}
 	},
 	"require": {
-		"timber/timber": "^2.2"
+		"timber/timber": "^2.3"
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"wp-coding-standards/wpcs": "^3.1",
-		"squizlabs/php_codesniffer": "^3.10",
-		"php-stubs/wordpress-stubs": "^6.6",
-		"php-stubs/wp-cli-stubs": "^2.10",
-		"php-stubs/acf-pro-stubs": "^6.2"
+		"squizlabs/php_codesniffer": "^3.13",
+		"php-stubs/wordpress-stubs": "^6.8",
+		"php-stubs/wp-cli-stubs": "^2.11",
+		"php-stubs/acf-pro-stubs": "^6.3"
 	}
 }
