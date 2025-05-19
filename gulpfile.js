@@ -82,6 +82,8 @@ const config = {
 			'wp-caption',
 			'wp-caption-text',
 			'screen-reader-text',
+			/^ep-(.*)?$/,
+			/^autosuggest-(.*)?$/,
 			/^hide-(.*)?$/,
 			/^gm-(.*)?$/,
 			/^lg-(.*)?$/,
