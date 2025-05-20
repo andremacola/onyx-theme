@@ -143,7 +143,7 @@ function styles() {
 	return gulp
 		.src(config.styles.source)
 		.pipe(sass({
-			outputStyle: config.cssout,
+			style: config.cssout,
 			includePaths: [ './node_modules/' ],
 		}).on('error', sass.logError))
 		.pipe(rename(config.styles.output))
