@@ -2,14 +2,14 @@
 | ONYX FRAMEWORK
 --------------------------------------------------------------- */
 
-@import "utils/vars";
-@import "utils/mixins";
-@import "utils/reset";
-@import "utils/helpers";
+@use "utils/vars";
+@use "utils/mixins";
+@use "utils/reset";
+@use "utils/helpers";
 
-@import "layouts/theme";
-@import "layouts/post";
+@use "layouts/theme";
+@use "layouts/post";
 
-@import "components/wp-blocks";
+@use "components/wp-blocks";
 // @import "components/pagenavi";
 // @import "components/comments";

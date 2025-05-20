@@ -1,3 +1,5 @@
+@use "../utils/mixins";
+
 /* ---------------------------------------------------------------
 | THEME STYLES
 --------------------------------------------------------------- */
@@ -21,7 +23,7 @@ a {
 	transition: color 200ms, text-indent 200ms, background 200ms;
 	
 	&:not(.wp-block-button a) {
-		@include hover {
+		@include mixins.hover {
 			text-decoration: var(--color-link-hover);
 			color: var(--color-link-hover);
 		}

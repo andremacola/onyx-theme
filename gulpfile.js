@@ -1,25 +1,27 @@
-'use strict';
+import 'dotenv/config';
 
-require('dotenv/config');
+import gulp from 'gulp';
+import gulpif from 'gulp-if';
+import rename from 'gulp-rename';
+import source from 'vinyl-source-stream';
 
-const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const rename = require('gulp-rename');
-const source = require('vinyl-source-stream');
+import liveReload from 'gulp-livereload';
 
-const liveReload = require('gulp-livereload');
+import autoprefixer from 'gulp-autoprefixer';
+import purgecss from 'gulp-purgecss';
+import * as sassCompiler from 'sass';
+import gulpSass from 'gulp-sass';
+import px2rem from 'gulp-px2rem';
 
-const autoprefixer = require('gulp-autoprefixer');
-const purgecss = require('gulp-purgecss');
-const sass = require('gulp-sass')(require('sass'));
-const px2rem = require('gulp-px2rem');
+import rollup from '@rollup/stream';
+import commonjs from '@rollup/plugin-commonjs';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 
-const rollup = require('@rollup/stream');
-const commonjs = require('@rollup/plugin-commonjs');
-const { nodeResolve } = require('@rollup/plugin-node-resolve');
-const terser = require('@rollup/plugin-terser');
+import { readFileSync } from 'fs';
 
-const read = require('fs').readFileSync;
+const sass = gulpSass(sassCompiler);
+const read = readFileSync;
 
 /* -------------------------------------------------------------------------
 | CONFIGURATION VARIABLES
@@ -221,9 +223,11 @@ function serve() {
 | EXPORTS
 ------------------------------------------------------------------------- */
 
-exports.styles = styles;
-exports.stylesPurge = stylesPurge;
-exports.jsApp = jsApp;
-exports.jsAdmin = jsAdmin;
-exports.serve = serve;
-exports.default = gulp.series(styles, stylesPurge, jsApp, jsAdmin);
+export {
+	styles,
+	stylesPurge,
+	jsApp,
+	jsAdmin,
+	serve,
+};
+export default gulp.series(styles, stylesPurge, jsApp, jsAdmin);

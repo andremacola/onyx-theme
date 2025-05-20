@@ -1,3 +1,5 @@
+@use "vars";
+
 /* ---------------------------------------------------------------
 | HELPER CLASSES
 --------------------------------------------------------------- */
@@ -47,42 +49,42 @@
 --------------------------------------------------------------- */
 
 /* TO SMALL MOBILE <=320px */
-@media #{$to-smb} {
+@media #{vars.$to-smb} {
 	.hide-smb {
 		display: none;
 	}
 }
 
 /* TO MOBILE <=767px */
-@media #{$to-mb} {
+@media #{vars.$to-mb} {
 	.hide-mb {
 		display: none;
 	}
 }
 
 /* FROM MOBILE L >=540px */
-@media #{$from-lmb} {
+@media #{vars.$from-lmb} {
 	.hide-lmb {
 		display: none;
 	}
 }
 
 /* FROM TABLET P >=768px */
-@media #{$from-ptb} {
+@media #{vars.$from-ptb} {
 	.hide-ptb {
 		display: none;
 	}
 }
 
 /* FROM TABLET L >=1024px */
-@media #{$from-ltb} {
+@media #{vars.$from-ltb} {
 	.hide-ltb {
 		display: none;
 	}
 }
 
 /* TO DESK >=1200 */
-@media #{$to-desk} {
+@media #{vars.$to-desk} {
 	.hide-desk {
 		display: none;
 	}

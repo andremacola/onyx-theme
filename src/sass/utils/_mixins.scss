@@ -1,3 +1,5 @@
+@use "vars";
+
 /* ---------------------------------------------------------------
 | MIXINS
 --------------------------------------------------------------- */
@@ -48,12 +50,12 @@
 	@return scale3d($var,$var,$var);
 }
 
-@mixin to-smb { @media #{$to-smb} { @content; } }
-@mixin to-mb { @media #{$to-mb} { @content; } }
-@mixin from-lmb { @media #{$from-lmb} { @content; } }
-@mixin from-ptb { @media #{$from-ptb} { @content; } }
-@mixin from-ltb { @media #{$from-ltb} { @content; } }
-@mixin to-desk { @media #{$to-desk} { @content; } }
+@mixin to-smb { @media #{vars.$to-smb} { @content; } }
+@mixin to-mb { @media #{vars.$to-mb} { @content; } }
+@mixin from-lmb { @media #{vars.$from-lmb} { @content; } }
+@mixin from-ptb { @media #{vars.$from-ptb} { @content; } }
+@mixin from-ltb { @media #{vars.$from-ltb} { @content; } }
+@mixin to-desk { @media #{vars.$to-desk} { @content; } }
 
 
 // workaround for min() and max() functions (fancybox)
