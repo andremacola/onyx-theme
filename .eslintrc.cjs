@@ -19,6 +19,7 @@ module.exports = {
 		jquery: true,
 	},
 	rules: {
+		'no-unused-vars': 0,
 		quotes: [ 'error', 'single', { allowTemplateLiterals: true } ],
 		'no-var': 0,
 		'no-console': 0,

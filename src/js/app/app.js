@@ -2,7 +2,7 @@
 | IMPORT FRAMEWORKS AND LIBRARIES
 ------------------------------------------------------------------------- */
 
-// import { tns } from 'tiny-slider';
+import { tns } from 'tiny-slider';
 
 /* -------------------------------------------------------------------------
 | APP FUNCTIONS
