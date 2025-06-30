@@ -43,8 +43,3 @@ Timber\Timber::$dirname = 'views';
 
 new \Onyx\Setup(); // setup theme configuration `after_setup_theme`
 new \Onyx\Boot();  // boot controllers routes functionality
-
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-if ( (isset( $_GET['clear_timber_cache'] ) && is_user_logged_in()) || \Onyx\Helpers::is_dev() ) {
-	\Onyx\Helpers::clear_cache_timber();
-}
