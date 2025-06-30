@@ -493,6 +493,21 @@ function onyx_disable_comments_trackbacks() {
 // add_action( 'after_setup_theme', 'onyx_disable_comments_trackbacks' );
 
 /**
+ * Clear transient and Timber cache
+ * when WP Super Cache is cleared
+ *
+ * @TODO: Architect this better
+ * @return void
+ */
+function onyx_clear_cache() {
+	O::clear_cache_timber();
+}
+add_action( 'wp_cache_cleared', 'onyx_clear_cache' );
+if ( 'delcachepage' === filter_input( INPUT_GET, 'action' ) || 'clear_timber_cache' === filter_input( INPUT_GET, 'action' ) ) {
+	add_action( 'init', 'onyx_clear_cache' );
+}
+
+/**
  * Filter allowed mime types to upload.
  *
  * @param array $existing_mimes Mime types array to return
