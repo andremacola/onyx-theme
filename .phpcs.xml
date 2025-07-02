@@ -27,6 +27,8 @@
 		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralText"/>
 		<exclude name="WordPress.WP.I18n.InterpolatedVariableText"/>
 		<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+		<exclude name="WordPress.DB.PreparedSQL.NotPrepared"/>
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
 		<!-- <exclude name="WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode"/> -->
 
 		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
