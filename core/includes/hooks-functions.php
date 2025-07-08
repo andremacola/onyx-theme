@@ -609,6 +609,19 @@ add_filter( 'posts_request', 'onyx_supress_main_query', 10, 2 );
 --------------------------------------------------------------- */
 
 /**
+ * Add custom file types to the theme editor.
+ * This is used to edit Twig files in the theme editor.
+ *
+ * @param array $types Existing file types in the theme editor.
+ * @return array Modified file types
+ */
+function onyx_add_custom_editor_file_types( $types ) {
+	$types[] = 'twig';
+	return $types;
+}
+add_filter( 'wp_theme_editor_filetypes', 'onyx_add_custom_editor_file_types' );
+
+/**
  * Action to inject gulp-livereload server for development,
  * only works with `.local` domains.
  *
