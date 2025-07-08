@@ -616,7 +616,9 @@ add_filter( 'posts_request', 'onyx_supress_main_query', 10, 2 );
  * @return array Modified file types
  */
 function onyx_add_custom_editor_file_types( $types ) {
-	$types[] = 'twig';
+	if ( O::is_dev() ) {
+		$types[] = 'twig';
+	}
 	return $types;
 }
 add_filter( 'wp_theme_editor_filetypes', 'onyx_add_custom_editor_file_types' );
