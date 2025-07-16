@@ -93,6 +93,28 @@
 					"name": "System Font",
 					"slug": "system-font"
 				}
+			],
+			"fontSizes": [
+				{
+					"name": "Small",
+					"size": "16px",
+					"slug": "s"
+				},
+				{
+					"name": "Medium",
+					"size": "18px",
+					"slug": "m"
+				},
+				{
+					"name": "Large",
+					"size": "22px",
+					"slug": "l"
+				},
+				{
+					"name": "Extra Large",
+					"size": "26px",
+					"slug": "xl"
+				}
 			]
 		}
 	},
