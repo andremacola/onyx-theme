@@ -75,16 +75,26 @@
 		},
     "custom": {
       "onyx": {
-        "block-gap": "1.5rem"
+        "block-gap": "1.5rem",
+				"block-buttons-gap": "0.35rem"
       }
     },
 		"blocks": {
-
+			"core/buttons": {
+				"spacing": {
+					"blockGap": true
+				}
+			}
 		},
 		"typography": {}
 	},
 	"styles": {
 		"blocks": {
+			"core/buttons": {
+				"spacing": {
+					"blockGap": "var(--wp--custom--onyx--block-buttons-gap)"
+				}
+			},
 			"core/button": {
 				"border": {
 					"radius": "0px"
