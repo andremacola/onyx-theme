@@ -63,7 +63,7 @@
 	--------------------------------------------------------------- */
 	.wp-block-button {
 		.wp-block-button__link {
-			&:hover {
+			@include hover {
 				opacity: 0.8;
 			}
 		}
