@@ -24,7 +24,7 @@ a {
 	
 	&:not(.wp-block-button a) {
 		@include mixins.hover {
-			text-decoration: var(--color-link-hover);
+			text-decoration: none;
 			color: var(--color-link-hover);
 		}
 	}
