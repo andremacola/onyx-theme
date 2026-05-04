@@ -31,7 +31,7 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
 - ***2*** / Run `composer install`
 - ***3*** / Rename `.env.example` file inside the onyx theme folder to `.env` and configure it
 - ***4*** / Activate the theme inside WordPress
-- ***5*** / Run `npm run serve` or `npm run dev` (live reload will only work if you develop with a `.local` domain)
+- ***5*** / Run `npm run dev` (Vite dev server with HMR)
 
 ## Folder structure
 
@@ -54,21 +54,20 @@ Download latest version from [releases](https://github.com/andremacola/onyx-them
 - `composer install` inside theme folder to create the autoload and install dependencies
 - `composer onyx-dump` inside theme folder to dump the autoload
 
-## Gulp
+## Vite
 
-Gulp is used for processing javascripts, scss and livereload. To be used in conjunction with a WEB server such as LocalbyFlywheel or MAMP.
+Vite drives the asset pipeline (SCSS, JS, HMR). To be used in conjunction with a WEB server such as LocalWP, MAMP, or any local WordPress setup.
 
-  - Configure the environment through the file **.env** inside the theme folder.
-  - Execute `npm install` inside theme folder.
+  - Configure the environment through the file **.env** inside the theme folder (`VITE_DEV_PORT`, `VITE_HTTPS`, `VITE_KEY`, `VITE_CRT`).
+  - Execute `npm install` inside the theme folder.
 
-|Commands             | Functionality                              |
-|---------------------|--------------------------------------------|
-| npm run serve       | Listen and process files when saving. Need a `.local` domain to work
-| npm run serve:prod  | Same as `serve` but using production environment
-| npm run build       | Build assets (css/js)
+|Commands         | Functionality                                                                              |
+|-----------------|--------------------------------------------------------------------------------------------|
+| npm run dev     | Start the Vite dev server with HMR (CSS hot-replace, full reload on `.twig`/`.php` saves)  |
+| npm run build   | Production build → `assets/dist/` with hashed filenames + `manifest.json` (PurgeCSS + px2rem applied here) |
+| npm run preview | Preview the production build locally                                                       |
 
-**Other gulp commands**
-`npx gulp styles`, `npx gulp stylesHome`, `npx gulp stylesPurge`, `npx gulp js`, `npx gulp jsHome`, `npx gulp watch`
+The PHP layer (`\Onyx\Vite`) detects whether the dev server is running by looking for `assets/dist/hot`; entries declared in `core/config/assets.php` are source paths (e.g. `src/sass/style.scss`) and get resolved to the right URL automatically in dev or production.
 
 ## Requiring dependencies in javascript
 

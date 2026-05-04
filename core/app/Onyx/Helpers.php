@@ -174,45 +174,6 @@ class Helpers {
 	}
 
 	/**
-	 * Add CSS from assets
-	 *
-	 * @param string $css [required]
-	 * @param bool   $home Display CSS only on Home [optional]
-	 * @return void Link style html tag
-	 */
-	public static function css( $css, $home = false ) {
-		$src = self::static_path( $css );
-		$v   = ONYX_THEME_VERSION;
-		$css = "<link rel='stylesheet' href='$src?ver=$v'>\n";
-
-		if ( ! $home ) :
-			echo $css;
-		elseif ( is_home() ) :
-				echo $css;
-		endif;
-	}
-
-	/**
-	 * Add javascript from assets
-	 *
-	 * @param string $js file|url [required]
-	 * @param bool   $home Display script only on Home [optional]
-	 * @param string $attr Tag attributes (data|async|defer) [optional]
-	 * @return void Script html tag
-	 */
-	public static function js( $js, $home = false, $attr = '' ) {
-		$src    = self::static_path( $js );
-		$v      = ONYX_THEME_VERSION;
-		$script = "<script $attr src='$src?ver=$v'></script>\n";
-
-		if ( ! $home ) :
-			echo $script;
-		elseif ( is_home() ) :
-				echo $script;
-		endif;
-	}
-
-	/**
 	 * Add google analytics script html (main method)
 	 *
 	 * @param string $uax Google UAX ID required [required]
@@ -302,6 +263,8 @@ class Helpers {
 			$title = get_the_author();
 		} elseif ( is_tax() ) { // for custom post types.
 			$title = single_term_title( $prefix, false );
+		} else {
+			$title = get_the_title();
 		}
 
 		if ( $show ) {

@@ -34,6 +34,7 @@ return [
 			[ 'xmlrpc_enabled', '__return_false', 10 ], // disable xmlrpc
 			[ 'use_default_gallery_style', '__return_false', 10 ], // disable classic gallery style
 			[ 'the_generator', '__return_false', 10 ], // remove meta tag from wp feed.
+			[ 'script_loader_tag', [ \Onyx\Vite::class, 'filter_script_tag' ], 10, 2 ], // type="module" for Vite handles
 
 			// ----------------------------------------------------------
 			// PLUGINS (add:filters)

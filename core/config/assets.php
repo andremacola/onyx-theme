@@ -1,23 +1,23 @@
 <?php
 /**
- * Edit this file to enqueue WordPress styles and javascripts
- * Please do not add any type of functions here
- * Onyx do not set javascript dependencies on wp_enqueue functions. All is managed by Gulp
+ * Edit this file to enqueue WordPress styles and javascripts.
+ * Please do not add any type of functions here.
+ *
+ * Source paths are resolved through Vite (`\Onyx\Vite::asset()`) — the dev
+ * server URL is used when `npm run dev` is running, otherwise the hashed
+ * filename is read from `assets/dist/.vite/manifest.json` (production build).
  *
  * @package Onyx Theme
  * @see https://developer.wordpress.org/reference/functions/wp_enqueue_style/
  * @see https://developer.wordpress.org/reference/functions/wp_enqueue_script/
  * @see https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
- * @param array handler $args {
- *      style or scripts params
- *
- *      @type string src [required]
- *      @type boolean $home only in home? [optional]
- *      @type array $deps [optional]
- *      @type string|bool|null $ver [optional]
- *      @type string|bool $media|$in_footer [optional]
- * }
+ * Handler entry shape (positional array values):
+ *      [0] string $src        [required] Vite source entry, e.g. `src/sass/style.scss`.
+ *      [1] boolean $home      [optional] Only enqueue on the home page.
+ *      [2] array $deps        [optional] Script/style dependencies.
+ *      [3] mixed $ver         [optional] Ignored — Vite handles cache-busting via filename hash.
+ *      [4] string|bool $media [optional] Media (CSS) or in_footer (JS).
  */
 
 return [
@@ -28,7 +28,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'css' => [
-		'style' => [ 'assets/css/style.css' ],
+		'style' => [ 'src/sass/style.scss' ],
 	],
 
 	/*
@@ -37,7 +37,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	'js'  => [
-		'app' => [ 'assets/js/app.min.js' ],
+		'app' => [ 'src/js/app/app.js' ],
 	],
 
 ];

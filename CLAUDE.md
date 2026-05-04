@@ -11,13 +11,11 @@ Build/dev (run from theme root):
 ```
 npm install                # install JS deps
 composer install           # install PHP deps + generates core/vendor/autoload.php (required — functions.php wp_die's without it)
-npm run dev | npm run serve  # gulp watch + livereload (needs a .local domain or localhost)
-npm run serve:prod         # serve with NODE_ENV=prod (minified output)
-npm run build              # production build (styles → stylesPurge → jsApp → jsAdmin)
+npm run dev                # vite dev server with HMR (writes assets/dist/hot for PHP detection)
+npm run build              # production build → assets/dist/ + .vite/manifest.json (PurgeCSS + px2rem applied here)
+npm run preview            # vite preview of the prod build
 composer onyx:dump         # composer dump-autoload -o (after adding new namespaced classes)
 ```
-
-Targeted gulp tasks: `npx gulp styles`, `npx gulp stylesPurge`, `npx gulp jsApp`, `npx gulp jsAdmin`.
 
 Lint (no tests configured):
 
@@ -27,12 +25,12 @@ Lint (no tests configured):
 npx eslint src/js                    # WordPress eslint preset, see .eslintrc.cjs
 ```
 
-`.env` (copy from `.env.example`) controls `LIVERELOAD`, `LIVERELOAD_PORT`, optional `KEY`/`CRT` for HTTPS livereload.
+`.env` (copy from `.env.example`) controls `VITE_DEV_PORT` (default 5173), `VITE_HTTPS=true|false`, optional `VITE_KEY`/`VITE_CRT` for HTTPS dev server.
 
 ## Architecture
 
 ### Bootstrap chain
-`functions.php` requires `core/vendor/autoload.php`, then `core/includes/hooks-functions.php`, then initializes Timber with `views/` as the templates dir, then instantiates `\Onyx\Setup` (theme config) and `\Onyx\Boot` (router). Defines `ONYX_THEME` and `ONYX_THEME_VERSION` (random per request when current user is in `ONYX_DEVELOPERS`, for cachebusting).
+`functions.php` requires `core/vendor/autoload.php`, then `core/includes/hooks-functions.php`, then initializes Timber with `views/` as the templates dir, then instantiates `\Onyx\Setup` (theme config) and `\Onyx\Boot` (router). Defines `ONYX_THEME`. Cache-busting for assets is handled by Vite via filename hash, so no manual version constant is needed.
 
 ### Controller routing (`core/app/Onyx/Boot.php`)
 Onyx replaces the normal "load a PHP template" flow:
@@ -68,7 +66,7 @@ Subclass `\Onyx\RestController`, set `$namespace`, register endpoints in `regist
 - `contexts.php` — array merged into Timber's global context via the `timber/context` filter
 
 ### Hooks (`core/includes/hooks-functions.php`)
-**Hook _functions_ live here; hook _registrations_ live in `core/config/hooks.php`.** Many functions are intentionally registered at the bottom of this file (e.g., `body_class`, `the_content`, `timber/context`, admin-bar tweaks, ACF tweaks, mime-type filtering, livereload). Suppresses the main WP query on the home page (`onyx_supress_main_query`) — home posts come from the Controller's own `WP_Query`.
+**Hook _functions_ live here; hook _registrations_ live in `core/config/hooks.php`.** Many functions are intentionally registered at the bottom of this file (e.g., `body_class`, `the_content`, `timber/context`, admin-bar tweaks, ACF tweaks, mime-type filtering, the Vite HMR client). Suppresses the main WP query on the home page (`onyx_supress_main_query`) — home posts come from the Controller's own `WP_Query`.
 
 ### PSR-4 autoload map (`composer.json`)
 - `Onyx\` → `core/app/Onyx`
@@ -79,14 +77,20 @@ After adding new namespaced classes run `composer onyx:dump` (composer-installed
 ### Views
 Twig files live in `views/`. `base.twig` is the wrapper; pages typically `{% extends 'base.twig' %}` and override `content`/`head`/`sidebar`/`footer` blocks. Convention: `views/pages/` for top-level templates resolved by `set_page_templates()`/`set_archive_templates()`; `views/partials/` for header/footer/sidebar; `views/blocks/` for reusable fragments. Timber cache is disabled when `wp_get_environment_type() === 'local'`.
 
-### Frontend pipeline (`gulpfile.js`)
-- SCSS: `src/sass/style.scss` → `assets/css/style.css`. `npm run build` runs `stylesPurge` (PurgeCSS over `core/**/*.php`, `views/**/*.{twig,php}`, `src/js/**/*.js`) and `px2rem`. Add new dynamic class patterns to `config.purgecss.whitelist` or they'll be stripped in production.
-- JS app bundle: `src/js/app/app.js` → `assets/js/app.min.js` (Rollup, CommonJS output, terser when prod).
-- JS admin (Gutenberg): `src/js/admin/admin.js` → `assets/js/admin/onyx.min.js`. Enqueued by `onyx_gutenberg_js` with `wp-blocks`/`wp-dom-ready`/`wp-edit-post` deps.
-- Livereload: `gulp-livereload` listens on `LIVERELOAD_PORT` (default 3010); only injected for `localhost`/`.local` hosts via `onyx_enqueue_livereload`.
+### Frontend pipeline (`vite.config.js`)
+Vite drives every asset. Entries are declared in `vite.config.js` (`build.rollupOptions.input`); `core/config/assets.php` lists the **source paths** (e.g., `src/sass/style.scss`) that the PHP layer resolves through `\Onyx\Vite`.
+
+- SCSS entries: `src/sass/style.scss` (frontend), `src/sass/admin.scss` (admin), `src/sass/editor.scss` (Gutenberg). PostCSS pipeline runs `autoprefixer` always; `postcss-pxtorem` and `@fullhuman/postcss-purgecss` only in production. Add new dynamic class patterns to `purgecssSafelist` in `vite.config.js`.
+- JS entries: `src/js/app/app.js` (frontend, ESM `<script type="module">`) and `src/js/admin/admin.js` (Gutenberg, deps `wp-blocks`/`wp-dom-ready`/`wp-edit-post` declared in `wp_enqueue_script`).
+- Output: `assets/dist/` (gitignored) with hashed filenames + `.vite/manifest.json`. Cache-busting comes from the hash, so all `wp_enqueue_*` calls pass `null` for the version (warning suppressed via `phpcs:disable WordPress.WP.EnqueuedResourceParameters.MissingVersion` blocks).
+- Dev server: `npm run dev` boots Vite at `http://localhost:5173` (override via `VITE_DEV_PORT`). The custom `onyx:hot-file` plugin writes `assets/dist/hot` containing the dev URL; `\Onyx\Vite::is_running()` checks for that file. When present, `onyx_inject_vite_client()` enqueues `<script type="module" src="{devUrl}/@vite/client">` and entries are served directly from the dev server with HMR (CSS updates inline, JS modules hot-replace, `.twig`/`.php` changes trigger full reload via `vite-plugin-full-reload`). When the dev server stops, the hot file is removed and PHP falls back to the production manifest.
+- ES module rewriting: `onyx_module_script_tag` filter adds `type="module"` to handles registered via `onyx_register_module_handle()` (Vite-managed entries + the HMR client).
 
 ### `Onyx\Helpers` (`core/app/Onyx/Helpers.php`, aliased `O`)
-Static helper grab-bag used throughout: `O::conf('env'|'assets'|...)` reads loaded config (with `pass`/`password`/`key`/`keys`/`devs` redacted), `O::load($file)` reads a config file fresh, `O::is_dev()` checks against `ONYX_DEVELOPERS` or `local` env, `O::clear_cache_timber()`, `O::route_type()`, `O::section_title()`, `O::pagenavi()`, `O::menu()`, `O::static_path()`/`O::css()`/`O::js()`/`O::img()` for asset URLs.
+Static helper grab-bag used throughout: `O::conf('env'|'assets'|...)` reads loaded config (with `pass`/`password`/`key`/`keys`/`devs` redacted), `O::load($file)` reads a config file fresh, `O::is_dev()` checks against `ONYX_DEVELOPERS` or `local` env, `O::clear_cache_timber()`, `O::route_type()`, `O::section_title()`, `O::pagenavi()`, `O::menu()`, `O::static_path()`/`O::img()` for asset URLs (Vite-managed JS/CSS go through `\Onyx\Vite::asset()`).
+
+### `Onyx\Vite` (`core/app/Onyx/Vite.php`)
+Resolves source paths to public URLs by reading `assets/dist/hot` (dev) or `assets/dist/.vite/manifest.json` (prod). Public API: `Vite::is_running()`, `Vite::asset($source)`, `Vite::css_for($source)` (CSS chunks emitted alongside a JS entry, prod only), `Vite::hmr_client_url()`. Used by the asset hooks in `hooks-functions.php` (`onyx_load_styles`, `onyx_load_javascripts`, `onyx_admin_scripts`, `onyx_gutenberg_style`, `onyx_gutenberg_js`, `onyx_inject_vite_client`).
 
 ## Coding conventions
 

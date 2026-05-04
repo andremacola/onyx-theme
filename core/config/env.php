@@ -9,7 +9,6 @@
 $onyx_local = (wp_get_environment_type() === 'local');
 
 return [
-	'version' => '1.0',
 	'local'   => $onyx_local,
 	'theme'   => get_template(),
 	'dir_uri' => get_template_directory_uri(),

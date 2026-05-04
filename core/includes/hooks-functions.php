@@ -10,6 +10,7 @@
  */
 
 use Onyx\Helpers as O;
+use Onyx\Vite;
 
 /**
  * Remove WordPress frontend jquery.
@@ -110,50 +111,73 @@ function onyx_single_cat_template( $t ) {
 // add_filter( 'single_template', 'onyx_single_cat_template' );
 
 /**
- * Action to add Onyx Theme Styles.
+ * Action to add Onyx Theme Styles via Vite.
+ *
+ * Cache-busting is handled by the `[hash]` token in the file name produced by
+ * Vite, so `null` is intentionally passed for the version argument.
  *
  * @return void
  */
 function onyx_load_styles() {
 	$assets = O::conf( 'assets' )->css;
 	foreach ( $assets as $handler => $css ) {
-		$src   = O::static_path( $css[0] );
-		$home  = ( isset( $css[1] ) ) ? $css[1] : false;
-		$deps  = ( isset( $css[2] ) ) ? $css[2] : [];
-		$ver   = ( isset( $css[3] ) ) ? $css[3] : ONYX_THEME_VERSION;
-		$media = ( isset( $css[4] ) ) ? $css[4] : false;
+		$source = $css[0];
+		$home   = isset( $css[1] ) ? $css[1] : false;
+		$deps   = isset( $css[2] ) ? $css[2] : [];
+		$media  = isset( $css[4] ) ? $css[4] : 'all';
 
-		if ( ! $home ) :
-			wp_enqueue_style( $handler, $src, $deps, $ver, $media );
-		elseif ( is_home() ) :
-				wp_enqueue_style( $handler, $src, $deps, $ver, $media );
-		endif;
+		if ( $home && ! is_home() ) {
+			continue;
+		}
+
+		if ( Vite::is_running() ) {
+			// In dev the CSS is injected by the JS module; enqueue the entry as a module.
+			$src = Vite::asset( $source );
+			if ( $src ) {
+				wp_enqueue_script( $handler, $src, $deps, null, false );
+				Vite::register_module( $handler );
+			}
+			continue;
+		}
+
+		$src = Vite::asset( $source );
+		if ( $src ) {
+			wp_enqueue_style( $handler, $src, $deps, null, $media );
+		}
 	}
 }
-// add_action( 'wp_enqueue_scripts', 'onyx_load_styles' );
 
 /**
- * Action to add Onyx Theme Javascripts.
+ * Action to add Onyx Theme JavaScripts via Vite.
  *
  * @return void
  */
 function onyx_load_javascripts() {
 	$assets = O::conf( 'assets' )->js;
 	foreach ( $assets as $handler => $js ) {
-		$src       = O::static_path( $js[0] );
-		$home      = ( isset( $js[1] ) ) ? $js[1] : false;
-		$deps      = ( isset( $js[2] ) ) ? $js[2] : [];
-		$ver       = ( isset( $js[3] ) ) ? $js[3] : ONYX_THEME_VERSION;
-		$in_footer = ( isset( $js[4] ) ) ? $js[4] : false;
+		$source    = $js[0];
+		$home      = isset( $js[1] ) ? $js[1] : false;
+		$deps      = isset( $js[2] ) ? $js[2] : [];
+		$in_footer = isset( $js[4] ) ? $js[4] : true;
 
-		if ( ! $home ) :
-			wp_enqueue_script( $handler, $src, $deps, $ver, $in_footer );
-		elseif ( is_home() ) :
-				wp_enqueue_script( $handler, $src, $deps, $ver, $in_footer );
-		endif;
+		if ( $home && ! is_home() ) {
+			continue;
+		}
+
+		$src = Vite::asset( $source );
+		if ( ! $src ) {
+			continue;
+		}
+
+		wp_enqueue_script( $handler, $src, $deps, null, $in_footer );
+		Vite::register_module( $handler );
+
+		// Production: enqueue any CSS chunks Vite associated with this entry.
+		foreach ( Vite::css_for( $source ) as $i => $css_url ) {
+			wp_enqueue_style( $handler . '-css-' . $i, $css_url, [], null );
+		}
 	}
 }
-// add_action( 'wp_enqueue_scripts', 'onyx_load_javascripts' );
 
 /**
  * Enqueue all styles and scripts
@@ -399,8 +423,19 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
  * @return void
  */
 function onyx_admin_scripts() {
-	$env = O::conf( 'env' );
-	wp_enqueue_style( 'onyx-admin-style', $env->dir_uri . '/assets/css/style.admin.css', [], $env->version );
+	if ( Vite::is_running() ) {
+		$src = Vite::asset( 'src/sass/admin.scss' );
+		if ( $src ) {
+			wp_enqueue_script( 'onyx-admin-style', $src, [], null, false );
+			Vite::register_module( 'onyx-admin-style' );
+		}
+		return;
+	}
+
+	$src = Vite::asset( 'src/sass/admin.scss' );
+	if ( $src ) {
+		wp_enqueue_style( 'onyx-admin-style', $src, [], null );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'onyx_admin_scripts' );
 
@@ -558,12 +593,22 @@ add_filter( 'mce_buttons', 'onyx_editor_page_break' );
 --------------------------------------------------------------- */
 
 /**
- * Add editor style.
+ * Add editor style. The Block Editor's `add_editor_style` only accepts paths
+ * relative to the theme directory, so in production we register the hashed
+ * file produced by Vite. In dev the editor falls back to the latest build.
  *
  * @return void
  */
 function onyx_gutenberg_style() {
-	add_editor_style( 'assets/css/style.editor.css' );
+	$url = Vite::asset( 'src/sass/editor.scss' );
+	if ( ! $url || Vite::is_running() ) {
+		return;
+	}
+
+	$theme_uri = get_template_directory_uri();
+	if ( 0 === strpos( $url, $theme_uri ) ) {
+		add_editor_style( ltrim( substr( $url, strlen( $theme_uri ) ), '/' ) );
+	}
 }
 add_action( 'admin_init', 'onyx_gutenberg_style' );
 
@@ -573,14 +618,19 @@ add_action( 'admin_init', 'onyx_gutenberg_style' );
  * @return void
  */
 function onyx_gutenberg_js() {
-	$env = O::conf( 'env' );
+	$src = Vite::asset( 'src/js/admin/admin.js' );
+	if ( ! $src ) {
+		return;
+	}
+
 	wp_enqueue_script(
 		'onyx-gutenberg',
-		$env->dir_uri . '/assets/js/admin/onyx.min.js',
-		array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
-		$env->version,
+		$src,
+		[ 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ],
+		null,
 		true
 	);
+	Vite::register_module( 'onyx-gutenberg' );
 }
 add_action( 'enqueue_block_editor_assets', 'onyx_gutenberg_js' );
 
@@ -624,21 +674,25 @@ function onyx_add_custom_editor_file_types( $types ) {
 add_filter( 'wp_theme_editor_filetypes', 'onyx_add_custom_editor_file_types' );
 
 /**
- * Action to inject gulp-livereload server for development,
- * only works with `.local` domains.
+ * Inject the Vite HMR client when the dev server is running.
+ * Detection is canonical: presence of `assets/dist/hot` (written by the
+ * `onyx:hot-file` plugin in `vite.config.js`).
  *
- * @return void|boolean
+ * @return void
  */
-function onyx_enqueue_livereload() {
-	if ( is_admin() ) {
-		return false;
+function onyx_inject_vite_client() {
+	if ( ! Vite::is_running() ) {
+		return;
 	}
 
-	if ( strpos( $_SERVER['HTTP_HOST'], 'localhost' ) || strpos( $_SERVER['HTTP_HOST'], '.local' ) ) {
-			$port = 3010;
-			$url  = 'http://localhost' . ":$port/livereload.js";
-			wp_enqueue_script( 'live-reload', $url, [], 1, true );
+	$url = Vite::hmr_client_url();
+	if ( ! $url ) {
+		return;
 	}
 
-	return false;
+	wp_enqueue_script( 'onyx-vite-client', $url, [], null, false );
+	Vite::register_module( 'onyx-vite-client' );
 }
+add_action( 'wp_enqueue_scripts', 'onyx_inject_vite_client', 1 );
+add_action( 'admin_enqueue_scripts', 'onyx_inject_vite_client', 1 );
+add_action( 'enqueue_block_editor_assets', 'onyx_inject_vite_client', 1 );

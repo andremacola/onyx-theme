@@ -83,13 +83,8 @@ class Setup extends \Timber\Site {
 		$this->support  = O::load( 'support' );
 
 		define( 'ONYX_THEME', true );
-		define( 'ONYX_THEME_VERSION', $this->version() );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
-
-		if ( $this->env->local ) {
-			add_action( 'wp_enqueue_scripts', 'onyx_enqueue_livereload' );
-		}
 
 		parent::__construct();
 	}
@@ -244,16 +239,6 @@ class Setup extends \Timber\Site {
 				require $test;
 			}
 		}
-	}
-
-	/**
-	 * Define theme version
-	 * Mostly used for development purpose (cachebuster)
-	 *
-	 * @return int
-	 */
-	protected function version() {
-		return (in_array( $this->env->user, $this->env->devs )) ? wp_rand( 0, 99999 ) : $this->env->version;
 	}
 
 }

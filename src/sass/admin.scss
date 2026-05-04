@@ -11,11 +11,12 @@ body,
 ------------------------------------- */
 
 /* activity */
-#wpbody #future-posts ul span, #wpbody #published-posts ul span { min-width: 80px; }
+#wpbody #future-posts ul span,
+#wpbody #published-posts ul span { min-width: 80px; }
 
 /* dashboard columns */
 #wpbody #wpbody-content #dashboard-widgets .postbox-container { width: 100%; }
-@media screen and ( min-width: 1200px ) {
+@media screen and (min-width: 1200px) {
 	#wpbody #wpbody-content #dashboard-widgets .postbox-container { width: 50%; }
 }
 
@@ -24,19 +25,21 @@ body,
 ------------------------------------- */
 
 .login h1 a {
-	background-image: url('../images/admin/logo-admin.png') !important;
+	background-image: url('../../assets/images/admin/logo-admin.png') !important;
 	margin-bottom: 0px !important;
 	width: 275px !important;
 	height: 100px !important;
 	background-size: 275px 100px !important;
 }
 .login form { border-radius: 10px; }
-.login form .input, .login form input[type=checkbox], .login input[type=text] { border-radius: 3px; }
+.login form .input,
+.login form input[type=checkbox],
+.login input[type=text] { border-radius: 3px; }
 
 /* -------------------------------------
 | ADMIN BAR
 ------------------------------------- */
 
 #wpadminbar #wp-admin-bar-site-name > .ab-item:before {
-	content: url('../images/admin/favicon-20.png') !important;
+	content: url('../../assets/images/admin/favicon-20.png') !important;
 }
