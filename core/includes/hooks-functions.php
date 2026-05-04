@@ -186,7 +186,9 @@ function onyx_load_javascripts() {
  * @return void
  */
 function onyx_enqueue_assets() {
-	onyx_header_footer_scripts();
+	if ( ! Vite::is_running() ) {
+		onyx_header_footer_scripts();
+	}
 	onyx_load_styles();
 	onyx_load_javascripts();
 }
