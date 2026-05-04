@@ -84,7 +84,7 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		root: __dirname,
-		base: isProd ? '/wp-content/themes/onyx/assets/dist/' : `${devUrl}/`,
+		base: isProd ? './' : `${devUrl}/`,
 
 		server: {
 			host: 'localhost',
