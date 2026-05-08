@@ -230,29 +230,6 @@ function onyx_remove_private_title( $title ) {
 add_filter( 'private_title_format', 'onyx_remove_private_title' );
 add_filter( 'protected_title_format', 'onyx_remove_private_title' );
 
-
-/**
- * Show excerpt by default;
- * Not needed for Gutenberg.
- *
- * @deprecated
- * @param string[] $hidden An array of IDs of meta boxes hidden by default.
- * @param object   $screen Object of the current screen.
- * @return bool
- */
-function onyx_show_hidden_excerpt( $hidden, $screen ) {
-	if ( 'post' === $screen->base ) {
-		foreach ( $hidden as $key => $value ) {
-			if ( 'postexcerpt' === $value ) {
-				unset( $hidden[ $key ] );
-				break;
-			}
-		}
-	}
-	return $hidden;
-}
-apply_filters( 'default_hidden_meta_boxes', 'onyx_show_hidden_excerpt', 10, 2 );
-
 /**
  * Adjust a better wp-caption without <p>
  * and removing the additional 10px.
