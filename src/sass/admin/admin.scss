@@ -1,6 +1,10 @@
 /* -------------------------------------
-| ADMIN
+| ADMINs
 ------------------------------------- */
+
+body {
+	background-color: green !important;
+}
 
 /* background for classic editing and admin */
 body,
@@ -25,7 +29,7 @@ body,
 ------------------------------------- */
 
 .login h1 a {
-	background-image: url('../../assets/images/admin/logo-admin.png') !important;
+	background-image: url('../../../assets/images/admin/logo-admin.png') !important;
 	margin-bottom: 0px !important;
 	width: 275px !important;
 	height: 100px !important;
@@ -41,5 +45,5 @@ body,
 ------------------------------------- */
 
 #wpadminbar #wp-admin-bar-site-name > .ab-item:before {
-	content: url('../../assets/images/admin/favicon-20.png') !important;
+	content: url('../../../assets/images/admin/favicon-20.png') !important;
 }

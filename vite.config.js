@@ -26,6 +26,7 @@ const purgecssSafelist = {
 		/^author(-.*)?$/, /^category(-.*)?$/, /^tag(-.*)?$/,
 		/^tax-/, /^term-/, /-?paged(-.*)?$/,
 		/^comments-/, /^comment-/,
+		/^ad-slot--/,
 	],
 };
 
@@ -108,8 +109,8 @@ export default defineConfig(({ mode }) => {
 			rollupOptions: {
 				input: {
 					style: resolve(__dirname, 'src/sass/style.scss'),
-					'style.admin': resolve(__dirname, 'src/sass/admin.scss'),
-					'style.editor': resolve(__dirname, 'src/sass/editor.scss'),
+					'style.admin': resolve(__dirname, 'src/sass/admin/admin.scss'),
+					'style.editor': resolve(__dirname, 'src/sass/admin/editor.scss'),
 					app: resolve(__dirname, 'src/js/app/app.js'),
 					admin: resolve(__dirname, 'src/js/admin/admin.js'),
 				},

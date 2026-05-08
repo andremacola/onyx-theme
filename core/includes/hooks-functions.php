@@ -426,7 +426,7 @@ function onyx_acf_post_object_query( $args, $field, $post_id ) {
  */
 function onyx_admin_scripts() {
 	if ( Vite::is_running() ) {
-		$src = Vite::asset( 'src/sass/admin.scss' );
+		$src = Vite::asset( 'src/sass/admin/admin.scss' );
 		if ( $src ) {
 			wp_enqueue_script( 'onyx-admin-style', $src, [], null, false );
 			Vite::register_module( 'onyx-admin-style' );
@@ -434,7 +434,7 @@ function onyx_admin_scripts() {
 		return;
 	}
 
-	$src = Vite::asset( 'src/sass/admin.scss' );
+	$src = Vite::asset( 'src/sass/admin/admin.scss' );
 	if ( $src ) {
 		wp_enqueue_style( 'onyx-admin-style', $src, [], null );
 	}
@@ -603,8 +603,14 @@ add_filter( 'mce_buttons', 'onyx_editor_page_break' );
  * @return void
  */
 function onyx_gutenberg_style() {
-	$url = Vite::asset( 'src/sass/editor.scss' );
-	if ( ! $url || Vite::is_running() ) {
+	$url = Vite::asset( 'src/sass/admin/editor.scss' );
+	if ( ! $url ) {
+		return;
+	}
+
+	// Dev: `?direct` makes Vite return raw CSS for the editor iframe <link> (no HMR; refresh to update).
+	if ( Vite::is_running() ) {
+		add_editor_style( $url . '?direct' );
 		return;
 	}
 
