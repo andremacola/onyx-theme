@@ -440,6 +440,7 @@ function onyx_admin_scripts() {
 	}
 }
 add_action( 'admin_enqueue_scripts', 'onyx_admin_scripts' );
+add_action( 'login_enqueue_scripts', 'onyx_admin_scripts' );
 
 /**
  * Customize admin footer text label.
@@ -697,4 +698,5 @@ function onyx_inject_vite_client() {
 }
 add_action( 'wp_enqueue_scripts', 'onyx_inject_vite_client', 1 );
 add_action( 'admin_enqueue_scripts', 'onyx_inject_vite_client', 1 );
+add_action( 'login_enqueue_scripts', 'onyx_inject_vite_client', 1 );
 add_action( 'enqueue_block_editor_assets', 'onyx_inject_vite_client', 1 );
